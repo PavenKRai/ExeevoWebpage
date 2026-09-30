@@ -1,0 +1,18 @@
+import { defineConfig, devices } from "@playwright/test";
+
+export default defineConfig({
+  testDir: "./tests",
+  fullyParallel: true,
+  reporter: "list",
+  use: { baseURL: "http://localhost:3000" },
+  webServer: {
+    command: "pnpm build && pnpm start",
+    url: "http://localhost:3000",
+    reuseExistingServer: true,
+    timeout: 240_000,
+  },
+  projects: [
+    { name: "normal", use: { ...devices["Desktop Chrome"] } },
+    { name: "reduced-motion", use: { ...devices["Desktop Chrome"], reducedMotion: "reduce" } },
+  ],
+});

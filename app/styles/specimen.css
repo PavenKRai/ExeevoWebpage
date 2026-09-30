@@ -1,0 +1,108 @@
+.specimen {
+  --size: 440px;
+  position: relative;
+  width: var(--size);
+  aspect-ratio: 1;
+}
+.specimen > * {
+  position: absolute;
+}
+.specimen-glow {
+  inset: 6%;
+  border-radius: 50%;
+  background: var(--ex-orb);
+  filter: blur(70px);
+  opacity: 0.5;
+}
+.orb {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 38%),
+    var(--ex-orb);
+  animation: spin 40s linear infinite;
+}
+.specimen > .specimen-orb {
+  position: absolute;
+  inset: 12%;
+}
+/* the highlight should not rotate with the gradient */
+.orb-fixed {
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.orb-fixed::before {
+  content: "";
+  position: absolute;
+  inset: -2%;
+  background: var(--ex-orb);
+  animation: spin 40s linear infinite;
+}
+.orb-fixed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 38%);
+  box-shadow: inset -18px -22px 48px rgba(24, 32, 38, 0.3);
+}
+.lens {
+  width: 46%;
+  aspect-ratio: 1;
+  right: 2%;
+  bottom: 6%;
+  border-radius: 50%;
+}
+.specimen-rings {
+  inset: 0;
+  perspective: 1200px;
+}
+/* Rings are flattened individually: a shared preserve-3d context makes Chrome split
+   intersecting planes into stray straight lines. */
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.ring-spin {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  animation: spin 22s linear infinite;
+}
+.orbit-ring-1 { transform: rotateX(72deg) rotateY(8deg); inset: -2%; }
+.orbit-ring-2 { transform: rotateX(64deg) rotateY(-38deg); inset: -10%; }
+.orbit-ring-2 .ring-spin { animation-duration: 30s; animation-direction: reverse; }
+.orbit-ring-3 { transform: rotateX(80deg) rotateY(52deg); inset: -16%; }
+.orbit-ring-3 .ring-spin { animation-duration: 26s; }
+.sat {
+  position: absolute;
+  top: -5px;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 14px 4px currentColor;
+  color: #fff;
+}
+.sat-magenta { background: var(--ex-magenta); color: var(--ex-magenta); }
+.sat-green { background: var(--ex-green); color: var(--ex-green); }
+.sat-white { background: #fff; color: #fff; }
+
+.specimen[data-paused="true"] *,
+.orb-fixed[data-paused="true"]::before {
+  animation-play-state: paused !important;
+}
+
+@keyframes spin {
+  to { rotate: 360deg; }
+}
+@keyframes float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -12px; }
+}
+.float { animation: float 8s ease-in-out infinite; }
+.float-2 { animation: float 7s ease-in-out -2s infinite; }
+.float-3 { animation: float 9s ease-in-out -4s infinite; }

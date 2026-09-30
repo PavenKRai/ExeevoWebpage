@@ -1,0 +1,93 @@
+:root {
+  /* brand */
+  --ex-slate: #333f48;
+  --ex-magenta: #df1995;
+  --ex-blue: #0762c8;
+  --ex-green: #00c389;
+  --ex-purple: #6e5bd8;
+  --ex-gradient: linear-gradient(100deg, #df1995, #0762c8 55%, #00c389);
+  --ex-orb: conic-gradient(from 200deg, #df1995, #0762c8, #00c389, #0762c8, #df1995);
+
+  /* neutrals */
+  --ex-ink: #182026;
+  --ex-ink-deep: #141a1f;
+  --ex-heading: #1d262d;
+  --ex-text: #333f48;
+  --ex-muted: #56636c;
+  --ex-mist: #e9eef1;
+  --ex-frost: #f6f8f9;
+  --ex-hairline: #d3dbe0;
+  --ex-on-dark: #b6c1c8;
+  --ex-on-dark-muted: #a3afb7;
+  --ex-link-on-dark: #8ec2ff;
+  --ex-green-ink: #008a61;
+  --ex-white: #ffffff;
+  --ex-error: #b3261e;
+
+  /* type */
+  --ex-font-display: var(--font-sora), "Segoe UI", system-ui, sans-serif;
+  --ex-font-text: var(--font-figtree), "Segoe UI", system-ui, sans-serif;
+
+  /* radius */
+  --ex-r-chip: 12px;
+  --ex-r-input: 14px;
+  --ex-r-btn: 17px;
+  --ex-r-card-s: 22px;
+  --ex-r-card: 28px;
+  --ex-r-panel: 32px;
+  --ex-r-block: 36px;
+
+  /* glass */
+  --ex-glass-dark: linear-gradient(145deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.035));
+  --ex-glass-light: linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.42));
+  --ex-blur-dark: blur(22px) saturate(170%);
+  --ex-blur-light: blur(26px) saturate(180%);
+
+  /* motion */
+  --ex-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ex-ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ex-dur-fast: 0.35s;
+  --ex-dur-base: 0.6s;
+  --ex-dur-slow: 0.9s;
+
+  /* layout */
+  --ex-gutter: clamp(20px, 5.6vw, 80px);
+  --ex-section-y: clamp(64px, 8vw, 120px);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --ex-blur-dark: blur(15px) saturate(170%);
+    --ex-blur-light: blur(18px) saturate(180%);
+  }
+}
+
+@theme inline {
+  --color-slate: var(--ex-slate);
+  --color-magenta: var(--ex-magenta);
+  --color-brand-blue: var(--ex-blue);
+  --color-brand-green: var(--ex-green);
+  --color-purple: var(--ex-purple);
+  --color-ink: var(--ex-ink);
+  --color-ink-deep: var(--ex-ink-deep);
+  --color-heading: var(--ex-heading);
+  --color-body: var(--ex-text);
+  --color-muted: var(--ex-muted);
+  --color-mist: var(--ex-mist);
+  --color-frost: var(--ex-frost);
+  --color-hairline: var(--ex-hairline);
+  --color-on-dark: var(--ex-on-dark);
+  --color-on-dark-muted: var(--ex-on-dark-muted);
+  --color-link-on-dark: var(--ex-link-on-dark);
+  --color-green-ink: var(--ex-green-ink);
+  --color-error: var(--ex-error);
+  --font-display: var(--ex-font-display);
+  --font-sans: var(--ex-font-text);
+  --radius-chip: var(--ex-r-chip);
+  --radius-input: var(--ex-r-input);
+  --radius-btn: var(--ex-r-btn);
+  --radius-card-s: var(--ex-r-card-s);
+  --radius-card: var(--ex-r-card);
+  --radius-panel: var(--ex-r-panel);
+  --radius-block: var(--ex-r-block);
+}
