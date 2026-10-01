@@ -27,7 +27,7 @@ export function DemoSection({ demo }: { demo: typeof gettingStarted.demo }) {
             <h2 className="text-[clamp(32px,4vw,42px)] leading-[1.08] tracking-[-0.03em]">{demo.title}</h2>
             <p className="text-[17px] leading-[1.55] text-on-dark">{demo.body}</p>
           </Layer>
-          <Layer from={{ x: 160, o: 0, s: 0.96 }} range={[0, 0.25]} className="glass-light relative mx-5 mb-6 rounded-[28px] p-6 lg:mx-0 lg:mb-0 lg:min-h-[468px] lg:p-[34px]">
+          <Layer from={{ x: 160, o: 0, s: 0.96 }} range={[0, 0.25]} className="glass-dark relative mx-5 mb-6 rounded-[28px] p-6 lg:mx-0 lg:mb-0 lg:min-h-[468px] lg:p-[34px]">
             <DemoForm copy={{ consent: demo.consent, success: demo.success, teams: demo.teams }} />
           </Layer>
         </Layer>

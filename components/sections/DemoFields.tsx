@@ -5,12 +5,12 @@ type Base = { label: string; error?: string; id: string };
 function Wrap({ id, label, error, children }: Base & { children: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-[14px] font-medium leading-[1.2] text-body">
+      <label htmlFor={id} className="text-[14px] font-medium leading-[1.2] text-on-dark">
         {label}
       </label>
       {children}
       {error && (
-        <p id={`${id}-error`} className="text-[14px] font-medium text-error">
+        <p id={`${id}-error`} className="text-[14px] font-medium text-error-on-dark">
           {error}
         </p>
       )}

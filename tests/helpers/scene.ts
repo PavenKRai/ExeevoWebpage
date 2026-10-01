@@ -2,6 +2,7 @@ import type { Page } from "@playwright/test";
 
 /** Geometry of the nth `.scene` on the page (document coordinates). */
 export async function sceneGeometry(page: Page, index = 0) {
+  await page.locator(".scene").nth(index).waitFor({ state: "attached" });
   return page.evaluate((i) => {
     const s = document.querySelectorAll<HTMLElement>(".scene")[i];
     const top = s.getBoundingClientRect().top + window.scrollY;

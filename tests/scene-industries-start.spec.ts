@@ -3,6 +3,7 @@ import { layerState, scrollToSceneProgress, stageTop } from "./helpers/scene";
 
 // Index of a scene by its id among all `.scene` elements.
 async function sceneIndex(page: import("@playwright/test").Page, id: string) {
+  await page.locator(`#${id}`).waitFor({ state: "attached" }); // client-rendered (Suspense) scenes mount after load
   return page.evaluate((i) => [...document.querySelectorAll(".scene")].findIndex((s) => s.id === i), id);
 }
 

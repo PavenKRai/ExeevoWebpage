@@ -23,6 +23,7 @@
   --ex-green-ink: #008a61;
   --ex-white: #ffffff;
   --ex-error: #b3261e;
+  --ex-error-on-dark: #ff9a92;
 
   /* type */
   --ex-font-display: var(--font-sora), "Segoe UI", system-ui, sans-serif;
@@ -81,6 +82,7 @@
   --color-link-on-dark: var(--ex-link-on-dark);
   --color-green-ink: var(--ex-green-ink);
   --color-error: var(--ex-error);
+  --color-error-on-dark: var(--ex-error-on-dark);
   --font-display: var(--ex-font-display);
   --font-sans: var(--ex-font-text);
   --radius-chip: var(--ex-r-chip);

@@ -38,7 +38,7 @@ export function DemoForm({ copy }: { copy: Copy }) {
 
   if (done) {
     return (
-      <div role="status" className="grid min-h-[400px] content-center gap-3 text-heading">
+      <div role="status" className="grid min-h-[400px] content-center gap-3 text-white">
         <p className="font-display text-[28px] font-semibold leading-tight tracking-tight">{copy.success}</p>
       </div>
     );
@@ -54,25 +54,25 @@ export function DemoForm({ copy }: { copy: Copy }) {
       </div>
       <SelectField id="demo-teams" label="Which teams are you buying for?" options={copy.teams} error={errors.teams?.message} {...register("teams")} />
       {failure && (
-        <p role="alert" className="rounded-input border border-error bg-white/80 p-4 text-[15px] font-medium text-error">
+        <p role="alert" className="rounded-input border border-error-on-dark bg-white/[0.07] p-4 text-[15px] font-medium text-error-on-dark">
           {failure}
         </p>
       )}
       <div className="mt-auto flex flex-col gap-4 pt-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="grid gap-1">
-          <label htmlFor="demo-consent" className="flex min-h-11 max-w-[300px] cursor-pointer items-center gap-2.5 text-[13px] leading-[1.45] text-muted">
+          <label htmlFor="demo-consent" className="flex min-h-11 max-w-[300px] cursor-pointer items-center gap-2.5 text-[13px] leading-[1.45] text-on-dark">
             <input
               id="demo-consent"
               type="checkbox"
               aria-invalid={errors.consent ? true : undefined}
               aria-describedby={errors.consent ? "demo-consent-error" : undefined}
-              className="size-[18px] shrink-0 accent-ink"
+              className="size-[18px] shrink-0 accent-white"
               {...register("consent")}
             />
             <span>{copy.consent}</span>
           </label>
           {errors.consent && (
-            <p id="demo-consent-error" className="text-[14px] font-medium text-error">
+            <p id="demo-consent-error" className="text-[14px] font-medium text-error-on-dark">
               {errors.consent.message}
             </p>
           )}
