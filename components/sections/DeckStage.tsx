@@ -26,7 +26,7 @@ export function DeckStage({ modules, index, onSelect }: { modules: Module[]; ind
         />
       </Parallax>
       <DeckCards modules={modules} index={index} onSelect={onSelect} swipe={!desktop} />
-      <div className="absolute inset-x-3 top-[calc(var(--dh)-80px)] flex items-center justify-between sm:inset-x-10">
+      <div className="absolute inset-x-3 top-[calc(var(--dh)-52px)] flex items-center justify-between sm:inset-x-10 xl:inset-x-0">
         <IconButton label="Previous module" disabled={index === 0} onClick={() => onSelect(index - 1)}>
           <ChevronLeft size={20} strokeWidth={2} />
         </IconButton>

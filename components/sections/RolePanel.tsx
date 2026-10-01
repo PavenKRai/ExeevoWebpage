@@ -104,7 +104,7 @@ export function RolePanel({ role, index, total, open, onSelect }: Props) {
                   initial={reduce ? false : { opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: reduce ? 0 : 0.6, delay: reduce ? 0 : 0.2 + n * 0.09, ease }}
-                  className="glass-dark flex items-center gap-3.5 rounded-[18px] bg-white/[0.07] bg-none px-[18px] py-4 [@media(max-height:800px)]:py-2.5"
+                  className="flex items-center gap-3.5 rounded-[18px] border border-white/[0.14] bg-white/[0.09] px-[18px] py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] [@media(max-height:800px)]:py-2.5"
                 >
                   <span aria-hidden="true" className="flex size-7 shrink-0 items-center justify-center rounded-[9px] bg-white text-ink">
                     <Check size={14} strokeWidth={2.4} />

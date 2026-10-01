@@ -42,7 +42,7 @@ export function DeckCards({
             <motion.div
               key={m.slug}
               className={cn(
-                "absolute inset-x-3 top-10 h-[calc(var(--dh)-160px)] rounded-[32px] border border-white/90 p-6 shadow-[inset_0_1px_0_#fff,0_28px_56px_-28px_rgba(24,32,38,0.32)] sm:inset-x-10 sm:p-9 pinned:xl:[@media(max-height:820px)]:p-6 pinned:xl:[@media(max-height:820px)]:sm:p-6",
+                "absolute inset-x-3 top-5 h-[480px] rounded-[32px] border border-white/90 p-6 shadow-[inset_0_1px_0_#fff,0_28px_56px_-28px_rgba(24,32,38,0.32)] sm:inset-x-10 sm:p-9 xl:inset-x-0 xl:p-[34px]",
               )}
               style={{
                 zIndex: 20 - a,
@@ -77,10 +77,10 @@ export function DeckCards({
                     {pad(i + 1)} / {pad(n)}
                   </span>
                 </div>
-                <div className="flex flex-col gap-4 pinned:xl:[@media(max-height:820px)]:gap-2.5">
-                  <h2 className="text-[clamp(30px,3vw,38px)] pinned:xl:[@media(max-height:820px)]:text-[30px] font-semibold leading-[1.05] tracking-[-0.03em] text-heading">{m.name}</h2>
-                  <p className="text-[21px] pinned:xl:[@media(max-height:820px)]:text-[18px] font-medium leading-[1.25] tracking-[-0.01em] text-slate">{m.headline}</p>
-                  <p className="text-[15px] leading-[1.55] text-muted pinned:xl:[@media(max-height:820px)]:text-[14px] pinned:xl:[@media(max-height:820px)]:leading-[1.45]">{m.summary}</p>
+                <div className="flex flex-col gap-4">
+                  <h2 className="text-[clamp(30px,3vw,38px)] xl:text-[38px] font-semibold leading-[1.05] tracking-[-0.03em] text-heading">{m.name}</h2>
+                  <p className="text-[21px] font-medium leading-[1.25] tracking-[-0.01em] text-slate">{m.headline}</p>
+                  <p className="text-[15px] leading-[1.55] text-muted">{m.summary}</p>
                 </div>
               </motion.div>
               {!front && !hidden && (

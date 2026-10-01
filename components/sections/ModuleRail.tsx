@@ -41,7 +41,7 @@ export function ModuleRail({ modules, index, onSelect }: { modules: Module[]; in
   };
 
   return (
-    <div className="glass-light rounded-[26px] p-2.5 xl:mt-5 pinned:xl:mt-0">
+    <div className="glass-light rounded-[26px] p-2.5">
       <div
         role="tablist"
         aria-label="Platform modules"
@@ -62,12 +62,12 @@ export function ModuleRail({ modules, index, onSelect }: { modules: Module[]; in
               tabIndex={sel ? 0 : -1}
               onClick={() => onSelect(i)}
               className={cn(
-                "flex h-[54px] shrink-0 items-center gap-3 whitespace-nowrap rounded-2xl px-4 text-left text-[15px] transition-colors duration-300 xl:w-full pinned:xl:[@media(max-height:820px)]:h-[46px]",
+                "flex min-h-[54px] shrink-0 items-center gap-3.5 whitespace-nowrap rounded-2xl px-4 text-left text-[15px] xl:px-[18px] transition-colors duration-300 xl:w-full",
                 sel ? "bg-ink font-semibold text-white" : "font-[450] text-slate hover:bg-white/70",
               )}
             >
               <CategoryDot category={m.category} className="size-[9px]" />
-              {m.name}
+              <span>{m.name}</span>
             </button>
           );
         })}
