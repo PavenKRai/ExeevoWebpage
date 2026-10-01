@@ -1,16 +1,27 @@
+import "./scene-choreo.css";
+
+const ORB = "radial-gradient(circle at 32% 28%, rgba(255,255,255,.6), rgba(255,255,255,0) 24%), var(--ex-orb)";
+const blob = "linear-gradient(135deg, var(--ex-magenta), var(--ex-blue))";
+const hi = "radial-gradient(circle at 30% 25%, rgba(255,255,255,.55), rgba(255,255,255,0) 35%)";
+
+/** Scroll-scrubbed (see scene-choreo.css): turns to its rest pose, spins about its axis, halves part to show the dots. */
 export function PharmaCapsule() {
   return (
-    <div aria-hidden="true" className="relative mx-auto h-[220px] w-[360px] max-w-full" style={{ perspective: "1200px" }}>
-      <div className="float absolute inset-0 flex items-center justify-center">
-        <div className="relative flex h-[120px] w-[320px] max-w-full overflow-hidden rounded-full shadow-[0_40px_70px_-30px_rgba(7,98,200,0.55)]" style={{ transform: "rotate(-32deg) rotateY(-12deg)", transformStyle: "preserve-3d" }}>
-          <div className="relative w-1/2" style={{ background: "linear-gradient(120deg, var(--ex-magenta), var(--ex-blue))" }}>
-            <span className="absolute left-[14%] top-[14%] h-[22%] w-[70%] rounded-full bg-white/60 blur-[2px]" />
-          </div>
-          <div className="glass-light relative flex w-1/2 items-center justify-center gap-3 !rounded-none">
-            <span className="h-4 w-4 rounded-full bg-magenta" />
-            <span className="h-5 w-5 rounded-full bg-brand-blue" />
-            <span className="h-4 w-4 rounded-full bg-brand-green" />
-            <span className="absolute left-[10%] top-[14%] h-[18%] w-[60%] rounded-full bg-white/70 blur-[2px]" />
+    <div aria-hidden="true" className="relative h-[520px] w-[520px]" style={{ perspective: "1200px" }}>
+      <div className="cz cz-glow absolute left-[120px] top-[140px] h-[260px] w-[300px] rounded-full opacity-55 blur-[70px]" style={{ background: ORB }} />
+      <div className="float absolute left-[70px] top-[200px] h-[150px] w-[400px]" style={{ transform: "rotateZ(-32deg) rotateY(-18deg)", transformStyle: "preserve-3d" }}>
+        <div className="cz cz-turn absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
+          <div className="cz cz-spin absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
+            <div
+              className="cz cz-halfl absolute left-0 top-0 h-[150px] w-[200px] rounded-l-[75px]"
+              style={{ background: `${hi}, ${blob}`, boxShadow: "0 30px 60px -20px rgba(223,25,149,.5)" }}
+            />
+            <div className="cz cz-halfr glass-light absolute left-[200px] top-0 h-[150px] w-[200px] rounded-r-[75px] !border-l-0" />
+            <div className="cz cz-dots absolute inset-0">
+              <span className="absolute left-[236px] top-[44px] h-[18px] w-[18px] rounded-full bg-brand-green opacity-80" />
+              <span className="absolute left-[284px] top-[80px] h-3 w-3 rounded-full bg-brand-blue opacity-70" />
+              <span className="absolute left-[318px] top-10 h-2.5 w-2.5 rounded-full bg-magenta opacity-70" />
+            </div>
           </div>
         </div>
       </div>

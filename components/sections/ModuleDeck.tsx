@@ -1,86 +1,53 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useMemo, type ReactNode } from "react";
 import { useSearchParams } from "next/navigation";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
 import { getModule, type Module } from "@/content/modules";
-import { Glow } from "@/components/glass/Glow";
-import { IconButton } from "@/components/ui/IconButton";
-import { cn } from "@/components/ui/cn";
-import { DeckCards } from "./DeckCards";
+import { Layer, Parallax, SceneProgress } from "@/components/scene/Layer";
+import { Scene } from "@/components/scene/Scene";
+import { DeckStage } from "./DeckStage";
 import { ModuleDetail } from "./ModuleDetail";
-import { ModuleRail, useIsDesktop } from "./ModuleRail";
+import { ModuleRail } from "./ModuleRail";
+import { useModuleScene } from "./useModuleScene";
+import "./platform-scene.css";
 
-export function ModuleDeck({ modules }: { modules: Module[] }) {
-  const params = useSearchParams();
-  const fromUrl = params.get("module");
-  const indexOf = (slug: string | null) => Math.max(0, modules.findIndex((m) => m.slug === getModule(slug).slug));
-  const [index, setIndex] = useState(() => indexOf(fromUrl));
-  const reduce = useReducedMotion();
-  const desktop = useIsDesktop();
 
-  const [seen, setSeen] = useState(fromUrl);
-  if (seen !== fromUrl) {
-    setSeen(fromUrl);
-    setIndex(indexOf(fromUrl));
-  }
-
-  const select = useCallback(
-    (i: number) => {
-      const next = Math.min(modules.length - 1, Math.max(0, i));
-      setIndex(next);
-      const url = new URL(window.location.href);
-      url.searchParams.set("module", modules[next].slug);
-      window.history.replaceState(window.history.state, "", url);
-    },
-    [modules],
-  );
-
-  const current = modules[index];
+/** Scene A: header + rail | deck | detail pinned together; scroll scrubs the selected module. */
+export function ModuleDeck({ modules, header }: { modules: Module[]; header: ReactNode }) {
+  const fromUrl = useSearchParams().get("module");
+  const slugs = useMemo(() => modules.map((m) => m.slug), [modules]);
+  const initial = Math.max(0, slugs.indexOf(getModule(fromUrl).slug));
+  const { ref, index, select } = useModuleScene(slugs, initial, fromUrl);
 
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)] gap-8 xl:items-start xl:grid-cols-[260px_minmax(0,1fr)_420px]">
-      <ModuleRail modules={modules} index={index} onSelect={select} />
-
-      <div className="relative mx-auto w-full max-w-[640px] xl:max-w-none">
-        <motion.div
-          aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-1/2 size-[360px] -translate-x-1/2 -translate-y-1/2"
-          animate={reduce ? undefined : { rotate: 360 }}
-          transition={{ duration: 40, ease: "linear", repeat: Infinity }}
-        >
-          <Glow color="gradient" className="inset-0 size-full" />
-        </motion.div>
-        <DeckCards modules={modules} index={index} onSelect={select} swipe={!desktop} />
-        <div className="relative mt-6 flex items-center justify-center gap-3">
-          <IconButton label="Previous module" disabled={index === 0} onClick={() => select(index - 1)}>
-            <ChevronLeft size={22} strokeWidth={1.8} />
-          </IconButton>
-          <div className="flex items-center">
-            {modules.map((m, i) => (
-              <button
-                key={m.slug}
-                type="button"
-                aria-label={`Go to ${m.name}`}
-                aria-current={i === index ? "true" : undefined}
-                onClick={() => select(i)}
-                className="flex size-11 items-center justify-center"
-              >
-                <span
-                  aria-hidden="true"
-                  className={cn("block h-2 rounded-full transition-all duration-500", i === index ? "w-6 bg-ink" : "w-2 bg-slate/40")}
-                />
-              </button>
-            ))}
-          </div>
-          <IconButton label="Next module" disabled={index === modules.length - 1} onClick={() => select(index + 1)}>
-            <ChevronRight size={22} strokeWidth={1.8} />
-          </IconButton>
+    <Scene
+      id="platform-explorer"
+      aria-label="Platform modules"
+      trackRef={ref}
+      pin={50}
+      className="scene--plat"
+      stageClassName="bg-mist pb-16 xl:pb-[88px] pinned:xl:flex pinned:xl:flex-col pinned:xl:pb-0"
+    >
+      <Parallax depth={28} aria-hidden="true" className="lab-grid pointer-events-none absolute -inset-y-24 inset-x-0" />
+      <Layer from={{ o: 0, y: 28 }} intro={0} className="relative">
+        {header}
+      </Layer>
+      <div className="frame relative pinned:xl:min-h-0 pinned:xl:flex-1 pinned:xl:pb-5">
+        <div className="grid grid-cols-[minmax(0,1fr)] gap-8 [--dh:640px] xl:grid-cols-[280px_minmax(0,1fr)_380px] xl:items-start xl:gap-10 pinned:xl:[--dh:clamp(430px,calc(100svh-340px),700px)] pinned:xl:grid-cols-[clamp(232px,18vw,260px)_minmax(0,1fr)_clamp(400px,31vw,420px)] pinned:xl:gap-8">
+          <Layer from={{ o: 0, x: -48 }} intro={0.12}>
+            <ModuleRail modules={modules} index={index} onSelect={select} />
+          </Layer>
+          <Layer from={{ o: 0, s: 0.92, y: 48, blur: 6 }} intro={0.22}>
+            <DeckStage modules={modules} index={index} onSelect={select} />
+          </Layer>
+          <Layer from={{ o: 0, x: 48 }} intro={0.32}>
+            <ModuleDetail module={modules[index]} />
+          </Layer>
         </div>
       </div>
-
-      <ModuleDetail module={current} />
-    </div>
+      <div className="absolute inset-x-0 bottom-0 hidden pinned:xl:block">
+        <SceneProgress />
+      </div>
+    </Scene>
   );
 }

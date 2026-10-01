@@ -1,0 +1,38 @@
+.demo-orb {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 24%),
+    var(--ex-orb);
+  animation: demo-spin 40s linear infinite;
+}
+@keyframes demo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ctad {
+  background:
+    linear-gradient(var(--ex-ink), var(--ex-ink)) padding-box,
+    var(--ex-gradient) border-box;
+  border: 2px solid transparent;
+}
+.demo-field {
+  height: 52px;
+  border-radius: 14px;
+  border: 1px solid rgba(51, 63, 72, 0.2);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0 16px;
+  font-size: 15px;
+  color: var(--ex-heading);
+}
+select.demo-field {
+  padding: 0 14px;
+}
+select.demo-field {
+  padding: 0 14px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-orb {
+    animation: none;
+  }
+}

@@ -5,7 +5,7 @@ type Item = { title: string; body?: string };
 
 export function Checklist({ items, tone = "light", className }: { items: Item[]; tone?: "light" | "dark"; className?: string }) {
   return (
-    <ul className={cn("grid gap-4", className)}>
+    <ul className={cn("stagger grid gap-4", className)}>
       {items.map((it) => (
         <li key={it.title} className="flex gap-4">
           <span

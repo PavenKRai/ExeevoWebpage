@@ -1,0 +1,144 @@
+/*
+ * Pinned scenes (scrollytelling) — native CSS only, no scroll library, scroll is never hijacked.
+ *
+ *   <section class="scene" style="--pin:160vh">          tall track; its height = 100svh + --pin
+ *     <div class="scene-stage"> … layers … </div>        sticky 100svh stage pinned while the track scrolls
+ *   </section>
+ *
+ * A named view timeline (--scene) on the track drives every `.sc` layer inside it. Scrubbed progress 0→1
+ * is the *pinned interval*: from the moment the stage sticks (track top == viewport top) until it lets go
+ * (track bottom == viewport bottom). A layer picks its slice of that interval with --a / --b (0..1) and its
+ * from/to state with the custom properties below; the plain (un-animated) layout is always the FINAL state.
+ *
+ * Pinning is enabled only when: width >= 768px, no reduced-motion preference, and the browser supports
+ * scroll-driven animations. Everywhere else the scene is an ordinary static section showing the final state.
+ */
+
+.scene {
+  position: relative;
+  --pin: 140vh;
+}
+.scene-stage {
+  position: relative;
+  min-height: 0;
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .scene {
+      height: calc(100vh + var(--pin));
+      height: calc(100svh + var(--pin));
+      view-timeline: --scene block;
+    }
+    .scene-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .scene-stage--visible {
+      overflow: visible;
+    }
+
+    /* Generic scrubbed layer. Configure with custom properties (all optional):
+       --o0/--o1 opacity · --x0/--x1 --y0/--y1 translate (length/%) · --s0/--s1 scale
+       --rot0/--rot1 rotate (e.g. "x -30deg" or "8deg", same axis on both) · --b0/--b1 blur (px)
+       --a/--b start/end of the slice of the pinned interval (0..1, default 0..1) */
+    .sc {
+      --a: 0;
+      --b: 1;
+      /* Declared on every layer so nested layers never inherit a parent's from/to values
+         (inline styles from <Layer from/to> still win). */
+      --o0: 1; --o1: 1;
+      --x0: 0px; --x1: 0px; --y0: 0px; --y1: 0px;
+      --s0: 1; --s1: 1;
+      --rot0: 0deg; --rot1: 0deg;
+      --b0: 0px; --b1: 0px;
+      animation: scScrub cubic-bezier(0.25, 0.6, 0.3, 1) both;
+      animation-timeline: --scene;
+      animation-range:
+        cover calc(100vh + var(--pin) * var(--a))
+        cover calc(100vh + var(--pin) * var(--b));
+    }
+    /* Base scrub: no `filter` at all, so glass inside a layer keeps sampling what is behind it. */
+    @keyframes scScrub {
+      from {
+        opacity: var(--o0, 1);
+        translate: var(--x0, 0px) var(--y0, 0px);
+        scale: var(--s0, 1);
+        rotate: var(--rot0, 0deg);
+      }
+      to {
+        opacity: var(--o1, 1);
+        translate: var(--x1, 0px) var(--y1, 0px);
+        scale: var(--s1, 1);
+        rotate: var(--rot1, 0deg);
+      }
+    }
+    /* Blur variants — <Layer> picks one only when a blur is requested. "In" layers end with filter:none. */
+    .sc-blur-in { animation-name: scScrubBlurIn; }
+    .sc-blur-out { animation-name: scScrubBlurOut; }
+    .sc-blur { animation-name: scScrubBlur; }
+    @keyframes scScrubBlurIn {
+      from { opacity: var(--o0, 1); translate: var(--x0, 0px) var(--y0, 0px); scale: var(--s0, 1); rotate: var(--rot0, 0deg); filter: blur(var(--b0, 0px)); }
+      to { opacity: var(--o1, 1); translate: var(--x1, 0px) var(--y1, 0px); scale: var(--s1, 1); rotate: var(--rot1, 0deg); filter: none; }
+    }
+    @keyframes scScrubBlurOut {
+      from { opacity: var(--o0, 1); translate: var(--x0, 0px) var(--y0, 0px); scale: var(--s0, 1); rotate: var(--rot0, 0deg); filter: none; }
+      to { opacity: var(--o1, 1); translate: var(--x1, 0px) var(--y1, 0px); scale: var(--s1, 1); rotate: var(--rot1, 0deg); filter: blur(var(--b1, 0px)); }
+    }
+    @keyframes scScrubBlur {
+      from { opacity: var(--o0, 1); translate: var(--x0, 0px) var(--y0, 0px); scale: var(--s0, 1); rotate: var(--rot0, 0deg); filter: blur(var(--b0, 0px)); }
+      to { opacity: var(--o1, 1); translate: var(--x1, 0px) var(--y1, 0px); scale: var(--s1, 1); rotate: var(--rot1, 0deg); filter: blur(var(--b1, 0px)); }
+    }
+    /* Slowly scrubbing background depth layers (true parallax across the whole track). */
+    .sc-par {
+      animation: scPar linear both;
+      animation-timeline: --scene;
+      animation-range: cover 0% cover 100%;
+    }
+    @keyframes scPar {
+      from { translate: 0 var(--par, 80px); }
+      to { translate: 0 calc(var(--par, 80px) * -1); }
+    }
+    /* Progress hairline: scaleX 0→1 across the pinned interval. */
+    .sc-progress {
+      transform-origin: left;
+      animation: scProgress linear both;
+      animation-timeline: --scene;
+      animation-range: cover 100vh cover calc(100vh + var(--pin));
+    }
+    @keyframes scProgress {
+      from { scale: 0 1; }
+      to { scale: 1 1; }
+    }
+  }
+}
+
+/*
+ * Intro layers: a TIME-based entrance that plays once on load (any width, pinned or not), for the first scene
+ * of a page. Scroll-scrubbed layers sit at their "from" state at scroll position 0, so a page's first
+ * composition must never depend on them: it arrives by itself, then scroll only adds motion on top.
+ * Same custom properties as .sc; `--delay` (s) staggers. Disabled by the global reduced-motion rule.
+ */
+.sc-intro {
+  --delay: 0;
+  --o0: 1; --o1: 1;
+  --x0: 0px; --x1: 0px; --y0: 0px; --y1: 0px;
+  --s0: 1; --s1: 1;
+  --rot0: 0deg; --rot1: 0deg;
+  --b0: 0px; --b1: 0px;
+  animation: scIntro 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--delay) * 1s);
+}
+.sc-intro-blur { animation-name: scIntroBlur; }
+@keyframes scIntro {
+  from { opacity: var(--o0, 1); translate: var(--x0, 0px) var(--y0, 0px); scale: var(--s0, 1); rotate: var(--rot0, 0deg); }
+  to { opacity: var(--o1, 1); translate: var(--x1, 0px) var(--y1, 0px); scale: var(--s1, 1); rotate: var(--rot1, 0deg); }
+}
+@keyframes scIntroBlur {
+  from { opacity: var(--o0, 1); translate: var(--x0, 0px) var(--y0, 0px); scale: var(--s0, 1); rotate: var(--rot0, 0deg); filter: blur(var(--b0, 0px)); }
+  to { opacity: var(--o1, 1); translate: var(--x1, 0px) var(--y1, 0px); scale: var(--s1, 1); rotate: var(--rot1, 0deg); filter: none; }
+}

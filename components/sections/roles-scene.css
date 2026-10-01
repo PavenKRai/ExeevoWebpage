@@ -1,0 +1,9 @@
+/* Pinned roles scene: panels arrive from depth on load (no scroll-linked reveal inside a pinned stage). */
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    #roles-scene .role-arrive {
+      animation: rise var(--ex-dur-slow) var(--ex-ease-out) both;
+      animation-delay: calc(0.3s + var(--i, 0) * 0.1s);
+    }
+  }
+}

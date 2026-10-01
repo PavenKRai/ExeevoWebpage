@@ -15,29 +15,35 @@ export function MegaMenu({ id, onClose }: { id: string; onClose: () => void }) {
       id={id}
       role="dialog"
       aria-label="Platform modules"
-      className="glass-dark on-dark absolute left-0 right-0 top-[calc(100%+12px)] grid grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-6 rounded-[28px] bg-ink/85 p-6"
+      className="glass-dark on-dark pointer-events-auto grid w-[920px] max-w-full grid-cols-3 gap-1.5 rounded-[26px] bg-[rgba(24,32,38,.72)] p-[22px] text-[#EEF2F4]"
     >
-      <Link href="/platform" onClick={onClose} className="glass-dark relative flex min-h-56 flex-col justify-end overflow-hidden rounded-[22px] p-6">
-        <Orb size={120} className="absolute -right-6 -top-6 opacity-90" />
-        <span className="font-display text-[24px] font-semibold text-white">{platformPage.overview.name}</span>
-        <span className="text-on-dark">{platformPage.overview.blurb}</span>
+      <Link
+        href="/platform"
+        onClick={onClose}
+        className="nav-link nav-link-dark row-span-3 flex min-h-[220px] flex-col justify-between rounded-[18px] bg-white/[.06] p-[22px]"
+      >
+        <Orb size={64} />
+        <span className="flex flex-col gap-1.5">
+          <span className="text-[19px] font-semibold">{platformPage.overview.name}</span>
+          <span className="text-[14px] text-on-dark-muted">{platformPage.overview.blurb}</span>
+        </span>
       </Link>
-      <ul className="grid grid-cols-2 gap-2">
-        {modules.map((m) => (
-          <li key={m.slug}>
-            <Link
-              href={`/platform?module=${m.slug}`}
-              onClick={onClose}
-              className="flex min-h-14 flex-col gap-0.5 rounded-input px-4 py-2.5 hover:bg-white/10"
-            >
-              <span className="flex items-center gap-2 font-semibold text-white">
-                <CategoryDot category={m.category} /> {m.name}
-              </span>
-              <span className="text-[14px] text-on-dark-muted">{m.menuBlurb}</span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {modules.map((m) => (
+        <Link
+          key={m.slug}
+          href={`/platform?module=${m.slug}`}
+          onClick={onClose}
+          className="nav-link nav-link-dark flex min-h-11 items-start gap-3 rounded-[14px] px-4 py-3.5"
+        >
+          <span className="mt-[7px] flex">
+            <CategoryDot category={m.category} className="!size-2" />
+          </span>
+          <span className="flex flex-col gap-[3px]">
+            <span className="text-[15px] font-[550]">{m.name}</span>
+            <span className="text-[13px] leading-[1.4] text-on-dark-muted">{m.menuBlurb}</span>
+          </span>
+        </Link>
+      ))}
     </div>
   );
 }

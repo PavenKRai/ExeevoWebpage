@@ -13,14 +13,12 @@ export const metadata: Metadata = {
 export default function PlatformPage() {
   return (
     <main id="main">
-      <PlatformHeader label={platformPage.label} title={platformPage.h1} intro={platformPage.intro} />
-      <section className="lab-grid relative overflow-hidden pb-[var(--ex-section-y)]" aria-label="Platform modules">
-        <div className="frame">
-          <Suspense fallback={null}>
-            <ModuleDeck modules={modules} />
-          </Suspense>
-        </div>
-      </section>
+      <Suspense fallback={null}>
+        <ModuleDeck
+          modules={modules}
+          header={<PlatformHeader label={platformPage.label} title={platformPage.h1} intro={platformPage.intro} />}
+        />
+      </Suspense>
       <RolesBand text={platformPage.band.text} cta={platformPage.band.cta} href={platformPage.band.href} />
     </main>
   );

@@ -41,13 +41,13 @@ export function ModuleRail({ modules, index, onSelect }: { modules: Module[]; in
   };
 
   return (
-    <div className="glass-light rounded-card p-2 xl:p-3">
+    <div className="glass-light rounded-[26px] p-2.5 xl:mt-5 pinned:xl:mt-0">
       <div
         role="tablist"
         aria-label="Platform modules"
         aria-orientation={desktop ? "vertical" : "horizontal"}
         onKeyDown={onKey}
-        className="flex gap-2 overflow-x-auto p-1 xl:flex-col xl:overflow-visible"
+        className="flex gap-1 overflow-x-auto xl:flex-col xl:overflow-visible"
       >
         {modules.map((m, i) => {
           const sel = i === index;
@@ -62,11 +62,11 @@ export function ModuleRail({ modules, index, onSelect }: { modules: Module[]; in
               tabIndex={sel ? 0 : -1}
               onClick={() => onSelect(i)}
               className={cn(
-                "flex min-h-12 shrink-0 items-center gap-3 whitespace-nowrap rounded-chip px-4 text-left font-semibold transition-colors duration-300 xl:w-full",
-                sel ? "bg-ink text-white" : "text-heading hover:bg-white/70",
+                "flex h-[54px] shrink-0 items-center gap-3 whitespace-nowrap rounded-2xl px-4 text-left text-[15px] transition-colors duration-300 xl:w-full pinned:xl:[@media(max-height:820px)]:h-[46px]",
+                sel ? "bg-ink font-semibold text-white" : "font-[450] text-slate hover:bg-white/70",
               )}
             >
-              <CategoryDot category={m.category} />
+              <CategoryDot category={m.category} className="size-[9px]" />
               {m.name}
             </button>
           );

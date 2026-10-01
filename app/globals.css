@@ -3,6 +3,16 @@
 @import "./styles/glass.css" layer(components);
 @import "./styles/specimen.css" layer(components);
 @import "./styles/motion.css" layer(components);
+@import "./styles/scenes.css" layer(components);
+
+/* `pinned:` variant = the pinned-scene environment (see app/styles/scenes.css). */
+@custom-variant pinned {
+  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      @slot;
+    }
+  }
+}
 
 html {
   scroll-behavior: smooth;

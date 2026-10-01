@@ -1,78 +1,88 @@
 "use client";
-import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { GlassPanel } from "@/components/glass/GlassPanel";
-import { Glow } from "@/components/glass/Glow";
-import { SegmentedControl } from "@/components/ui/SegmentedControl";
+import { Layer } from "@/components/scene/Layer";
+import { Scene } from "@/components/scene/Scene";
 import { Button } from "@/components/ui/Button";
 import { industries, type IndustrySlug } from "@/content/industries";
-import { PharmaCapsule } from "./PharmaCapsule";
+import { IndustryCards } from "./IndustryCards";
 import { MedtechDevice } from "./MedtechDevice";
-
-const glowColors = ["blue", "magenta", "green", "purple"] as const;
+import { PharmaCapsule } from "./PharmaCapsule";
 
 export function IndustrySwitcher() {
   const params = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
   const reduce = useReducedMotion();
-  const initial: IndustrySlug = params.get("industry") === "medtech" ? "medtech" : "pharma";
-  const [active, setActive] = useState<IndustrySlug>(initial);
+  const active: IndustrySlug = params.get("industry") === "medtech" ? "medtech" : "pharma";
   const item = industries.items[active];
-  const options = (Object.keys(industries.items) as IndustrySlug[]).map((k) => ({ value: k, label: industries.items[k].label }));
-
-  const change = (v: string) => {
-    const slug = v as IndustrySlug;
-    setActive(slug);
-    router.replace(`${pathname}?industry=${slug}`, { scroll: false });
-  };
-
+  const slugs = Object.keys(industries.items) as IndustrySlug[];
   const dur = reduce ? 0 : 0.6;
+  const shift = reduce ? 0 : 18;
+
   return (
     <>
-      <section className="lab-grid relative overflow-hidden pb-[var(--ex-section-y)] pt-[140px]">
-        <Glow color="gradient" className="right-[8%] top-24 h-80 w-80" />
-        <div className="frame">
-          <SegmentedControl label="Industry" options={options} value={active} onChange={change} />
-          <AnimatePresence mode="wait" initial={false}>
+      <Scene id="industries-hero" pin={70} stageClassName="ind-ground overflow-hidden">
+        <div className="relative mx-auto flex max-w-[1440px] flex-col pb-16 pt-[140px] pinned:h-full pinned:pb-8 pinned:pt-[116px] xl:pt-[171px] pinned:xl:pt-[116px]">
+          <div className="px-5 xl:px-20">
+            <div role="group" aria-label="Industry" className="glass-light flex w-fit gap-1 rounded-[18px] p-[5px]">
+              {slugs.map((k) => {
+                const on = k === active;
+                return (
+                  <button
+                    key={k}
+                    type="button"
+                    aria-pressed={on}
+                    onClick={() => router.replace(`${pathname}?industry=${k}`, { scroll: false })}
+                    className={`h-[46px] min-w-11 rounded-[14px] px-6 text-[15px] font-semibold transition-colors duration-[350ms] ${on ? "bg-ink text-white" : "bg-transparent text-body"}`}
+                  >
+                    {industries.items[k].label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              initial={{ opacity: 0, y: reduce ? 0 : 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: reduce ? 0 : -18 }}
+              className="relative mt-[26px] pinned:flex pinned:flex-1 pinned:flex-col"
+              initial={{ opacity: 0, x: shift }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -shift }}
               transition={{ duration: dur, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="mt-12 grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-                <div>
-                  <h1>{item.h1}</h1>
-                  <p className="body-lg mt-6">{item.intro}</p>
-                </div>
-                {active === "pharma" ? <PharmaCapsule /> : <MedtechDevice />}
+              <div className="flex flex-col gap-[22px] px-5 pinned:mb-6 xl:h-[446px] xl:px-20 pinned:xl:h-auto">
+                <h1 className="max-w-[760px] text-[clamp(40px,5vw+8px,64px)] leading-[1.04] tracking-[-0.035em] pinned:max-w-[56%] pinned:text-[clamp(36px,min(4.6vw,7.4svh),60px)] pinned:xl:max-w-[720px]">{item.h1}</h1>
+                <p className="body-lg max-w-[620px] text-muted pinned:max-w-[52%] pinned:xl:max-w-[620px]">{item.intro}</p>
               </div>
-              <ul className="mt-16 grid gap-6 sm:grid-cols-2">
-                {item.cards.map((c, i) => (
-                  <li key={c.title} className="relative">
-                    <Glow color={glowColors[i]} className="-bottom-6 -right-4 h-32 w-32" />
-                    <GlassPanel tone="light" className="relative h-full rounded-card p-8">
-                      <h2 className="mb-3 text-[clamp(22px,1.4vw+12px,28px)] leading-tight">{c.title}</h2>
-                      <p className="text-[17px]">{c.body}</p>
-                    </GlassPanel>
-                  </li>
-                ))}
-              </ul>
+              <div className="pointer-events-none flex justify-center overflow-hidden max-md:h-[320px] xl:absolute xl:left-[880px] xl:top-[-124px] xl:block xl:overflow-visible pinned:absolute pinned:inset-auto pinned:right-0 pinned:top-[-120px] pinned:block pinned:h-auto pinned:overflow-visible pinned:xl:left-auto pinned:xl:right-[20px]">
+                <Layer intro={0.15} from={{ o: 0, y: 40, s: 0.94 }} className="pinned:origin-top-right">
+                  <Layer to={{ y: -36 }} className="pinned:origin-top-right">
+                    <div className="ind-obj mx-auto shrink-0 origin-top scale-[.6] md:scale-100 pinned:origin-top-right pinned:md:scale-[.56] pinned:lg:scale-[.72] pinned:xl:scale-[.85]">
+                      {active === "pharma" ? <PharmaCapsule /> : <MedtechDevice />}
+                    </div>
+                  </Layer>
+                </Layer>
+              </div>
+              <IndustryCards cards={item.cards} />
             </motion.div>
           </AnimatePresence>
         </div>
-      </section>
-      <section className="pb-[var(--ex-section-y)]">
-        <div className="frame flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="lead text-heading">{industries.closing.line}</p>
-          <Button href={industries.closing.href} size="hero">
-            {industries.closing.cta}
-          </Button>
+      </Scene>
+      <Scene id="industries-close" pin={35} stageClassName="bg-mist">
+        <div className="pb-16 pt-8 pinned:flex pinned:h-full pinned:items-center pinned:py-0">
+          <Layer from={{ o: 0, y: 70 }} range={[0, 0.5]} className="mx-auto flex w-full max-w-[1280px] flex-col items-start gap-6 border-t border-hairline px-5 py-8 sm:flex-row sm:items-center sm:justify-between xl:px-0">
+            <p className="text-[20px] font-medium text-heading">{industries.closing.line}</p>
+            <Button href={industries.closing.href} size="hero" className="min-h-[52px] !rounded-2xl !px-6">
+              {industries.closing.cta}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="M13 6l6 6-6 6" />
+              </svg>
+            </Button>
+          </Layer>
         </div>
-      </section>
+      </Scene>
     </>
   );
 }

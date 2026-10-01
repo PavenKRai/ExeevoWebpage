@@ -1,0 +1,129 @@
+/* Home page: design-scale stages and the hero specimen cluster. Self-contained. */
+.hm {
+  --hs: 0.52;
+  --bs: 1;
+  --hm-fg: #eef2f4;
+  --hm-fg-2: #dce3e7;
+  --hm-fg-3: #c4ced4;
+  --hm-dash: #9aa7b0;
+  --hm-line: #c3cdd3;
+}
+@media (min-width: 400px) { .hm { --hs: 0.58; } }
+@media (min-width: 640px) { .hm { --hs: 0.9; } }
+@media (min-width: 768px) { .hm { --hs: 1; --bs: 0.9; } }
+@media (min-width: 830px) { .hm { --bs: 1; } }
+@media (min-width: 1024px) { .hm { --hs: 0.62; } }
+@media (min-width: 1180px) { .hm { --hs: 0.72; } }
+@media (min-width: 1280px) { .hm { --hs: 0.8; --bs: 0.85; } }
+@media (min-width: 1360px) { .hm { --hs: 0.9; --bs: 0.95; } }
+@media (min-width: 1440px) { .hm { --hs: 1; --bs: 1; } }
+
+/* A fixed-size design canvas scaled by --s inside a box that reserves the scaled size. */
+.hm-stage {
+  position: relative;
+  width: calc(var(--w) * 1px * var(--s));
+  height: calc(var(--h) * 1px * var(--s));
+}
+.hm-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--w) * 1px);
+  height: calc(var(--h) * 1px);
+  transform: scale(var(--s));
+  transform-origin: 0 0;
+}
+.hm-hero-stage { --s: var(--hs); --w: 600; --h: 600; }
+.hm-tenant-stage { --s: 1; --w: 600; --h: 460; }
+.hm-board-stage { --s: var(--bs); --w: 760; --h: 720; }
+/* Below 768px the board is a flat grid rather than a scaled 3D canvas. */
+@media (max-width: 767px) {
+  .hm-flat-sm { width: auto; height: auto; }
+  .hm-flat-sm > .hm-canvas { position: static; width: auto; height: auto; transform: none; }
+}
+
+.hm-hero-bg {
+  background:
+    repeating-radial-gradient(circle at calc(100% - 350px) 430px, rgba(255, 255, 255, 0.05) 0 1px, rgba(255, 255, 255, 0) 1.5px 72px),
+    var(--ex-ink);
+}
+@media (max-width: 1023px) {
+  .hm-hero-bg {
+    background:
+      repeating-radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.05) 0 1px, rgba(255, 255, 255, 0) 1.5px 72px),
+      var(--ex-ink);
+  }
+}
+
+/* Orb: the brand gradient sphere. --from rotates the conic start. */
+.hm-orb {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 24%),
+    conic-gradient(from var(--from, 200deg), var(--ex-magenta), var(--ex-blue), var(--ex-green), var(--ex-blue), var(--ex-magenta));
+}
+.hm-orb-glow {
+  border-radius: 50%;
+  background: conic-gradient(from 200deg, var(--ex-magenta), var(--ex-blue), var(--ex-green), var(--ex-blue), var(--ex-magenta));
+}
+.hm-blob { position: absolute; border-radius: 50%; }
+.hm-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+}
+.hm-sat {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 14px currentColor;
+}
+.hm-dot {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  width: var(--d, 10px);
+  height: var(--d, 10px);
+  background: var(--ex-blue);
+}
+.hm-dot[data-c="medical"] { background: var(--ex-magenta); }
+.hm-dot[data-c="platform"] { background: var(--ex-green); }
+.hm-dot[data-c="ai"] { background: linear-gradient(135deg, var(--ex-magenta), var(--ex-blue), var(--ex-green)); }
+
+/* Ambient loops: only the specimen sphere and its rings */
+@keyframes hm-spin { to { transform: rotate(360deg); } }
+@keyframes hm-oa { from { transform: rotateX(72deg) rotateY(8deg) rotateZ(0); } to { transform: rotateX(72deg) rotateY(8deg) rotateZ(360deg); } }
+@keyframes hm-ob { from { transform: rotateX(64deg) rotateY(-38deg) rotateZ(0); } to { transform: rotateX(64deg) rotateY(-38deg) rotateZ(-360deg); } }
+@keyframes hm-oc { from { transform: rotateX(80deg) rotateY(52deg) rotateZ(0); } to { transform: rotateX(80deg) rotateY(52deg) rotateZ(360deg); } }
+@keyframes hm-tilt { from { opacity: 0; rotate: y -28deg; translate: 0 0 -160px; } to { opacity: 1; rotate: y 0deg; translate: 0 0 0; } }
+@keyframes hm-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+.hm-spin { animation: hm-spin 40s linear infinite; }
+.hm-oa { animation: hm-oa 22s linear infinite; }
+.hm-ob { animation: hm-ob 30s linear infinite; }
+.hm-oc { animation: hm-oc 26s linear infinite; }
+.hm-t1 { animation: hm-tilt 1.2s 0.3s var(--ex-ease-out) both, hm-float 7s 1.5s ease-in-out infinite; }
+.hm-t2 { animation: hm-tilt 1.2s 0.5s var(--ex-ease-out) both, hm-float 8s 1.7s ease-in-out infinite; }
+.hm-t3 { animation: hm-tilt 1.2s 0.7s var(--ex-ease-out) both, hm-float 9s 1.9s ease-in-out infinite; }
+[data-paused="true"] .hm-spin, [data-paused="true"] .hm-oa, [data-paused="true"] .hm-ob, [data-paused="true"] .hm-oc { animation-play-state: paused; }
+
+.hm-tile { transition: transform 0.5s var(--ex-ease-soft); }
+.hm-tile:hover { transform: translateZ(34px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hm *, .hm *::before, .hm *::after { animation: none !important; transition: none !important; }
+  .hm-t1, .hm-t2, .hm-t3 { opacity: 1 !important; }
+}
+
+/* Hero cluster hangs slightly past the content frame on large screens (design: right edge at x=1390). */
+@media (min-width: 1024px) {
+  .hm-hero-cluster { right: -16px; }
+}
+@media (min-width: 1440px) {
+  .hm-hero-cluster { right: -30px; }
+}

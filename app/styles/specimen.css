@@ -1,103 +1,130 @@
+/* Orb: radial highlight over the brand conic gradient (design: .orb) */
+.orb {
+  display: inline-block;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 24%),
+    conic-gradient(from 200deg, #df1995, #0762c8, #00c389, #0762c8, #df1995);
+}
+.orb-spin {
+  animation: spin 40s linear infinite;
+}
+
+/*
+ * Specimen: the design's 600x600 sphere cluster, scaled as a unit.
+ * --k is the unitless scale (size / 600). When size is a string (e.g. "100%") the
+ * box is a container and the stage scales with 100cqw / 600px instead.
+ */
 .specimen {
-  --size: 440px;
+  --size: 600px;
+  --k: 1;
   position: relative;
   width: var(--size);
   aspect-ratio: 1;
+  container-type: inline-size;
 }
-.specimen > * {
+.specimen-stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 600px;
+  height: 600px;
+  transform-origin: 0 0;
+  scale: var(--k);
+  perspective: 1400px;
+}
+.specimen-fluid .specimen-stage {
+  scale: calc(100cqw / 600px);
+}
+.specimen-stage > * {
   position: absolute;
 }
 .specimen-glow {
-  inset: 6%;
+  left: 100px;
+  top: 100px;
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
-  background: var(--ex-orb);
+  background: conic-gradient(from 200deg, #df1995, #0762c8, #00c389, #0762c8, #df1995);
   filter: blur(70px);
   opacity: 0.5;
 }
-.orb {
+.specimen-sphere {
+  left: 140px;
+  top: 140px;
+  width: 320px;
+  height: 320px;
+  animation: spin 40s linear infinite;
+}
+.specimen-shade {
+  left: 140px;
+  top: 140px;
+  width: 320px;
+  height: 320px;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 38%),
-    var(--ex-orb);
-  animation: spin 40s linear infinite;
+    radial-gradient(circle at 34% 30%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 26%),
+    radial-gradient(circle at 70% 78%, rgba(24, 32, 38, 0.45), rgba(24, 32, 38, 0) 55%);
 }
-.specimen > .specimen-orb {
-  position: absolute;
-  inset: 12%;
-}
-/* the highlight should not rotate with the gradient */
-.orb-fixed {
-  position: relative;
+.specimen-lens {
+  left: 250px;
+  top: 210px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
-  overflow: hidden;
-}
-.orb-fixed::before {
-  content: "";
-  position: absolute;
-  inset: -2%;
-  background: var(--ex-orb);
-  animation: spin 40s linear infinite;
-}
-.orb-fixed::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 38%);
-  box-shadow: inset -18px -22px 48px rgba(24, 32, 38, 0.3);
-}
-.lens {
-  width: 46%;
-  aspect-ratio: 1;
-  right: 2%;
-  bottom: 6%;
-  border-radius: 50%;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.04));
 }
 .specimen-rings {
-  inset: 0;
-  perspective: 1200px;
+  left: 60px;
+  top: 60px;
+  width: 480px;
+  height: 480px;
+  transform-style: preserve-3d;
 }
-/* Rings are flattened individually: a shared preserve-3d context makes Chrome split
-   intersecting planes into stray straight lines. */
+/* Named orbit-ring (not .ring) to avoid Tailwind's built-in ring utility. */
 .orbit-ring {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.ring-spin {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.28);
-  animation: spin 22s linear infinite;
+  transform-style: preserve-3d;
 }
-.orbit-ring-1 { transform: rotateX(72deg) rotateY(8deg); inset: -2%; }
-.orbit-ring-2 { transform: rotateX(64deg) rotateY(-38deg); inset: -10%; }
-.orbit-ring-2 .ring-spin { animation-duration: 30s; animation-direction: reverse; }
-.orbit-ring-3 { transform: rotateX(80deg) rotateY(52deg); inset: -16%; }
-.orbit-ring-3 .ring-spin { animation-duration: 26s; }
+.orbit-ring-1 { animation: orbitA 22s linear infinite; }
+.orbit-ring-2 { inset: 30px; animation: orbitB 30s linear infinite; }
+.orbit-ring-3 { inset: -20px; border-color: rgba(255, 255, 255, 0.14); animation: orbitC 26s linear infinite; }
 .sat {
   position: absolute;
   top: -5px;
-  left: calc(50% - 5px);
+  left: 50%;
   width: 10px;
   height: 10px;
+  margin-left: -5px;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 14px 4px currentColor;
-  color: #fff;
 }
-.sat-magenta { background: var(--ex-magenta); color: var(--ex-magenta); }
-.sat-green { background: var(--ex-green); color: var(--ex-green); }
-.sat-white { background: #fff; color: #fff; }
+.sat-magenta { background: #df1995; box-shadow: 0 0 14px #df1995; }
+.sat-green { background: #00c389; box-shadow: 0 0 14px #00c389; }
+.sat-white { background: #fff; box-shadow: 0 0 14px #fff; }
 
 .specimen[data-paused="true"] *,
-.orb-fixed[data-paused="true"]::before {
+.orb-spin[data-paused="true"] {
   animation-play-state: paused !important;
 }
 
 @keyframes spin {
-  to { rotate: 360deg; }
+  to { transform: rotate(360deg); }
+}
+@keyframes orbitA {
+  from { transform: rotateX(72deg) rotateY(8deg) rotateZ(0); }
+  to { transform: rotateX(72deg) rotateY(8deg) rotateZ(360deg); }
+}
+@keyframes orbitB {
+  from { transform: rotateX(64deg) rotateY(-38deg) rotateZ(0); }
+  to { transform: rotateX(64deg) rotateY(-38deg) rotateZ(-360deg); }
+}
+@keyframes orbitC {
+  from { transform: rotateX(80deg) rotateY(52deg) rotateZ(0); }
+  to { transform: rotateX(80deg) rotateY(52deg) rotateZ(360deg); }
 }
 @keyframes float {
   0%, 100% { translate: 0 0; }

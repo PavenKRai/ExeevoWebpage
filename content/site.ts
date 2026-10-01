@@ -103,6 +103,7 @@ export const home = {
       boundary: "Your Microsoft tenant",
       chips: ["HCP & customer data", "Ask-Nova agents, scoped to your data", "Dynamics 365, Power Platform, Azure"],
       external: "Shared AI models",
+      note: "Stored and processed in your own Azure environment.",
     },
   },
   goLive: {
