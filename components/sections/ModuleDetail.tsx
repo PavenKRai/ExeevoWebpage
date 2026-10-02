@@ -56,7 +56,7 @@ export function ModuleDetail({ module: m, all }: { module: Module; all: readonly
       role="tabpanel"
       aria-labelledby={tabId(m.slug)}
       tabIndex={0}
-      className="glass-light grid min-h-[calc(var(--dh)-40px)] overflow-hidden rounded-[30px] p-6 sm:p-8 xl:min-h-0 xl:px-[30px] xl:py-[28px]"
+      className="glass-light grid min-h-[calc(var(--dh)-40px)] overflow-hidden rounded-[30px] p-6 sm:p-8 xl:h-full xl:min-h-0 xl:px-[30px] xl:py-[28px]"
     >
       {/* Invisible copies of every module's detail stack in the same grid cell, so the panel is always as tall
           as the tallest module and never jumps or clips when you switch. */}

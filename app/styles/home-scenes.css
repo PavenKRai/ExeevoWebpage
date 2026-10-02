@@ -61,8 +61,8 @@
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
     .hs-outer { height: 100%; padding-bottom: 0; }
-    .hs-frame { height: 100%; min-height: 0; padding-top: clamp(104px, 15svh, 176px); }
-    .hs-cluster { top: clamp(84px, 12.5svh, 130px); }
+    .hs-frame { height: 100%; min-height: 0; padding-top: clamp(124px, calc(15svh + 20px), 196px); }
+    .hs-cluster { top: clamp(104px, calc(12.5svh + 20px), 150px); }
     .hs-trust-wrap { bottom: clamp(18px, 4.5svh, 50px); }
     .hs-text { gap: clamp(14px, 2.6svh, 28px); }
     .hs-text h1 { font-size: clamp(34px, min(5.2vw, 7.4svh), 64px); }

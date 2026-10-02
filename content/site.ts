@@ -10,6 +10,7 @@ export const site = {
     { label: "Industries", href: "/industries" },
     { label: "Solutions by role", href: "/solutions-by-role" },
     { label: "Why Exeevo", href: "/why-exeevo" },
+    { label: "Compliance", href: "/why-exeevo#compliance" },
     { label: "Getting started", href: "/getting-started" },
   ] satisfies NavLink[],
   footer: {
@@ -35,7 +36,7 @@ export const site = {
         links: [
           { label: "About", href: "[URL]" },
           { label: "Case Studies", href: "[URL]" },
-          { label: "Trust & Compliance", href: "/why-exeevo" },
+          { label: "Trust & Compliance", href: "/why-exeevo#compliance" },
         ],
       },
     ],
@@ -44,6 +45,23 @@ export const site = {
       { label: "Privacy", href: "[URL]" },
       { label: "Cookie Policy", href: "[URL]" },
       { label: "Site Map", href: "[URL]" },
+    ],
+  },
+  rolesMenu: {
+    blurb: "Field Rep, MSL, KAM, Account Mgr",
+    items: [
+      { label: "Field Rep", slug: "field-rep" },
+      { label: "Medical Science Liaison", slug: "msl" },
+      { label: "Key Account Manager", slug: "kam" },
+      { label: "Consumer & Animal Health Rep", slug: "consumer-animal-health" },
+    ],
+  },
+  /** Mobile sheet groups (Platform's modules come from content/modules.ts). */
+  mobile: {
+    more: [
+      { label: "Why Exeevo", href: "/why-exeevo" },
+      { label: "Compliance", href: "/why-exeevo#compliance" },
+      { label: "Getting started", href: "/getting-started" },
     ],
   },
   industriesMenu: [

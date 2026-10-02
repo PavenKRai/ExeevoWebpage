@@ -15,7 +15,24 @@ test.describe("platform page (relaxed layout, no pinning)", () => {
     const rail = await page.getByRole("tablist").boundingBox();
     expect(rail!.y - (h1!.y + h1!.height)).toBeGreaterThan(60); // columns clear of the title
     await expect(page.getByRole("tabpanel")).toBeVisible();
-    await expect(page.locator("#platform-explorer.scene")).toHaveCount(0); // explorer is a normal section
+  });
+
+  test("on scroll the header shrinks and rail, deck and detail fit one screen with margins kept", async ({ page }, info) => {
+    test.skip(info.project.name === "reduced-motion", "pinned mode only");
+    await page.goto("/platform");
+    await page.waitForTimeout(1800);
+    const rest = await page.getByRole("tablist").boundingBox();
+    await scrollToSceneProgress(page, 0, 0.85);
+    expect(await stageTop(page, 0)).toBe(0);
+    const vh = 900;
+    const rail = (await page.getByRole("tablist").locator("xpath=..").boundingBox())!;
+    const detail = (await page.getByRole("tabpanel").boundingBox())!;
+    expect(Math.abs(rail.height - detail.height)).toBeLessThan(3); // equal heights
+    expect(rail.y + rail.height).toBeLessThanOrEqual(vh);
+    expect(detail.y + detail.height).toBeLessThanOrEqual(vh);
+    expect(Math.abs(rail.x - rest!.x + 10)).toBeLessThan(12); // left margin kept
+    const h1 = (await page.getByRole("heading", { level: 1 }).boundingBox())!;
+    expect(h1.height).toBeLessThan(50); // title has shrunk
   });
 
   test("clicking a tab selects it without moving the page", async ({ page }) => {

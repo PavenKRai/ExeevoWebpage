@@ -41,13 +41,13 @@ export function ModuleRail({ modules, index, onSelect }: { modules: Module[]; in
   };
 
   return (
-    <div className="glass-light rounded-[26px] p-2.5">
+    <div className="glass-light rounded-[26px] p-2.5 xl:h-full xl:px-4 xl:py-[18px]">
       <div
         role="tablist"
         aria-label="Platform modules"
         aria-orientation={desktop ? "vertical" : "horizontal"}
         onKeyDown={onKey}
-        className="flex gap-1 overflow-x-auto xl:flex-col xl:overflow-visible"
+        className="flex gap-1 overflow-x-auto xl:h-full xl:flex-col xl:justify-between xl:overflow-visible"
       >
         {modules.map((m, i) => {
           const sel = i === index;
@@ -62,7 +62,7 @@ export function ModuleRail({ modules, index, onSelect }: { modules: Module[]; in
               tabIndex={sel ? 0 : -1}
               onClick={() => onSelect(i)}
               className={cn(
-                "flex min-h-[54px] shrink-0 items-center gap-3.5 whitespace-nowrap rounded-2xl px-4 text-left text-[15px] xl:px-[18px] transition-colors duration-300 xl:w-full",
+                "flex min-h-[54px] shrink-0 items-center gap-3.5 whitespace-nowrap rounded-2xl px-4 text-left text-[15px] xl:h-[50px] xl:min-h-0 xl:flex-none xl:px-[18px] transition-colors duration-300 xl:w-full",
                 sel ? "bg-ink font-semibold text-white" : "font-[450] text-slate hover:bg-white/70",
               )}
             >

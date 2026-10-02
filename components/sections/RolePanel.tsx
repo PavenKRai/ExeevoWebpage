@@ -2,6 +2,7 @@
 import { useRef, type CSSProperties } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Check } from "lucide-react";
+import Link from "next/link";
 import { cn } from "../ui/cn";
 
 export type RoleItem = {
@@ -10,6 +11,7 @@ export type RoleItem = {
   glow: "blue" | "magenta" | "purple" | "green";
   description: string;
   capabilities: readonly string[];
+  modules?: readonly { label: string; href: string }[];
 };
 
 const color = {
@@ -87,15 +89,28 @@ export function RolePanel({ role, index, total, open, onSelect }: Props) {
               document.getElementById(buttonId)?.focus({ preventScroll: true });
             }}
             transition={{ duration: reduce ? 0 : 0.7, delay: reduce ? 0 : 0.05, ease }}
-            className="relative flex flex-col gap-8 p-6 text-white md:absolute md:inset-0 md:justify-between md:gap-4 md:px-7 md:py-7 lg:px-11 lg:py-10 [@media(max-height:800px)]:lg:py-7!"
+            className="relative flex flex-col gap-8 p-6 text-white md:absolute md:inset-0 md:justify-between md:gap-4 md:px-7 md:py-7 lg:px-11 lg:py-10 [@media(max-height:800px)]:lg:py-5! [@media(max-height:800px)]:md:gap-2!"
           >
-            <div className="flex max-w-[560px] flex-col gap-[18px]">
+            <div className="flex max-w-[640px] flex-col gap-[18px] [@media(max-height:800px)]:gap-2">
               <span className="flex items-center gap-2.5 text-[14px] text-[#C4CED4]">
                 <span aria-hidden="true" className="size-3 rounded-full" style={{ background: c }} />
                 {`Role ${index + 1} of ${total}`}
               </span>
-              <h3 className="m-0 text-[inherit]">{button}</h3>
-              <p className="text-[17px] leading-[1.55] text-on-dark">{role.description}</p>
+              <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+                <h3 className="m-0 text-[inherit]">{button}</h3>
+                {role.modules && (
+                  <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
+                    {role.modules.map((m) => (
+                      <li key={m.href}>
+                        <Link href={m.href} className="inline-flex min-h-11 items-center rounded-full border border-white/20 px-4 text-[14px] font-medium text-white hover:bg-white/10">
+                          {m.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              <p className="text-[17px] leading-[1.55] text-on-dark [@media(max-height:800px)]:text-[15px] [@media(max-height:800px)]:leading-[1.45]">{role.description}</p>
             </div>
             <ul className="m-0 flex max-w-[600px] list-none flex-col gap-2.5 p-0">
               {role.capabilities.map((cap, n) => (

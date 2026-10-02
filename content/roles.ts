@@ -8,6 +8,7 @@ export const rolesPage = {
 export const roles = [
   {
     slug: "field-rep",
+    modules: [{ label: "CRM (Sales)", href: "/platform?module=crm-sales" }, { label: "Mobile App", href: "/platform?module=mobile-app" }],
     name: "Field Rep",
     glow: "blue",
     description: "Territory coverage and call-cycle tools built around how details actually get delivered and tracked.",
@@ -19,6 +20,7 @@ export const roles = [
   },
   {
     slug: "msl",
+    modules: [{ label: "Medical CRM", href: "/platform?module=medical-crm" }, { label: "Mobile App", href: "/platform?module=mobile-app" }],
     name: "Medical Science Liaison",
     glow: "magenta",
     description: "Scientific and compliance workflows distinct from commercial CRM.",
@@ -30,6 +32,7 @@ export const roles = [
   },
   {
     slug: "kam",
+    modules: [{ label: "CRM (Sales)", href: "/platform?module=crm-sales" }, { label: "Mobile App", href: "/platform?module=mobile-app" }],
     name: "Key Account Manager",
     glow: "purple",
     description: "Account-level tools for institutional and multi-stakeholder accounts.",
@@ -41,6 +44,7 @@ export const roles = [
   },
   {
     slug: "consumer-animal-health",
+    modules: [{ label: "Mobile App", href: "/platform?module=mobile-app" }],
     name: "Consumer & Animal Health Rep",
     glow: "green",
     description: "Trade and retail-specific tools for consumer-facing field teams.",

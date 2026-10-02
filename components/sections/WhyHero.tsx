@@ -77,7 +77,7 @@ export function WhyHero({
               {intro}
             </p>
           </Layer>
-          <div className="mt-16 flex flex-col gap-[18px] lg:mt-[68px] pinned:mt-[clamp(24px,5svh,68px)]">
+          <div id="compliance" className="mt-16 flex scroll-mt-28 flex-col gap-[18px] lg:mt-[68px] pinned:mt-[clamp(24px,5svh,68px)]">
             <Layer intro={0.3} from={{ o: 0, y: 16 }}>
               <h2
                 className="text-[15px] font-medium tracking-normal text-[#DCE3E7]"

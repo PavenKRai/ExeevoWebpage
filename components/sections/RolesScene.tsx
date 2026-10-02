@@ -16,9 +16,16 @@ const dot = { blue: "var(--ex-blue)", magenta: "var(--ex-magenta)", purple: "var
 /** Scroll never changes the open role: people should be able to scroll past freely. */
 const SCROLL_STEPS = false;
 
-export function RolesScene({ roles, page }: { roles: readonly RoleItem[]; page: Page }) {
+export function RolesScene({ roles, page, roleParam = null }: { roles: readonly RoleItem[]; page: Page; roleParam?: string | null }) {
   const { ref, progress, scrollToProgress, isPinned } = useSceneProgress();
-  const [active, setActive] = useState(0);
+  const fromUrl = Math.max(0, roles.findIndex((r) => r.slug === roleParam));
+  const [active, setActive] = useState(fromUrl);
+  // Follow ?role= when it changes after mount (e.g. the nav's Solutions by role menu while already on this page).
+  const [seenParam, setSeenParam] = useState(roleParam);
+  if (seenParam !== roleParam) {
+    setSeenParam(roleParam);
+    if (roleParam) setActive(fromUrl);
+  }
   const n = roles.length;
   const lock = useRef(false);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);

@@ -1,9 +1,10 @@
 import { Layer } from "@/components/scene/Layer";
+import { TextLink } from "@/components/ui/TextLink";
 
 const dots = ["var(--ex-blue)", "var(--ex-magenta)", "var(--ex-blue)", "var(--ex-green)"];
 
 /** Four cards; they rise in one after another on load (time-based, so they are in place at scroll 0). */
-export function IndustryCards({ cards }: { cards: readonly { title: string; body: string }[] }) {
+export function IndustryCards({ cards }: { cards: readonly { title: string; body: string; link: { label: string; href: string } }[] }) {
   return (
     <ul className="mx-auto grid w-full max-w-[1440px] gap-6 px-5 md:grid-cols-2 pinned:mt-auto pinned:gap-4 pinned:lg:grid-cols-4 xl:px-20 pinned:xl:gap-5" style={{ perspective: "1400px" }}>
       {cards.map((c, i) => (
@@ -19,6 +20,7 @@ export function IndustryCards({ cards }: { cards: readonly { title: string; body
             {c.title}
           </h2>
           <p className="max-w-[520px] text-[16px] leading-[1.55] text-muted pinned:text-[15px]">{c.body}</p>
+          <TextLink href={c.link.href} className="text-[15px] pinned:min-h-9">{c.link.label}</TextLink>
         </Layer>
       ))}
     </ul>
