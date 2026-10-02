@@ -3,6 +3,7 @@ import { Figtree, Sora } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
 import { OffscreenPause } from "@/components/layout/OffscreenPause";
+import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { site } from "@/content/site";
 import "./globals.css";
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <OffscreenPause />
+        <RevealObserver />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </body>
     </html>

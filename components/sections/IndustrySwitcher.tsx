@@ -1,6 +1,6 @@
 "use client";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Layer } from "@/components/scene/Layer";
 import { Scene } from "@/components/scene/Scene";
 import { Button } from "@/components/ui/Button";
@@ -9,12 +9,11 @@ import { IndustryCards } from "./IndustryCards";
 import { MedtechDevice } from "./MedtechDevice";
 import { PharmaCapsule } from "./PharmaCapsule";
 
-export function IndustrySwitcher() {
-  const params = useSearchParams();
+export function IndustrySwitcher({ industryParam = null }: { industryParam?: string | null }) {
   const router = useRouter();
   const pathname = usePathname();
   const reduce = useReducedMotion();
-  const active: IndustrySlug = params.get("industry") === "medtech" ? "medtech" : "pharma";
+  const active: IndustrySlug = industryParam === "medtech" ? "medtech" : "pharma";
   const item = industries.items[active];
   const slugs = Object.keys(industries.items) as IndustrySlug[];
   const dur = reduce ? 0 : 0.6;
@@ -22,7 +21,7 @@ export function IndustrySwitcher() {
 
   return (
     <>
-      <Scene id="industries-hero" pin={70} stageClassName="ind-ground overflow-hidden">
+      <Scene id="industries-hero" fit pin={70} stageClassName="ind-ground overflow-hidden">
         <div className="relative mx-auto flex max-w-[1440px] flex-col pb-16 pt-[140px] pinned:h-full pinned:pb-8 pinned:pt-[116px] xl:pt-[171px] pinned:xl:pt-[116px]">
           <div className="px-5 xl:px-20">
             <div role="group" aria-label="Industry" className="glass-light flex w-fit gap-1 rounded-[18px] p-[5px]">
@@ -69,7 +68,7 @@ export function IndustrySwitcher() {
           </AnimatePresence>
         </div>
       </Scene>
-      <Scene id="industries-close" pin={35} stageClassName="bg-mist">
+      <Scene id="industries-close" fit pin={35} stageClassName="bg-mist">
         <div className="pb-16 pt-8 pinned:flex pinned:h-full pinned:items-center pinned:py-0">
           <Layer from={{ o: 0, y: 70 }} range={[0, 0.5]} className="mx-auto flex w-full max-w-[1280px] flex-col items-start gap-6 border-t border-hairline px-5 py-8 sm:flex-row sm:items-center sm:justify-between xl:px-0">
             <p className="text-[20px] font-medium text-heading">{industries.closing.line}</p>

@@ -23,6 +23,9 @@ export function useModuleScene(slugs: string[], initial: number, fromUrl: string
   const quiet = useRef<number | undefined>(undefined);
   const urlTimer = useRef<number | undefined>(undefined);
   const written = useRef<string | null>(fromUrl);
+  // Slugs this hook itself put in the URL, with the time: Next reports the new ?module= a moment later (sometimes after
+  // the next selection), and that echo must not be mistaken for outside navigation or it would undo the newer selection.
+  const echoes = useRef(new Map<string, number>());
 
   const apply = useCallback((i: number) => {
     latest.current = i;
@@ -55,6 +58,7 @@ export function useModuleScene(slugs: string[], initial: number, fromUrl: string
       window.clearTimeout(urlTimer.current);
       urlTimer.current = window.setTimeout(() => {
         written.current = slugs[i];
+        echoes.current.set(slugs[i], Date.now());
         const url = new URL(window.location.href);
         url.searchParams.set("module", slugs[i]);
         window.history.replaceState(window.history.state, "", url);
@@ -98,6 +102,8 @@ export function useModuleScene(slugs: string[], initial: number, fromUrl: string
   // Deep link on load and external navigation (e.g. the mega menu) to ?module=
   useEffect(() => {
     if (fromUrl === null || fromUrl === written.current) return;
+    const at = echoes.current.get(fromUrl);
+    if (at !== undefined && Date.now() - at < 2500) return; // our own echo
     written.current = fromUrl;
     const i = Math.max(0, slugs.indexOf(fromUrl));
     apply(i);

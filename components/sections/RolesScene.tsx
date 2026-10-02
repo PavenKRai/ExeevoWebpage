@@ -64,7 +64,7 @@ export function RolesScene({ roles, page, roleParam = null }: { roles: readonly 
   };
 
   return (
-    <Scene id="roles-scene" pin={45} trackRef={ref} stageClassName="overflow-hidden bg-ink on-dark text-white">
+    <Scene id="roles-scene" fit pin={45} trackRef={ref} stageClassName="overflow-hidden bg-ink on-dark text-white">
       <Parallax depth={90} aria-hidden="true" className="pointer-events-none absolute -inset-y-24 inset-x-0">
         <Layer from={{ s: 0.92 }} to={{ s: 1.12 }} aria-hidden="true" className="rings-bg size-full" style={{ "--rx": "87%", "--ry": "20%" } as CSSProperties} />
       </Parallax>

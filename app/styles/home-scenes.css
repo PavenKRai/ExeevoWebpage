@@ -13,6 +13,7 @@
 
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
+    :root[data-pin="on"] {
     /* ---------- Pathways ---------- */
     .hp-inner {
       height: 100%;
@@ -54,12 +55,14 @@
     .ho-dot .ho-layer { position: absolute; inset: 0; }
     .ho-dot-fill { display: block; width: 100%; height: 100%; border-radius: 50%; background: var(--ex-ink); }
     .ho-progress { display: block; position: absolute; inset-inline: 0; bottom: 0; }
+      }
   }
 }
 
 /* ---------- Hero (desktop only) ---------- */
 @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
+    :root[data-pin="on"] {
     .hs-outer { height: 100%; padding-bottom: 0; }
     .hs-frame { height: 100%; min-height: 0; padding-top: clamp(124px, calc(15svh + 20px), 196px); }
     .hs-cluster { top: clamp(104px, calc(12.5svh + 20px), 150px); }
@@ -87,22 +90,28 @@
       animation-range: normal, normal, var(--r), var(--r);
       animation-composition: replace, replace, add, replace;
     }
-    @keyframes hsCardMove {
-      from { translate: 0 0; }
-      to { translate: var(--cx) var(--cy); }
-    }
-    @keyframes hsCardOut {
-      55% { opacity: 0.75; }
-      to { opacity: 0; scale: var(--cs); }
-    }
+    
+    
 
     .hs-trust {
       animation: rise var(--ex-dur-slow) var(--ex-ease-out) calc(var(--i, 0) * 0.12s) both, hsTrustOut linear both;
       animation-timeline: auto, --scene;
       animation-range: normal, cover calc(100vh + var(--pin) * 0.04) cover calc(100vh + var(--pin) * 0.4);
     }
-    @keyframes hsTrustOut {
-      to { translate: 0 220px; opacity: 0; }
-    }
+    
+      }
   }
 }
+
+/* keyframes for the (disabled) pinned choreography */
+@keyframes hsCardMove {
+      from { translate: 0 0; }
+      to { translate: var(--cx) var(--cy); }
+    }
+@keyframes hsCardOut {
+      55% { opacity: 0.75; }
+      to { opacity: 0; scale: var(--cs); }
+    }
+@keyframes hsTrustOut {
+      to { translate: 0 220px; opacity: 0; }
+    }

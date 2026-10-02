@@ -24,6 +24,7 @@ export function RolesBand({ text, cta, href }: { text: string; cta: string; href
   const step = 0.22;
   return (
     <Scene
+      fit
       id="platform-roles-band"
       aria-label="Solutions by role"
       pin={45}

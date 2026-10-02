@@ -86,7 +86,7 @@ export function WhyHero({
                 {complianceTitle}
               </h2>
             </Layer>
-            <Layer as="ul" to={{ y: -20, o: 0.8 }} range={[0.4, 1]} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 pinned:[perspective:1400px]">
+            <Layer as="ul" to={{ y: -20, o: 0.8 }} range={[0.4, 1]} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4 [perspective:1400px]">
               {compliance.map((c, n) => (
                 <Layer
                   as="li"

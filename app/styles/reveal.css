@@ -1,0 +1,51 @@
+/*
+ * One-time reveals. RevealObserver (client) adds .rv-hide to below-the-fold targets, then swaps it for .rv-in the first
+ * time they scroll into view; the element transitions to its natural layout once and is never observed again.
+ *
+ * Safety: nothing is hidden in server HTML, with JS off, in print, or under prefers-reduced-motion — .rv-hide is only
+ * ever added by JS. Only opacity/translate/scale animate (never filter), so backdrop-filter glass is untouched.
+ *
+ * Hidden state comes from, in order: the <Layer from> custom properties (--o0/--x0/--y0/--s0), the legacy-class defaults
+ * below (--rv-x/--rv-y/--rv-s), then a plain 40px rise.
+ */
+.sr { --rv-y: 44px; --rv-s: 0.97; }
+.srl { --rv-x: -56px; }
+.srr { --rv-x: 56px; }
+.srg { --rv-y: 40px; --rv-s: 0.96; }
+.srt { --rv-y: 72px; --rv-s: 0.94; }
+.srs { --rv-s: 0.85; }
+.srf { --rv-y: 0px; }
+.stagger > * { --rv-y: 36px; }
+
+.rv-hide {
+  opacity: var(--o0, 0);
+  translate: var(--x0, var(--rv-x, 0px)) var(--y0, var(--rv-y, 40px));
+  scale: var(--s0, var(--rv-s, 1));
+  rotate: var(--rot0, 0deg); /* <Layer from={{ rot: "x 14deg" }}> tiles tilt in */
+}
+
+/* Home platform board: the plane tilts up once (rotate x -46deg cancels the board's own rotateX(46deg), so it starts
+   face-on), while its tiles rise into place in category order (delay comes from each tile's --a, see RevealObserver). */
+.rv-hide.hs-board { rotate: x -46deg; opacity: 1; translate: none; scale: 1; }
+.rv-in.hs-board { transition: rotate 1.2s var(--ex-ease-out); }
+.rv-hide.hs-tile { opacity: 0; translate: var(--dx, 0px) var(--dy, 0px) -120px; scale: 0.55; rotate: 0deg; }
+.rv-hide.ln { scale: 0 1; opacity: 1; translate: none; transform-origin: left; }
+.rv-hide.ln-y { scale: 1 0; opacity: 1; translate: none; transform-origin: top; }
+
+.rv-in {
+  transition:
+    opacity 0.8s var(--ex-ease-out),
+    translate 0.8s var(--ex-ease-out),
+    scale 0.8s var(--ex-ease-out),
+    rotate 0.8s var(--ex-ease-out);
+  transition-delay: var(--rv-delay, 0s);
+}
+.rv-in.ln,
+.rv-in.ln-y {
+  transition-duration: 1s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv-hide { opacity: 1 !important; translate: none !important; scale: none !important; rotate: none !important; }
+  .rv-in { transition: none !important; }
+}

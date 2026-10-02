@@ -4,11 +4,13 @@
 @import "./styles/specimen.css" layer(components);
 @import "./styles/motion.css" layer(components);
 @import "./styles/scenes.css" layer(components);
+@import "./styles/reveal.css" layer(components);
 
-/* `pinned:` variant = the pinned-scene environment (see app/styles/scenes.css). */
+/* `pinned:` variant = the one-screen "stage" layout. It applies only inside scenes that opt in with <Scene fit> (the
+   Platform, Industries and Solutions by role pages), at >= 768px. Nothing pins any more: the stage is just 100svh tall. */
 @custom-variant pinned {
-  @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+  @media (min-width: 768px) {
+    &:where(.pin-layout *) {
       @slot;
     }
   }

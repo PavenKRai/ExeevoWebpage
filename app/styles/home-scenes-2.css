@@ -1,6 +1,7 @@
 /* Home, second half: pinned-scene choreography for the platform board. Only active when the scene pins. */
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
+    :root[data-pin="on"] {
     .hs-board {
       --a: 0.02;
       --b: 0.8;
@@ -10,10 +11,7 @@
         cover calc(100svh + var(--pin) * var(--a))
         cover calc(100svh + var(--pin) * var(--b));
     }
-    @keyframes hsBoard {
-      from { transform: rotateX(0deg) rotateZ(0deg); }
-      to { transform: rotateX(46deg) rotateZ(-22deg); }
-    }
+    
     /* Each tile rises from below the board plane, spread outward and small, in its own slice. */
     .hs-tile {
       animation: hsTile linear both;
@@ -22,10 +20,8 @@
         cover calc(100svh + var(--pin) * var(--a))
         cover calc(100svh + var(--pin) * var(--b));
     }
-    @keyframes hsTile {
-      from { opacity: 0; translate: var(--dx, 0px) var(--dy, 0px) -120px; scale: 0.55; }
-      to { opacity: 1; translate: 0px 0px 0px; scale: 1; }
-    }
+    
+      }
   }
 }
 
@@ -38,3 +34,13 @@
   --rot0: 0deg; --rot1: 0deg;
   --b0: 0px; --b1: 0px;
 }
+
+/* keyframes for the (disabled) pinned choreography */
+@keyframes hsBoard {
+      from { transform: rotateX(0deg) rotateZ(0deg); }
+      to { transform: rotateX(46deg) rotateZ(-22deg); }
+    }
+@keyframes hsTile {
+      from { opacity: 0; translate: var(--dx, 0px) var(--dy, 0px) -120px; scale: 0.55; }
+      to { opacity: 1; translate: 0px 0px 0px; scale: 1; }
+    }

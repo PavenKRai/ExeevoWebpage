@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, type CSSProperties, type ReactNode } from "react";
-import { useSearchParams } from "next/navigation";
 import { getModule, type Module } from "@/content/modules";
 import { Layer, Parallax } from "@/components/scene/Layer";
 import { Scene } from "@/components/scene/Scene";
@@ -23,11 +22,25 @@ const BOTTOM_GAP = 24;
  * screen — keeping the page's left/right margins (rail pins to the left edge, detail to the right edge, the deck
  * stays centred) and equal-height rail and detail panels. Selecting a module is by click / keyboard / ?module=.
  */
-export function ModuleDeck({ modules, header }: { modules: Module[]; header: ReactNode }) {
-  const fromUrl = useSearchParams().get("module");
+export function ModuleDeck({ modules, header, moduleParam = null }: { modules: Module[]; header: ReactNode; moduleParam?: string | null }) {
+  const fromUrl = moduleParam;
   const slugs = useMemo(() => modules.map((m) => m.slug), [modules]);
   const initial = Math.max(0, slugs.indexOf(getModule(fromUrl).slug));
   const { ref, index, select } = useModuleScene(slugs, initial, fromUrl);
+
+  // On the FIRST scroll the title and intro shrink and the three columns ease up and scale to fit one screen (a single
+  // ~1s transition driven by [data-compact], see scenes.css .sc-to). It plays once and stays; scrolling back never undoes it.
+  useEffect(() => {
+    const scene = ref.current;
+    if (!scene || scene.hasAttribute("data-compact")) return;
+    const compact = () => {
+      scene.setAttribute("data-compact", "");
+      window.removeEventListener("scroll", compact);
+    };
+    if (window.scrollY > 16) compact();
+    else window.addEventListener("scroll", compact, { passive: true, once: true });
+    return () => window.removeEventListener("scroll", compact);
+  }, [ref]);
 
   // Scale that makes the columns' natural height fit between END_TOP and the bottom of the viewport.
   const gridRef = useRef<HTMLDivElement>(null);
@@ -54,6 +67,7 @@ export function ModuleDeck({ modules, header }: { modules: Module[]; header: Rea
 
   return (
     <Scene
+      fit
       id="platform-explorer"
       aria-label="Platform modules"
       trackRef={ref}

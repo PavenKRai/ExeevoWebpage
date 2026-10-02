@@ -45,21 +45,41 @@ function vars(st: LayerState | undefined, k: "0" | "1") {
   return o;
 }
 
-/** A scrubbed layer inside a <Scene>. Without pinning support it simply renders in its natural (final) state. */
+/**
+ * A layer inside a <Scene>. With `intro` it plays `from` -> natural layout once on load (time-based). With only `from`
+ * it is hidden at that state while below the fold and reveals ONCE when it scrolls into view (see RevealObserver);
+ * `range[0]` staggers it. With only `to` it eases to that pose once an ancestor has [data-compact]. `blur` is ignored.
+ * Without `from`/`to` it is a plain wrapper.
+ */
 export function Layer({ from, to, range = [0, 1], intro, as: Tag = "div", className, style, children, ...rest }: Props) {
-  const css = { ...vars(from, "0"), ...vars(to, "1"), "--a": range[0], "--b": range[1], ...style } as CSSProperties;
-  // Only layers that actually blur get a filter (a filter makes a backdrop root for glass inside).
-  const blurIn = from?.blur !== undefined, blurOut = to?.blur !== undefined;
-  const blurClass = blurIn && blurOut ? "sc-blur" : blurIn ? "sc-blur-in" : blurOut ? "sc-blur-out" : undefined;
   if (intro !== undefined) {
+    const css = { ...vars(from, "0"), "--delay": intro, ...style } as CSSProperties;
     return (
-      <Tag className={cn("sc-intro", blurIn && "sc-intro-blur", className)} style={{ ...css, "--delay": intro } as CSSProperties} {...rest}>
+      <Tag className={cn("sc-intro", from?.blur !== undefined && "sc-intro-blur", className)} style={css} {...rest}>
         {children}
       </Tag>
     );
   }
+  if (!from && to) {
+    // A pose reached once, later, when an ancestor gets [data-compact] (see scenes.css .sc-to). Inert elsewhere.
+    return (
+      <Tag className={cn("sc-to", className)} style={{ ...vars(to, "1"), ...style } as CSSProperties} {...rest}>
+        {children}
+      </Tag>
+    );
+  }
+  const reveals = !!from && (from.o !== undefined || from.x !== undefined || from.y !== undefined || from.s !== undefined);
+  if (!reveals) {
+    return (
+      <Tag className={className} style={style} {...rest}>
+        {children}
+      </Tag>
+    );
+  }
+  const delay = Math.round(Math.min(range[0], 0.8) * 800);
+  const css = { ...vars(from, "0"), "--rv-delay": `${delay}ms`, ...style } as CSSProperties;
   return (
-    <Tag className={cn("sc", blurClass, className)} style={css} {...rest}>
+    <Tag className={cn("rv", className)} style={css} {...rest}>
       {children}
     </Tag>
   );
@@ -74,7 +94,8 @@ export function Parallax({ depth = 80, as: Tag = "div", className, style, childr
   );
 }
 
-/** Hairline that fills across the pinned interval (scene progress). */
-export function SceneProgress({ className }: { className?: string }) {
-  return <div aria-hidden="true" className={cn("sc-progress h-0.5 w-full origin-left bg-[image:var(--ex-gradient)]", className)} />;
+/** Retired: scene progress hairlines belonged to the scroll-scrubbed scenes. Kept so old imports still compile. */
+export function SceneProgress(_props: { className?: string }) {
+  void _props;
+  return null;
 }

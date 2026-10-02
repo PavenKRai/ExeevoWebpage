@@ -11,6 +11,7 @@
 
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
+    :root[data-pin="on"] {
     /* slice of the pinned interval: --a..--b */
     .cz {
       --a: 0;
@@ -24,30 +25,29 @@
     }
     /* Industries: the object sways a little while the scene scrolls, always returning to its rest pose */
     .cz-turn { --b: 0.9; animation-name: czTurn; }
-    @keyframes czTurn { 0%, 100% { rotate: y 0deg; } 50% { rotate: y 16deg; } }
+    
     .cz-spin { --b: 0.9; animation-name: czSpin; }
-    @keyframes czSpin { 0%, 100% { rotate: x 0deg; } 50% { rotate: x 14deg; } }
+    
     /* capsule halves part and close again */
     .cz-halfl { --a: 0.38; --b: 0.85; animation-name: czHalfL; }
-    @keyframes czHalfL { 0%, 100% { translate: 0 0; } 50% { translate: -52px 0; } }
+    
     .cz-halfr { --a: 0.38; --b: 0.85; animation-name: czHalfR; }
-    @keyframes czHalfR { 0%, 100% { translate: 0 0; } 50% { translate: 52px 0; } }
+    
     .cz-dots { --a: 0.38; --b: 0.85; animation-name: czDots; }
-    @keyframes czDots { 0%, 100% { translate: 0 0; scale: 1; } 50% { translate: -34px 0; scale: 1.35; } }
+    
     /* device window brightens mid-scroll */
     .cz-win { --a: 0.1; --b: 0.9; animation-name: czWin; }
-    @keyframes czWin {
-      0%, 100% { filter: brightness(1) saturate(1); scale: 1; }
-      50% { filter: brightness(1.2) saturate(1.25); scale: 1.05; }
-    }
+    
     .cz-glow { --b: 0.9; animation-name: czGlow; }
-    @keyframes czGlow { 0%, 100% { opacity: 0.55; scale: 1; } 50% { opacity: 0.75; scale: 1.12; } }
+    
 
-    /* short viewports: a smaller object keeps it clear of the cards */
-    @media (min-width: 1024px) and (max-height: 820px) {
-      .ind-obj { scale: 0.72; }
-    }
+      }
   }
+}
+
+/* Industries, short viewports: a smaller object keeps it clear of the cards. */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .ind-obj { scale: 0.72; }
 }
 
 /* Getting started: connector draws and the arrow dot lands on load (time-based, so the paths scene is complete at scroll 0). */
@@ -64,3 +64,15 @@
   .gs-demo .scene-stage { position: relative; height: auto; overflow: visible; }
   .gs-demo .sc { animation: none; }
 }
+
+/* keyframes for the (disabled) pinned choreography */
+@keyframes czTurn { 0%, 100% { rotate: y 0deg; } 50% { rotate: y 16deg; } }
+@keyframes czSpin { 0%, 100% { rotate: x 0deg; } 50% { rotate: x 14deg; } }
+@keyframes czHalfL { 0%, 100% { translate: 0 0; } 50% { translate: -52px 0; } }
+@keyframes czHalfR { 0%, 100% { translate: 0 0; } 50% { translate: 52px 0; } }
+@keyframes czDots { 0%, 100% { translate: 0 0; scale: 1; } 50% { translate: -34px 0; scale: 1.35; } }
+@keyframes czWin {
+      0%, 100% { filter: brightness(1) saturate(1); scale: 1; }
+      50% { filter: brightness(1.2) saturate(1.25); scale: 1.05; }
+    }
+@keyframes czGlow { 0%, 100% { opacity: 0.55; scale: 1; } 50% { opacity: 0.75; scale: 1.12; } }

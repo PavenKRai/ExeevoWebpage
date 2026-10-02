@@ -15,16 +15,20 @@ type Props = {
   overflowVisible?: boolean;
   /** Attach to the track for client code (see useSceneProgress). */
   trackRef?: React.Ref<HTMLElement>;
+  style?: CSSProperties;
+  /** One-screen stage: the stage is 100svh tall and the `pinned:` layout classes apply (Platform, Industries, Roles). */
+  fit?: boolean;
   children: ReactNode;
 };
 
 /**
- * A pinned scene. `children` are laid out inside a 100svh sticky stage and animated by `.sc` layers
- * (see app/styles/scenes.css). Below 768px / reduced motion / no browser support it is a normal section.
+ * A scene is a normal scrolling section (`pin` is accepted for compatibility and ignored). Its <Layer>s reveal once
+ * as they scroll into view; see app/styles/reveal.css.
  */
-export function Scene({ pin = 140, id, as: Tag = "section", stageClassName, className, overflowVisible, trackRef, children, ...aria }: Props) {
+export function Scene({ pin: _pin, id, as: Tag = "section", stageClassName, className, overflowVisible, trackRef, style, fit, children, ...aria }: Props) {
+  void _pin;
   return (
-    <Tag id={id} ref={trackRef} className={cn("scene", className)} style={{ "--pin": `${pin}vh` } as CSSProperties} {...aria}>
+    <Tag id={id} ref={trackRef} className={cn("scene", fit && "pin-layout", className)} style={style} {...aria}>
       <div className={cn("scene-stage", overflowVisible && "scene-stage--visible", stageClassName)}>{children}</div>
     </Tag>
   );
