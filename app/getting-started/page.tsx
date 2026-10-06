@@ -3,13 +3,12 @@ import type { CSSProperties } from "react";
 import { Parallax } from "@/components/scene/Layer";
 import { Scene } from "@/components/scene/Scene";
 import { gettingStarted } from "@/content/paths";
+import { seo } from "@/content/seo";
+import { pageMetadata } from "@/lib/seo";
 import { GoLivePaths } from "@/components/sections/GoLivePaths";
 import { DemoSection } from "@/components/sections/DemoSection";
 
-export const metadata: Metadata = {
-  title: gettingStarted.h1,
-  description: gettingStarted.intro,
-};
+export const metadata: Metadata = pageMetadata(seo.start);
 
 export default function GettingStartedPage() {
   return (

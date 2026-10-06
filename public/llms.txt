@@ -1,0 +1,26 @@
+# Exeevo
+
+> Exeevo is a unified, AI-powered life sciences CRM built natively on Microsoft (Dynamics 365, Power Platform and Azure). It gives commercial, medical and marketing teams at pharma and MedTech companies one system, one data model and one license. Exeevo is a division of Valsoft.
+
+Customer data is stored and processed in the customer's own Microsoft Azure environment. It is not sold, shared or used to train AI models across other customers.
+
+## Key pages
+- [Home](/): what Exeevo is and who it is for
+- [Platform](/platform): the eight modules in one view
+- [Why Exeevo](/why-exeevo): built natively for life sciences, regulatory and compliance coverage, comparison with generic CRM platforms and point-solution add-ons
+- [Industries](/industries): pharma and MedTech
+- [Solutions by role](/solutions-by-role): Field Rep, Medical Science Liaison, Key Account Manager, Consumer & Animal Health Rep
+- [Getting started](/getting-started): Core (live in as little as 4 weeks) and Enterprise (tailored, multi-brand, multi-country) launch paths, and the demo request form
+
+## The eight modules
+- CRM (Sales): HCP targeting and segmentation, territory alignment, call planning and sample compliance
+- Medical CRM: scientific plans, adverse event and medical inquiry case management, KOL engagement tracking
+- Marketing Automation: omnichannel HCP journeys, segment building and campaign reporting
+- Event Management: virtual, hybrid and in-person events with native Microsoft Teams webinars
+- Content Management: compliant digital asset management with MLR review in Microsoft Teams, e-signatures and audit trails
+- Customer Insights: unified customer profile with out-of-box churn, lifetime value and sentiment models
+- Mobile App: offline-capable, voice-to-text capture and geo-routing for field reps, MSLs and account managers
+- Ask-Nova Studio: build and configure AI agents scoped to the customer's own data and compliance guardrails
+
+## Compliance coverage
+FDA 21 CFR Part 11 (audit trails and e-signatures), GDPR (consent and data-subject controls), PIPL (data residency and localization for China), HIPAA and Sunshine Act (transparency reporting and PHI safeguards).

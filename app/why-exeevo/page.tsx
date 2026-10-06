@@ -4,11 +4,10 @@ import { comparison } from "@/content/comparison";
 import { WhyHero } from "@/components/sections/WhyHero";
 import { ComparisonTable } from "@/components/sections/ComparisonTable";
 import { WhyTenant } from "@/components/sections/WhyTenant";
+import { seo } from "@/content/seo";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Why Exeevo",
-  description: whyExeevo.intro,
-};
+export const metadata: Metadata = pageMetadata(seo.why);
 
 export default function WhyExeevoPage() {
   return (

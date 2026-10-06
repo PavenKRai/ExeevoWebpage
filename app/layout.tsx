@@ -5,22 +5,40 @@ import { Nav } from "@/components/layout/Nav";
 import { OffscreenPause } from "@/components/layout/OffscreenPause";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
-import { site } from "@/content/site";
+import { orgFacts, seo } from "@/content/seo";
+import { siteUrl } from "@/lib/siteUrl";
 import "./globals.css";
 
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: "Exeevo | Life sciences CRM built natively on Microsoft", template: "%s | Exeevo" },
-  description: site.tagline,
-  openGraph: { siteName: "Exeevo", type: "website", description: site.tagline },
+  title: { default: seo.home.title, template: "%s | Exeevo" },
+  description: seo.home.description,
+  applicationName: "Exeevo",
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  openGraph: { siteName: "Exeevo", type: "website", locale: "en_US", title: seo.home.title, description: seo.home.description, url: "/" },
+  twitter: { card: "summary_large_image", title: seo.home.title, description: seo.home.description },
 };
 
-const orgJsonLd = { "@context": "https://schema.org", "@type": "Organization", name: "Exeevo", url: siteUrl, description: site.tagline };
+// Sitewide structured data: who Exeevo is (Organization) and the site itself (WebSite), linked by @id.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: orgFacts.name,
+      url: siteUrl,
+      logo: `${siteUrl}/brand/exeevo-icon.png`,
+      description: orgFacts.tagline,
+      parentOrganization: { "@type": "Organization", name: orgFacts.parent },
+    },
+    { "@type": "WebSite", "@id": `${siteUrl}/#website`, url: siteUrl, name: "Exeevo", description: orgFacts.tagline, publisher: { "@id": `${siteUrl}/#organization` }, inLanguage: "en" },
+  ],
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -33,7 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <OffscreenPause />
         <RevealObserver />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
     </html>
   );
