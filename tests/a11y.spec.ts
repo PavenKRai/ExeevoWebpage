@@ -1,7 +1,10 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/platform", "/why-exeevo", "/industries", "/solutions-by-role", "/getting-started"];
+const routes = [
+  "/", "/platform", "/why-exeevo", "/industries", "/solutions-by-role", "/getting-started",
+  "/resources", "/resources/blog", "/resources/blog/mastering-life-sciences-events", "/resources/white-papers", "/resources/webinars", "/resources/case-studies", "/resources/press-releases", "/events", "/glossary", "/about", "/privacy", "/site-map",
+];
 
 for (const route of routes) {
   test(`axe: ${route} has no serious or critical violations`, async ({ page }) => {

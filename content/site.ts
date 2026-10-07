@@ -11,6 +11,7 @@ export const site = {
     { label: "Solutions by role", href: "/solutions-by-role" },
     { label: "Why Exeevo", href: "/why-exeevo" },
     { label: "Compliance", href: "/why-exeevo#compliance" },
+    { label: "Resources", href: "/resources" },
     { label: "Getting started", href: "/getting-started" },
   ] satisfies NavLink[],
   footer: {
@@ -34,17 +35,30 @@ export const site = {
       {
         title: "Company",
         links: [
-          { label: "About", href: "[URL]" },
-          { label: "Case Studies", href: "[URL]" },
+          { label: "About", href: "/about" },
+          { label: "Partners", href: "/partners" },
+          { label: "Careers", href: "/careers" },
+          { label: "Case Studies", href: "/resources/case-studies" },
           { label: "Trust & Compliance", href: "/why-exeevo#compliance" },
+        ],
+      },
+      {
+        title: "Resources",
+        links: [
+          { label: "Blog", href: "/resources/blog" },
+          { label: "White papers", href: "/resources/white-papers" },
+          { label: "Webinars", href: "/resources/webinars" },
+          { label: "Events", href: "/events" },
+          { label: "Press", href: "/resources/press-releases" },
+          { label: "Glossary", href: "/glossary" },
         ],
       },
     ],
     legal: "© 2026 Exeevo. A division of Valsoft.",
     legalLinks: [
-      { label: "Privacy", href: "[URL]" },
-      { label: "Cookie Policy", href: "[URL]" },
-      { label: "Site Map", href: "[URL]" },
+      { label: "Privacy", href: "/privacy" },
+      { label: "Cookie Policy", href: "/cookies" },
+      { label: "Site Map", href: "/site-map" },
     ],
   },
   rolesMenu: {
@@ -61,6 +75,7 @@ export const site = {
     more: [
       { label: "Why Exeevo", href: "/why-exeevo" },
       { label: "Compliance", href: "/why-exeevo#compliance" },
+      { label: "Resources", href: "/resources" },
       { label: "Getting started", href: "/getting-started" },
     ],
   },

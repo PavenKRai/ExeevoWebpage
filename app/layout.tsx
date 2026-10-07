@@ -6,7 +6,7 @@ import { OffscreenPause } from "@/components/layout/OffscreenPause";
 import { RevealObserver } from "@/components/motion/RevealObserver";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { orgFacts, seo } from "@/content/seo";
-import { siteUrl } from "@/lib/siteUrl";
+import { isStaging, siteUrl } from "@/lib/siteUrl";
 import "./globals.css";
 
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap" });
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: seo.home.description,
   applicationName: "Exeevo",
   alternates: { canonical: "/" },
-  robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
+  robots: isStaging ? { index: false, follow: false } : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 } },
   openGraph: { siteName: "Exeevo", type: "website", locale: "en_US", title: seo.home.title, description: seo.home.description, url: "/" },
   twitter: { card: "summary_large_image", title: seo.home.title, description: seo.home.description },
 };

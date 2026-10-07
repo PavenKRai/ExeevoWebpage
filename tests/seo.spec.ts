@@ -48,10 +48,12 @@ test("robots.txt welcomes search and AI crawlers and lists the sitemap", async (
   expect(txt).toMatch(/Sitemap: .*\/sitemap\.xml/);
 });
 
-test("sitemap lists every route with a lastmod", async ({ request }) => {
+test("sitemap lists every route (core pages, resources, migrated pages) with a lastmod", async ({ request }) => {
   const xml = await (await request.get("/sitemap.xml")).text();
-  expect((xml.match(/<loc>/g) ?? []).length).toBe(routes.length);
-  expect((xml.match(/<lastmod>/g) ?? []).length).toBe(routes.length);
+  const locs = xml.match(/<loc>/g) ?? [];
+  expect(locs.length).toBeGreaterThanOrEqual(routes.length);
+  expect((xml.match(/<lastmod>/g) ?? []).length).toBe(locs.length);
+  for (const p of ["/resources/blog", "/glossary", "/events", "/about", "/privacy"]) expect(xml, p).toContain(`${p}</loc>`);
 });
 
 test("brand assets: favicon, apple icon, manifest, share image and llms.txt are served", async ({ request }) => {
