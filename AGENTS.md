@@ -16,6 +16,7 @@ Instructions for AI coding agents working on the Exeevo marketing website. Read 
 | `/why-exeevo` | Why Exeevo |
 | `/industries` | Industries |
 | `/solutions-by-role` | Solutions by Role |
+| `/ask-nova` | Ask-Nova Studio & AI |
 | `/services` | Professional Services (replaced Getting Started; `/getting-started` redirects here) |
 
 ## Stack

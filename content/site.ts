@@ -1,4 +1,4 @@
-export type NavLink = { label: string; href: string };
+export type NavLink = { label: string; href: string; icon?: "orb" };
 
 export const site = {
   name: "Exeevo",
@@ -7,6 +7,7 @@ export const site = {
   videoUrl: "[VIDEO URL]",
   nav: [
     { label: "Platform", href: "/platform" },
+    { label: "Ask-Nova", href: "/ask-nova", icon: "orb" },
     { label: "Industries", href: "/industries" },
     { label: "Solutions by role", href: "/solutions-by-role" },
     { label: "Why Exeevo", href: "/why-exeevo" },
@@ -19,6 +20,7 @@ export const site = {
         title: "Platform",
         links: [
           { label: "Overview", href: "/platform" },
+          { label: "Ask-Nova Studio & AI", href: "/ask-nova" },
           { label: "Why Exeevo", href: "/why-exeevo" },
           { label: "Professional Services", href: "/services" },
         ],
@@ -72,6 +74,7 @@ export const site = {
   /** Mobile sheet groups (Platform's modules come from content/modules.ts). */
   mobile: {
     more: [
+      { label: "Ask-Nova", href: "/ask-nova" },
       { label: "Why Exeevo", href: "/why-exeevo" },
       { label: "Services", href: "/services" },
       { label: "Resources", href: "/resources" },

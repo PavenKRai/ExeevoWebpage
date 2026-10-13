@@ -67,7 +67,7 @@ test.describe("mobile menu", () => {
     await expect(menu.getByRole("link", { name: /Pharma/ })).toBeVisible();
     await expect(menu.getByRole("link", { name: /MedTech/ })).toBeVisible();
     await expect(menu.getByRole("link", { name: /Solutions by role/ })).toBeVisible();
-    for (const n of ["Why Exeevo", "Services", "Resources"]) await expect(menu.getByRole("link", { name: n })).toBeVisible();
+    for (const n of ["Ask-Nova", "Why Exeevo", "Services", "Resources"]) await expect(menu.getByRole("link", { name: n })).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(menu).toBeHidden();
   });

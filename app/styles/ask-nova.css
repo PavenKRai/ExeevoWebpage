@@ -1,0 +1,47 @@
+/* Ask-Nova page. Static decoration plus the few transitions the interactive parts need (all disabled under reduced motion by the global rule). */
+.nova-grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, #000 35%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, #000 35%, transparent 85%);
+}
+/* Gradient-ringed pill ("Ask-Nova Plus"): ink or white fill with the 1.5px brand ring. */
+.nova-ring {
+  background: linear-gradient(var(--ex-ink), var(--ex-ink)) padding-box, var(--ex-gradient) border-box;
+  border: 1.5px solid transparent;
+}
+.nova-ring-light {
+  background: linear-gradient(#fff, #fff) padding-box, var(--ex-gradient) border-box;
+  border: 1.5px solid transparent;
+}
+.nova-swap {
+  animation: novaSwap 0.6s var(--ex-ease-out) both;
+}
+@keyframes novaSwap {
+  from {
+    opacity: 0;
+    translate: 18px 0;
+  }
+}
+.nova-tick {
+  transition: height 0.45s var(--ex-ease-out), background-color 0.45s;
+}
+.nova-node {
+  transition: scale 0.4s var(--ex-ease-soft), background-color 0.4s;
+}
+.nova-deck-card {
+  transition: transform 0.8s var(--ex-ease-out), opacity 0.6s, filter 0.6s;
+}
+/* Feature carousel: three cards in view from 768px; below that it is a swipeable row. */
+.nova-carousel {
+  --card: clamp(300px, calc((100vw - 2 * var(--ex-gutter) - 48px) / 3), 392px);
+  --step: calc(var(--card) + 24px);
+}
+@media (min-width: 768px) {
+  .nova-track {
+    translate: calc(var(--step) * var(--i, 0) * -1) 0;
+    transition: translate 0.8s var(--ex-ease-out);
+  }
+}

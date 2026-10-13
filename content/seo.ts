@@ -36,6 +36,12 @@ export const seo = {
     description:
       "Role-specific tools for Field Reps, Medical Science Liaisons, Key Account Managers and Consumer & Animal Health reps, all on the same HCP record.",
   },
+  askNova: {
+    path: "/ask-nova",
+    title: "Ask-Nova: AI for life sciences CRM, before and after meetings",
+    description:
+      "Thirteen AI features for life sciences teams, three included with every licence. Ask-Nova Studio adds agents and MCP inside your CRM access rules.",
+  },
   services: {
     path: "/services",
     title: "Life sciences CRM professional services",

@@ -92,8 +92,9 @@ export function Nav() {
                   key={l.href}
                   href={l.href}
                   aria-current={current ? "page" : undefined}
-                  className={cn(item, "px-4", current && tint)}
+                  className={cn(item, "px-4", l.icon && "gap-2", current && tint)}
                 >
+                  {l.icon === "orb" && <span aria-hidden="true" className="orb size-[18px] shrink-0" />}
                   {l.label}
                 </Link>
               );
