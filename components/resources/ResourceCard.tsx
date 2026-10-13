@@ -5,11 +5,11 @@ import { CategoryDot } from "../ui/CategoryDot";
 import { ResourceArt } from "./ResourceArt";
 
 /** One card in a resource grid. The whole card is a single link on the title (stretched), so it is one tab stop. */
-export function ResourceCard({ type, item, index = 0, showRead = true }: { type: ResourceType; item: Resource; index?: number; showRead?: boolean }) {
+export function ResourceCard({ type, item, index = 0, showRead = true, priority = false }: { type: ResourceType; item: Resource; index?: number; showRead?: boolean; priority?: boolean }) {
   const cat = item.categories[0];
   return (
     <article className="glass-light lift srg relative flex flex-col rounded-[28px] p-3">
-      <ResourceArt image={item.image} seed={index} className="h-[210px] rounded-[20px]" sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" />
+      <ResourceArt image={item.image} seed={index} priority={priority} className="h-[210px] rounded-[20px]" sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw" />
       <div className="flex flex-1 flex-col gap-3 px-3.5 pb-3.5 pt-[22px]">
         {cat && (
           <span className="flex items-center gap-2 text-[13px] text-muted">

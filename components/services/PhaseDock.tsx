@@ -30,19 +30,19 @@ export function PhaseDock() {
   }, []);
   return (
     <div className="pointer-events-none sticky top-[100px] z-30 -mt-7 flex justify-center px-3 md:top-[108px]">
-      <nav aria-label={servicesPage.dock} className="glass-light pointer-events-auto flex max-w-full items-center gap-1 overflow-x-auto rounded-[20px] p-1.5">
+      <nav aria-label={servicesPage.dock} className="glass-light pointer-events-auto flex max-w-full items-center gap-1 overflow-x-auto rounded-[18px] p-1 lg:rounded-[18px]">
         {phases.map((p) => (
           <a
             key={p.slug}
             href={`#${p.slug}`}
             aria-current={active === p.slug ? "true" : undefined}
-            className={cn("flex h-11 shrink-0 items-center gap-2.5 rounded-[14px] px-4 text-[15px] font-semibold text-heading transition-colors hover:bg-slate/[.07] sm:px-5", active === p.slug && "bg-slate/[.1]")}
+            className={cn("flex h-10 shrink-0 items-center gap-2.5 rounded-[14px] px-4 text-[15px] font-semibold text-heading transition-colors hover:bg-slate/[.07] sm:px-5", active === p.slug && "bg-slate/[.1]")}
           >
             <span aria-hidden="true" className={cn("size-2.5 rounded-full", phaseStyle[p.color].dot)} />
             {p.title}
           </a>
         ))}
-        <Button href={site.demoHref} size="nav" className="ml-1.5 h-11! min-h-11! shrink-0 rounded-[14px]! px-4! text-[15px]! sm:px-5!">
+        <Button href={site.demoHref} size="nav" className="ml-1.5 h-10! min-h-10! shrink-0 rounded-[14px]! px-4! text-[15px]! sm:px-[18px]!">
           {servicesPage.primaryCta}
         </Button>
       </nav>

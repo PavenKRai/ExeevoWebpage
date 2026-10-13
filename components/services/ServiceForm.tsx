@@ -52,7 +52,7 @@ export function ServiceForm() {
   }
 
   return (
-    <form aria-label={contact.title} noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-[18px] lg:min-h-[452px]">
+    <form aria-label={contact.title} noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-[18px] lg:min-h-[410px]">
       <div className="grid gap-4 sm:grid-cols-2">
         <TextField id="demo-name" label="Full name" autoComplete="name" error={errors.fullName?.message} {...register("fullName")} />
         <TextField id="demo-email" label="Work email" type="email" autoComplete="email" error={errors.email?.message} {...register("email")} />

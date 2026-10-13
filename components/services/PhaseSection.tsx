@@ -48,10 +48,10 @@ export function PhaseSection({ phase, children }: { phase: Phase; children?: Rea
 
   const cur = list[sel];
   return (
-    <section ref={ref} id={phase.slug} aria-labelledby={`${phase.slug}-title`} className="flex scroll-mt-32 flex-col gap-8 pt-24 lg:gap-11 lg:pt-[110px]">
+    <section ref={ref} id={phase.slug} aria-labelledby={`${phase.slug}-title`} className={cn("flex flex-col gap-8 pt-24 lg:gap-[18px]", phase.slug === "advise" ? "lg:scroll-mt-14 lg:pt-24" : "lg:pt-[150px]")}>
       <div className="sr flex flex-col justify-between gap-3 lg:flex-row lg:items-center lg:gap-10">
-        <h2 id={`${phase.slug}-title`} className="text-[clamp(36px,3.6vw,46px)] leading-[1.04] tracking-[-0.03em]">{phase.title}</h2>
-        <p className="max-w-[480px] text-[17px] leading-[1.55] text-muted">
+        <h2 id={`${phase.slug}-title`} className="text-[clamp(30px,2.6vw,32px)] leading-[1.1] tracking-[-0.025em]">{phase.title}</h2>
+        <p className="max-w-[520px] text-[15px] leading-[1.55] text-muted">
           {phase.blurb} <span className="font-semibold text-heading">{n} services.</span>
         </p>
       </div>
@@ -72,13 +72,13 @@ export function PhaseSection({ phase, children }: { phase: Phase; children?: Rea
                   tabIndex={on ? 0 : -1}
                   onClick={() => go(i)}
                   className={cn(
-                    "flex min-h-14 shrink-0 flex-col gap-2 rounded-[22px] px-[22px] py-5 text-left transition-[background,color,box-shadow] duration-300 max-lg:w-[78%] max-lg:max-w-[320px]",
+                    "flex min-h-14 shrink-0 flex-col gap-2 rounded-[22px] px-[22px] py-5 text-left transition-[background,color,box-shadow] duration-300 max-lg:w-[78%] max-lg:max-w-[320px] lg:gap-1.5 lg:rounded-[20px] lg:px-[18px] lg:py-3.5",
                     on ? "bg-ink text-white shadow-[0_24px_44px_-24px_rgba(24,32,38,.55)]" : "text-heading shadow-[inset_0_-1px_0_rgba(51,63,72,.12)] hover:bg-white/50",
                   )}
                 >
                   <span className="flex items-center gap-3.5">
                     <span className={cn("w-[22px] text-[13px] font-semibold tabular-nums", on ? "text-on-dark-muted" : "text-muted")}>{s.num}</span>
-                    <span className="flex-1 text-[18px] font-semibold leading-[1.25] tracking-[-0.01em]">{s.title}</span>
+                    <span className="flex-1 text-[18px] font-semibold leading-[1.25] tracking-[-0.01em] lg:text-[16.5px]">{s.title}</span>
                     <span aria-hidden="true" className={cn("size-2.5 rounded-full transition-colors", on ? style.dot : "bg-slate/[.18]")} />
                   </span>
                   {on && <span className="pl-9 text-[14px] leading-[1.45] text-on-dark">{s.tag}</span>}
@@ -86,7 +86,7 @@ export function PhaseSection({ phase, children }: { phase: Phase; children?: Rea
               );
             })}
           </div>
-          <div className="glass-light mt-auto flex flex-col gap-3 rounded-[24px] px-6 py-[22px]">
+          <div className="glass-light mt-auto flex flex-col gap-3 rounded-[24px] px-6 py-[22px] lg:gap-2.5 lg:rounded-[22px] lg:px-5 lg:py-4">
             <p className="text-[14px] leading-[1.5] text-muted">
               {servicesPage.interested.before} <span className="font-semibold text-heading">{cur.title}</span>?
             </p>
@@ -106,7 +106,7 @@ export function PhaseSection({ phase, children }: { phase: Phase; children?: Rea
               role="tabpanel"
               aria-labelledby={tabId(s.slug)}
               hidden={i !== sel}
-              className="svc-panel glass-light relative flex flex-col gap-6 rounded-[34px] p-6 sm:p-9 lg:min-h-[700px] lg:gap-[26px] lg:px-11 lg:py-10"
+              className="svc-panel glass-light relative flex flex-col gap-6 rounded-[34px] p-6 sm:p-9 lg:h-[530px] lg:gap-4 lg:overflow-hidden lg:rounded-[30px] lg:px-8 lg:py-[26px]"
             >
               <div className="flex items-center justify-between gap-3">
                 <p className="flex items-center gap-2.5 text-[13.5px] font-semibold text-muted">
@@ -122,25 +122,25 @@ export function PhaseSection({ phase, children }: { phase: Phase; children?: Rea
                   <IconButton label="Next service" onClick={() => go(sel + 1)} className="size-11 rounded-[13px]"><ChevronRight size={18} strokeWidth={1.8} /></IconButton>
                 </div>
               </div>
-              <div className="flex flex-col gap-3.5">
-                <h3 className="text-[clamp(26px,2.4vw,32px)] leading-[1.12] tracking-[-0.025em]">{s.tag}</h3>
-                <p className="max-w-[680px] text-[16px] leading-[1.65] text-[#4A5760]">{s.desc}</p>
+              <div className="flex flex-col gap-3.5 lg:gap-2">
+                <h3 className="text-[clamp(26px,2.4vw,32px)] leading-[1.12] tracking-[-0.025em] lg:text-[24px] lg:leading-[1.15] lg:tracking-[-0.02em]">{s.tag}</h3>
+                <p className="max-w-[700px] text-[16px] leading-[1.65] text-[#4A5760] lg:text-[14.5px] lg:leading-[1.55]">{s.desc}</p>
               </div>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-3 lg:gap-2">
                 <h4 className="text-[13px] font-semibold text-muted">{servicesPage.includedLabel}</h4>
-                <ul className="grid gap-2.5 sm:grid-cols-2">
+                <ul className="grid gap-2.5 sm:grid-cols-2 lg:gap-2">
                   {s.inc.map((x) => (
-                    <li key={x} className="flex items-center gap-3 rounded-2xl border border-white/95 bg-white/60 px-3.5 py-[13px] text-[14px] leading-[1.35] text-heading">
+                    <li key={x} className="flex items-center gap-3 rounded-2xl border border-white/95 bg-white/60 px-3.5 py-[13px] text-[14px] leading-[1.35] text-heading lg:gap-2.5 lg:px-3 lg:py-[9px] lg:text-[13.5px] lg:leading-[1.3]">
                       <span aria-hidden="true" className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-ink text-white"><Check size={14} strokeWidth={2} /></span>
                       {x}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="on-dark relative mt-auto grid gap-3 overflow-hidden rounded-3xl bg-ink px-7 py-6 sm:grid-cols-[150px_1fr] sm:gap-5">
+              <div className="on-dark relative mt-auto grid gap-3 overflow-hidden rounded-3xl bg-ink px-7 py-6 sm:grid-cols-[150px_1fr] sm:gap-5 lg:grid-cols-[130px_1fr] lg:gap-4 lg:px-[22px] lg:py-4">
                 <span aria-hidden="true" className={cn("pointer-events-none absolute -right-14 -top-16 size-[220px] rounded-full opacity-30 blur-[60px]", style.dot)} />
                 <h4 className="relative text-[13px] font-semibold text-on-dark-muted">{servicesPage.valueLabel}</h4>
-                <p className="relative text-[17px] font-[450] leading-[1.55] text-white">{s.val}</p>
+                <p className="relative text-[17px] font-[450] leading-[1.55] text-white lg:text-[15px] lg:leading-[1.5]">{s.val}</p>
               </div>
             </div>
           ))}

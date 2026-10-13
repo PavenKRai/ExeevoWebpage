@@ -14,12 +14,12 @@ function PathCard({ path, side, reveal }: { path: Path; side: "left" | "right"; 
     <Layer
       {...timing(side === "left" ? 0.25 : 0.35)}
       from={{ o: 0, x: dir * 60, s: 0.96 }}
-      className="glass-light lift flex flex-col justify-between gap-8 rounded-[32px] p-8 lg:h-[330px] lg:p-[38px] pinned:h-auto pinned:gap-6 pinned:p-7 pinned:lg:p-[34px]"
+      className={`glass-light lift flex flex-col justify-between gap-8 rounded-[32px] p-8 pinned:h-auto pinned:gap-6 pinned:p-7 pinned:lg:p-[34px] ${reveal ? "lg:h-[230px] lg:rounded-[28px] lg:px-[30px] lg:py-[26px]" : "lg:h-[330px] lg:p-[38px]"}`}
     >
-      <div className="flex flex-col gap-3.5">
+      <div className={`flex flex-col ${reveal ? "gap-3.5 lg:gap-2" : "gap-3.5"}`}>
         <p className="text-[14px] font-medium leading-[1.2] text-muted">{path.tag}</p>
-        <h2 className="text-[clamp(26px,2.4vw,32px)] leading-[1.1] tracking-[-0.025em]">{path.title}</h2>
-        <p className="max-w-[500px] text-[16px] leading-[1.55] text-muted">{path.body}</p>
+        <h2 className={reveal ? "text-[clamp(22px,1.7vw,24px)] leading-[1.1] tracking-[-0.02em]" : "text-[clamp(26px,2.4vw,32px)] leading-[1.1] tracking-[-0.025em]"}>{path.title}</h2>
+        <p className={reveal ? "max-w-[520px] text-[14.5px] leading-[1.5] text-muted" : "max-w-[500px] text-[16px] leading-[1.55] text-muted"}>{path.body}</p>
       </div>
       <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
         {path.chips.map((c, i) => (

@@ -37,7 +37,7 @@ export async function ResourceListPage({ type, searchParams }: { type: ResourceT
       </div>
       <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {items.map((r, n) => (
-          <ResourceCard key={r.slug} type={type} item={r} index={n} showRead={type !== "events" && type !== "webinars"} />
+          <ResourceCard key={r.slug} type={type} item={r} index={n} priority={!lead && n < 3} showRead={type !== "events" && type !== "webinars"} />
         ))}
       </div>
       <Pagination basePath={c.path} page={page} pages={pages} category={activeCategory} />
