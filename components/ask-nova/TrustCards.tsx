@@ -7,7 +7,7 @@ export function TrustCards() {
   const t = askNova.trust;
   return (
     <section aria-labelledby="trust-title" className="relative overflow-hidden bg-frost py-20 lg:py-[120px]">
-      <Glow color="gradient" className="left-[560px] top-[280px] size-[440px] blur-[90px] max-lg:hidden" style={{ opacity: 0.38 }} />
+      <Glow parallax color="gradient" className="left-[560px] top-[280px] size-[440px] blur-[90px] max-lg:hidden" style={{ opacity: 0.38 }} />
       <div className="frame relative">
         <div className="grid items-end gap-6 pb-12 lg:grid-cols-12 lg:gap-x-6 lg:pb-14">
           <div className="srl flex flex-col gap-4 lg:col-span-7">

@@ -10,7 +10,7 @@ export function FitDiagram() {
     <div className="relative mt-10 flex flex-col gap-10 lg:mt-0 lg:block lg:h-[430px]">
       <div className="lg:absolute lg:left-0 lg:top-12 lg:w-[23.4%]">
         <p className="mb-4 text-[13px] text-[#8FA0AA] lg:absolute lg:-top-12 lg:mb-0">{f.data.label}</p>
-        <ul className="srl flex flex-col gap-4">
+        <ul className="stagger flex flex-col gap-4">
           {f.data.items.map((it) => (
             <li key={it.name} className="glass-dark flex min-h-[76px] items-center gap-3.5 rounded-[20px] px-5">
               <span aria-hidden="true" className="size-[9px] shrink-0 rounded-full bg-brand-blue" />
@@ -35,7 +35,7 @@ export function FitDiagram() {
               <span aria-hidden="true" className="orb size-[34px]" />
               <span className="font-display text-[19px] font-semibold text-white">{f.studio.name}</span>
             </div>
-            <ul className="flex flex-col gap-2">
+            <ul className="stagger flex flex-col gap-2">
               {f.studio.parts.map((p) => (
                 <li key={p} className="flex h-[42px] items-center rounded-[13px] bg-white/[.07] px-4 text-[15px] text-white">{p}</li>
               ))}
@@ -55,7 +55,7 @@ export function FitDiagram() {
 
       <div className="lg:absolute lg:left-[76.6%] lg:top-12 lg:w-[23.4%]">
         <p className="mb-4 text-[13px] text-[#8FA0AA] lg:absolute lg:-top-12 lg:mb-0">{f.ask.label}</p>
-        <ul className="srr flex flex-col gap-3">
+        <ul className="stagger flex flex-col gap-3">
           {f.ask.items.map((it) => (
             <li key={it.name} className="glass-dark flex min-h-16 items-center justify-between gap-3 rounded-[18px] px-5 py-2">
               <span className="text-[15.5px] font-semibold text-white">{it.name}</span>

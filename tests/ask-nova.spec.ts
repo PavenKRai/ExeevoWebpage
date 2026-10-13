@@ -68,3 +68,27 @@ test("demo buttons lead to the Talk to our team form; JSON-LD lists 13 features;
   const app = blocks.flatMap((b) => b["@graph"] ?? []).find((n: { "@type": string }) => n["@type"] === "SoftwareApplication");
   expect(app.featureList).toHaveLength(13);
 });
+
+test("scroll animations: below-the-fold blocks start hidden, reveal once, and are never hidden again", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === "reduced-motion", "reveals are disabled under reduced motion");
+  await page.goto("/ask-nova", { waitUntil: "networkidle" });
+  await page.waitForTimeout(800);
+  const hidden = await page.locator(".rv-hide").count();
+  expect(hidden, "reveal targets waiting below the fold").toBeGreaterThan(20);
+  const row = page.locator("#licensing-title").locator("xpath=ancestor::section").locator(".stagger > *").first();
+  await expect(row).toHaveClass(/rv-hide/);
+  await row.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1800);
+  await expect(row).not.toHaveClass(/rv-hide/);
+  expect(Number(await row.evaluate((e) => getComputedStyle(e).opacity))).toBe(1);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.waitForTimeout(500);
+  await expect(row).not.toHaveClass(/rv-hide/);
+});
+
+test("hero load animation: dial nodes and ticks animate in and end fully visible", async ({ page }) => {
+  await page.goto("/ask-nova", { waitUntil: "networkidle" });
+  await page.waitForTimeout(2500);
+  const node = page.getByRole("button", { name: "Feature 07, Voice Interaction" }).first();
+  expect(Number(await node.evaluate((e) => getComputedStyle(e).opacity))).toBe(1);
+});

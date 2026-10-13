@@ -9,7 +9,7 @@ export function StudioSection() {
   const s = askNova.studio;
   return (
     <section id="studio" aria-labelledby="studio-title" className="on-dark relative overflow-hidden bg-ink py-20 text-[#EEF2F4] lg:py-[120px]">
-      <Glow color="gradient" className="left-[520px] top-[120px] size-[520px] blur-[120px] max-lg:hidden" style={{ opacity: 0.3 }} />
+      <Glow parallax color="gradient" className="left-[520px] top-[120px] size-[520px] blur-[120px] max-lg:hidden" style={{ opacity: 0.3 }} />
       <div className="frame relative grid items-start gap-12 lg:grid-cols-12 lg:gap-x-6">
         <div className="srl flex flex-col gap-[26px] lg:col-span-6">
           <div className="flex items-center gap-2.5">
@@ -20,7 +20,7 @@ export function StudioSection() {
           <p className="max-w-[560px] text-[18px] font-[350] leading-[1.6] text-on-dark">{s.body}</p>
           <div className="flex flex-col gap-3.5 pt-1.5">
             <h3 className="font-sans text-[14px] font-medium tracking-normal text-[#8FA0AA]">{s.fitTitle}</h3>
-            <ul className="flex flex-col gap-3.5">
+            <ul className="stagger flex flex-col gap-3.5">
               {s.fit.map((t) => (
                 <li key={t} className="flex items-start gap-3.5">
                   <span aria-hidden="true" className="flex size-[26px] shrink-0 items-center justify-center rounded-[9px] bg-white/10 text-white"><Check size={15} strokeWidth={2} /></span>

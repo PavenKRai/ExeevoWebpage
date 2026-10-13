@@ -31,22 +31,48 @@ export function FeatureCarousel() {
   const stage = features[idx].stage;
 
   return (
-    <section id="features" aria-labelledby="cycle-title" className="relative overflow-x-clip bg-mist py-20 lg:py-[120px]">
-      <Glow color="blue" className="-left-[120px] top-[360px] h-[420px] w-[560px] blur-[120px]" style={{ opacity: 0.22 }} />
-      <Glow color="magenta" className="-right-20 top-[260px] h-[420px] w-[460px] blur-[130px]" style={{ opacity: 0.14 }} />
+    <section
+      id="features"
+      aria-labelledby="cycle-title"
+      className="relative overflow-x-clip bg-mist py-20 lg:py-[120px]"
+    >
+      <Glow
+        parallax
+        color="blue"
+        className="-left-[120px] top-[360px] h-[420px] w-[560px] blur-[120px]"
+        style={{ opacity: 0.22 }}
+      />
+      <Glow
+        parallax
+        color="magenta"
+        className="-right-20 top-[260px] h-[420px] w-[460px] blur-[130px]"
+        style={{ opacity: 0.14 }}
+      />
       <div className="frame relative flex flex-col justify-between gap-6 lg:flex-row lg:items-end lg:gap-10">
         <div className="srl flex max-w-[680px] flex-col gap-4">
           <p className="text-[15px] text-muted">{askNova.cycle.label}</p>
-          <h2 id="cycle-title" className="text-[clamp(32px,3.4vw,46px)] leading-[1.08] tracking-[-0.03em]">{askNova.cycle.title}</h2>
+          <h2
+            id="cycle-title"
+            className="text-[clamp(32px,3.4vw,46px)] leading-[1.08] tracking-[-0.03em]"
+          >
+            {askNova.cycle.title}
+          </h2>
         </div>
-        <div role="group" aria-label={askNova.cycle.groupLabel} className="glass-light srr flex max-w-full gap-1 self-start overflow-x-auto rounded-[18px] p-[5px]">
+        <div
+          role="group"
+          aria-label={askNova.cycle.groupLabel}
+          className="glass-light srr flex max-w-full gap-1 self-start overflow-x-auto rounded-[18px] p-[5px]"
+        >
           {novaStages.map((s, k) => (
             <button
               key={s.short}
               type="button"
               aria-pressed={k === stage}
               onClick={() => setIdx(stageFirst[k])}
-              className={cn("h-[46px] shrink-0 rounded-[14px] px-[18px] text-[14.5px] font-semibold transition-colors", k === stage ? "bg-ink text-white" : "text-body hover:bg-slate/[.07]")}
+              className={cn(
+                "h-[46px] shrink-0 rounded-[14px] px-[18px] text-[14.5px] font-semibold transition-colors",
+                k === stage ? "bg-ink text-white" : "text-body hover:bg-slate/[.07]",
+              )}
             >
               {s.short}
             </button>
@@ -55,7 +81,10 @@ export function FeatureCarousel() {
       </div>
 
       <div className="nova-carousel relative mt-10 overflow-x-auto pl-[var(--ex-gutter)] max-md:snap-x md:mt-14 md:overflow-hidden">
-        <ul className="nova-track flex w-max gap-6" style={{ "--i": wide ? idx : 0 } as React.CSSProperties}>
+        <ul
+          className="nova-track flex w-max gap-6"
+          style={{ "--i": wide ? idx : 0 } as React.CSSProperties}
+        >
           {features.map((f, i) => {
             const inView = !wide || (i >= idx && i < idx + VISIBLE);
             return (
@@ -63,22 +92,40 @@ export function FeatureCarousel() {
                 key={f.slug}
                 aria-hidden={inView ? undefined : true}
                 inert={!inView}
-                className={cn("glass-light flex h-[452px] w-[var(--card)] shrink-0 flex-col justify-between rounded-[30px] p-[30px] transition-opacity duration-500 max-md:snap-start", inView ? "opacity-100" : "opacity-35")}
+                className={cn(
+                  "w-[var(--card)] shrink-0 max-md:snap-start",
+                  i < 3 && "srt",
+                  i === 1 && "d1",
+                  i === 2 && "d2",
+                )}
               >
-                <div className="flex flex-col gap-[22px]">
-                  <div className="flex items-start justify-between">
-                    <span className="font-display text-[44px] font-light leading-none tracking-[-0.04em] text-heading">{f.num}</span>
-                    <TierBadge tier={f.tier} />
+                <div
+                  className={cn(
+                    "glass-light flex h-[452px] flex-col justify-between rounded-[30px] p-[30px] transition-opacity duration-500",
+                    inView ? "opacity-100" : "opacity-35",
+                  )}
+                >
+                  <div className="flex flex-col gap-[22px]">
+                    <div className="flex items-start justify-between">
+                      <span className="font-display text-[44px] font-light leading-none tracking-[-0.04em] text-heading">
+                        {f.num}
+                      </span>
+                      <TierBadge tier={f.tier} />
+                    </div>
+                    <span className="flex size-[52px] items-center justify-center rounded-2xl bg-ink text-white">
+                      <NovaIcon d={f.icon} />
+                    </span>
+                    <div className="flex flex-col gap-3">
+                      <h3 className="font-sans text-[26px] leading-[1.15] tracking-[-0.02em]">
+                        {f.name}
+                      </h3>
+                      <p className="text-[15.5px] leading-[1.55] text-muted">{f.desc}</p>
+                    </div>
                   </div>
-                  <span className="flex size-[52px] items-center justify-center rounded-2xl bg-ink text-white"><NovaIcon d={f.icon} /></span>
-                  <div className="flex flex-col gap-3">
-                    <h3 className="font-sans text-[26px] leading-[1.15] tracking-[-0.02em]">{f.name}</h3>
-                    <p className="text-[15.5px] leading-[1.55] text-muted">{f.desc}</p>
+                  <div className="flex items-center justify-between border-t border-hairline pt-4 text-[13px] text-muted">
+                    <span>{novaStages[f.stage].who}</span>
+                    <span>{novaStages[f.stage].long}</span>
                   </div>
-                </div>
-                <div className="flex items-center justify-between border-t border-hairline pt-4 text-[13px] text-muted">
-                  <span>{novaStages[f.stage].who}</span>
-                  <span>{novaStages[f.stage].long}</span>
                 </div>
               </li>
             );
@@ -88,26 +135,60 @@ export function FeatureCarousel() {
 
       <div className="frame relative mt-10 hidden items-end gap-10 md:flex">
         <div className="flex flex-1 flex-col gap-3.5">
-          <div className="grid h-[30px] items-end gap-1.5" style={{ gridTemplateColumns: "repeat(13, minmax(0, 1fr))" }}>
+          <div
+            className="grid h-[30px] items-end gap-1.5"
+            style={{ gridTemplateColumns: "repeat(13, minmax(0, 1fr))" }}
+          >
             {features.map((f, i) => {
               const on = i >= idx && i < idx + VISIBLE;
               return (
-                <button key={f.slug} type="button" aria-label={`Show feature ${f.num}, ${f.name}`} onClick={() => setIdx(i)} className="flex h-[30px] items-end">
-                  <span className={cn("nova-tick block w-full rounded-[3px]", on ? "h-[22px] bg-ink" : "h-2.5 bg-[#B6C1C8]")} />
+                <button
+                  key={f.slug}
+                  type="button"
+                  aria-label={`Show feature ${f.num}, ${f.name}`}
+                  onClick={() => setIdx(i)}
+                  className="flex h-[30px] items-end"
+                >
+                  <span
+                    className={cn(
+                      "nova-tick block w-full rounded-[3px]",
+                      on ? "h-[22px] bg-ink" : "h-2.5 bg-[#B6C1C8]",
+                    )}
+                  />
                 </button>
               );
             })}
           </div>
-          <div className="grid gap-1.5 text-[13px] text-muted" style={{ gridTemplateColumns: rulerSpans.map((n) => `${n}fr`).join(" ") }} aria-hidden="true">
+          <div
+            className="grid gap-1.5 text-[13px] text-muted"
+            style={{ gridTemplateColumns: rulerSpans.map((n) => `${n}fr`).join(" ") }}
+            aria-hidden="true"
+          >
             {novaStages.map((s) => (
-              <span key={s.ruler} className="border-t border-[#B6C1C8] pt-2.5">{s.ruler}</span>
+              <span key={s.ruler} className="border-t border-[#B6C1C8] pt-2.5">
+                {s.ruler}
+              </span>
             ))}
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span aria-live="polite" className="min-w-24 text-right text-[14px] text-muted">{two(idx + 1)}–{two(idx + VISIBLE)} of {COUNT}</span>
-          <IconButton label={askNova.cycle.prev} disabled={idx === 0} onClick={() => setIdx(idx - 1)}><ChevronLeft size={20} strokeWidth={1.8} /></IconButton>
-          <IconButton label={askNova.cycle.next} disabled={idx === MAX_INDEX} onClick={() => setIdx(idx + 1)}><ChevronRight size={20} strokeWidth={1.8} /></IconButton>
+          <span aria-live="polite" className="min-w-24 text-right text-[14px] text-muted">
+            {two(idx + 1)}–{two(idx + VISIBLE)} of {COUNT}
+          </span>
+          <IconButton
+            label={askNova.cycle.prev}
+            disabled={idx === 0}
+            onClick={() => setIdx(idx - 1)}
+          >
+            <ChevronLeft size={20} strokeWidth={1.8} />
+          </IconButton>
+          <IconButton
+            label={askNova.cycle.next}
+            disabled={idx === MAX_INDEX}
+            onClick={() => setIdx(idx + 1)}
+          >
+            <ChevronRight size={20} strokeWidth={1.8} />
+          </IconButton>
         </div>
       </div>
     </section>

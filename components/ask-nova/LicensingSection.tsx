@@ -27,7 +27,7 @@ export function LicensingSection() {
               <h3 className="font-sans text-[15px] font-semibold tracking-normal text-heading">{l.includedTitle}</h3>
               <span className="text-[13px] text-muted">{l.includedCount}</span>
             </div>
-            <ul className="border-b border-hairline">
+            <ul className="stagger border-b border-hairline">
               {included.map((f) => (
                 <li key={f.slug} className="flex gap-[18px] border-t border-hairline py-5">
                   <span className="w-[26px] font-display text-[15px] font-medium text-muted">{f.num}</span>
@@ -46,7 +46,7 @@ export function LicensingSection() {
                 <span className="nova-ring flex h-[34px] items-center rounded-full px-[15px] text-[14px] font-semibold text-white">{askNova.tiers.plus}</span>
                 <span className="text-[13px] text-on-dark-muted">{l.plusCount}</span>
               </div>
-              <ul className="flex flex-wrap gap-2">
+              <ul className="stagger flex flex-wrap gap-2">
                 {l.plusChips.map((c) => (
                   <li key={c} className="glass-dark flex h-[34px] items-center rounded-full px-3.5 text-[13.5px] text-[#DCE3E7]">{c}</li>
                 ))}

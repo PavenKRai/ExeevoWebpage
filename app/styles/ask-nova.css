@@ -45,3 +45,24 @@
     transition: translate 0.8s var(--ex-ease-out);
   }
 }
+
+/* Hero load-in: the dial's nodes pop in around the sphere and the tick marks sweep round it (time-based, once). */
+.nova-pop {
+  animation: novaPop 0.7s var(--ex-ease-out) both;
+  animation-delay: calc(0.3s + var(--n, 0) * 60ms);
+}
+@keyframes novaPop {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+.nova-tickin {
+  animation: novaTickIn 0.5s ease-out both;
+  animation-delay: calc(0.5s + var(--n, 0) * 14ms);
+}
+@keyframes novaTickIn {
+  from {
+    opacity: 0;
+  }
+}

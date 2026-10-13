@@ -71,8 +71,8 @@ export function FeatureDial() {
             <span
               key={k}
               aria-hidden="true"
-              className={cn("nova-tick absolute h-2 w-px", lit ? (k % 5 === 0 ? "bg-white" : "bg-white/70") : k % 5 === 0 ? "bg-white/35" : "bg-white/[.14]")}
-              style={{ left: pct(CENTER + TICK_R * Math.cos(a) - 0.5), top: pct(CENTER + TICK_R * Math.sin(a) - 4), rotate: `${(deg + 90).toFixed(2)}deg` }}
+              className={cn("nova-tick nova-tickin absolute h-2 w-px", lit ? (k % 5 === 0 ? "bg-white" : "bg-white/70") : k % 5 === 0 ? "bg-white/35" : "bg-white/[.14]")}
+              style={{ left: pct(CENTER + TICK_R * Math.cos(a) - 0.5), top: pct(CENTER + TICK_R * Math.sin(a) - 4), rotate: `${(deg + 90).toFixed(2)}deg`, "--n": k } as React.CSSProperties}
             />
           );
         })}
@@ -99,8 +99,8 @@ export function FeatureDial() {
               aria-pressed={on}
               tabIndex={on ? 0 : -1}
               onClick={() => setSel(i)}
-              className={cn("nova-node absolute flex size-11 items-center justify-center rounded-full text-[13px] font-semibold text-white", on ? "nova-ring scale-[1.18]" : "glass-dark hover:bg-white/10")}
-              style={{ left: pct(CENTER + NODE_R * Math.cos(a) - 22), top: pct(CENTER + NODE_R * Math.sin(a) - 22) }}
+              className={cn("nova-node nova-pop absolute flex size-11 items-center justify-center rounded-full text-[13px] font-semibold text-white", on ? "nova-ring scale-[1.18]" : "glass-dark hover:bg-white/10")}
+              style={{ left: pct(CENTER + NODE_R * Math.cos(a) - 22), top: pct(CENTER + NODE_R * Math.sin(a) - 22), "--n": i } as React.CSSProperties}
             >
               {x.num}
             </button>

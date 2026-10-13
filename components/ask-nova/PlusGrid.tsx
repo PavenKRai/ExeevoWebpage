@@ -6,7 +6,7 @@ import { useNova } from "./NovaProvider";
 export function PlusGrid() {
   const { openFeature } = useNova();
   return (
-    <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="stagger grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {features
         .map((f, i) => ({ f, i }))
         .filter(({ f }) => f.tier === "plus")
