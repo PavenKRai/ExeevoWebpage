@@ -12,7 +12,7 @@ export function PlusGrid() {
         .filter(({ f }) => f.tier === "plus")
         .map(({ f, i }) => (
           <li key={f.slug}>
-            <button type="button" onClick={() => openFeature(i)} className="glass-dark lift flex h-24 w-full flex-col justify-between rounded-[20px] px-[18px] py-4 text-left text-white">
+            <button type="button" onClick={() => openFeature(i)} className="glass-dark lift flex h-[78px] w-full flex-col justify-between rounded-[18px] px-4 py-3 text-left text-white">
               <span className="font-display text-[13px] text-on-dark-muted">{f.num}</span>
               <span className="text-[16px] font-semibold tracking-[-0.01em]">{f.name}</span>
             </button>

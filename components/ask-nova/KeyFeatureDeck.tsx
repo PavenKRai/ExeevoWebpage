@@ -21,7 +21,7 @@ export function KeyFeatureDeck() {
   return (
     <div className="srr relative">
       <p className="mb-3 text-[14px] font-medium text-[#8FA0AA]">{askNova.studio.deckLabel}</p>
-      <div className="relative h-[420px] max-md:h-[360px] md:[perspective:1600px]" style={{ transformStyle: "preserve-3d" }}>
+      <div className="relative h-[400px] max-md:h-[340px] md:[perspective:1600px]" style={{ transformStyle: "preserve-3d" }}>
         {keyFeatures.map((k, i) => {
           const off = (i - cur + n) % n;
           const p = POSE[off];
@@ -33,7 +33,7 @@ export function KeyFeatureDeck() {
               aria-hidden={off === 0 ? undefined : true}
               aria-label={`Show ${k.t}`}
               onClick={() => setCur(off === 0 ? (cur + 1) % n : i)}
-              className={cn("nova-deck-card glass-dark absolute left-0 top-0 flex h-[420px] w-full max-w-[430px] flex-col justify-between rounded-[32px] p-8 text-left text-white max-md:h-[360px] md:p-[34px]", off !== 0 && "max-md:hidden")}
+              className={cn("nova-deck-card glass-dark absolute left-0 top-0 flex h-[360px] w-full max-w-[430px] flex-col justify-between rounded-[30px] p-[30px] text-left text-white max-md:h-[340px]", off !== 0 && "max-md:hidden")}
               style={{ transform: p.tf, opacity: p.op, zIndex: p.z, filter: p.blur, pointerEvents: off <= 1 ? "auto" : "none" }}
             >
               <span className={cn("flex w-full items-center justify-between transition-opacity duration-500", off === 0 ? "opacity-100" : "opacity-0")}>
@@ -41,14 +41,14 @@ export function KeyFeatureDeck() {
                 <span className="font-display text-[14px] text-on-dark-muted">{String(i + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}</span>
               </span>
               <span className={cn("flex flex-col gap-3.5 transition-opacity duration-500", off === 0 ? "opacity-100" : "opacity-0")}>
-                <span className="font-display text-[clamp(24px,2.2vw,30px)] font-semibold leading-[1.1] tracking-[-0.025em]">{k.t}</span>
+                <span className="font-display text-[clamp(22px,1.9vw,26px)] font-semibold leading-[1.12] tracking-[-0.025em]">{k.t}</span>
                 <span className="text-[16px] leading-[1.55] text-on-dark">{k.d}</span>
               </span>
             </button>
           );
         })}
       </div>
-      <div className="mt-6 flex w-full max-w-[430px] items-center justify-between">
+      <div className="mt-[26px] flex w-full max-w-[430px] items-center justify-between">
         <IconButton label={askNova.studio.deckPrev} onClick={() => setCur((cur - 1 + n) % n)}><ChevronLeft size={20} strokeWidth={1.8} /></IconButton>
         <div aria-hidden="true" className="flex gap-1.5">
           {keyFeatures.map((k, i) => (

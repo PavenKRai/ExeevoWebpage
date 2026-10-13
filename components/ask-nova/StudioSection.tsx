@@ -8,19 +8,19 @@ import { KeyFeatureDeck } from "./KeyFeatureDeck";
 export function StudioSection() {
   const s = askNova.studio;
   return (
-    <section id="studio" aria-labelledby="studio-title" className="on-dark relative overflow-hidden bg-ink py-20 text-[#EEF2F4] lg:py-[120px]">
+    <section id="studio" aria-labelledby="studio-title" className="on-dark relative overflow-hidden bg-ink py-16 text-[#EEF2F4] lg:py-20">
       <Glow parallax color="gradient" className="left-[520px] top-[120px] size-[520px] blur-[120px] max-lg:hidden" style={{ opacity: 0.3 }} />
       <div className="frame relative grid items-start gap-12 lg:grid-cols-12 lg:gap-x-6">
-        <div className="srl flex flex-col gap-[26px] lg:col-span-6">
+        <div className="srl flex flex-col gap-[18px] lg:col-span-6">
           <div className="flex items-center gap-2.5">
             <span className="text-[15px] text-on-dark-muted">{s.label}</span>
             <span className="nova-ring flex h-7 items-center rounded-full px-3 text-[12.5px] font-semibold text-white">{askNova.tiers.plus}</span>
           </div>
-          <h2 id="studio-title" className="text-[clamp(34px,3.4vw,48px)] leading-[1.06] tracking-[-0.03em]">{s.title}</h2>
-          <p className="max-w-[560px] text-[18px] font-[350] leading-[1.6] text-on-dark">{s.body}</p>
-          <div className="flex flex-col gap-3.5 pt-1.5">
+          <h2 id="studio-title" className="text-[clamp(28px,2.7vw,38px)] leading-[1.1] tracking-[-0.03em]">{s.title}</h2>
+          <p className="max-w-[580px] text-[16px] font-[350] leading-[1.55] text-on-dark">{s.body}</p>
+          <div className="flex flex-col gap-2.5 pt-0.5">
             <h3 className="font-sans text-[14px] font-medium tracking-normal text-[#8FA0AA]">{s.fitTitle}</h3>
-            <ul className="stagger flex flex-col gap-3.5">
+            <ul className="stagger flex flex-col gap-2.5">
               {s.fit.map((t) => (
                 <li key={t} className="flex items-start gap-3.5">
                   <span aria-hidden="true" className="flex size-[26px] shrink-0 items-center justify-center rounded-[9px] bg-white/10 text-white"><Check size={15} strokeWidth={2} /></span>
@@ -40,9 +40,9 @@ export function StudioSection() {
           <KeyFeatureDeck />
         </div>
       </div>
-      <div className="frame relative mt-20 lg:mt-[110px]">
-        <div className="border-t border-white/10 pt-14">
-          <div className="sr flex flex-col justify-between gap-4 pb-12 lg:flex-row lg:items-end lg:gap-10">
+      <div className="frame relative mt-14 lg:mt-16">
+        <div className="border-t border-white/10 pt-11">
+          <div className="sr flex flex-col justify-between gap-4 pb-7 lg:flex-row lg:items-end lg:gap-10">
             <h3 className="text-[28px] leading-[1.2] tracking-[-0.02em]">{askNova.fits.title}</h3>
             <p className="max-w-[520px] text-[15px] leading-[1.55] text-on-dark-muted">{askNova.fits.body}</p>
           </div>

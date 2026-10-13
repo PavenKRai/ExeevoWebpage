@@ -34,7 +34,7 @@ export function FeatureCarousel() {
     <section
       id="features"
       aria-labelledby="cycle-title"
-      className="relative overflow-x-clip bg-mist py-20 lg:py-[120px]"
+      className="relative overflow-x-clip bg-mist pb-[72px] pt-20"
     >
       <Glow
         parallax
@@ -53,7 +53,7 @@ export function FeatureCarousel() {
           <p className="text-[15px] text-muted">{askNova.cycle.label}</p>
           <h2
             id="cycle-title"
-            className="text-[clamp(32px,3.4vw,46px)] leading-[1.08] tracking-[-0.03em]"
+            className="text-[clamp(28px,2.7vw,38px)] leading-[1.1] tracking-[-0.03em]"
           >
             {askNova.cycle.title}
           </h2>
@@ -80,7 +80,7 @@ export function FeatureCarousel() {
         </div>
       </div>
 
-      <div className="nova-carousel relative mt-10 overflow-x-auto pl-[var(--ex-gutter)] max-md:snap-x md:mt-14 md:overflow-hidden">
+      <div className="nova-carousel relative mt-9 overflow-x-auto pl-[var(--ex-gutter)] max-md:snap-x md:overflow-hidden">
         <ul
           className="nova-track flex w-max gap-6"
           style={{ "--i": wide ? idx : 0 } as React.CSSProperties}
@@ -101,28 +101,28 @@ export function FeatureCarousel() {
               >
                 <div
                   className={cn(
-                    "glass-light flex h-[452px] flex-col justify-between rounded-[30px] p-[30px] transition-opacity duration-500",
+                    "glass-light flex h-[330px] flex-col justify-between rounded-[28px] px-[26px] py-6 transition-opacity duration-500",
                     inView ? "opacity-100" : "opacity-35",
                   )}
                 >
-                  <div className="flex flex-col gap-[22px]">
+                  <div className="flex flex-col gap-3.5">
                     <div className="flex items-start justify-between">
-                      <span className="font-display text-[44px] font-light leading-none tracking-[-0.04em] text-heading">
+                      <span className="font-display text-[34px] font-light leading-none tracking-[-0.04em] text-heading">
                         {f.num}
                       </span>
                       <TierBadge tier={f.tier} />
                     </div>
-                    <span className="flex size-[52px] items-center justify-center rounded-2xl bg-ink text-white">
-                      <NovaIcon d={f.icon} />
+                    <span className="flex size-[42px] items-center justify-center rounded-[13px] bg-ink text-white">
+                      <NovaIcon d={f.icon} size={20} />
                     </span>
-                    <div className="flex flex-col gap-3">
-                      <h3 className="font-sans text-[26px] leading-[1.15] tracking-[-0.02em]">
+                    <div className="flex flex-col gap-2">
+                      <h3 className="font-sans text-[22px] leading-[1.15] tracking-[-0.02em]">
                         {f.name}
                       </h3>
-                      <p className="text-[15.5px] leading-[1.55] text-muted">{f.desc}</p>
+                      <p className="text-[14.5px] leading-[1.5] text-muted">{f.desc}</p>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between border-t border-hairline pt-4 text-[13px] text-muted">
+                  <div className="flex items-center justify-between border-t border-hairline pt-3 text-[13px] text-muted">
                     <span>{novaStages[f.stage].who}</span>
                     <span>{novaStages[f.stage].long}</span>
                   </div>
@@ -133,7 +133,7 @@ export function FeatureCarousel() {
         </ul>
       </div>
 
-      <div className="frame relative mt-10 hidden items-end gap-10 md:flex">
+      <div className="frame relative mt-7 hidden items-end gap-10 md:flex">
         <div className="flex flex-1 flex-col gap-3.5">
           <div
             className="grid h-[30px] items-end gap-1.5"
@@ -160,7 +160,7 @@ export function FeatureCarousel() {
             })}
           </div>
           <div
-            className="grid gap-1.5 text-[13px] text-body"
+            className="grid gap-1.5 text-[13px] text-heading"
             style={{ gridTemplateColumns: rulerSpans.map((n) => `${n}fr`).join(" ") }}
             aria-hidden="true"
           >
@@ -172,7 +172,7 @@ export function FeatureCarousel() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span aria-live="polite" className="min-w-24 text-right text-[14px] text-muted">
+          <span aria-live="polite" className="min-w-24 text-right text-[14px] text-heading">
             {two(idx + 1)}–{two(idx + VISIBLE)} of {COUNT}
           </span>
           <IconButton
