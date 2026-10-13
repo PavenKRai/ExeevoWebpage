@@ -46,7 +46,8 @@ const rules = [
   [/marketing-automation-for-life-sciences/, modules["marketing-automation"]],
   [/event-management-life-sciences/, modules["event-management"]],
   [/content-management-life-sciences/, modules["content-management"]],
-  [/(^|\/)(produits|produkte|productos|seihin)(\/|$)|^\/(products|pharma-crm|services|nos-services|servicios|dienstleistungen|sabisu-naiyo)$/, "/platform"],
+  [/(^|\/)(produits|produkte|productos|seihin)(\/|$)|^\/(products|pharma-crm)$/, "/platform"],
+  [/^\/(services|nos-services|servicios|dienstleistungen|sabisu-naiyo)$/, "/services"],
   [/life-sciences-crm-comparison|^\/(trust|low-code-no-code|microsoft)$/, "/why-exeevo"],
   [/etudes-de-cas|case-studies|%e3%82%b1|ケース/, "/resources/case-studies"],
   [/blogue|\/blog$|bloggen|burogu/, "/resources/blog"],
@@ -62,11 +63,11 @@ const rules = [
   [/politique-de-confidentialite|politica-de-privacidad|datenschutzbestimmungen|puraibashi-porishi|privacy-policy/, "/privacy"],
   [/politique-relative-aux-cookies|politica-de-cookies|kukki-porishi|cookie-policy/, "/cookies"],
   [/plan-du-site|mapa-del-sitio|lageplan|saito-mappu|site-map/, "/site-map"],
-  [/contactez-nous|kontakt|contacto|o-toiawase|contact-us|demo-request|pricing/, "/getting-started"],
+  [/contactez-nous|kontakt|contacto|o-toiawase|contact-us|demo-request|pricing/, "/services"],
   [/(^|\/)(evenements|eventos|veranstaltungen|events)$/, "/events"],
-  [/(^|\/)(formation|formacion|ausbildung|toreningu|training|learn)$/, "/resources"],
+  [/(^|\/)(formation|formacion|ausbildung|toreningu|training|learn)$/, "/services"],
   [/(^|\/)(ressources|recursos|ressourcen|risosu)(\/(nos-publications|publicaciones|veroffentlichungen|shuppanbutsu|publications))?$|^\/resources(\/publications)?$/, "/resources"],
-  [/^\/docs(\/|$)/, "/getting-started"],
+  [/^\/docs(\/|$)/, "/services"],
 ];
 
 /** Returns the new path for an old path, or null when the path is not an old-site URL we know. */

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/platform", "/why-exeevo", "/industries", "/solutions-by-role", "/getting-started"];
+const routes = ["/", "/platform", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
 test.use({ viewport: { width: 1440, height: 900 } });
 
 const state = (page: import("@playwright/test").Page) =>
@@ -32,7 +32,7 @@ test("nothing is pinned or tied to scroll position", async ({ page }) => {
 
 test("stopping the scroll anywhere never leaves a half-finished reveal", async ({ page }) => {
   test.setTimeout(90_000);
-  for (const r of ["/", "/why-exeevo", "/getting-started"]) {
+  for (const r of ["/", "/why-exeevo", "/services"]) {
     await page.goto(r);
     await page.waitForTimeout(1500);
     const H = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -85,8 +85,8 @@ test("server HTML shows everything: no hidden classes, content present without J
     expect(await page.locator(".rv-hide").count(), `${r} hidden`).toBe(0);
     await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible();
   }
-  await page.goto("/getting-started");
-  await expect(page.getByText("Talk to our team")).toBeVisible();
+  await page.goto("/services");
+  await expect(page.getByRole("heading", { name: "Talk to our team" })).toBeVisible();
   await ctx.close();
 });
 
@@ -99,10 +99,11 @@ test("reduced motion: everything visible immediately", async ({ browser }) => {
   await ctx.close();
 });
 
-test("/getting-started#demo lands with the form visible", async ({ page }) => {
+test("/services#demo lands with the form visible (and so does the old /getting-started#demo link)", async ({ page }) => {
   await page.goto("/getting-started#demo");
+  await expect(page).toHaveURL(/\/services#demo$/);
   await page.waitForTimeout(1500);
-  await expect(page.getByRole("form", { name: "Request a demo" })).toBeInViewport();
+  await expect(page.getByRole("form", { name: "Talk to our team" })).toBeInViewport();
   await page.locator("#demo-name").fill("Test");
   await expect(page.locator("#demo-name")).toHaveValue("Test");
 });

@@ -65,6 +65,7 @@ test("old WordPress URLs redirect permanently to their new home", async ({ reque
     ["/a-propos", "/about"],
     ["/politique-de-confidentialite", "/privacy"],
     ["/ressourcen/veroffentlichungen/weisse-papiere", "/resources/white-papers"],
+    ["/getting-started", "/services"],
   ];
   for (const [from, to] of cases) {
     const res = await request.get(from, { maxRedirects: 0 });

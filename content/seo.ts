@@ -36,11 +36,11 @@ export const seo = {
     description:
       "Role-specific tools for Field Reps, Medical Science Liaisons, Key Account Managers and Consumer & Animal Health reps, all on the same HCP record.",
   },
-  start: {
-    path: "/getting-started",
-    title: "Two paths to go live: Core and Enterprise",
+  services: {
+    path: "/services",
+    title: "Life sciences CRM professional services",
     description:
-      "Go live in as little as 4 weeks with Core, or scale across brands and countries with Enterprise. Same platform, so it's an expansion, not a migration.",
+      "Advisory, implementation, data migration, integrations, training and managed services for life sciences CRM, from first workshop to go-live and beyond.",
   },
 } as const satisfies Record<string, PageSeo>;
 

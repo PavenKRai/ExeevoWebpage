@@ -52,8 +52,8 @@ test("platform: the dark roles band is a full-screen section", async ({ page }) 
   expect(Math.round(box!.width)).toBe(1440);
 });
 
-test("home, why exeevo and getting started keep their normal-flow layout (no forced one-screen stages)", async ({ page }) => {
-  for (const r of ["/", "/why-exeevo", "/getting-started"]) {
+test("home, why exeevo and services keep their normal-flow layout (no forced one-screen stages)", async ({ page }) => {
+  for (const r of ["/", "/why-exeevo", "/services"]) {
     await page.goto(r);
     const fixed = await page.evaluate(() => document.querySelectorAll(".pin-layout").length);
     expect(fixed, `${r} fit scenes`).toBe(0);

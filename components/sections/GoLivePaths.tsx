@@ -1,16 +1,18 @@
 import type { CSSProperties } from "react";
 import { ChevronRight } from "lucide-react";
 import { Layer } from "@/components/scene/Layer";
-import { gettingStarted } from "@/content/paths";
+import { gettingStarted } from "@/content/services";
 import "./scene-choreo.css";
 
 type Path = (typeof gettingStarted.paths)[number];
 
-function PathCard({ path, side }: { path: Path; side: "left" | "right" }) {
+function PathCard({ path, side, reveal }: { path: Path; side: "left" | "right"; reveal: boolean }) {
   const dir = side === "left" ? -1 : 1;
+  // On the Services page the cards sit below the fold: they reveal once when scrolled into view instead of on load.
+  const timing = (d: number) => (reveal ? { range: [Math.min(d, 0.8), 1] as [number, number] } : { intro: d });
   return (
     <Layer
-      intro={side === "left" ? 0.25 : 0.35}
+      {...timing(side === "left" ? 0.25 : 0.35)}
       from={{ o: 0, x: dir * 60, s: 0.96 }}
       className="glass-light lift flex flex-col justify-between gap-8 rounded-[32px] p-8 lg:h-[330px] lg:p-[38px] pinned:h-auto pinned:gap-6 pinned:p-7 pinned:lg:p-[34px]"
     >
@@ -24,7 +26,7 @@ function PathCard({ path, side }: { path: Path; side: "left" | "right" }) {
           <Layer
             key={c}
             as="li"
-            intro={0.7 + (side === "left" ? 0 : 0.05) + i * 0.06}
+            {...timing(0.7 + (side === "left" ? 0 : 0.05) + i * 0.06)}
             from={{ o: 0, y: 12, s: 0.92 }}
             className="flex h-[34px] items-center rounded-[17px] border border-slate/[0.18] px-3.5 text-[13px] text-slate"
           >
@@ -36,11 +38,11 @@ function PathCard({ path, side }: { path: Path; side: "left" | "right" }) {
   );
 }
 
-export function GoLivePaths({ paths, connector }: { paths: readonly Path[]; connector: string }) {
+export function GoLivePaths({ paths, connector, reveal = false }: { paths: readonly Path[]; connector: string; reveal?: boolean }) {
   const [a, b] = paths;
   return (
     <div className="flex flex-col lg:grid lg:grid-cols-[1fr_80px_1fr] pinned:md:grid pinned:md:grid-cols-[1fr_56px_1fr] pinned:lg:grid-cols-[1fr_80px_1fr]">
-      <PathCard path={a} side="left" />
+      <PathCard path={a} side="left" reveal={reveal} />
       <div className="relative h-20 lg:h-auto pinned:md:h-auto">
         <span className="ln ln-y absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 bg-[image:linear-gradient(180deg,var(--ex-magenta),var(--ex-blue),var(--ex-green))] lg:hidden pinned:md:hidden" aria-hidden="true" />
         <span className="cz-linex absolute inset-x-0 top-1/2 -mt-px hidden h-0.5 bg-[image:linear-gradient(90deg,var(--ex-magenta),var(--ex-blue),var(--ex-green))] lg:block pinned:md:block" aria-hidden="true" />
@@ -51,7 +53,7 @@ export function GoLivePaths({ paths, connector }: { paths: readonly Path[]; conn
         </span>
         <span className="sr-only">{connector}</span>
       </div>
-      <PathCard path={b} side="right" />
+      <PathCard path={b} side="right" reveal={reveal} />
     </div>
   );
 }

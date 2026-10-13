@@ -2,7 +2,7 @@ import { Scene } from "../scene/Scene";
 import { Layer, Parallax } from "../scene/Layer";
 import { Button } from "../ui/Button";
 import { home, site } from "@/content/site";
-import { gettingStarted } from "@/content/paths";
+import { gettingStarted } from "@/content/services";
 import "../../app/styles/home.css";
 import "../../app/styles/home-scenes-2.css";
 

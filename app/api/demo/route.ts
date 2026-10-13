@@ -23,7 +23,7 @@ export async function POST(request: Request) {
     const res = await fetch(endpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(parsed.data),
+      body: JSON.stringify({ source: "services", ...parsed.data }),
     });
     if (!res.ok) return NextResponse.json({ error: "The CRM did not accept the request." }, { status: 502 });
     return NextResponse.json({ ok: true });

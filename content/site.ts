@@ -3,16 +3,15 @@ export type NavLink = { label: string; href: string };
 export const site = {
   name: "Exeevo",
   tagline: "A unified, AI-powered life sciences CRM built natively on Microsoft.",
-  demoHref: "/getting-started#demo",
+  demoHref: "/services#demo",
   videoUrl: "[VIDEO URL]",
   nav: [
     { label: "Platform", href: "/platform" },
     { label: "Industries", href: "/industries" },
     { label: "Solutions by role", href: "/solutions-by-role" },
     { label: "Why Exeevo", href: "/why-exeevo" },
-    { label: "Compliance", href: "/why-exeevo#compliance" },
+    { label: "Services", href: "/services" },
     { label: "Resources", href: "/resources" },
-    { label: "Getting started", href: "/getting-started" },
   ] satisfies NavLink[],
   footer: {
     columns: [
@@ -21,7 +20,7 @@ export const site = {
         links: [
           { label: "Overview", href: "/platform" },
           { label: "Why Exeevo", href: "/why-exeevo" },
-          { label: "Getting Started", href: "/getting-started" },
+          { label: "Professional Services", href: "/services" },
         ],
       },
       {
@@ -74,9 +73,8 @@ export const site = {
   mobile: {
     more: [
       { label: "Why Exeevo", href: "/why-exeevo" },
-      { label: "Compliance", href: "/why-exeevo#compliance" },
+      { label: "Services", href: "/services" },
       { label: "Resources", href: "/resources" },
-      { label: "Getting started", href: "/getting-started" },
     ],
   },
   industriesMenu: [

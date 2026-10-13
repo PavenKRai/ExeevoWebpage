@@ -16,7 +16,7 @@ Instructions for AI coding agents working on the Exeevo marketing website. Read 
 | `/why-exeevo` | Why Exeevo |
 | `/industries` | Industries |
 | `/solutions-by-role` | Solutions by Role |
-| `/getting-started` | Getting Started |
+| `/services` | Professional Services (replaced Getting Started; `/getting-started` redirects here) |
 
 ## Stack
 
@@ -81,7 +81,8 @@ tests/          smoke.spec.ts, a11y.spec.ts
 - **Deep links:**
   - Platform module: `/platform?module=<slug>`
   - Industry: `/industries?industry=pharma|medtech`
-  - Demo: `/getting-started#demo`
+  - Demo / contact form: `/services#demo`
+  - Service: `/services?service=<slug>` (selects it; slugs in `content/services.ts`)
 - Keep components under about 200 lines. Split sections instead of growing files.
 
 ## Design rules (do not break)

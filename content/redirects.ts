@@ -109,22 +109,22 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/ausbildung",
-    "destination": "/resources",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/contact-us",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/contactez-nous",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/contacto",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -149,22 +149,22 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/demo-request",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/dienstleistungen",
-    "destination": "/platform",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/docs",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/docs/uncategorized/schedule-a-meeting",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -509,12 +509,12 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/formacion",
-    "destination": "/resources",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/formation",
-    "destination": "/resources",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -559,7 +559,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/kontakt",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -574,7 +574,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/learn",
-    "destination": "/resources",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -599,12 +599,12 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/nos-services",
-    "destination": "/platform",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/o-toiawase",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -649,7 +649,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/pricing",
-    "destination": "/getting-started",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -1654,7 +1654,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/sabisu-naiyo",
-    "destination": "/platform",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -1668,13 +1668,8 @@ export const pageRedirects: Redirect[] = [
     "permanent": true
   },
   {
-    "source": "/services",
-    "destination": "/platform",
-    "permanent": true
-  },
-  {
     "source": "/servicios",
-    "destination": "/platform",
+    "destination": "/services",
     "permanent": true
   },
   {
@@ -1709,12 +1704,12 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/toreningu",
-    "destination": "/resources",
+    "destination": "/services",
     "permanent": true
   },
   {
     "source": "/training",
-    "destination": "/resources",
+    "destination": "/services",
     "permanent": true
   },
   {

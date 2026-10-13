@@ -20,6 +20,8 @@
   --ex-on-dark: #b6c1c8;
   --ex-on-dark-muted: #a3afb7;
   --ex-link-on-dark: #8ec2ff;
+  /* phase accents as text on dark ink (checked >= 4.5:1 on --ex-ink): magenta #f26bbf 5.7:1, link blue 9.4:1, green 7:1 */
+  --ex-magenta-on-dark: #f26bbf;
   --ex-green-ink: #008a61;
   --ex-white: #ffffff;
   --ex-error: #b3261e;
@@ -80,6 +82,7 @@
   --color-on-dark: var(--ex-on-dark);
   --color-on-dark-muted: var(--ex-on-dark-muted);
   --color-link-on-dark: var(--ex-link-on-dark);
+  --color-magenta-on-dark: var(--ex-magenta-on-dark);
   --color-green-ink: var(--ex-green-ink);
   --color-error: var(--ex-error);
   --color-error-on-dark: var(--ex-error-on-dark);
