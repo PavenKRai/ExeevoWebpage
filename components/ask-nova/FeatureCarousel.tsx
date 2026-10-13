@@ -160,7 +160,7 @@ export function FeatureCarousel() {
             })}
           </div>
           <div
-            className="grid gap-1.5 text-[13px] text-muted"
+            className="grid gap-1.5 text-[13px] text-body"
             style={{ gridTemplateColumns: rulerSpans.map((n) => `${n}fr`).join(" ") }}
             aria-hidden="true"
           >
