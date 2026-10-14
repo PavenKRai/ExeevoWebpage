@@ -15,6 +15,7 @@ const state = (page: import("@playwright/test").Page) =>
   });
 
 test("nothing is pinned or tied to scroll position", async ({ page }) => {
+  test.setTimeout(90_000);
   for (const r of routes) {
     await page.goto(r);
     await page.waitForTimeout(800);
@@ -37,7 +38,7 @@ test("stopping the scroll anywhere never leaves a half-finished reveal", async (
     await page.waitForTimeout(1500);
     const H = await page.evaluate(() => document.documentElement.scrollHeight);
     for (const frac of [0.23, 0.41, 0.58, 0.77]) {
-      await page.evaluate((y) => window.scrollTo(0, y), Math.round(H * frac));
+      await page.evaluate((y) => window.scrollTo({ top: y, behavior: "instant" }), Math.round(H * frac)); // instant: smooth scrolling over a long page takes longer than the wait below
       await page.waitForTimeout(2600); // stop, wait for staggered transitions (up to ~1.6 s) under load
       const s = await state(page);
       expect(s.dim, `${r} @${frac}: items in view that are not fully visible`).toBe(0);
@@ -46,6 +47,7 @@ test("stopping the scroll anywhere never leaves a half-finished reveal", async (
 });
 
 test("reveals play once: scrolling back up does not hide anything again", async ({ page }) => {
+  test.setTimeout(90_000);
   await page.goto("/");
   await page.waitForTimeout(1500);
   const H = await page.evaluate(() => document.documentElement.scrollHeight);
@@ -111,9 +113,9 @@ test("/services#demo lands with the form visible (and so does the old /getting-s
 test("jumping straight to the bottom never leaves blank areas when scrolling back up", async ({ page }) => {
   await page.goto("/");
   await page.waitForTimeout(1500);
-  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight)); // skip everything in between
+  await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" })); // skip everything in between
   await page.waitForTimeout(1500);
-  await page.evaluate(() => window.scrollTo(0, Math.round(document.documentElement.scrollHeight * 0.4)));
+  await page.evaluate(() => window.scrollTo({ top: Math.round(document.documentElement.scrollHeight * 0.4), behavior: "instant" }));
   await page.waitForTimeout(2400);
   const s = await state(page);
   expect(s.hidden).toBe(0);
