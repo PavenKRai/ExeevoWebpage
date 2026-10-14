@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/platform", "/ask-nova", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
+const routes = ["/", "/platform", "/ask-nova", "/about", "/partners", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
 
 const meta = (html: string, re: RegExp) => html.match(re)?.[1] ?? "";
 

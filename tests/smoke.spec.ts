@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/platform", "/ask-nova", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
+const routes = ["/", "/platform", "/ask-nova", "/about", "/partners", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
 
 for (const route of routes) {
   test(`route ${route} returns 200 and renders one h1`, async ({ page }) => {

@@ -1,8 +1,30 @@
 import type { Metadata } from "next";
-import { ContentPage, contentPageMetadata } from "@/components/resources/ContentPage";
+import { AboutHero } from "@/components/about/AboutHero";
+import { ClosingCards } from "@/components/about/ClosingCards";
+import { MicrosoftWhy } from "@/components/about/MicrosoftWhy";
+import { OfficesMap } from "@/components/about/OfficesMap";
+import { StoryTimeline } from "@/components/about/StoryTimeline";
+import { ValsoftValues } from "@/components/about/ValsoftValues";
+import { WhatWeDo } from "@/components/about/WhatWeDo";
+import { JsonLd } from "@/components/resources/JsonLd";
+import { seo } from "@/content/seo";
+import { aboutJsonLd } from "@/lib/companyJsonLd";
+import { pageMetadata } from "@/lib/seo";
+import "@/app/styles/company.css";
 
-export const generateMetadata = (): Promise<Metadata> => contentPageMetadata("about");
+export const metadata: Metadata = pageMetadata(seo.about);
 
-export default function Page() {
-  return <ContentPage page="about" />;
+export default function AboutPage() {
+  return (
+    <>
+      <JsonLd data={aboutJsonLd()} />
+      <AboutHero />
+      <StoryTimeline />
+      <WhatWeDo />
+      <MicrosoftWhy />
+      <ValsoftValues />
+      <OfficesMap />
+      <ClosingCards />
+    </>
+  );
 }

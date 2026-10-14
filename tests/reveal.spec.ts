@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/platform", "/ask-nova", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
+const routes = ["/", "/platform", "/ask-nova", "/about", "/partners", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
 test.use({ viewport: { width: 1440, height: 900 } });
 
 const state = (page: import("@playwright/test").Page) =>

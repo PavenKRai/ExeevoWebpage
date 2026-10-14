@@ -3,11 +3,11 @@ import { sanityConfigured, sanityFetch } from "@/lib/sanity";
 import pagesJson from "./pages.json";
 
 /** Standalone pages (legal, about, partners, careers): from Sanity when configured, else the bundled JSON. */
-export type PageKey = "about" | "partners" | "careers" | "privacy" | "cookies";
+export type PageKey = "careers" | "privacy" | "cookies";
 export type PageSection = { slug: string; title: string; bodyHtml?: string; body?: PortableTextBlock[] };
 export type MigratedPage = { title: string; description: string; updated: string; sections: PageSection[] };
 
-export const pagePaths: Record<PageKey, string> = { about: "/about", partners: "/partners", careers: "/careers", privacy: "/privacy", cookies: "/cookies" };
+export const pagePaths: Record<PageKey, string> = { careers: "/careers", privacy: "/privacy", cookies: "/cookies" };
 
 type Raw = { title: string; description?: string | null; updated: string; sections?: { title: string; body?: PortableTextBlock[]; legacyHtml?: string }[] };
 

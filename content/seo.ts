@@ -42,6 +42,18 @@ export const seo = {
     description:
       "Thirteen AI features for life sciences teams, three included with every licence. Ask-Nova Studio adds agents and MCP inside your CRM access rules.",
   },
+  about: {
+    path: "/about",
+    title: "About Exeevo: life sciences CRM built natively on Microsoft",
+    description:
+      "Exeevo is a life sciences CRM on Microsoft Dynamics 365, founded in 2017 and part of Valsoft, with 15,000+ users and offices in the US, India and China.",
+  },
+  partners: {
+    path: "/partners",
+    title: "Exeevo partners: technology, implementation, data and compliance",
+    description:
+      "Microsoft, system integrators, data vendors and compliance partners that deliver Exeevo CRM programmes for life sciences teams across markets and languages.",
+  },
   services: {
     path: "/services",
     title: "Life sciences CRM professional services",

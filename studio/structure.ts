@@ -11,7 +11,7 @@ import {TagIcon} from '@sanity/icons/Tag'
 import {TrendUpwardIcon} from '@sanity/icons/TrendUpward'
 
 /** Company pages that exist as fixed documents (edit only). */
-export const PAGE_IDS = ['about', 'partners', 'careers', 'privacy', 'cookies'] as const
+export const PAGE_IDS = ['careers', 'privacy', 'cookies'] as const
 
 const newestFirst = [{field: 'date', direction: 'desc' as const}]
 
