@@ -38,7 +38,7 @@ test("?service= deep link selects that service", async ({ page }) => {
   const operate = page.locator("#operate");
   await expect(operate.getByRole("tab", { name: /Managed Services/ })).toHaveAttribute("aria-selected", "true");
   await page.goto("/services?service=ai-readiness-advisory#demo", { waitUntil: "networkidle" });
-  await expect(page.locator("#advise").getByRole("tab", { name: /AI Readiness/ })).toHaveAttribute("aria-selected", "true");
+  await expect(page.locator("#consult").getByRole("tab", { name: /AI Readiness/ })).toHaveAttribute("aria-selected", "true");
   await expect(page.locator("#demo-service")).toHaveValue("AI Readiness & Advisory");
 });
 

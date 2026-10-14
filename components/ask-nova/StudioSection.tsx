@@ -1,53 +1,61 @@
 import { Check } from "lucide-react";
-import { Glow } from "@/components/glass/Glow";
-import { askNova } from "@/content/askNova";
+import { askNova, keyFeatures } from "@/content/askNova";
 import { FitDiagram } from "./FitDiagram";
-import { KeyFeatureDeck } from "./KeyFeatureDeck";
+import { NovaIcon } from "./NovaIcon";
 
-/** Ask-Nova Studio: pitch and "good fit" list on the left, the key-feature deck on the right, then the integration diagram. */
+/** Ask-Nova Studio: pitch, "good fit" and platforms cards, the four key features, then the animated "how it fits together" diagram. */
 export function StudioSection() {
   const s = askNova.studio;
   return (
-    <section id="studio" aria-labelledby="studio-title" className="on-dark relative overflow-hidden bg-ink py-16 text-[#EEF2F4] lg:py-20">
-      <Glow parallax color="gradient" className="left-[520px] top-[120px] size-[520px] blur-[120px] max-lg:hidden" style={{ opacity: 0.3 }} />
-      <div className="frame relative grid items-start gap-12 lg:grid-cols-12 lg:gap-x-6">
-        <div className="srl flex flex-col gap-[18px] lg:col-span-6">
-          <div className="flex items-center gap-2.5">
-            <span className="text-[15px] text-on-dark-muted">{s.label}</span>
-            <span className="nova-ring flex h-7 items-center rounded-full px-3 text-[12.5px] font-semibold text-white">{askNova.tiers.plus}</span>
+    <section id="studio" aria-labelledby="studio-title" className="relative overflow-hidden bg-white py-20 lg:py-[120px]">
+      <div className="aura -left-40 top-10 size-[560px] bg-[#7A3FC0] opacity-10 max-lg:hidden" aria-hidden="true" />
+      <div className="frame relative flex flex-col gap-14">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-x-6">
+          <div className="flex flex-col gap-6 lg:col-span-7">
+            <div className="sr flex flex-wrap gap-2">
+              <span className="glass inline-flex h-8 items-center gap-2 rounded-full px-3 text-[13px] text-heading"><span aria-hidden="true" className="dot dot-ai" />{s.label}</span>
+              <span className="inline-flex h-8 items-center rounded-full border border-hairline px-3 text-[13px] text-muted">{askNova.tiers.plus}</span>
+            </div>
+            <h2 id="studio-title" className="h2 sr">{s.parts.light} <b>{s.parts.bold}</b></h2>
+            <p className="lead sr">{s.body}</p>
           </div>
-          <h2 id="studio-title" className="text-[clamp(28px,2.7vw,38px)] leading-[1.1] tracking-[-0.03em]">{s.title}</h2>
-          <p className="max-w-[580px] text-[16px] font-[350] leading-[1.55] text-on-dark">{s.body}</p>
-          <div className="flex flex-col gap-2.5 pt-0.5">
-            <h3 className="font-sans text-[14px] font-medium tracking-normal text-[#8FA0AA]">{s.fitTitle}</h3>
-            <ul className="stagger flex flex-col gap-2.5">
-              {s.fit.map((t) => (
-                <li key={t} className="flex items-start gap-3.5">
-                  <span aria-hidden="true" className="flex size-[26px] shrink-0 items-center justify-center rounded-[9px] bg-white/10 text-white"><Check size={15} strokeWidth={2} /></span>
-                  <span className="text-[15.5px] leading-[1.5] text-[#DCE3E7]">{t}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="flex flex-col gap-4 lg:col-span-4 lg:col-start-9">
+            <div className="card sr flex flex-col gap-3.5 p-6">
+              <h3 className="label !font-normal">{s.fitTitle}</h3>
+              <ul className="flex flex-col gap-3">
+                {s.fit.map((t) => (
+                  <li key={t} className="flex items-start gap-3 text-[15px] leading-[1.5] text-body">
+                    <span aria-hidden="true" className="flex pt-0.5 text-green-ink"><Check size={16} strokeWidth={1.8} /></span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="card sr flex flex-col gap-3 px-6 py-5">
+              <p className="label">{s.platformsLabel}</p>
+              <ul className="flex flex-wrap gap-1.5">
+                {s.platforms.map((p) => (
+                  <li key={p} className="rounded-full border border-hairline bg-porcelain px-3 py-[7px] text-[13px] text-heading">{p}</li>
+                ))}
+              </ul>
+            </div>
           </div>
-          <div className="flex flex-wrap items-center gap-2.5 pt-2">
-            <span className="pr-1 text-[14px] text-[#8FA0AA]">{s.platformsLabel}</span>
-            {s.platforms.map((p) => (
-              <span key={p} className="flex h-[34px] items-center rounded-full border border-white/[.18] px-3.5 text-[13.5px] text-[#DCE3E7]">{p}</span>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <h3 className="sr label !text-heading">{s.deckLabel}</h3>
+          <ul className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-4">
+            {keyFeatures.map((k) => (
+              <li key={k.t} className="glass srg flex flex-col gap-3.5 rounded-[22px] p-6">
+                <span className="flex size-10 items-center justify-center rounded-xl border border-hairline bg-white text-heading"><NovaIcon d={k.icon} size={20} /></span>
+                <h4 className="text-[17px] font-[450] leading-[1.3] text-heading">{k.t}</h4>
+                <p className="body-text !text-[14px]">{k.d}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-        <div className="lg:col-span-5 lg:col-start-8">
-          <KeyFeatureDeck />
-        </div>
-      </div>
-      <div className="frame relative mt-14 lg:mt-16">
-        <div className="border-t border-white/10 pt-11">
-          <div className="sr flex flex-col justify-between gap-4 pb-7 lg:flex-row lg:items-end lg:gap-10">
-            <h3 className="text-[28px] leading-[1.2] tracking-[-0.02em]">{askNova.fits.title}</h3>
-            <p className="max-w-[520px] text-[15px] leading-[1.55] text-on-dark-muted">{askNova.fits.body}</p>
-          </div>
-          <FitDiagram />
-        </div>
+
+        <FitDiagram />
       </div>
     </section>
   );

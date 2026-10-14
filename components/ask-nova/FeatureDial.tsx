@@ -1,28 +1,46 @@
 "use client";
-import { useRef, type KeyboardEvent } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import type { CSSProperties, KeyboardEvent } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { askNova, features, novaStages } from "@/content/askNova";
 import { cn } from "@/components/ui/cn";
 import { COUNT, useNova } from "./NovaProvider";
 import { TierBadge } from "./TierBadge";
 
-const BOX = 580;
-const CENTER = 290;
-const NODE_R = 222;
-const TICK_R = 258;
+const C = 240; // dial centre (design box is 480x480)
+const NODE_R = 212;
 const TICKS = 65;
-const pct = (n: number) => `${((n / BOX) * 100).toFixed(3)}%`;
 
-/** The hero dial: 13 numbered nodes around the sphere, 65 ticks lit for the selected feature's stage. From 768px; below it shows a row of buttons. */
-export function FeatureDial() {
-  const { sel, setSel, setIdx } = useNova();
+/** Detail card for the selected feature (centre of the dial on desktop, a plain card on small screens). */
+function DetailCard({ className, style }: { className?: string; style?: CSSProperties }) {
+  const { sel, setSel, openFeature } = useNova();
   const f = features[sel];
-  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  return (
+    <div className={cn("glass flex flex-col gap-2.5 rounded-[28px] p-[22px]", className)} style={style} aria-live="polite">
+      <span className="num text-[12px] text-muted">{f.num} of 13 · {novaStages[f.stage].short}</span>
+      <span className="text-[22px] font-[450] leading-[1.15] tracking-[-0.02em] text-heading">{f.name}</span>
+      <div className="flex"><TierBadge tier={f.tier} /></div>
+      <p className="overflow-hidden text-[13px] leading-[1.5] text-muted">{f.desc}</p>
+      <div className="mt-auto flex items-center justify-between gap-2">
+        <button type="button" onClick={() => openFeature(sel)} className="tlink !min-h-11 text-[13px]">{askNova.dial.read}</button>
+        <span className="flex gap-1.5">
+          <button type="button" aria-label={askNova.dial.prev} onClick={() => setSel((sel - 1 + COUNT) % COUNT)} className="btn btn-glass !size-11 !p-0"><ChevronLeft size={16} strokeWidth={1.6} aria-hidden="true" /></button>
+          <button type="button" aria-label={askNova.dial.next} onClick={() => setSel((sel + 1) % COUNT)} className="btn btn-glass !size-11 !p-0"><ChevronRight size={16} strokeWidth={1.6} aria-hidden="true" /></button>
+        </span>
+      </div>
+    </div>
+  );
+}
 
+/**
+ * The hero dial: 13 numbered nodes on a ring around a glass card that describes the selected feature. From 1024px; below
+ * that the card sits above a scrolling row of the same 13 buttons.
+ */
+export function FeatureDial() {
+  const { sel, setSel } = useNova();
   const move = (to: number) => {
     const n = (to + COUNT) % COUNT;
     setSel(n);
-    refs.current[n]?.focus();
+    document.getElementById(`dial-node-${n}`)?.focus();
   };
   const onKey = (e: KeyboardEvent) => {
     const to: Record<string, number> = { ArrowRight: sel + 1, ArrowDown: sel + 1, ArrowLeft: sel - 1, ArrowUp: sel - 1, Home: 0, End: COUNT - 1 };
@@ -31,93 +49,57 @@ export function FeatureDial() {
     move(to[e.key]);
   };
 
-  const card = (
-    <div key={sel} className="nova-swap flex flex-col items-center gap-2.5">
-      <span className="text-[13px] tracking-[.02em] text-on-dark-muted">{f.num} of 13 · {novaStages[f.stage].long}</span>
-      <span className="font-display text-[23px] font-semibold leading-[1.15] tracking-[-0.02em] text-white">{f.name}</span>
-      <TierBadge tier={f.tier} onDark size="sm" />
-    </div>
-  );
-
   return (
-    <div className="flex min-w-0 flex-col items-center gap-5">
-      {/* Mobile: the selected feature on the sphere, with a scrolling row of the 13 numbers */}
-      <div className="relative mx-auto flex aspect-square w-full max-w-[340px] items-center justify-center md:hidden" aria-hidden={false}>
-        <span aria-hidden="true" className="orb absolute inset-[8%] opacity-85" />
-        <div className="glass-dark relative flex size-[84%] flex-col items-center justify-center rounded-full bg-ink/70 px-8 text-center">{card}</div>
-      </div>
-      <div role="group" aria-label="Features" onKeyDown={onKey} className="-mx-5 flex w-[calc(100%+40px)] gap-2 overflow-x-auto px-5 pb-1 md:hidden">
-        {features.map((x, i) => (
-          <button
-            key={x.slug}
-            type="button"
-            aria-label={`Feature ${x.num}, ${x.name}`}
-            aria-pressed={i === sel}
-            onClick={() => setSel(i)}
-            className={cn("flex size-11 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold text-white", i === sel ? "nova-ring" : "glass-dark")}
-          >
-            {x.num}
-          </button>
-        ))}
+    <div id="dial" className="fi min-w-0 scroll-mt-[120px]">
+      {/* Small screens */}
+      <div className="flex flex-col gap-4 lg:hidden">
+        <DetailCard />
+        <div role="group" aria-label="Features" onKeyDown={onKey} className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1">
+          {features.map((x, i) => (
+            <button key={x.slug} type="button" aria-label={`Feature ${x.num}, ${x.name}`} aria-pressed={i === sel} onClick={() => setSel(i)} className={cn("num size-11 shrink-0 rounded-full border text-[12px] transition-all", i === sel ? "border-heading bg-heading text-white" : "border-heading/10 bg-white/80 text-body")}>
+              {x.num}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Desktop and tablet: the dial */}
-      <div className="relative hidden aspect-square w-full max-w-[580px] md:block" role="group" aria-label="Features" onKeyDown={onKey}>
-        {Array.from({ length: TICKS }, (_, k) => {
-          const deg = -90 + (k * 360) / TICKS;
-          const a = (deg * Math.PI) / 180;
-          const lit = features[Math.floor(k / 5)].stage === f.stage;
-          return (
-            <span
-              key={k}
-              aria-hidden="true"
-              className={cn("nova-tick nova-tickin absolute h-2 w-px", lit ? (k % 5 === 0 ? "bg-white" : "bg-white/70") : k % 5 === 0 ? "bg-white/35" : "bg-white/[.14]")}
-              style={{ left: pct(CENTER + TICK_R * Math.cos(a) - 0.5), top: pct(CENTER + TICK_R * Math.sin(a) - 4), rotate: `${(deg + 90).toFixed(2)}deg`, "--n": k } as React.CSSProperties}
-            />
-          );
-        })}
-        <span aria-hidden="true" className="absolute rounded-full border border-white/[.14]" style={{ left: pct(68), top: pct(68), width: pct(444), height: pct(444) }} />
-        <span aria-hidden="true" className="orb absolute opacity-85" style={{ left: pct(170), top: pct(170), width: pct(240), height: pct(240) }} />
-        <div
-          className="glass-dark absolute flex flex-col items-center justify-center gap-2.5 rounded-full bg-ink/70 px-[6%] text-center"
-          style={{ left: pct(150), top: pct(150), width: pct(280), height: pct(280) }}
-          aria-live="polite"
-        >
-          {card}
-        </div>
+      {/* Desktop dial */}
+      <div className="relative mx-auto hidden size-[480px] max-xl:scale-[.88] lg:block" role="group" aria-label="Features" onKeyDown={onKey}>
+        <svg width="480" height="480" viewBox="0 0 480 480" aria-hidden="true" className="absolute inset-0">
+          {Array.from({ length: TICKS }, (_, k) => {
+            const major = k % 5 === 0;
+            return <line key={k} x1="240" y1="6" x2="240" y2={major ? 20 : 14} stroke={major ? "rgba(29,38,45,0.35)" : "rgba(29,38,45,0.16)"} strokeWidth="1" transform={`rotate(${((k * 360) / TICKS).toFixed(2)} 240 240)`} />;
+          })}
+          <circle cx="240" cy="240" r="210" fill="none" stroke="rgba(29,38,45,.12)" strokeDasharray="2 6" />
+          <circle cx="240" cy="240" r="150" fill="none" stroke="url(#nova-ring)" strokeWidth="1" />
+          <defs>
+            <linearGradient id="nova-ring" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#DF1995" />
+              <stop offset=".55" stopColor="#0762C8" />
+              <stop offset="1" stopColor="#00C389" />
+            </linearGradient>
+          </defs>
+        </svg>
         {features.map((x, i) => {
           const a = ((-90 + (i * 360) / COUNT) * Math.PI) / 180;
           const on = i === sel;
           return (
             <button
               key={x.slug}
-              ref={(el) => {
-                refs.current[i] = el;
-              }}
+              id={`dial-node-${i}`}
               type="button"
               aria-label={`Feature ${x.num}, ${x.name}`}
               aria-pressed={on}
               tabIndex={on ? 0 : -1}
               onClick={() => setSel(i)}
-              className={cn("nova-node nova-pop absolute flex size-11 items-center justify-center rounded-full text-[13px] font-semibold text-white", on ? "nova-ring scale-[1.18]" : "glass-dark hover:bg-white/10")}
-              style={{ left: pct(CENTER + NODE_R * Math.cos(a) - 22), top: pct(CENTER + NODE_R * Math.sin(a) - 22), "--n": i } as React.CSSProperties}
+              className={cn("num absolute size-11 rounded-full border text-[12px] transition-all duration-300", on ? "border-heading bg-heading text-white shadow-[0_0_0_6px_rgba(7,98,200,.12),0_12px_24px_-10px_rgba(29,38,45,.5)]" : "border-heading/10 bg-white/80 text-body shadow-[0_6px_14px_-10px_rgba(29,38,45,.4)] hover:bg-white")}
+              style={{ left: C + NODE_R * Math.cos(a) - 22, top: C + NODE_R * Math.sin(a) - 22 }}
             >
               {x.num}
             </button>
           );
         })}
-      </div>
-
-      <div className="flex items-center justify-center gap-4">
-        <button type="button" aria-label={askNova.dial.prev} onClick={() => setSel((sel - 1 + COUNT) % COUNT)} className="glass-dark nav-link nav-link-dark flex size-11 items-center justify-center rounded-[15px] text-white">
-          <ArrowLeft aria-hidden="true" size={18} strokeWidth={1.8} />
-        </button>
-        <a href="#features" onClick={() => setIdx(sel)} className="inline-flex min-h-11 items-center border-b border-link-on-dark/60 pb-0.5 text-[14px] font-medium text-[#DCE3E7]">
-          {askNova.dial.read}
-        </a>
-        <button type="button" aria-label={askNova.dial.next} onClick={() => setSel((sel + 1) % COUNT)} className="glass-dark nav-link nav-link-dark flex size-11 items-center justify-center rounded-[15px] text-white">
-          <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
-        </button>
+        <DetailCard className="absolute !backdrop-blur-[54px]" style={{ left: 104, top: 116, width: 272, height: 248 }} />
       </div>
     </div>
   );

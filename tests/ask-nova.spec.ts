@@ -23,38 +23,25 @@ test("dial: click and arrow keys change the selected feature", async ({ page }) 
   await expect(node("05", "Companion App")).toHaveAttribute("aria-pressed", "true");
 });
 
-test("carousel: previous/next, stage tabs and the ruler move the visible features", async ({ page }) => {
+test("feature list: stage filter narrows the list and 'All 13 features' restores it", async ({ page }) => {
   await page.goto("/ask-nova", { waitUntil: "networkidle" });
-  const range = page.getByText(/of 13$/).first();
-  await expect(range).toHaveText("01–03 of 13");
-  await page.getByRole("button", { name: "Next features" }).click();
-  await expect(range).toHaveText("02–04 of 13");
-  await page.getByRole("button", { name: "Anywhere" }).click();
-  await expect(range).toHaveText("07–09 of 13");
-  await expect(page.getByRole("button", { name: "Anywhere" })).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: "Show feature 12, AI Configurator" }).click();
-  await expect(range).toHaveText("11–13 of 13");
-  await expect(page.getByRole("button", { name: "Next features" })).toBeDisabled();
+  const rows = page.locator("#features :is([id^='f0'], [id^='f1'])");
+  await expect(rows).toHaveCount(13);
+  const stage = page.getByRole("group", { name: "Filter by stage" }).getByRole("button", { name: /Anywhere/ });
+  await stage.click();
+  await expect(stage).toHaveAttribute("aria-pressed", "true");
+  await expect(rows).toHaveCount(2);
+  await page.getByRole("button", { name: "All 13 features" }).click();
+  await expect(rows).toHaveCount(13);
 });
 
-test("'Read about this feature' and the Plus tiles open that feature in the carousel", async ({ page }) => {
+test("'Read about this feature' and the Plus tiles jump to that feature in the list", async ({ page }) => {
   await page.goto("/ask-nova", { waitUntil: "networkidle" });
   await page.getByRole("button", { name: "Feature 05, Companion App" }).first().click();
-  await page.getByRole("link", { name: askNova.dial.read }).click();
-  await expect(page.getByText(/of 13$/).first()).toHaveText("05–07 of 13");
-  await page.locator("#studio").scrollIntoViewIfNeeded();
-  await page.getByRole("button", { name: /^09 Ask-Nova Studio/ }).click();
-  await expect(page.getByText(/of 13$/).first()).toHaveText("09–11 of 13");
-});
-
-test("key-feature deck: previous/next cycle the four cards", async ({ page }) => {
-  await page.goto("/ask-nova", { waitUntil: "networkidle" });
-  await expect(page.getByText("Custom skills, tools and agents").first()).toBeVisible();
-  await page.getByRole("button", { name: "Next key feature" }).click();
-  await expect(page.getByText("Bring in third-party agents").first()).toBeVisible();
-  await page.getByRole("button", { name: "Previous key feature" }).click();
-  await page.getByRole("button", { name: "Previous key feature" }).click();
-  await expect(page.getByText("Compliance-scoped by design").first()).toBeVisible();
+  await page.getByRole("button", { name: askNova.dial.read }).filter({ visible: true }).click();
+  await expect(page.locator("#f05")).toBeInViewport();
+  await page.getByRole("button", { name: /^09\s*Ask-Nova Studio/ }).click();
+  await expect(page.locator("#f09")).toBeInViewport();
 });
 
 test("demo buttons lead to the Talk to our team form; JSON-LD lists 13 features; the nav has Ask-Nova after Platform", async ({ page, request }) => {
@@ -62,7 +49,7 @@ test("demo buttons lead to the Talk to our team form; JSON-LD lists 13 features;
   for (const b of await page.getByRole("link", { name: "Get a demo" }).all()) await expect(b).toHaveAttribute("href", "/services#demo");
   const nav = page.getByRole("navigation", { name: "Primary" }).getByRole("link");
   const names = await nav.allTextContents();
-  expect(names.map((n) => n.trim()).slice(0, 3)).toEqual(["Platform", "Ask-Nova", "Industries"]);
+  expect(names.map((n) => n.trim()).slice(0, 3)).toEqual(["Platform", "Ask-Nova", "Services"]);
   const html = await (await request.get("/ask-nova")).text();
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
   const app = blocks.flatMap((b) => b["@graph"] ?? []).find((n: { "@type": string }) => n["@type"] === "SoftwareApplication");
@@ -74,8 +61,8 @@ test("scroll animations: below-the-fold blocks start hidden, reveal once, and ar
   await page.goto("/ask-nova", { waitUntil: "networkidle" });
   await page.waitForTimeout(800);
   const hidden = await page.locator(".rv-hide").count();
-  expect(hidden, "reveal targets waiting below the fold").toBeGreaterThan(20);
-  const row = page.locator("#licensing-title").locator("xpath=ancestor::section").locator(".stagger > *").first();
+  expect(hidden, "reveal targets waiting below the fold").toBeGreaterThan(10);
+  const row = page.locator("#licensing-title").locator("xpath=..");
   await expect(row).toHaveClass(/rv-hide/);
   await row.scrollIntoViewIfNeeded();
   await page.waitForTimeout(1800);

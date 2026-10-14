@@ -32,15 +32,14 @@ test("partners: every partner is listed and the filter narrows the directory", a
   await expect(page.getByRole("heading", { name: "System Integrators" })).toBeVisible();
 });
 
-test("partners: Read more opens the full profile; previous/next and Escape work", async ({ page }) => {
+test("partners: the plus button expands a partner in place; all text stays in the HTML", async ({ request, page }) => {
+  const html = await (await request.get("/partners")).text();
+  expect(html).toContain("Together, Exeevo and NNIT");
   await page.goto("/partners", { waitUntil: "networkidle" });
-  await page.getByRole("button", { name: /Read more.*NNIT/ }).click();
-  const dialog = page.getByRole("dialog");
-  await expect(dialog).toBeVisible();
-  await expect(dialog.getByRole("heading", { name: "NNIT" })).toBeVisible();
-  await expect(dialog).toContainText("Together, Exeevo and NNIT");
-  await dialog.getByRole("button", { name: "Next partner" }).click();
-  await expect(dialog.getByRole("heading", { name: "msg industry advisors" })).toBeVisible();
-  await page.keyboard.press("Escape");
-  await expect(dialog).toBeHidden();
+  const toggle = page.getByRole("button", { name: /Read more about NNIT/ });
+  await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByText("Together, Exeevo and NNIT")).toBeHidden();
+  await toggle.click();
+  await expect(page.getByRole("button", { name: /Show less about NNIT/ })).toHaveAttribute("aria-expanded", "true");
+  await expect(page.getByText("Together, Exeevo and NNIT")).toBeVisible();
 });

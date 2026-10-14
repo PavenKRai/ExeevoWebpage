@@ -1,129 +1,79 @@
-/* Home page: design-scale stages and the hero specimen cluster. Self-contained. */
-.hm {
-  --hs: 0.52;
-  --bs: 1;
-  --hm-fg: #eef2f4;
-  --hm-fg-2: #dce3e7;
-  --hm-fg-3: #c4ced4;
-  --hm-dash: #9aa7b0;
-  --hm-line: #c3cdd3;
-}
-@media (min-width: 400px) { .hm { --hs: 0.58; } }
-@media (min-width: 640px) { .hm { --hs: 0.9; } }
-@media (min-width: 768px) { .hm { --hs: 1; --bs: 0.9; } }
-@media (min-width: 830px) { .hm { --bs: 1; } }
-@media (min-width: 1024px) { .hm { --hs: 0.62; } }
-@media (min-width: 1180px) { .hm { --hs: 0.72; } }
-@media (min-width: 1280px) { .hm { --hs: 0.8; --bs: 0.85; } }
-@media (min-width: 1360px) { .hm { --hs: 0.9; --bs: 0.95; } }
-@media (min-width: 1440px) { .hm { --hs: 1; --bs: 1; } }
+/* Home page (new design): layout wrapper, the field-view demo loop, outcome visuals and the tenant diagram. */
+.hm-wrap { width: 100%; max-width: 1280px; margin-inline: auto; padding-inline: 40px; position: relative; }
+@media (max-width: 700px) { .hm-wrap { padding-inline: 20px; } }
+.hm-mslogo { display: inline-block; width: 66px; height: 14px; background: var(--ex-text); -webkit-mask: url(/home/microsoft-wordmark.webp) center / contain no-repeat; mask: url(/home/microsoft-wordmark.webp) center / contain no-repeat; }
 
-/* A fixed-size design canvas scaled by --s inside a box that reserves the scaled size. */
-.hm-stage {
-  position: relative;
-  width: calc(var(--w) * 1px * var(--s));
-  height: calc(var(--h) * 1px * var(--s));
-}
-.hm-canvas {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: calc(var(--w) * 1px);
-  height: calc(var(--h) * 1px);
-  transform: scale(var(--s));
-  transform-origin: 0 0;
-}
-.hm-hero-stage { --s: var(--hs); --w: 600; --h: 600; }
-.hm-tenant-stage { --s: 1; --w: 600; --h: 460; }
-.hm-board-stage { --s: var(--bs); --w: 760; --h: 720; }
-/* Below 768px the board is a flat grid rather than a scaled 3D canvas. */
-@media (max-width: 767px) {
-  .hm-flat-sm { width: auto; height: auto; }
-  .hm-flat-sm > .hm-canvas { position: static; width: auto; height: auto; transform: none; }
-}
-
-.hm-hero-bg {
-  background:
-    repeating-radial-gradient(circle at calc(100% - 350px) 430px, rgba(255, 255, 255, 0.05) 0 1px, rgba(255, 255, 255, 0) 1.5px 72px),
-    var(--ex-ink);
-}
-@media (max-width: 1023px) {
-  .hm-hero-bg {
-    background:
-      repeating-radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.05) 0 1px, rgba(255, 255, 255, 0) 1.5px 72px),
-      var(--ex-ink);
-  }
-}
-
-/* Orb: the brand gradient sphere. --from rotates the conic start. */
-.hm-orb {
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 24%),
-    conic-gradient(from var(--from, 200deg), var(--ex-magenta), var(--ex-blue), var(--ex-green), var(--ex-blue), var(--ex-magenta));
-}
-.hm-orb-glow {
-  border-radius: 50%;
-  background: conic-gradient(from 200deg, var(--ex-magenta), var(--ex-blue), var(--ex-green), var(--ex-blue), var(--ex-magenta));
-}
-.hm-blob { position: absolute; border-radius: 50%; }
-.hm-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-}
-.hm-sat {
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  width: 10px;
-  height: 10px;
-  margin-left: -5px;
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: 0 0 14px currentColor;
-}
-.hm-dot {
-  display: inline-block;
-  flex-shrink: 0;
-  border-radius: 50%;
-  width: var(--d, 10px);
-  height: var(--d, 10px);
-  background: var(--ex-blue);
-}
-.hm-dot[data-c="medical"] { background: var(--ex-magenta); }
-.hm-dot[data-c="platform"] { background: var(--ex-green); }
-.hm-dot[data-c="ai"] { background: linear-gradient(135deg, var(--ex-magenta), var(--ex-blue), var(--ex-green)); }
-
-/* Ambient loops: only the specimen sphere and its rings */
-@keyframes hm-spin { to { transform: rotate(360deg); } }
-@keyframes hm-oa { from { transform: rotateX(72deg) rotateY(8deg) rotateZ(0); } to { transform: rotateX(72deg) rotateY(8deg) rotateZ(360deg); } }
-@keyframes hm-ob { from { transform: rotateX(64deg) rotateY(-38deg) rotateZ(0); } to { transform: rotateX(64deg) rotateY(-38deg) rotateZ(-360deg); } }
-@keyframes hm-oc { from { transform: rotateX(80deg) rotateY(52deg) rotateZ(0); } to { transform: rotateX(80deg) rotateY(52deg) rotateZ(360deg); } }
-@keyframes hm-tilt { from { opacity: 0; rotate: y -28deg; translate: 0 0 -160px; } to { opacity: 1; rotate: y 0deg; translate: 0 0 0; } }
-@keyframes hm-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
-.hm-spin { animation: hm-spin 40s linear infinite; }
-.hm-oa { animation: hm-oa 22s linear infinite; }
-.hm-ob { animation: hm-ob 30s linear infinite; }
-.hm-oc { animation: hm-oc 26s linear infinite; }
-.hm-t1 { animation: hm-tilt 1.2s 0.3s var(--ex-ease-out) both, hm-float 7s 1.5s ease-in-out infinite; }
-.hm-t2 { animation: hm-tilt 1.2s 0.5s var(--ex-ease-out) both, hm-float 8s 1.7s ease-in-out infinite; }
-.hm-t3 { animation: hm-tilt 1.2s 0.7s var(--ex-ease-out) both, hm-float 9s 1.9s ease-in-out infinite; }
-[data-paused="true"] .hm-spin, [data-paused="true"] .hm-oa, [data-paused="true"] .hm-ob, [data-paused="true"] .hm-oc { animation-play-state: paused; }
-
-.hm-tile { transition: transform 0.5s var(--ex-ease-soft); }
-.hm-tile:hover { transform: translateZ(34px); }
-
+/* Field-view demo: one 15s loop, pure CSS. Base styles are the end state shown under reduced motion. */
+.d-cur { position: absolute; left: 86%; top: 400px; width: 22px; height: 22px; z-index: 5; pointer-events: none; opacity: 0; animation: dCur 15s cubic-bezier(.45,.05,.25,1) infinite; }
+.d-rip { opacity: 0; animation: dRip 15s linear infinite; }
+.d-row1 { animation: dRow 15s linear infinite; }
+.d-skel { opacity: 0; animation: dSkel 15s linear infinite; }
+.d-detail { animation: dDet 15s cubic-bezier(.16,1,.3,1) infinite; }
+.d-alert { animation: dAlert 15s cubic-bezier(.16,1,.3,1) infinite; }
+.d-btn { opacity: .68; animation: dBtn 15s linear infinite; }
+.d-chip { animation: dChip 15s cubic-bezier(.16,1,.3,1) infinite; }
+.d-ph { opacity: 1; animation: dPh 15s linear infinite; }
+.d-type { opacity: 0; animation: dTypeBox 15s linear infinite; }
+.d-ch { font-size: 13px; animation: dCh 15s linear infinite backwards; }
+.d-send { animation: dSend 15s linear infinite; }
+.d-caret { opacity: 0; animation: dCaret 15s linear infinite, dBlink 1s step-end infinite; }
+.d-resp { animation: dResp 15s cubic-bezier(.16,1,.3,1) infinite; }
+.d-toast { animation: dToast 15s cubic-bezier(.16,1,.3,1) infinite; }
+.d-live { animation: dLive 1.6s ease-in-out infinite; }
+@keyframes dCur{0%,5%{left:86%;top:400px;opacity:0;scale:1}8%{opacity:1}18%{left:21%;top:104px;scale:1}19.5%{scale:.82}21%{scale:1}24%{left:21%;top:104px}36%{left:calc(42% + 62px);top:262px}38%{scale:1}39%{scale:.82}40.5%{scale:1}44%{left:calc(42% + 62px);top:262px}52%{left:30%;top:452px;scale:1}53.5%{scale:.82}55%{scale:1}66%{left:30%;top:452px;scale:1}69%{left:calc(100% - 39px);top:442px;scale:1}69.7%{scale:.82}70.5%{scale:1}74%{left:calc(100% - 39px);top:442px}80%{left:82%;top:330px;opacity:1}93%{left:82%;top:330px;opacity:1}97%,100%{left:86%;top:400px;opacity:0}}
+@keyframes dRip{0%,19%{opacity:0;scale:.2}19.5%{opacity:.8;scale:.4}23%{opacity:0;scale:1.9}38.9%{opacity:0;scale:.2}39.4%{opacity:.8;scale:.4}43%{opacity:0;scale:1.9}53%{opacity:0;scale:.2}53.5%{opacity:.8;scale:.4}57%{opacity:0;scale:1.9}69.5%{opacity:0;scale:.2}69.8%{opacity:.8;scale:.4}73%,100%{opacity:0;scale:1.9}}
+@keyframes dRow{0%,19%{background:transparent}21%,92%{background:#F1F6FD}96%,100%{background:transparent}}
+@keyframes dSkel{0%,19%{opacity:1}22%,93%{opacity:0}97%,100%{opacity:1}}
+@keyframes dDet{0%,20%{opacity:0;translate:0 10px}25%,92%{opacity:1;translate:0 0}96%,100%{opacity:0;translate:0 0}}
+@keyframes dAlert{0%,25%{opacity:0;scale:.96}29%,92%{opacity:1;scale:1}96%,100%{opacity:0}}
+@keyframes dBtn{0%,29%{opacity:0;background:#1D262D}32%,38.8%{opacity:1;background:#1D262D}39%,41%{opacity:1;background:#0762C8}43%,92%{opacity:.68;background:#1D262D}96%,100%{opacity:0}}
+@keyframes dChip{0%,41%{opacity:0;translate:-6px 0}45%,92%{opacity:1;translate:0 0}96%,100%{opacity:0}}
+@keyframes dPh{0%,53%{opacity:1}55%,70%{opacity:0}72%,100%{opacity:1}}
+@keyframes dTypeBox{0%,54.9%{opacity:0}55%,70%{opacity:1}70.3%,100%{opacity:0}}
+@keyframes dSend{0%,69%{scale:1;background:#1D262D}70%{scale:.82;background:#0762C8}72%,100%{scale:1;background:#1D262D}}
+@keyframes dCh{0%,55%{font-size:0}55.2%,88%{font-size:13px}88.3%,100%{font-size:0}}
+@keyframes dCaret{0%,53%{opacity:0}54%,70%{opacity:1}70.3%,100%{opacity:0}}
+@keyframes dBlink{50%{background:transparent}}
+@keyframes dResp{0%,70.4%{opacity:0;translate:0 14px;filter:blur(6px)}72.4%,92%{opacity:1;translate:0 0;filter:none}96%,100%{opacity:0}}
+@keyframes dToast{0%,80%{opacity:0;translate:0 -12px}84%,92%{opacity:1;translate:0 0}96%,100%{opacity:0}}
+@keyframes dLive{50%{opacity:.25}}
+/* Off-screen: pause every loop (OffscreenPause sets data-paused on [data-orb]). */
+[data-orb][data-paused="true"] *, [data-orb][data-paused="true"] { animation-play-state: paused !important; }
 @media (prefers-reduced-motion: reduce) {
-  .hm *, .hm *::before, .hm *::after { animation: none !important; transition: none !important; }
-  .hm-t1, .hm-t2, .hm-t3 { opacity: 1 !important; }
+  .d-cur, .d-rip, .d-type, .d-caret, .d-toast { display: none; }
+  .d-ph { opacity: 1 !important; }
+  .d-btn { opacity: .68 !important; }
 }
 
-/* Hero cluster hangs slightly past the content frame on large screens (design: right edge at x=1390). */
-@media (min-width: 1024px) {
-  .hm-hero-cluster { right: -16px; }
-}
-@media (min-width: 1440px) {
-  .hm-hero-cluster { right: -30px; }
-}
+/* Outcome visuals */
+.oc-seg { background: #E6EBEE; animation: ocSeg 6s ease-in-out infinite; }
+.oc-seg:nth-child(7) { animation-name: ocGap; }
+.oc-flag { animation: ocFlag 6s cubic-bezier(.16,1,.3,1) infinite; }
+.oc-bar { width: 100%; animation: ocBar 4s cubic-bezier(.45,.05,.25,1) infinite; }
+@keyframes ocSeg{0%,8%{background:#E6EBEE}14%,88%{background:#0762C8}96%,100%{background:#E6EBEE}}
+@keyframes ocGap{0%,60%{background:#E6EBEE;box-shadow:none}66%,88%{background:#FBE8F3;box-shadow:inset 0 0 0 1.5px #DF1995}96%,100%{background:#E6EBEE;box-shadow:none}}
+@keyframes ocFlag{0%,62%{opacity:0;translate:0 6px}68%,90%{opacity:1;translate:0 0}96%,100%{opacity:0}}
+@keyframes ocBar{0%{width:0}70%,90%{width:100%}100%{width:100%;opacity:0}}
+@media (prefers-reduced-motion: reduce) { .oc-seg { background: #0762C8; } .oc-seg:nth-child(7) { background: #FBE8F3; box-shadow: inset 0 0 0 1.5px #DF1995; } }
+.oc-dash { stroke-dasharray: 3 4; animation: ocDash 1.2s linear infinite; }
+@keyframes ocDash { from { stroke-dashoffset: 14; } to { stroke-dashoffset: 0; } }
+
+/* Tenant diagram: packets flow inside the boundary; the shared-AI packet is blocked at the edge */
+.t-box { animation: tBox 8s linear infinite; }
+.t-pk { position: absolute; right: 12px; width: 8px; height: 8px; margin-right: -4px; border-radius: 50%; background: var(--ex-blue); box-shadow: 0 0 0 4px rgba(7,98,200,.14); animation: tFlow 4.8s cubic-bezier(.45,.05,.55,.95) infinite; opacity: 0; }
+.t-up { background: var(--ex-green); box-shadow: 0 0 0 4px rgba(0,195,137,.16); animation-name: tFlowUp; }
+.t-out { position: absolute; right: 12px; width: 9px; height: 9px; margin-right: -4.5px; border-radius: 50%; background: var(--ex-magenta); box-shadow: 0 0 0 4px rgba(223,25,149,.16); animation: tOut 8s cubic-bezier(.45,.05,.55,.95) infinite; opacity: 0; top: calc(100% - 38px); }
+.t-tag { animation: tTag 8s cubic-bezier(.16,1,.3,1) infinite; }
+.t-x { animation: tX 8s linear infinite; }
+@keyframes tFlow{0%{top:30px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% - 38px);opacity:0}}
+@keyframes tFlowUp{0%{top:calc(100% - 38px);opacity:0}10%{opacity:1}90%{opacity:1}100%{top:30px;opacity:0}}
+@keyframes tOut{0%,40%{top:calc(100% - 38px);opacity:0;scale:1}46%{opacity:1}62%{top:calc(100% + 52px);scale:1;opacity:1}65%{scale:1.6 .6}68%{top:calc(100% + 40px);scale:1;opacity:1}76%{top:calc(100% - 38px);opacity:0}100%{opacity:0}}
+@keyframes tBox{0%,61%{border-color:#9AA7AF;box-shadow:none}64%{border-color:#DF1995;box-shadow:0 0 0 6px rgba(223,25,149,.1)}80%,100%{border-color:#9AA7AF;box-shadow:none}}
+@keyframes tTag{0%,62%{opacity:0;translate:0 6px}66%,88%{opacity:1;translate:0 0}94%,100%{opacity:0}}
+@keyframes tX{0%,62%{scale:1}65%{scale:1.15}68%{scale:.95}71%,100%{scale:1}}
+@media (prefers-reduced-motion: reduce) { .t-pk, .t-out { display: none; } .t-tag { opacity: 1; } }
+
+.hm-lead { font-size: 18px; line-height: 1.6; font-weight: 350; color: var(--ex-muted); text-wrap: pretty; letter-spacing: normal; }
+
+/* The category dot gradient needs --c resolved on the element (the root token cannot see it). */
+.dot:not(.dot-ai) { background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.75), var(--c) 55%); }

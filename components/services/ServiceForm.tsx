@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { contact } from "@/content/services";
 import { demoSchema, type DemoInput } from "@/lib/demoSchema";
 import { Button } from "../ui/Button";
-import { SelectField, TextField } from "../sections/DemoFields";
+import { SelectField, TextField } from "./ServiceFields";
 import { useServiceParam } from "./ServiceParam";
 
 const options = contact.serviceOptions;
@@ -45,14 +45,14 @@ export function ServiceForm() {
 
   if (done) {
     return (
-      <div role="status" className="grid min-h-[400px] content-center gap-3 text-white">
-        <p className="font-display text-[28px] font-semibold leading-tight tracking-tight">{contact.success}</p>
+      <div role="status" className="grid min-h-[320px] content-center gap-3 text-heading">
+        <p className="text-[28px] font-light leading-tight tracking-[-0.02em]">{contact.success}</p>
       </div>
     );
   }
 
   return (
-    <form aria-label={contact.title} noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-[18px] lg:min-h-[410px]">
+    <form aria-label={contact.title} noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-[18px]">
       <div className="grid gap-4 sm:grid-cols-2">
         <TextField id="demo-name" label="Full name" autoComplete="name" error={errors.fullName?.message} {...register("fullName")} />
         <TextField id="demo-email" label="Work email" type="email" autoComplete="email" error={errors.email?.message} {...register("email")} />
@@ -61,30 +61,30 @@ export function ServiceForm() {
       </div>
       <SelectField id="demo-service" label={contact.serviceLabel} options={options} error={errors.service?.message} {...register("service")} />
       {failure && (
-        <p role="alert" className="rounded-input border border-error-on-dark bg-white/[0.07] p-4 text-[15px] font-medium text-error-on-dark">
+        <p role="alert" className="rounded-input border border-error bg-white p-4 text-[15px] font-medium text-error">
           {failure}
         </p>
       )}
-      <div className="mt-auto flex flex-col gap-4 pt-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="grid gap-1">
-          <label htmlFor="demo-consent" className="flex min-h-11 max-w-[300px] cursor-pointer items-center gap-2.5 text-[13px] leading-[1.45] text-on-dark">
+          <label htmlFor="demo-consent" className="flex min-h-11 max-w-[300px] cursor-pointer items-center gap-2.5 text-[13px] leading-[1.45] text-muted">
             <input
               id="demo-consent"
               type="checkbox"
               aria-invalid={errors.consent ? true : undefined}
               aria-describedby={errors.consent ? "demo-consent-error" : undefined}
-              className="size-[18px] shrink-0 accent-white"
+              className="size-[18px] shrink-0 accent-[#1D262D]"
               {...register("consent")}
             />
             <span>{contact.consent}</span>
           </label>
           {errors.consent && (
-            <p id="demo-consent-error" className="text-[14px] font-medium text-error-on-dark">
+            <p id="demo-consent-error" className="text-[13.5px] font-medium text-error">
               {errors.consent.message}
             </p>
           )}
         </div>
-        <Button type="submit" disabled={isSubmitting} className="ctad min-h-[54px]! px-7! disabled:opacity-70">
+        <Button type="submit" disabled={isSubmitting} className="disabled:opacity-70">
           {contact.submit}
         </Button>
       </div>

@@ -1,68 +1,28 @@
-/* Ask-Nova page. Static decoration plus the few transitions the interactive parts need (all disabled under reduced motion by the global rule). */
-.nova-grid-bg {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, #000 35%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 35%, #000 35%, transparent 85%);
+/* Ask-Nova page: the "how it fits together" demo (12s loop). Everything here is disabled under reduced motion by the global rule. */
+@keyframes hwCur {
+  0%, 4% { left: 96%; top: 420px; opacity: 0; scale: 1; }
+  7% { opacity: 1; }
+  14% { left: 88%; top: 124px; scale: 1; }
+  15% { scale: 0.82; }
+  16.5% { scale: 1; }
+  24% { left: 84%; top: 180px; }
+  86% { left: 84%; top: 180px; opacity: 1; }
+  92%, 100% { left: 96%; top: 420px; opacity: 0; }
 }
-/* Gradient-ringed pill ("Ask-Nova Plus"): ink or white fill with the 1.5px brand ring. */
-.nova-ring {
-  background: linear-gradient(var(--ex-ink), var(--ex-ink)) padding-box, var(--ex-gradient) border-box;
-  border: 1.5px solid transparent;
+@keyframes hwRip { 0%, 14.8% { opacity: 0; scale: 0.2; } 15.2% { opacity: 0.8; scale: 0.4; } 19%, 100% { opacity: 0; scale: 1.9; } }
+@keyframes hwTeams { 0%, 15% { background: #fff; box-shadow: 0 0 0 1px #e1e6ea; } 16.5%, 84% { background: #f1f6fd; box-shadow: 0 0 0 1.5px #0762c8; } 90%, 100% { background: #fff; box-shadow: 0 0 0 1px #e1e6ea; } }
+@keyframes hwHub {
+  0%, 26% { box-shadow: 0 0 0 1px rgba(29, 38, 45, 0.05), 0 24px 48px -30px rgba(29, 38, 45, 0.3), inset 0 1px 0 #fff; }
+  29%, 60% { box-shadow: 0 0 0 1.5px #7a3fc0, 0 0 0 8px rgba(122, 63, 192, 0.08), 0 24px 48px -30px rgba(29, 38, 45, 0.3), inset 0 1px 0 #fff; }
+  64%, 100% { box-shadow: 0 0 0 1px rgba(29, 38, 45, 0.05), 0 24px 48px -30px rgba(29, 38, 45, 0.3), inset 0 1px 0 #fff; }
 }
-.nova-ring-light {
-  background: linear-gradient(#fff, #fff) padding-box, var(--ex-gradient) border-box;
-  border: 1.5px solid transparent;
-}
-.nova-swap {
-  animation: novaSwap 0.6s var(--ex-ease-out) both;
-}
-@keyframes novaSwap {
-  from {
-    opacity: 0;
-    translate: 18px 0;
-  }
-}
-.nova-tick {
-  transition: height 0.45s var(--ex-ease-out), background-color 0.45s;
-}
-.nova-node {
-  transition: scale 0.4s var(--ex-ease-soft), background-color 0.4s;
-}
-.nova-deck-card {
-  transition: transform 0.8s var(--ex-ease-out), opacity 0.6s, filter 0.6s;
-}
-/* Feature carousel: three cards in view from 768px; below that it is a swipeable row. */
-.nova-carousel {
-  --card: clamp(300px, calc((100vw - 2 * var(--ex-gutter) - 48px) / 3), 392px);
-  --step: calc(var(--card) + 24px);
-}
-@media (min-width: 768px) {
-  .nova-track {
-    translate: calc(var(--step) * var(--i, 0) * -1) 0;
-    transition: translate 0.8s var(--ex-ease-out);
-  }
-}
-
-/* Hero load-in: the dial's nodes pop in around the sphere and the tick marks sweep round it (time-based, once). */
-.nova-pop {
-  animation: novaPop 0.7s var(--ex-ease-out) both;
-  animation-delay: calc(0.3s + var(--n, 0) * 60ms);
-}
-@keyframes novaPop {
-  from {
-    opacity: 0;
-    scale: 0.4;
-  }
-}
-.nova-tickin {
-  animation: novaTickIn 0.5s ease-out both;
-  animation-delay: calc(0.5s + var(--n, 0) * 14ms);
-}
-@keyframes novaTickIn {
-  from {
-    opacity: 0;
-  }
-}
+@keyframes hwAgent { 0%, 27% { background: #fff; color: #1d262d; } 29%, 60% { background: #1d262d; color: #fff; } 63%, 100% { background: #fff; color: #1d262d; } }
+@keyframes hwData { 0%, 39% { background: #fff; box-shadow: 0 0 0 1px #e1e6ea; } 41%, 58% { background: #eefaf5; box-shadow: 0 0 0 1.5px #00c389; } 62%, 100% { background: #fff; box-shadow: 0 0 0 1px #e1e6ea; } }
+@keyframes hwReply { 0%, 70% { opacity: 0; translate: 0 8px; } 73%, 86% { opacity: 1; translate: 0 0; } 90%, 100% { opacity: 0; } }
+.hw-cur { animation: hwCur 12s cubic-bezier(0.45, 0.05, 0.25, 1) infinite; }
+.hw-rip { animation: hwRip 12s linear infinite; }
+.hw-teams { animation: hwTeams 12s linear infinite; }
+.hw-hub { animation: hwHub 12s linear infinite; }
+.hw-agent { animation: hwAgent 12s linear infinite; }
+.hw-crm, .hw-db { animation: hwData 12s linear infinite; }
+.hw-reply { opacity: 0; animation: hwReply 12s cubic-bezier(0.16, 1, 0.3, 1) infinite; }

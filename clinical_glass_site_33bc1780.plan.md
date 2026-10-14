@@ -1,3 +1,5 @@
+> **Historical.** This is the original build plan for the dark "Clinical Glass" design. It is superseded by the "Clinical light" redesign (`docs/design-system.md`).
+
 ---
 name: Clinical Glass Site
 overview: "Scaffold a six-page Next.js Clinical Glass marketing site from an empty repo: copy from the content HTML, visual system from the brief, Platform module deck for the eight product sections, scroll-driven CSS motion, and a stubbed demo form. No WordPress, no Resources page, no analytics yet."
@@ -28,6 +30,8 @@ todos:
     status: pending
 isProject: false
 ---
+
+> **Historical.** Superseded by the "Clinical light" redesign (`docs/design-system.md`).
 
 # Clinical Glass marketing site
 

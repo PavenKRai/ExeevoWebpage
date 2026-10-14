@@ -39,7 +39,7 @@
 }
 
 /* Gradient dots: only where the colour carries meaning (category, phase, stage). Set --c on the element. */
-.dot { display: inline-block; flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--ex-dot); }
+.dot { display: inline-block; flex-shrink: 0; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.75), var(--c, var(--ex-blue)) 55%); }
 .dot-commercial { --c: var(--ex-blue); }
 .dot-medical { --c: var(--ex-magenta); }
 .dot-platform { --c: var(--ex-green); }
@@ -85,3 +85,7 @@
 .scan { position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(7, 98, 200, 0.55), transparent); animation: scan 6s linear infinite alternate; pointer-events: none; }
 @keyframes focusIn { from { opacity: 0; filter: blur(12px); scale: 0.96; } to { opacity: 1; filter: none; scale: 1; } }
 .fi { animation: focusIn 1.2s 0.25s var(--ex-ease-out) both; }
+
+/* Content column used by the page designs: 1280px with 40px (20px on phones) side padding. */
+.wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 40px; position: relative; }
+@media (max-width: 700px) { .wrap { padding: 0 20px; } }

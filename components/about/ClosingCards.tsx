@@ -1,37 +1,37 @@
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Glow } from "@/components/glass/Glow";
 import { about } from "@/content/about";
 import { site } from "@/content/site";
 
-/** Two closing cards: meet the partners, talk to the team. */
+/** Two closing cards: meet the partners (light), talk to the team (ink). */
 export function ClosingCards() {
   const c = about.closing;
   return (
-    <section className="overflow-x-clip bg-mist py-16 lg:py-[120px]">
-      <div className="frame grid gap-6 lg:grid-cols-2">
-        <div className="glass-light srl relative flex min-h-[220px] flex-col justify-between gap-8 overflow-hidden rounded-[32px] p-8 lg:p-10">
-          <Glow color="magenta" className="-right-12 -top-16 size-[260px] blur-[70px]" style={{ opacity: 0.3 }} />
-          <div className="relative flex flex-col gap-3.5">
-            <p className="text-[15px] text-muted">{c.partners.label}</p>
-            <h2 className="max-w-[460px] text-[clamp(26px,2.4vw,32px)] leading-[1.12] tracking-[-0.025em]">{c.partners.title}</h2>
-          </div>
-          <Link href="/partners" className="relative inline-flex min-h-11 items-center gap-2 self-start font-semibold text-brand-blue">
+    <section className="overflow-x-clip bg-porcelain pb-20 lg:pb-[120px]">
+      <div className="frame grid grid-cols-1 gap-5 md:grid-cols-2">
+        <Link href="/partners" className="card lift sr flex min-h-[220px] flex-col gap-3.5 p-8">
+          <span className="label inline-flex items-center gap-2.5">
+            <span aria-hidden="true" className="dot" style={{ "--c": c.partners.dot } as CSSProperties} />
+            {c.partners.label}
+          </span>
+          <span className="text-[28px] font-[350] leading-[1.15] tracking-[-0.025em] text-heading">{c.partners.title}</span>
+          <span className="tlink mt-auto">
             {c.partners.cta}
-            <ArrowRight aria-hidden="true" size={16} strokeWidth={1.8} />
-          </Link>
-        </div>
-        <div className="on-dark srr relative flex min-h-[220px] flex-col justify-between gap-8 overflow-hidden rounded-[32px] bg-ink p-8 lg:p-10">
-          <Glow color="green" className="-right-12 -top-16 size-[300px] blur-[80px]" style={{ opacity: 0.4 }} />
-          <div className="relative flex flex-col gap-3.5">
-            <p className="text-[15px] text-on-dark-muted">{c.contact.label}</p>
-            <h2 className="text-[clamp(26px,2.4vw,32px)] leading-[1.12] tracking-[-0.025em]">{c.contact.title}</h2>
-          </div>
-          <Link href={site.demoHref} className="relative inline-flex min-h-11 items-center gap-2 self-start font-semibold text-link-on-dark">
+            <ArrowRight aria-hidden="true" size={16} strokeWidth={1.6} />
+          </span>
+        </Link>
+        <Link href={site.demoHref} className="card lift sr flex min-h-[220px] flex-col gap-3.5 border-heading bg-heading p-8">
+          <span className="label inline-flex items-center gap-2.5 !text-[#B6C1C8]">
+            <span aria-hidden="true" className="dot" style={{ "--c": c.contact.dot } as CSSProperties} />
+            {c.contact.label}
+          </span>
+          <span className="text-[28px] font-[350] leading-[1.15] tracking-[-0.025em] text-white">{c.contact.title}</span>
+          <span className="mt-auto inline-flex min-h-11 items-center gap-2 text-[15px] text-[#8EC2FF]">
             {c.contact.cta}
-            <ArrowRight aria-hidden="true" size={16} strokeWidth={1.8} />
-          </Link>
-        </div>
+            <ArrowRight aria-hidden="true" size={16} strokeWidth={1.6} />
+          </span>
+        </Link>
       </div>
     </section>
   );

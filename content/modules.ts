@@ -212,3 +212,22 @@ export const modules: Module[] = [
 
 export const moduleSlugs = modules.map((m) => m.slug);
 export const getModule = (slug?: string | null) => modules.find((m) => m.slug === slug) ?? modules[0];
+
+/** Platform page headings: a light phrase plus one bold ink phrase (design system). Same words as `headline`. */
+export const moduleHeadings: Record<string, [light: string, bold: string]> = {
+  "crm-sales": ["Engineered around", "the pharma call cycle"],
+  "medical-crm": ["Purpose-built", "for Medical Affairs"],
+  "marketing-automation": ["Personalize at scale,", "without a separate martech stack"],
+  "event-management": ["Run compliant events", "end to end"],
+  "content-management": ["Compliant content,", "without the review bottleneck"],
+  "customer-insights": ["One customer profile,", "built from every data source"],
+  "mobile-app": ["The full platform,", "offline-capable, in the field"],
+  "ask-nova-studio": ["Real agentic AI,", "engineered for your workflows"],
+};
+
+/** Big figures under the Platform intro. */
+export const platformFigures = [
+  { value: "8", label: "Modules" },
+  { value: "1", label: "Data model" },
+  { value: "1", label: "License" },
+] as const;

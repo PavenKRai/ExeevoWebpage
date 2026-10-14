@@ -71,7 +71,7 @@ test("below-the-fold items start hidden, then reveal when scrolled into view", a
   await page.waitForTimeout(1500);
   const before = await page.evaluate(() => document.querySelectorAll(".rv-hide").length);
   expect(before).toBeGreaterThan(5);
-  const el = page.locator(".hp-grid, [class*='hp-']").first();
+  const el = page.locator(".rv-hide").last();
   await el.scrollIntoViewIfNeeded();
   await page.waitForTimeout(1500);
   expect(await page.evaluate(() => document.querySelectorAll(".rv-hide").length)).toBeLessThan(before);

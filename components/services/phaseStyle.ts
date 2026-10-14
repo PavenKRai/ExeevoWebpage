@@ -1,8 +1,8 @@
 import type { Phase } from "@/content/services";
 
-/** Phase accents: dot/fill colour, text colour on dark ink, and glow colour. */
-export const phaseStyle: Record<Phase["color"], { dot: string; textOnDark: string; glow: "magenta" | "blue" | "green" }> = {
-  magenta: { dot: "bg-magenta", textOnDark: "text-magenta-on-dark", glow: "magenta" },
-  blue: { dot: "bg-brand-blue", textOnDark: "text-link-on-dark", glow: "blue" },
-  green: { dot: "bg-brand-green", textOnDark: "text-brand-green", glow: "green" },
+/** Phase accents: gradient dot class, glow colour (for the aura behind glass) and the check colour on light grounds. */
+export const phaseStyle: Record<Phase["color"], { dot: string; glow: string; check: string }> = {
+  magenta: { dot: "dot-medical", glow: "#DF1995", check: "text-[#B0127A]" },
+  blue: { dot: "dot-commercial", glow: "#0762C8", check: "text-brand-blue" },
+  green: { dot: "dot-platform", glow: "#00C389", check: "text-green-ink" },
 };

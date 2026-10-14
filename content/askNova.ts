@@ -5,6 +5,8 @@ export type NovaFeature = { num: string; slug: string; name: string; tier: Tier;
 export const askNova = {
   label: "Ask-Nova Studio & AI",
   h1: "AI before, during and after every customer meeting.",
+  /** The h1 as the design sets it: light phrase, then a bold ink phrase. */
+  h1Parts: { light: "AI before, during and after", bold: "every customer meeting." },
   intro:
     "Exeevo CRM puts AI where your teams already work. Three features come with every licence; Ask-Nova Plus adds more data, voice, languages, admin tools and openness to the AI tools your teams already use.",
   primaryCta: "Get a demo",
@@ -17,17 +19,18 @@ export const askNova = {
     { value: "4", label: "places to ask: the CRM app, Teams, Copilot and Claude" },
   ],
   grounded: { title: "Grounded in your data, not trained on it", body: "Answers draw on your CRM and the databases you connect" },
-  cycle: { label: "The meeting cycle", title: "Thirteen features, grouped by who uses them and when", groupLabel: "Jump to a group", prev: "Previous features", next: "Next features" },
+  cycle: { title: "Thirteen features, grouped by who uses them and when", parts: { light: "Thirteen features,", bold: "grouped by who uses them and when" }, all: "All 13 features", groupLabel: "Filter by stage" },
   licensing: {
     label: "Licensing",
     titleBefore: "What comes with every licence, and what",
     titleAfter: "adds",
+    parts: { light: "What comes with every licence,", bold: "and what Ask-Nova Plus adds" },
     body: "Every user gets AI on day one. Ask-Nova Plus is for teams that want more data, voice, languages, admin tools and openness to the AI tools they already use.",
     includedTitle: "Included with every licence",
     includedCount: "3 features",
     plusCount: "9 more features",
     plusChips: ["More data", "Voice", "Languages", "Admin tools", "Openness to the AI tools you already use"],
-    note: "Select a feature to read about it above. Ask-Nova Assistant (06): [Tier to confirm].",
+    note: "Select a feature to see it in the meeting cycle below. Ask-Nova Assistant (06): [Tier to confirm].",
     /** Short descriptions shown in the "included" list. */
     includedDesc: {
       "ai-summaries": "A short brief on an HCP, an HCO or the whole territory.",
@@ -38,6 +41,7 @@ export const askNova = {
   studio: {
     label: "Ask-Nova Studio",
     title: "Real agentic AI, engineered for your workflows.",
+    parts: { light: "Real agentic AI,", bold: "engineered for your workflows." },
     body: "Build your own AI skills, tools and agents on top of your CRM data, or bring in agents you already use. Exeevo CRM comes with AI built in for every user; Ask-Nova Studio lets you go further, for the workflows that don't come out of the box. Everything runs inside the access rules and compliance guardrails already built into the platform.",
     fitTitle: "Good fit if you need",
     fit: [
@@ -54,6 +58,9 @@ export const askNova = {
   },
   fits: {
     title: "How it fits together",
+    legend: { request: "Request", answer: "Answer" },
+    reply: "Answer drawn from your CRM data",
+    alt: "Diagram: your CRM records, connected databases, device context and SAP feed Ask-Nova Studio's skills, tools and agents, which answer in the Exeevo CRM app and, via MCP, in Teams, Copilot, Claude, ChatGPT and partner tools, all inside your access rules and compliance guardrails.",
     body: "Teams, Copilot, Claude, ChatGPT and partner tools reach your CRM data through the MCP Server, under each user's own access.",
     data: { label: "Your data", items: [{ name: "CRM records" }, { name: "Databases you connect", note: "As a query or in a no-code editor" }, { name: "Device context" }, { name: "SAP and other business systems" }] },
     studio: { label: "Ask-Nova Studio", name: "Ask-Nova Studio", parts: ["Skills", "Tools", "Agents"], third: "+ Third-party agents", guard: "Inside your existing access rules and compliance guardrails" },
@@ -71,6 +78,7 @@ export const askNova = {
   trust: {
     label: "Trust",
     title: "The AI works from your data, under your rules",
+    parts: { light: "The AI works from your data,", bold: "under your rules" },
     lead: "Agents are grounded in your data, not trained on it.",
     cards: [
       { icon: "M5 6c0-1.7 3.1-3 7-3s7 1.3 7 3-3.1 3-7 3-7-1.3-7-3z M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6 M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3", title: "Uses your data", body: "Answers come from your CRM records and the databases you choose to connect." },
@@ -81,6 +89,7 @@ export const askNova = {
   },
   cta: {
     title: "See Ask-Nova on your own CRM data",
+    parts: { light: "See Ask-Nova", bold: "on your own CRM data" },
     body: "We'll walk through the AI your reps get on day one, and what Ask-Nova Plus and Ask-Nova Studio add for your teams.",
     button: "Get a demo",
   },

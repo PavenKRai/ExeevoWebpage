@@ -1,3 +1,7 @@
+> **Superseded visual design.** The site now follows the "Clinical light" design system (see `docs/design-system.md` and `AGENTS.md`). Sections of this brief about the dark "Clinical Glass" look, the Sora/Figtree fonts, the 3D board and the module deck no longer apply. The content, copy and information architecture below still do.
+
+> **Superseded.** This brief describes the earlier "Clinical Glass" design. The current visual system is in `docs/design-system.md`; copy and content rules still apply.
+
 # Build prompt: Exeevo website redesign ("Clinical Glass", v2)
 
 Paste this whole file into your IDE agent as the task. Keep `AGENTS.md` at the repository root so the agent follows the project rules on every step.

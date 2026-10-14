@@ -3,21 +3,20 @@ import { Button } from "@/components/ui/Button";
 import { askNova } from "@/content/askNova";
 import { site } from "@/content/site";
 
-/** Closing call to action on a dark block (the page's one primary action at this point of the scroll). */
+/** Closing call to action: a centred glass block on mist. */
 export function NovaCta() {
   const c = askNova.cta;
   return (
-    <section className="bg-frost pb-16 lg:pb-20">
-      <div className="frame">
-        <div className="on-dark srg relative flex flex-col items-start justify-between gap-8 overflow-hidden rounded-[36px] bg-ink p-8 sm:p-10 lg:flex-row lg:items-center lg:px-14 lg:py-12">
-          <span aria-hidden="true" className="orb pointer-events-none absolute -right-24 -top-32 size-[420px] opacity-30 blur-[70px]" />
-          <div className="relative flex max-w-[680px] flex-col gap-3.5">
-            <h2 className="text-[clamp(30px,3.4vw,44px)] leading-[1.08] tracking-[-0.03em]">{c.title}</h2>
-            <p className="text-[17px] leading-[1.55] text-on-dark">{c.body}</p>
-          </div>
-          <Button href={site.demoHref} size="hero" className="relative">
+    <section className="relative overflow-hidden bg-mist py-20 lg:py-[110px]">
+      <div className="aura left-[40%] top-[10%] h-[340px] w-[520px] bg-brand-blue opacity-[.16] max-lg:hidden" aria-hidden="true" />
+      <div className="aura left-[20%] top-[30%] size-[340px] bg-magenta opacity-10 max-lg:hidden" aria-hidden="true" />
+      <div className="frame relative">
+        <div className="glass sr flex flex-col items-center gap-[22px] rounded-[36px] px-6 py-14 text-center lg:px-12 lg:py-16">
+          <h2 className="h2 max-w-[760px]">{c.parts.light} <b>{c.parts.bold}</b></h2>
+          <p className="lead max-w-[620px]">{c.body}</p>
+          <Button href={site.demoHref}>
             {c.button}
-            <ArrowRight aria-hidden="true" size={18} strokeWidth={1.8} />
+            <ArrowRight aria-hidden="true" size={16} strokeWidth={1.6} />
           </Button>
         </div>
       </div>

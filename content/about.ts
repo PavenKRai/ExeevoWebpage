@@ -2,14 +2,14 @@
 export const about = {
   label: "About Exeevo",
   h1: "Life sciences CRM Suite, built natively on Microsoft",
+  h1Parts: { light: "Life sciences CRM Suite,", bold: "built natively on Microsoft" },
   intro: "Exeevo gives pharmaceutical, biotech, consumer health and MedTech companies one CRM platform for their commercial, medical and marketing teams.",
   body: "Built natively on Microsoft Dynamics 365, Dataverse and the Power Platform, and powered by Nova AI, Exeevo helps field teams plan, engage and follow up faster, while giving leadership a single, compliant view of every healthcare professional and organisation.",
   oneLines: [
-    { text: "One platform.", dot: "bg-magenta" },
-    { text: "One licence.", dot: "bg-brand-blue" },
-    { text: "Every team on the same underlying data.", dot: "bg-brand-green" },
+    { text: "One platform. One licence.", strong: false },
+    { text: "Every team on the same underlying data.", strong: true },
   ],
-  heroImage: { src: "/about/hero.webp", alt: "An Exeevo user reviewing clinical data on a tablet with a physician in a hospital corridor", width: 1280, height: 300 },
+  heroImage: { src: "/about/hero.webp", alt: "An Exeevo user reviewing clinical data on a tablet with a physician in a hospital corridor", width: 1280, height: 300, tag: "Field view · HCP detailing" },
   stats: [
     { value: "2017", label: "Founded" },
     { value: "15,000+", label: "Life sciences users" },
@@ -20,6 +20,7 @@ export const about = {
   story: {
     label: "Our story",
     title: "From a Microsoft partnership to a global CRM provider",
+    parts: { light: "From a Microsoft partnership", bold: "to a global CRM provider" },
     items: [
       { when: "2017", title: "Founded", body: "Exeevo was founded in 2017 through a strategic partnership between Indegene and Microsoft, with a clear goal: to give life sciences a modern CRM built on the enterprise platform that IT teams already trust.", dot: "var(--ex-magenta)" },
       { when: "Global", title: "Independent and global", body: "Exeevo then grew into an independent, global life sciences CRM provider, supporting more than 15,000 users across EMEA, the Americas and APAC.", dot: "var(--ex-purple)" },
@@ -27,28 +28,10 @@ export const about = {
       { when: "Today", title: "Domain and engineering, together", body: "Today, our team brings together life sciences domain expertise and deep Microsoft engineering to deliver a platform that is purpose-built for how commercial and medical teams work, online or offline, in the office or in the field.", dot: "var(--ex-green)" },
     ],
   },
-  whatWeDo: {
-    label: "What we do",
-    title: "One configurable platform, no bolt-ons",
-    body: "Exeevo CRM brings the capabilities life sciences teams need into a single, highly configurable platform, with no bolt-on modules and no separate contracts as teams grow:",
-    items: [
-      { title: "Commercial & Medical CRM", body: "Territory Management, Account & Cycle plans, call planning and execution, HCP/HCO 360, samples, medical inquiries, fully available offline in our Mobile application." },
-      { title: "Key Account Management, Retail & Order Management", body: "For Rx, Rare Disease, Consumer Health and Retail/OTC models. Full capabilities are available on request." },
-      { title: "Marketing Automation & Event Management", body: "Omnichannel campaigns, mass email, and HCP events on the same data model, combining sales, medical and marketing activities in a 360 view." },
-      { title: "Content & Consent Management", body: "Approved content (CLM) and compliant consent capture across channels." },
-      { title: "Analytics & Reporting", body: "Embedded dashboards, extended with Microsoft Power BI." },
-      { title: "Nova AI", body: "AI summaries, proactive insights and a conversational assistant built into every screen, included in the licence." },
-    ],
-    cta: "Explore the platform",
-    images: {
-      monitor: { src: "/about/product-monitor.webp", alt: "Exeevo CRM opportunity dashboard on a desktop monitor" },
-      tablet: { src: "/about/product-tablet.webp", alt: "Exeevo CRM calendar and to-do view on a tablet" },
-      phone: { src: "/about/product-phone.webp", alt: "Exeevo mobile app home screen with pending activities" },
-    },
-  },
   microsoft: {
     label: "Microsoft Partnership",
     title: "The best of both worlds",
+    parts: { light: "The best of", bold: "both worlds" },
     body: [
       "Through close collaboration with Microsoft and our accredited implementation partners, Exeevo CRM Suite delivers the best of both worlds: Gold-standard hosting, performance and security, with Exeevo's Life Science capabilities and compliance features built on top.",
       "Microsoft Customers can benefit from their existing investments and deployments, expanding the use of Microsoft's Customer Data Platform, Power Platform, Advanced Analytics and AI capabilities within Exeevo CRM Suite.",
@@ -69,6 +52,7 @@ export const about = {
   valsoft: {
     label: "Part of Valsoft",
     title: "A partner that is here to stay",
+    parts: { light: "A partner that is", bold: "here to stay" },
     logo: { src: "/about/exeevo-valsoft.webp", alt: "Exeevo, a Valsoft company" },
     body: [
       "Exeevo is a Valsoft company. Headquartered in Montreal, Canada, Valsoft acquires and grows mission-critical vertical market software businesses, and today supports more than 150 companies across more than 20 industries.",
@@ -84,26 +68,27 @@ export const about = {
   },
   values: {
     title: "Our values",
-    label: "Value",
+    parts: { light: "Our", bold: "values" },
     items: [
-      { title: "Passion for life sciences", body: "We understand the industry we serve and focus on solving real problems for commercial and medical teams.", dot: "bg-magenta" },
-      { title: "Technological Innovation", body: "We invest continuously in new technology, from AI to mobile, so our customers stay ahead.", dot: "bg-brand-blue" },
-      { title: "Industry Collaboration", body: "We work as one team with our customers, implementation partners and Microsoft, bringing together diverse skills and perspectives to deliver modern, next-generation CRM and AI solutions.", dot: "bg-brand-green" },
+      { title: "Passion for life sciences", body: "We understand the industry we serve and focus on solving real problems for commercial and medical teams.", dot: "var(--ex-magenta)" },
+      { title: "Technological Innovation", body: "We invest continuously in new technology, from AI to mobile, so our customers stay ahead.", dot: "var(--ex-blue)" },
+      { title: "Industry Collaboration", body: "We work as one team with our customers, implementation partners and Microsoft, bringing together diverse skills and perspectives to deliver modern, next-generation CRM and AI solutions.", dot: "var(--ex-green)" },
     ],
   },
   offices: {
     label: "Offices",
     title: "Where to find us",
+    parts: { light: "Where to", bold: "find us" },
     body: "Supporting more than 15,000 users across EMEA, the Americas and APAC. Select an office to see its address.",
     mapLabel: "World map showing Exeevo offices in Clearwater, Bangalore and Shanghai",
     list: [
       { id: "clw", city: "Clearwater, Florida", region: "North America", addr: ["19321 US Hwy 19 N, Suite 607", "Clearwater, FL 33764", "United States"], x: 324.2, y: 156.7, color: "var(--ex-green)" },
       { id: "blr", city: "Bangalore, India", region: "India", addr: ["12th Floor, Summit A, Brigade Metropolis", "Mahadevapura (Garudachar Palya), Bangalore North", "Karnataka 560048, India"], x: 859.0, y: 206.7, color: "var(--ex-magenta)" },
-      { id: "sha", city: "Shanghai, China", region: "China", addr: ["Exeevo Shanghai Limited", "Room 04-168 of We Work Liwei Jiang commercial Info consulting co ltd", "333 Cheng Du Bei Lu, Shanghai"], x: 1004.8, y: 145.9, color: "var(--ex-link-on-dark)" },
+      { id: "sha", city: "Shanghai, China", region: "China", addr: ["Exeevo Shanghai Limited", "Room 04-168 of We Work Liwei Jiang commercial Info consulting co ltd", "333 Cheng Du Bei Lu, Shanghai"], x: 1004.8, y: 145.9, color: "var(--ex-blue)" },
     ],
   },
   closing: {
-    partners: { label: "Partners", title: "Meet the partners who deliver with us", cta: "See our partner ecosystem" },
-    contact: { label: "Contact", title: "Talk to our team", cta: "Get in touch" },
+    partners: { label: "Partners", dot: "var(--ex-magenta)", title: "Meet the partners who deliver with us", cta: "See our partner ecosystem" },
+    contact: { label: "Contact", dot: "var(--ex-green)", title: "Talk to our team", cta: "Get in touch" },
   },
 } as const;

@@ -1,33 +1,22 @@
-import { Layer } from "@/components/scene/Layer";
-import { Scene } from "@/components/scene/Scene";
 import { contact } from "@/content/services";
 import { ServiceForm } from "./ServiceForm";
-import "../sections/demo-section.css";
-import "../sections/scene-choreo.css";
 
-/** "Talk to our team": the dark block with the sphere and the dark-glass form (same styling as the old demo form). `#demo` is the anchor every "Get a demo" button links to. */
+/** "Talk to our team": mist section with soft glows; the glass form carries `#demo`, the anchor every "Get a demo" button links to. */
 export function ContactSection() {
   return (
-    <Scene id="talk" className="gs-demo" stageClassName="gs-ground">
-      <span id="demo" aria-hidden="true" className="pointer-events-none absolute left-0 top-0 h-px w-px scroll-mt-24" />
-      <div className="mx-auto max-w-[1440px] px-5 pb-16 pt-12 md:px-10 lg:px-20 lg:pb-16 lg:pt-16">
-        <Layer
-          from={{ s: 0.9 }}
-          className="on-dark relative overflow-hidden rounded-[36px] bg-ink lg:min-h-[560px] lg:py-12 lg:pl-[600px] lg:pr-14"
-        >
-          <Layer from={{ rot: -140, s: 0.7 }} range={[0, 0.25]} className="absolute -bottom-32 -left-20 size-[320px] lg:-left-[120px] lg:bottom-auto lg:top-[120px] lg:size-[520px]" aria-hidden="true">
-            <div className="demo-orb size-full opacity-90" />
-          </Layer>
-          <Layer from={{ x: -70, o: 0, s: 0.9 }} range={[0, 0.25]} className="glass-dark absolute -bottom-24 -left-10 size-[280px] rounded-full lg:-left-10 lg:bottom-auto lg:top-[210px] lg:size-[440px]" aria-hidden="true" />
-          <div className="relative flex flex-col gap-4 p-8 lg:absolute lg:left-16 lg:top-14 lg:w-[440px] lg:p-0">
-            <h2 className="text-[clamp(30px,3vw,34px)] leading-[1.1] tracking-[-0.025em]">{contact.title}</h2>
-            <p className="text-[17px] leading-[1.55] text-on-dark">{contact.body}</p>
-          </div>
-          <div className="glass-dark relative mx-5 mb-6 rounded-[28px] p-6 lg:mx-0 lg:mb-0 lg:min-h-[470px] lg:p-[30px]">
-            <ServiceForm />
-          </div>
-        </Layer>
+    <section id="talk" aria-labelledby="talk-title" className="relative scroll-mt-20 overflow-hidden bg-mist py-20 lg:py-[120px]">
+      <span aria-hidden="true" className="aura -left-[120px] top-20 size-[520px] bg-brand-blue opacity-[.14] max-lg:hidden" />
+      <span aria-hidden="true" className="aura -bottom-[120px] left-[260px] size-[380px] bg-magenta opacity-10 max-lg:hidden" />
+      <span id="demo" aria-hidden="true" className="absolute left-0 top-0 h-px w-px scroll-mt-24" />
+      <div className="frame relative grid items-start gap-10 lg:grid-cols-12 lg:gap-x-6">
+        <div className="sr flex max-w-[760px] flex-col gap-5 lg:col-span-5">
+          <h2 id="talk-title" className="h2">Talk to <b>our team</b></h2>
+          <p className="text-[18px] font-[350] leading-[1.6] tracking-normal text-muted [text-wrap:pretty] max-w-[640px]">{contact.body}</p>
+        </div>
+        <div className="glass srg rounded-[28px] p-6 sm:p-8 lg:col-span-6 lg:col-start-7">
+          <ServiceForm />
+        </div>
       </div>
-    </Scene>
+    </section>
   );
 }
