@@ -9,9 +9,9 @@ test("home hero: the three boxes are visible on load, after scrolling, and after
   await page.waitForTimeout(2200);
   for (const b of boxes) await expect(page.getByRole("heading", { name: b })).toBeInViewport();
 
-  await page.evaluate(() => window.scrollTo(0, 700));
+  await page.evaluate(() => window.scrollTo({ top: 700, behavior: "instant" }));
   await page.waitForTimeout(600);
-  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await page.waitForTimeout(900);
   for (const b of boxes) {
     const h = page.getByRole("heading", { name: b });
@@ -28,7 +28,7 @@ test("home hero: the three boxes are visible on load, after scrolling, and after
 test("home hero: nothing in the hero fades away as you scroll", async ({ page }) => {
   await page.goto("/");
   await page.waitForTimeout(2200);
-  await page.evaluate(() => window.scrollTo(0, 250));
+  await page.evaluate(() => window.scrollTo({ top: 250, behavior: "instant" }));
   await page.waitForTimeout(800);
   const h1 = await page.getByRole("heading", { level: 1 }).evaluate((e) => parseFloat(getComputedStyle(e).opacity));
   expect(h1).toBe(1);

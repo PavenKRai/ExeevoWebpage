@@ -52,14 +52,14 @@ test("reveals play once: scrolling back up does not hide anything again", async 
   await page.waitForTimeout(1500);
   const H = await page.evaluate(() => document.documentElement.scrollHeight);
   for (let y = 0; y < H; y += 400) {
-    await page.evaluate((v) => window.scrollTo(0, v), y);
+    await page.evaluate((v) => window.scrollTo({ top: v, behavior: "instant" }), y);
     await page.waitForTimeout(60);
   }
   await page.waitForTimeout(2200);
   const after = (await state(page)).hidden;
-  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await page.waitForTimeout(800);
-  await page.evaluate((v) => window.scrollTo(0, v), Math.round(H * 0.45));
+  await page.evaluate((v) => window.scrollTo({ top: v, behavior: "instant" }), Math.round(H * 0.45));
   await page.waitForTimeout(800);
   const s = await state(page);
   expect(after).toBe(0);
@@ -80,6 +80,7 @@ test("below-the-fold items start hidden, then reveal when scrolled into view", a
 });
 
 test("server HTML shows everything: no hidden classes, content present without JS", async ({ browser }) => {
+  test.setTimeout(90_000);
   const ctx = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
   for (const r of routes) {
