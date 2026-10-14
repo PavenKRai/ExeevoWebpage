@@ -4,7 +4,7 @@ import { phaseRange, phases, servicesPage } from "@/content/services";
 import { cn } from "@/components/ui/cn";
 import { phaseStyle } from "./phaseStyle";
 
-const bracket = "h-3 border-x border-[#8A969E] bg-[linear-gradient(#8A969E,#8A969E)_center/100%_1px_no-repeat]";
+const bracket = "relative h-3 border-x border-[#8A969E] after:absolute after:inset-x-0 after:top-1/2 after:h-px after:bg-[#8A969E] after:content-['']";
 
 /** "How we engage": the three phases in one hairline-bordered card; each service links to `?service=<slug>`. */
 export function HowWeEngage() {
