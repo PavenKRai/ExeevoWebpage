@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 import { askNova, type Tier } from "@/content/askNova";
 import { cn } from "@/components/ui/cn";
 
-/** "Included" (green tint), "Ask-Nova Plus" (white pill with the gradient dot) or the dashed "[Tier to confirm]" placeholder. */
+/** "Included" (green tint), "Ask-Nova Plus" (white pill with the gradient dot) (a dashed placeholder style is kept for any future unconfirmed tier). */
 export function TierBadge({ tier, className }: { tier: Tier; className?: string }) {
   const base = "inline-flex items-center whitespace-nowrap rounded-full px-2.5 py-[5px] text-[13.5px] font-[450]";
   const text = askNova.tiers[tier];

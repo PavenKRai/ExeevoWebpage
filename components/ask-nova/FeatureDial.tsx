@@ -19,12 +19,12 @@ function DetailCard({ className, style }: { className?: string; style?: CSSPrope
       <span className="num text-[12px] text-muted">{f.num} of 13 · {novaStages[f.stage].short}</span>
       <span className="text-[22px] font-[450] leading-[1.15] tracking-[-0.02em] text-heading">{f.name}</span>
       <div className="flex"><TierBadge tier={f.tier} /></div>
-      <p className="overflow-hidden text-[13px] leading-[1.5] text-muted">{f.desc}</p>
-      <div className="mt-auto flex items-center justify-between gap-2">
-        <button type="button" onClick={() => openFeature(sel)} className="tlink !min-h-11 text-[13px]">{askNova.dial.read}</button>
-        <span className="flex gap-1.5">
-          <button type="button" aria-label={askNova.dial.prev} onClick={() => setSel((sel - 1 + COUNT) % COUNT)} className="btn btn-glass !size-11 !p-0"><ChevronLeft size={16} strokeWidth={1.6} aria-hidden="true" /></button>
-          <button type="button" aria-label={askNova.dial.next} onClick={() => setSel((sel + 1) % COUNT)} className="btn btn-glass !size-11 !p-0"><ChevronRight size={16} strokeWidth={1.6} aria-hidden="true" /></button>
+      <p className="text-[13px] leading-[1.5] text-muted">{f.desc}</p>
+      <div className="mt-auto flex items-center pt-1 justify-between gap-2">
+        <button type="button" onClick={() => openFeature(sel)} className="tlink relative !min-h-0 whitespace-nowrap text-[13px] after:absolute after:-inset-y-3 after:-inset-x-1 after:content-['']">{askNova.dial.read}</button>
+        <span className="flex gap-2.5">
+          <button type="button" aria-label={askNova.dial.prev} onClick={() => setSel((sel - 1 + COUNT) % COUNT)} className="btn btn-glass relative !size-[34px] !min-h-0 !p-0 after:absolute after:-inset-[5px] after:content-['']"><ChevronLeft size={16} strokeWidth={1.6} aria-hidden="true" /></button>
+          <button type="button" aria-label={askNova.dial.next} onClick={() => setSel((sel + 1) % COUNT)} className="btn btn-glass relative !size-[34px] !min-h-0 !p-0 after:absolute after:-inset-[5px] after:content-['']"><ChevronRight size={16} strokeWidth={1.6} aria-hidden="true" /></button>
         </span>
       </div>
     </div>
@@ -99,7 +99,7 @@ export function FeatureDial() {
             </button>
           );
         })}
-        <DetailCard className="absolute !backdrop-blur-[54px]" style={{ left: 104, top: 116, width: 272, height: 248 }} />
+        <DetailCard className="absolute !backdrop-blur-[54px]" style={{ left: 104, top: C, width: 272, minHeight: 248, transform: "translateY(-50%)" }} />
       </div>
     </div>
   );

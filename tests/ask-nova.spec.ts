@@ -1,10 +1,11 @@
 import { expect, test } from "@playwright/test";
 import { askNova, features } from "../content/askNova";
 
-test("ask-nova: one h1, every feature is in the HTML and the tier placeholder is visible", async ({ request, page }) => {
+test("ask-nova: one h1, every feature is in the HTML and Ask-Nova Assistant (06) is in the Plus list", async ({ request, page }) => {
   const html = await (await request.get("/ask-nova")).text();
   for (const f of features) expect(html, f.name).toContain(f.name);
-  expect(html).toContain("[Tier to confirm]");
+  expect(features.find((f) => f.num === "06")?.tier).toBe("plus");
+  expect(features.filter((f) => f.tier === "plus")).toHaveLength(10);
   await page.goto("/ask-nova", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(askNova.h1);
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);

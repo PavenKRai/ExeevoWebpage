@@ -1,7 +1,7 @@
 export type Tier = "inc" | "plus" | "tbc";
 export type NovaFeature = { num: string; slug: string; name: string; tier: Tier; stage: 0 | 1 | 2 | 3; icon: string; desc: string };
 
-/** Copy comes verbatim from the Ask-Nova design. `tbc` renders the placeholder "[Tier to confirm]" until the tier is decided. */
+/** Copy comes verbatim from the Ask-Nova design. */
 export const askNova = {
   label: "Ask-Nova Studio & AI",
   h1: "AI before, during and after every customer meeting.",
@@ -28,9 +28,9 @@ export const askNova = {
     body: "Every user gets AI on day one. Ask-Nova Plus is for teams that want more data, voice, languages, admin tools and openness to the AI tools they already use.",
     includedTitle: "Included with every licence",
     includedCount: "3 features",
-    plusCount: "9 more features",
+    plusCount: "10 more features",
     plusChips: ["More data", "Voice", "Languages", "Admin tools", "Openness to the AI tools you already use"],
-    note: "Select a feature to see it in the meeting cycle below. Ask-Nova Assistant (06): [Tier to confirm].",
+    note: "Select a feature to see it in the meeting cycle below.",
     /** Short descriptions shown in the "included" list. */
     includedDesc: {
       "ai-summaries": "A short brief on an HCP, an HCO or the whole territory.",
@@ -155,7 +155,7 @@ export const features: NovaFeature[] = [
     "num": "06",
     "slug": "ask-nova-assistant",
     "name": "Ask-Nova Assistant",
-    "tier": "tbc",
+    "tier": "plus",
     "stage": 1,
     "icon": "M4 5h16v11H10l-5 4v-4H4z M8 10h8",
     "desc": "Answers plain-English questions such as “When did I last meet this customer?”, in the CRM app and in Teams, Copilot and Claude."
