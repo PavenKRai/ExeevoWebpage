@@ -1,3 +1,7 @@
+/* Page transition: opacity + rise, backwards fill only so nothing (transform/filter) stays applied afterwards. */
+@keyframes pageIn { from { opacity: 0; translate: 0 16px; } }
+.page-in { animation: pageIn 0.5s var(--ex-ease-out) backwards; }
+
 /* Load: rise (hero only) */
 @keyframes rise {
   from { opacity: 0; translate: 0 28px; }

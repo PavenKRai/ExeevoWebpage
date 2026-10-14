@@ -9,3 +9,6 @@ next-env.d.ts
 playwright-report
 test-results
 .DS_Store
+
+# Raw WordPress export (input to scripts/migrate/sanitise.mjs)
+scripts/migrate/.raw/

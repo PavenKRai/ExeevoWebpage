@@ -37,9 +37,9 @@ test.describe("desktop navigation", () => {
     await expect(page.locator("#role-button-msl")).toHaveAttribute("aria-expanded", "true");
   });
 
-  test("Compliance link lands on the compliance tiles", async ({ page }) => {
+  test("footer Trust & Compliance link lands on the compliance tiles", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Compliance" }).click();
+    await page.getByRole("contentinfo").getByRole("link", { name: "Trust & Compliance" }).click();
     await expect(page).toHaveURL(/why-exeevo#compliance/);
     await page.waitForTimeout(2200);
     await expect(page.getByText("Regulatory & compliance built in")).toBeInViewport();
@@ -67,7 +67,7 @@ test.describe("mobile menu", () => {
     await expect(menu.getByRole("link", { name: /Pharma/ })).toBeVisible();
     await expect(menu.getByRole("link", { name: /MedTech/ })).toBeVisible();
     await expect(menu.getByRole("link", { name: /Solutions by role/ })).toBeVisible();
-    for (const n of ["Why Exeevo", "Compliance", "Getting started"]) await expect(menu.getByRole("link", { name: n })).toBeVisible();
+    for (const n of ["Ask-Nova", "Why Exeevo", "Services", "Resources"]) await expect(menu.getByRole("link", { name: n })).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(menu).toBeHidden();
   });

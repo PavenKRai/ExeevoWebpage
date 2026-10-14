@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/platform", "/why-exeevo", "/industries", "/solutions-by-role", "/getting-started"];
+const routes = ["/", "/platform", "/ask-nova", "/about", "/partners", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
 
 for (const route of routes) {
   test(`route ${route} returns 200 and renders one h1`, async ({ page }) => {
@@ -72,19 +72,19 @@ test("industry toggle and deep link", async ({ page }) => {
   await expect(page).toHaveURL(/industry=pharma/);
 });
 
-test("demo form validation and success", async ({ page }) => {
+test("talk to our team form: validation and success", async ({ page }) => {
   await page.route("**/api/demo", (route) => route.fulfill({ status: 200, json: { ok: true } }));
-  await page.goto("/getting-started");
-  const form = page.getByRole("form", { name: "Request a demo" });
-  await form.getByRole("button", { name: "Request a demo" }).click();
+  await page.goto("/services", { waitUntil: "networkidle" });
+  const form = page.getByRole("form", { name: "Talk to our team" });
+  await form.getByRole("button", { name: "Send request" }).click();
   await expect(page.locator("#demo-name-error")).toBeVisible();
   await expect(page.locator("#demo-email-error")).toBeVisible();
   await form.locator("#demo-name").fill("Test Person");
   await form.locator("#demo-email").fill("test@example.com");
   await form.locator("#demo-company").fill("Example Co");
   await form.locator("#demo-country").fill("United States");
-  await form.locator("#demo-teams").selectOption({ index: 1 });
+  await form.locator("#demo-service").selectOption({ index: 1 });
   await form.locator("#demo-consent").check();
-  await form.getByRole("button", { name: "Request a demo" }).click();
+  await form.getByRole("button", { name: "Send request" }).click();
   await expect(page.getByRole("status")).toContainText("Request received.");
 });

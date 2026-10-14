@@ -1,0 +1,36 @@
+# Exeevo
+
+> Exeevo is a unified, AI-powered life sciences CRM built natively on Microsoft (Dynamics 365, Power Platform and Azure). It gives commercial, medical and marketing teams at pharma and MedTech companies one system, one data model and one license. Exeevo is a division of Valsoft.
+
+Customer data is stored and processed in the customer's own Microsoft Azure environment. It is not sold, shared or used to train AI models across other customers.
+
+## Key pages
+- [Home](/): what Exeevo is and who it is for
+- [Platform](/platform): the eight modules in one view
+- [Why Exeevo](/why-exeevo): built natively for life sciences, regulatory and compliance coverage, comparison with generic CRM platforms and point-solution add-ons
+- [Industries](/industries): pharma and MedTech
+- [Solutions by role](/solutions-by-role): Field Rep, Medical Science Liaison, Key Account Manager, Consumer & Animal Health Rep
+- [Ask-Nova Studio & AI](/ask-nova): thirteen AI features grouped by who uses them and when (AI Summaries, AI Insights, Conversation Analysis, Embedded Note Taker, Companion App, Ask-Nova Assistant, Voice Interaction, Multi-Language Support, Ask-Nova Studio, Data Connectivity, MCP Server, AI Configurator, AI Support Tool); three come with every licence, Ask-Nova Plus adds the rest; answers are grounded in the customer's data, not trained on it
+- [Professional Services](/services): advisory, implementation, data migration, integrations, training, managed services, hosting, AI enablement and machine learning services, grouped as Advise, Implement and Operate; includes the Core (live in as little as 4 weeks) and Enterprise launch paths and the "Talk to our team" demo and enquiry form
+- [Resources](/resources): blog, white papers, webinars, case studies, press releases, events, analyst reports and a glossary of life sciences terms
+- [Glossary](/glossary): plain-language definitions (HCP, MSL, KAM, MLR, 21 CFR Part 11 and more)
+- [About](/about): company story (founded 2017, part of Valsoft since December 2024), what Exeevo does, offices in Clearwater (US), Bangalore (India) and Shanghai (China)
+- [Partners](/partners): Microsoft, system integrators (NNIT, msg industry advisors, Hitachi Solutions, NTT DATA, TCS, Deloitte, Capgemini), data partners (MedPro, IQVIA) and compliance partner QPharma
+
+## Professional Services (10 services)
+- Advise: Consulting & Solution Advisory; AI Readiness & Advisory
+- Implement: Implementation; Data Migration & Data Operations; Integrations & Connectivity; Training & Enablement
+- Operate: Managed Services; Hosting & Platform Operations; AI Enablement Services; Machine Learning Services
+
+## The eight modules
+- CRM (Sales): HCP targeting and segmentation, territory alignment, call planning and sample compliance
+- Medical CRM: scientific plans, adverse event and medical inquiry case management, KOL engagement tracking
+- Marketing Automation: omnichannel HCP journeys, segment building and campaign reporting
+- Event Management: virtual, hybrid and in-person events with native Microsoft Teams webinars
+- Content Management: compliant digital asset management with MLR review in Microsoft Teams, e-signatures and audit trails
+- Customer Insights: unified customer profile with out-of-box churn, lifetime value and sentiment models
+- Mobile App: offline-capable, voice-to-text capture and geo-routing for field reps, MSLs and account managers
+- Ask-Nova Studio: build and configure AI agents scoped to the customer's own data and compliance guardrails
+
+## Compliance coverage
+FDA 21 CFR Part 11 (audit trails and e-signatures), GDPR (consent and data-subject controls), PIPL (data residency and localization for China), HIPAA and Sunshine Act (transparency reporting and PHI safeguards).

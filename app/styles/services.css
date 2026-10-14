@@ -1,0 +1,17 @@
+/* Professional Services page. Orbit arcs behind the dark hero (decorative, static) and the swap-in of a selected service. */
+.svc-arcs {
+  background: repeating-radial-gradient(circle at 74% 42%, transparent 0 138px, rgba(255, 255, 255, 0.05) 138px 139px);
+  mask-image: radial-gradient(ellipse 80% 70% at 74% 42%, #000 30%, transparent 78%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 74% 42%, #000 30%, transparent 78%);
+}
+
+/* A service panel animates in when it stops being [hidden] (opacity/translate only). */
+.svc-panel:not([hidden]) {
+  animation: svcSwap 0.6s var(--ex-ease-out) both;
+}
+@keyframes svcSwap {
+  from {
+    opacity: 0;
+    translate: 18px 0;
+  }
+}

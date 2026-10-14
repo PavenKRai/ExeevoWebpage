@@ -97,7 +97,7 @@ export function RolePanel({ role, index, total, open, onSelect }: Props) {
                 {`Role ${index + 1} of ${total}`}
               </span>
               <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
-                <h3 className="m-0 text-[inherit]">{button}</h3>
+                <h2 className="m-0 text-[inherit]">{button}</h2>
                 {role.modules && (
                   <ul className="m-0 flex list-none flex-wrap gap-2 p-0">
                     {role.modules.map((m) => (
@@ -140,7 +140,7 @@ export function RolePanel({ role, index, total, open, onSelect }: Props) {
           >
             <span id={regionId} hidden />
             <span aria-hidden="true" className="size-3 shrink-0 rounded-full" style={{ background: c }} />
-            <h3 className="m-0 flex text-[inherit]">{button}</h3>
+            <h2 className="m-0 flex text-[inherit]">{button}</h2>
           </motion.div>
         )}
       </AnimatePresence>

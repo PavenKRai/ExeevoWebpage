@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { roles, rolesPage } from "@/content/roles";
+import { seo } from "@/content/seo";
+import { pageMetadata } from "@/lib/seo";
 import { RolesScene } from "@/components/sections/RolesScene";
 import { RolesSceneRoute } from "@/components/sections/RolesSceneRoute";
 
-export const metadata: Metadata = {
-  title: rolesPage.h1,
-  description: rolesPage.intro,
-};
+export const metadata: Metadata = pageMetadata(seo.roles);
 
 export default function SolutionsByRolePage() {
   return (

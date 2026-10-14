@@ -1,4 +1,5 @@
 "use client";
+import { site } from "@/content/site";
 import "./roles-scene.css";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useMotionValueEvent } from "motion/react";
@@ -83,7 +84,7 @@ export function RolesScene({ roles, page, roleParam = null }: { roles: readonly 
         </div>
         <div className="mt-10 flex flex-col items-start gap-6 lg:mt-[60px] lg:flex-row lg:items-center lg:justify-between pinned:mt-0!">
           <p className="max-w-none text-[18px] text-[#DCE3E7]">{page.closing.line}</p>
-          <Button href="/getting-started#demo" size="hero" className="min-h-[54px]! px-[26px]!">{page.closing.cta}</Button>
+          <Button href={site.demoHref} size="hero" className="min-h-[54px]! px-[26px]!">{page.closing.cta}</Button>
         </div>
       </div>
       <div aria-hidden="true" className="absolute left-0 top-1/2 z-10 hidden -translate-y-1/2 flex-col pinned:flex">
