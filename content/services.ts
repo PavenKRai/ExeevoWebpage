@@ -27,7 +27,6 @@ export const servicesPage = {
   interested: { before: "Interested in", cta: "Talk to us about it" },
   valueLabel: "Value to clients",
   includedLabel: "What's included",
-  dock: "Service phases",
   engage_cta: (phase: string) => `View ${phase.toLowerCase()} services`,
   phaseWord: "Phase",
 } as const;

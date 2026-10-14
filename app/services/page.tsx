@@ -3,7 +3,6 @@ import { JsonLd } from "@/components/resources/JsonLd";
 import { ContactSection } from "@/components/services/ContactSection";
 import { HowWeEngage } from "@/components/services/HowWeEngage";
 import { PathsBlock } from "@/components/services/PathsBlock";
-import { PhaseDock } from "@/components/services/PhaseDock";
 import { PhaseSection } from "@/components/services/PhaseSection";
 import { ServiceParamProvider } from "@/components/services/ServiceParam";
 import { ServicesHero } from "@/components/services/ServicesHero";
@@ -20,7 +19,6 @@ export default function ServicesPage() {
     <ServiceParamProvider>
       <JsonLd data={servicesJsonLd()} />
       <ServicesHero />
-      <PhaseDock />
       <HowWeEngage />
       {phases.map((p) => (
         <PhaseSection key={p.slug} phase={p}>

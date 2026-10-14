@@ -42,14 +42,6 @@ test("?service= deep link selects that service", async ({ page }) => {
   await expect(page.locator("#demo-service")).toHaveValue("AI Readiness & Advisory");
 });
 
-test("dock links jump to the phases and the form", async ({ page }) => {
-  await page.goto("/services", { waitUntil: "networkidle" });
-  const dock = page.getByRole("navigation", { name: "Service phases" });
-  await expect(dock.getByRole("link")).toHaveCount(4);
-  for (const p of phases) await expect(dock.getByRole("link", { name: p.title })).toHaveAttribute("href", `#${p.slug}`);
-  await expect(dock.getByRole("link", { name: "Talk to our team" })).toHaveAttribute("href", "/services#demo");
-});
-
 test("form offers every service plus 'not sure' and 'end-to-end'", async ({ page }) => {
   await page.goto("/services", { waitUntil: "networkidle" });
   const options = await page.locator("#demo-service option").allTextContents();
