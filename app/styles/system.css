@@ -22,7 +22,12 @@
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .glass { background: linear-gradient(160deg, #ffffff, #f1f5f7); }
 }
-.aura { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
+/* Soft glow. A radial fade instead of filter: blur(), which GPU tiles clip into hard rectangles while scrolling. */
+.aura {
+  position: absolute; border-radius: 50%; pointer-events: none; scale: 1.8;
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.55) 40%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.55) 40%, transparent 100%);
+}
 .gridbg {
   position: absolute; inset: 0; pointer-events: none;
   background-image: linear-gradient(to right, rgba(29, 38, 45, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(29, 38, 45, 0.05) 1px, transparent 1px);
