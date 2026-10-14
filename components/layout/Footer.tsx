@@ -3,42 +3,38 @@ import { site } from "@/content/site";
 import { Button } from "../ui/Button";
 import { Logo } from "./Logo";
 
-// Text keeps the design's line pitch while the hit target stays at least 44px tall.
-const linkCls = "-my-[13px] inline-flex min-h-11 items-center";
+const linkCls = "inline-flex min-h-11 items-center text-[14px] text-body hover:text-heading";
 
 function FooterLink({ href, children, className }: { href: string; children: string; className: string }) {
-  return href.startsWith("[") ? (
-    <span className={className} title={href}>{children}</span>
-  ) : (
-    <Link href={href} className={`${className} hover:text-white`}>{children}</Link>
-  );
+  return href.startsWith("[") ? <span className={className} title={href}>{children}</span> : <Link href={href} className={className}>{children}</Link>;
 }
 
+/** White footer with a hairline top border: brand and CTA, three link columns, legal row. */
 export function Footer() {
   const f = site.footer;
   return (
-    <footer className="on-dark flex min-h-[360px] flex-col bg-ink-deep leading-[normal] text-[#DCE3E7]">
-      <div className="frame grid gap-10 pb-10 pt-16 lg:grid-cols-12 lg:gap-x-6 lg:pt-20">
-        <div className="flex flex-col gap-[18px] lg:col-span-3">
-          <div className="-my-[5px]"><Logo size="footer" /></div>
-          <p className="max-w-[300px] text-[15px] leading-[1.55] text-on-dark-muted">{site.tagline}</p>
-          <div className="mt-2"><Button href={site.demoHref} size="nav">Get a demo</Button></div>
+    <footer className="border-t border-hairline bg-white">
+      <div className="frame flex flex-col gap-14 pb-8 pt-16 lg:pt-[72px]">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          <div className="flex flex-col items-start gap-5">
+            <Logo size="footer" />
+            <p className="body-text max-w-[280px]">{site.tagline}</p>
+            <Button href={site.demoHref} size="nav" className="!h-11 !px-5 !text-[14px]">Get a demo</Button>
+          </div>
+          {f.columns.map((c) => (
+            <nav key={c.title} aria-label={`Footer: ${c.title}`} className="flex flex-col gap-0.5">
+              <p className="mb-2 text-[14px] font-medium text-heading">{c.title}</p>
+              {c.links.map((l) => (
+                <FooterLink key={l.label} href={l.href} className={linkCls}>{l.label}</FooterLink>
+              ))}
+            </nav>
+          ))}
         </div>
-        {f.columns.map((c) => (
-          <nav key={c.title} aria-label={`Footer: ${c.title}`} className="flex flex-col gap-[14px] lg:col-span-2">
-            <p className="text-[14px] font-medium text-[#8FA0AA]">{c.title}</p>
-            {c.links.map((l) => (
-              <FooterLink key={l.label} href={l.href} className={`${linkCls} text-[15px]`}>{l.label}</FooterLink>
-            ))}
-          </nav>
-        ))}
-      </div>
-      <div className="frame mt-auto pb-9">
-        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-white/[.08] pt-6 text-[13px] text-[#8FA0AA]">
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-hairline pt-6 text-[13px] text-muted">
           <p>{f.legal}</p>
           <ul className="flex flex-wrap gap-x-6">
             {f.legalLinks.map((l) => (
-              <li key={l.label}><FooterLink href={l.href} className="-my-[14px] inline-flex min-h-11 items-center">{l.label}</FooterLink></li>
+              <li key={l.label}><FooterLink href={l.href} className="inline-flex min-h-11 items-center hover:text-heading">{l.label}</FooterLink></li>
             ))}
           </ul>
         </div>

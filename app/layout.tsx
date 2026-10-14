@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree, Sora } from "next/font/google";
+import { Geist } from "next/font/google";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
 import { OffscreenPause } from "@/components/layout/OffscreenPause";
@@ -9,8 +9,8 @@ import { orgFacts, seo } from "@/content/seo";
 import { isStaging, siteUrl } from "@/lib/siteUrl";
 import "./globals.css";
 
-const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap" });
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
+// One typeface for everything (new design system): Geist, weights 300-600.
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -42,7 +42,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sora.variable} ${figtree.variable}`}>
+    <html lang="en" className={geist.variable}>
       <body>
         <a href="#main" className="skip-link">Skip to content</a>
         <ScrollProgress />

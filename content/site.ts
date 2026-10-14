@@ -1,17 +1,18 @@
-export type NavLink = { label: string; href: string; icon?: "orb" };
+export type NavLink = { label: string; href: string };
 
 export const site = {
   name: "Exeevo",
   tagline: "A unified, AI-powered life sciences CRM built natively on Microsoft.",
   demoHref: "/services#demo",
   videoUrl: "[VIDEO URL]",
+  /** Primary navigation (new design): plain links, no dropdowns. Solutions by role is no longer linked from the nav or footer; the page stays live. */
   nav: [
     { label: "Platform", href: "/platform" },
-    { label: "Ask-Nova", href: "/ask-nova", icon: "orb" },
-    { label: "Industries", href: "/industries" },
-    { label: "Solutions by role", href: "/solutions-by-role" },
-    { label: "Why Exeevo", href: "/why-exeevo" },
+    { label: "Ask-Nova", href: "/ask-nova" },
     { label: "Services", href: "/services" },
+    { label: "Industries", href: "/industries" },
+    { label: "Why Exeevo", href: "/why-exeevo" },
+    { label: "About", href: "/about" },
     { label: "Resources", href: "/resources" },
   ] satisfies NavLink[],
   footer: {
@@ -30,7 +31,6 @@ export const site = {
         links: [
           { label: "Pharma", href: "/industries?industry=pharma" },
           { label: "MedTech", href: "/industries?industry=medtech" },
-          { label: "Solutions by Role", href: "/solutions-by-role" },
         ],
       },
       {
@@ -38,20 +38,8 @@ export const site = {
         links: [
           { label: "About", href: "/about" },
           { label: "Partners", href: "/partners" },
-          { label: "Careers", href: "/careers" },
           { label: "Case Studies", href: "/resources/case-studies" },
           { label: "Trust & Compliance", href: "/why-exeevo#compliance" },
-        ],
-      },
-      {
-        title: "Resources",
-        links: [
-          { label: "Blog", href: "/resources/blog" },
-          { label: "White papers", href: "/resources/white-papers" },
-          { label: "Webinars", href: "/resources/webinars" },
-          { label: "Events", href: "/events" },
-          { label: "Press", href: "/resources/press-releases" },
-          { label: "Glossary", href: "/glossary" },
         ],
       },
     ],

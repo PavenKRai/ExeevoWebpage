@@ -5,6 +5,7 @@
 @import "./styles/motion.css" layer(components);
 @import "./styles/scenes.css" layer(components);
 @import "./styles/reveal.css" layer(components);
+@import "./styles/system.css" layer(components);
 
 /* `pinned:` variant = the one-screen "stage" layout. It applies only inside scenes that opt in with <Scene fit> (the
    Platform, Industries and Solutions by role pages), at >= 768px. Nothing pins any more: the stage is just 100svh tall. */
@@ -21,7 +22,7 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  background: var(--ex-mist);
+  background: var(--ex-porcelain);
   color: var(--ex-text);
   font-family: var(--ex-font-text);
   font-size: 16px;
@@ -32,7 +33,7 @@ body {
 @layer base {
 h1, h2, h3 {
   font-family: var(--ex-font-display);
-  font-weight: 600;
+  font-weight: 500;
   text-wrap: balance;
   color: var(--ex-heading);
 }
