@@ -224,10 +224,10 @@ export function TenantSection() {
         <div className="flex flex-col gap-[26px] lg:col-span-6">
           <Heading h={t.heading} className="sr max-w-[760px]" />
           <p className={`${lead} sr`}>{w.body}</p>
-          <div className="sr relative">
+          <div className="relative">
             <div className="aura left-[6%] top-[10%] h-[180px] w-[260px] bg-brand-blue opacity-[.16]" aria-hidden="true" />
             <div className="aura bottom-0 right-[8%] h-40 w-[220px] bg-brand-green opacity-[.14]" aria-hidden="true" />
-            <div className="glass relative grid grid-cols-[44px_minmax(0,1fr)] gap-4 rounded-[20px] px-[26px] py-6">
+            <div className="glass sr relative grid grid-cols-[44px_minmax(0,1fr)] gap-4 rounded-[20px] px-[26px] py-6">
               <span aria-hidden="true" className="flex size-11 items-center justify-center rounded-[14px] border border-hairline bg-white/80 text-brand-blue"><LayoutGrid size={20} strokeWidth={1.5} /></span>
               <div className="flex flex-col gap-1.5">
                 <h3 className="text-[17px] font-[450] tracking-normal text-heading">{w.cardTitle}</h3>
@@ -237,10 +237,10 @@ export function TenantSection() {
           </div>
         </div>
         <div className="grid lg:col-span-5 lg:col-start-8">
-          <div className="srg relative w-full max-w-[520px] justify-self-center" role="img" aria-label={t.diagramLabel}>
+          <div className="relative w-full max-w-[520px] justify-self-center" role="img" aria-label={t.diagramLabel}>
             <div className="aura left-[20%] top-[20%] size-3/5 bg-brand-green opacity-[.18]" aria-hidden="true" />
             <div className="aura left-[10%] top-[10%] size-2/5 bg-brand-blue opacity-[.12]" aria-hidden="true" />
-            <div className="relative">
+            <div className="srg relative">
               <TenantDiagram />
               <div className="glass absolute left-1/2 top-1/2 flex aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-2 rounded-full text-center" style={{ background: "linear-gradient(160deg,rgba(255,255,255,.95),rgba(255,255,255,.75))" }}>
                 <span aria-hidden="true" className="size-4 rounded-full" style={{ background: "var(--ex-orb)" }} />
