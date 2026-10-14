@@ -29,23 +29,35 @@ export function PhaseDock() {
     };
   }, []);
   return (
-    <div className="pointer-events-none sticky top-[92px] z-30 -mt-7 flex justify-center px-3">
-      <nav aria-label={servicesPage.dock} className="glass pointer-events-auto flex max-w-full items-center gap-1 overflow-x-auto rounded-full p-1">
-        {phases.map((p) => (
-          <a
-            key={p.slug}
-            href={`#${p.slug}`}
-            aria-current={active === p.slug ? "true" : undefined}
-            className={cn("flex h-11 shrink-0 items-center gap-2.5 rounded-full px-4 text-[14px] font-medium text-heading transition-colors hover:bg-slate/[.07] sm:px-5", active === p.slug && "bg-slate/[.1]")}
+    <div className="pointer-events-none sticky top-[119px] z-30 h-0">
+      <div className="absolute inset-x-0 top-[-27px] flex justify-center px-3">
+        <nav
+          aria-label={servicesPage.dock}
+          className="glass pointer-events-auto flex max-w-full items-center gap-1 overflow-x-auto rounded-full p-1"
+        >
+          {phases.map((p) => (
+            <a
+              key={p.slug}
+              href={`#${p.slug}`}
+              aria-current={active === p.slug ? "true" : undefined}
+              className={cn(
+                "flex h-11 shrink-0 items-center gap-2.5 rounded-full px-4 text-[14px] font-medium text-heading transition-colors hover:bg-slate/[.07] sm:px-5",
+                active === p.slug && "bg-slate/[.1]",
+              )}
+            >
+              <span aria-hidden="true" className={cn("dot", phaseStyle[p.color].dot)} />
+              {p.title}
+            </a>
+          ))}
+          <Button
+            href={site.demoHref}
+            size="nav"
+            className="ml-1 !h-11 shrink-0 !px-5 !text-[14px]"
           >
-            <span aria-hidden="true" className={cn("dot", phaseStyle[p.color].dot)} />
-            {p.title}
-          </a>
-        ))}
-        <Button href={site.demoHref} size="nav" className="ml-1 !h-11 shrink-0 !px-5 !text-[14px]">
-          {servicesPage.primaryCta}
-        </Button>
-      </nav>
+            {servicesPage.primaryCta}
+          </Button>
+        </nav>
+      </div>
     </div>
   );
 }
