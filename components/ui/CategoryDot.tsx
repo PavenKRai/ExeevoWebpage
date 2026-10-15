@@ -1,13 +1,14 @@
 import type { Category } from "@/content/modules";
 import { cn } from "./cn";
 
-const bg: Record<Category, string> = {
-  commercial: "bg-brand-blue",
-  medical: "bg-magenta",
-  platform: "bg-brand-green",
-  ai: "bg-[image:var(--ex-gradient)]",
+const cls: Record<Category, string> = {
+  commercial: "dot dot-commercial",
+  medical: "dot dot-medical",
+  platform: "dot dot-platform",
+  ai: "dot dot-ai",
 };
 
+/** Gradient dot (no ring): use only where the colour carries meaning (category, phase, stage). */
 export function CategoryDot({ category, className }: { category: Category; className?: string }) {
-  return <span aria-hidden="true" className={cn("inline-block size-2.5 shrink-0 rounded-full", bg[category], className)} />;
+  return <span aria-hidden="true" className={cn(cls[category], className)} />;
 }

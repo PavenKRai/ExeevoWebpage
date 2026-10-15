@@ -5,6 +5,8 @@ export type Partner = { id: string; cat: Exclude<PartnerCategory, "tech">; name:
 export const partnersPage = {
   label: "Partners",
   h1: "Successful CRM programmes depend on more than software",
+  h1Light: "Successful CRM programmes",
+  h1Bold: "depend on more than software",
   intro:
     "Exeevo works with a global ecosystem of technology, implementation, data and compliance partners, so every customer gets the right expertise for their markets, their languages and their regulatory landscape.",
   body:
@@ -12,6 +14,15 @@ export const partnersPage = {
   browse: "Browse partners",
   becomeLabel: "Become a partner",
   filterLabel: "Filter partners by type",
+  filterPrefix: "Filter / partner type",
+  heroTiles: [
+    { cat: "tech", href: "#tech" },
+    { cat: "impl", href: "#impl" },
+    { cat: "data", href: "#data" },
+    { cat: "comp", href: "#comp" },
+  ],
+  countNoun: { one: "partner", many: "partners" },
+  rowToggle: { open: "Show less", closed: "Read more" },
   filters: [
     { id: "all", name: "All partners" },
     { id: "tech", name: "Technology" },
@@ -37,6 +48,8 @@ export const partnersPage = {
     { cat: "comp", kicker: "Compliance partners", title: "Compliance & Support (US)", body: "Compliance and commercial support for US field operations, alongside Exeevo CRM." },
   ],
   become: {
+    titleLight: "Become an",
+    titleBold: "Exeevo partner",
     title: "Become an Exeevo partner",
     body: "We are growing our partner ecosystem across implementation, data, technology and compliance. If your organisation helps life sciences companies transform how they engage customers, we would like to hear from you.",
     cta: "Contact our partnerships team",

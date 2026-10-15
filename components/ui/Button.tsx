@@ -6,15 +6,16 @@ type Variant = "primary" | "secondary" | "text";
 type Size = "hero" | "content" | "nav";
 
 const sizes: Record<Size, string> = {
-  hero: "h-14 min-h-14 rounded-[17px] px-7 text-[16px]",
-  content: "h-[52px] min-h-[52px] rounded-[16px] px-6 text-[15px]",
-  nav: "h-12 min-h-12 rounded-[15px] px-[22px] text-[15px]",
+  hero: "btn-lg",
+  content: "",
+  nav: "btn-sm",
 };
 
 type Props = {
+  /** primary = ink pill (one per view), secondary = glass pill, text = blue text link. */
   variant?: Variant;
   size?: Size;
-  /** Primary only: solid ink fill with a 2px ring (nav on light pages). */
+  /** Kept for backwards compatibility with older call sites; the ink pill is always solid now. */
   solid?: boolean;
   href?: string;
   className?: string;
@@ -22,16 +23,12 @@ type Props = {
 } & Omit<ComponentProps<"button">, "className" | "children">;
 
 export function Button({ variant = "primary", size = "content", solid = false, href, className, children, ...rest }: Props) {
-  const base =
-    variant === "primary"
-      ? cn("btn-primary inline-flex items-center whitespace-nowrap justify-center gap-2.5 font-semibold leading-[normal]", solid && "btn-primary-solid", sizes[size])
-      : variant === "secondary"
-        ? cn("glass-dark nav-link nav-link-dark inline-flex h-14 items-center gap-3 leading-[normal] rounded-[17px] pl-2.5 pr-[22px] text-[16px] font-[450]")
-        : "inline-flex min-h-11 items-center font-semibold underline decoration-brand-blue decoration-2 underline-offset-[3px]";
+  void solid;
+  const base = variant === "text" ? "tlink" : cn("btn", variant === "primary" ? "btn-ink" : "btn-glass", sizes[size]);
   const cls = cn(base, className);
   if (href) {
-    const external = href.startsWith("[");
-    return external ? (
+    const placeholder = href.startsWith("[");
+    return placeholder ? (
       <span className={cls} title="Placeholder link">
         {children}
       </span>

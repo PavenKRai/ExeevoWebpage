@@ -1,23 +1,25 @@
 # AGENTS.md
 
-Instructions for AI coding agents working on the Exeevo marketing website. Read this file fully before making changes. The build brief, which covers design tokens, page layouts, motion specs and all copy, is in `exeevo-website-prompt.md`. When the two disagree, this file wins on process and the brief wins on design and content.
+Instructions for AI coding agents working on the Exeevo marketing website. Read this file fully before making changes. **Design:** the site follows the "Clinical light" design system (`docs/design-system.md`; sources `ExeevoNewDesignSystem.html` and `ExeevoNewWebsiteDesign.html`). The original build brief `exeevo-website-prompt.md` still holds the content and copy, but its dark "Clinical Glass" visual design is superseded. When they disagree, this file wins on process, the design system wins on design, and the brief wins on content.
 
 ## Project overview
 
 - **What:** The public marketing site for Exeevo, a unified, AI-powered life sciences CRM built natively on Microsoft.
 - **Audience:** Commercial, medical, marketing and IT leaders at pharma and MedTech companies.
-- **Look:** "Clinical Glass". Deep ink and pale mist surfaces, frosted glass panels, a glowing brand-gradient "specimen" sphere, CSS 3D depth, and scroll-driven reveals.
+- **Look:** "Clinical light": porcelain, white and mist grounds, frosted-glass cards over soft glows, Geist in light and bold pairs, pill buttons, gradient dots only where colour carries meaning, hairline dividers, one-time scroll reveals.
 - **Pages:**
 
 | Route | Page |
 | --- | --- |
 | `/` | Home |
-| `/platform` | Platform overview |
+| `/platform` | Platform overview (eight stacked module sections; `?module=<slug>` scrolls to one) |
 | `/why-exeevo` | Why Exeevo |
 | `/industries` | Industries |
-| `/solutions-by-role` | Solutions by Role |
+| `/solutions-by-role` | Solutions by Role (live, but not in the nav or footer; not yet redesigned) |
 | `/ask-nova` | Ask-Nova Studio & AI |
-| `/services` | Professional Services (replaced Getting Started; `/getting-started` redirects here) |
+| `/services` | Professional Services: Consult, Implement, Operate (replaced Getting Started; `/getting-started` redirects here) |
+| `/about`, `/partners` | About, Partners |
+| `/resources`, `/events`, `/glossary` and detail pages | Resources (CMS content; light-touch styling until redesigned) |
 
 ## Stack
 
@@ -26,7 +28,7 @@ Instructions for AI coding agents working on the Exeevo marketing website. Read 
 - Plain CSS for the complex effects: `app/styles/glass.css`, `specimen.css` and `motion.css`.
 - Motion (`motion/react`) for page transitions and interactive state animation.
 - Native CSS scroll-driven animations for scroll reveals. Never use a JavaScript scroll library.
-- `next/font/google`: Sora (display, `--font-sora`) and Figtree (text, `--font-figtree`).
+- `next/font/google`: Geist only (`--font-geist`) for display and text.
 - lucide-react icons at stroke width 1.8.
 - React Hook Form + Zod for the demo form, posting to `app/api/demo/route.ts`.
 - pnpm, ESLint, Prettier, Playwright, and @axe-core/playwright.
@@ -57,9 +59,9 @@ Run `pnpm lint && pnpm typecheck && pnpm test` before you consider any task comp
 ```
 app/            routes, layout.tsx, template.tsx (page transitions), api/demo, styles/
 components/
-  layout/       Nav, MegaMenu, MobileMenu, Footer, ScrollProgress
+  layout/       Nav (plain links), MobileMenu, Footer, ScrollProgress (MegaMenu and NavMenu are unused until a menu design arrives)
   ui/           Button, IconButton, TextLink, Chip, CategoryDot, SegmentedControl, Checklist, Field, Select
-  glass/        GlassPanel, Orb, Specimen, Glow
+  glass/        GlassPanel, Orb, Specimen, Glow (legacy dark glass only for pages not yet redesigned)
   sections/     one component per page section
 content/        typed copy: site, modules, compliance, comparison, industries, roles, paths
 public/brand/   exeevo-icon.png, exeevo-wordmark-white.png, exeevo-wordmark-slate.png
@@ -68,7 +70,7 @@ tests/          smoke.spec.ts, a11y.spec.ts
 
 ## Code conventions
 
-- Server Components by default. Add `"use client"` only to components that need state, effects or Motion: Nav, MegaMenu, MobileMenu, ModuleDeck, RolePanels, IndustrySwitcher, DemoForm and the page-transition template.
+- Server Components by default. Add `"use client"` only to components that need state, effects or Motion: Nav, MobileMenu, IndustriesPage, DemoForm and the page-transition template.
 - **Content:**
   - All copy lives in `content/*.ts` as typed objects. Components receive content through props.
   - Never hard-code marketing copy inside components.
@@ -76,9 +78,9 @@ tests/          smoke.spec.ts, a11y.spec.ts
 - **Naming:** components use PascalCase files; content keys are camelCase; module slugs are kebab-case (`crm-sales`, `ask-nova-studio`).
 - **Styling:**
   - Tailwind utilities for layout and spacing.
-  - Named classes from `app/styles/*.css` for glass (`glass-dark`, `glass-light`), the sphere (`orb`, `ring`, `sat`) and motion (`sr`, `srl`, `srr`, `srg`, `srt`, `px`, `ln`, `d1`–`d3`, `lift`).
+  - Named classes from `app/styles/system.css` for the design system (`h1`, `h2`, `h3`, `lead`, `body-text`, `glass`, `card`, `aura`, `gridbg`, `ruler`, `dot`, `btn btn-ink`, `btn-glass`, `tlink`, `nl`, `lift`, `row`, `wrap`) and motion (`sr`, `srl`, `srr`, `srg`, `srt`, `px`, `ln`, `d1` to `d3`, `stagger`). Page-specific CSS lives in its own file.
   - No inline hex colours in components; always use tokens.
-- **Props:** `GlassPanel` takes `tone: "dark" | "light"`. `Button` takes `variant: "primary" | "secondary" | "text"` and `size: "hero" | "content" | "nav"`.
+- **Props:** `Button` takes `variant: "primary" | "secondary" | "text"` (ink pill, glass pill, blue text link) and `size: "hero" | "content" | "nav"`.
 - **Deep links:**
   - Platform module: `/platform?module=<slug>`
   - Industry: `/industries?industry=pharma|medtech`
@@ -88,38 +90,28 @@ tests/          smoke.spec.ts, a11y.spec.ts
 
 ## Design rules (do not break)
 
-1. **The gradient is light, not a fill.**
-   - Use `--ex-gradient` / `--ex-orb` only for: the sphere, blurred glows behind glass, the 1.5px primary-button ring, the scroll progress bar and connector lines.
-   - Never use it as a section background, and never set text on it.
-2. **No white buttons and no gradient-filled buttons.** The primary button is always ink glass with the gradient ring. Use one primary action per view.
-3. **Glass needs light behind it.** Every glass surface sits over an orb or a blurred glow. Provide an opaque fallback for browsers without `backdrop-filter`.
-4. **Two typefaces only:** Sora for h1–h3, Figtree for everything else. Use sentence case and no all-caps labels.
-5. **Category colours:**
-   - Commercial = `--ex-blue`
-   - Medical = `--ex-magenta`
-   - Platform = `--ex-green`
-   - AI = the gradient
-   - KAM role accent = `#6E5BD8`
-6. **Green never carries white text.** Green text on light grounds uses `--ex-green-ink`, and only for icons or 24px+ type.
-7. **Radius grows with surface size** (12 → 36, 50% for orbs). Never use one radius everywhere.
-8. **Avoid generic template tells:**
-   - numbered "01 / 02 / 03" markers on content that isn't a sequence (the deck position counter is fine)
-   - left-border accent cards
-   - emoji
-   - identical grey-shadow card grids
-   - arrows appended to every link
-9. **3D is CSS only:** `perspective` and `preserve-3d`, with transforms on the GPU-friendly properties.
+Full detail in `docs/design-system.md`.
+
+1. **Brand colour never fills a section.** It appears only as small gradient dots that carry meaning (category, phase, stage), soft blurred glows behind glass, and the thin gradient line (scroll progress, connectors). Never set text on a gradient.
+2. **Light grounds.** Page ground porcelain `#F6F8F9`, alternating with white and mist `#EEF2F4` between sections. Ink `#1D262D` is for text and the primary button only.
+3. **One typeface: Geist.** No second label font, no monospace, no all-caps or wide-tracked labels; sentence case everywhere.
+4. **Headings pair a light grey phrase (`#5E6B74`, weight 300) with one bold ink phrase (`#1D262D`, weight 500)** via `.h1` / `.h2` and a `<b>`. Display 76, H2 52, H3 22 to 28, lead 18, body 15, small label 13.5.
+5. **Buttons are pills.** Ink is primary (one per view); glass is secondary; blue text link for tertiary. No white or gradient-filled buttons.
+6. **Glass over soft glows**, hairline borders, light shadows only; solid white `card` only on flat grounds. Keep an opaque fallback for browsers without `backdrop-filter`.
+7. **Category colours:** Commercial = blue, Medical = magenta, Platform = green, AI = the gradient dot. Phases: Consult = magenta, Implement = blue, Operate = green. Green text on light grounds uses `--ex-green-ink`.
+8. **Radius grows with surface size:** pill 999, chip 12, card 20, panel 28, block 36, 50% for orbs.
+9. **Avoid generic template tells:** eyebrow labels above headings unless they add information, coloured squares or bracket letters, decorative counters ("01 / 08", "Service 01"), heavy drop shadows or glows under the nav, emoji, left-border accent cards. Useful numbering stays (list items, "1 of 2").
+10. **Sticky nav** is a glass pill over a short gradient blur that ends at the nav edge. Nav links are plain (no dropdowns) until menu designs exist.
 
 ## Motion rules
 
 - **Hero load:** `rise` sequence, once per page.
 - **Scroll reveals:**
   - CSS only, inside `@supports (animation-timeline: view())`.
-  - They must reverse when scrolling up, and browsers without support must show the final state.
+  - Reveals play once, time-based (`RevealObserver`), never reverse and never depend on scroll position; no-JS, crawlers and reduced motion see the final state.
   - Scroll keyframes animate `translate` / `scale` / `rotate` / `opacity` / `filter` only, so hover `transform` keeps working.
-- **Ambient loop:** only the specimen sphere and its rings loop. Pause the sphere with `animation-play-state` when it is off-screen.
+- **Ambient loop:** one loop per visual (cursor demo, data flow, dial, orbit). Pause off-screen loops (`data-orb` / `data-paused`) and show the final state under reduced motion.
 - **Interactive motion** (Motion):
-  - Module deck: 3D offset stack, 0.8s.
   - Role panels: flex-grow 1 → 5, 0.7s.
   - Industry switch: cross-fade with an 18px slide.
   - Page transitions: fade, 16px rise and blur-out.
@@ -137,7 +129,7 @@ tests/          smoke.spec.ts, a11y.spec.ts
 
 | Component | Keys |
 | --- | --- |
-| Mega menu | Enter/Space to open, Escape to close, focus trapped while open |
+| Mobile menu | Opens from the menu button, Escape closes |
 | Module rail | Arrow keys move the selection |
 | Role panels | `aria-expanded` |
 | Segmented control | `aria-pressed` |
@@ -175,7 +167,7 @@ Design widths are 390, 768, 1024 and 1440. Below 1024px the nav collapses into a
 Playwright covers:
 - every route returns 200 and renders its h1
 - every nav and footer link resolves
-- mega menu keyboard behaviour
+- mobile menu keyboard behaviour
 - module deck selection by click, arrow keys and deep link
 - role panel expand/collapse
 - the industry toggle and its deep link

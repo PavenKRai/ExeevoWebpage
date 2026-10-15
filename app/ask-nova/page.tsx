@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FeatureCarousel } from "@/components/ask-nova/FeatureCarousel";
+import { FeatureList } from "@/components/ask-nova/FeatureList";
 import { LicensingSection } from "@/components/ask-nova/LicensingSection";
 import { NovaCta } from "@/components/ask-nova/NovaCta";
 import { NovaHero } from "@/components/ask-nova/NovaHero";
@@ -19,10 +19,10 @@ export default function AskNovaPage() {
     <NovaProvider>
       <JsonLd data={askNovaJsonLd()} />
       <NovaHero />
-      <FeatureCarousel />
-      <LicensingSection />
       <StudioSection />
       <TrustCards />
+      <LicensingSection />
+      <FeatureList />
       <NovaCta />
     </NovaProvider>
   );

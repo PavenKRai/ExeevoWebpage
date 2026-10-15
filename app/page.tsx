@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { HomeHero } from "@/components/sections/HomeHero";
-import { Pathways } from "@/components/sections/Pathways";
-import { Outcomes } from "@/components/sections/Outcomes";
-import { PlatformBoard } from "@/components/sections/PlatformBoard";
-import { PrivacyTenant } from "@/components/sections/PrivacyTenant";
-import { GoLiveBand } from "@/components/sections/GoLiveBand";
+import { GoLive } from "@/components/home/GoLive";
+import { HomeHero } from "@/components/home/HomeHero";
+import { ModuleGrid } from "@/components/home/ModuleGrid";
+import { Outcomes } from "@/components/home/Outcomes";
+import { Pathways } from "@/components/home/Pathways";
+import { PrivacyTenant } from "@/components/home/PrivacyTenant";
 import { seo } from "@/content/seo";
 import { pageMetadata } from "@/lib/seo";
+import "@/app/styles/home.css";
 
 export const metadata: Metadata = pageMetadata(seo.home);
 
@@ -14,11 +15,11 @@ export default function Home() {
   return (
     <>
       <HomeHero />
-      <Pathways />
       <Outcomes />
-      <PlatformBoard />
+      <ModuleGrid />
       <PrivacyTenant />
-      <GoLiveBand />
+      <GoLive />
+      <Pathways />
     </>
   );
 }

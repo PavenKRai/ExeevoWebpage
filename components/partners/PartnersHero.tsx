@@ -1,68 +1,64 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowDown } from "lucide-react";
 import type { CSSProperties } from "react";
 import { Button } from "@/components/ui/Button";
-import { Glow } from "@/components/glass/Glow";
-import { partnersPage } from "@/content/partners";
+import { catNames, partners, partnersPage, type PartnerCategory } from "@/content/partners";
+import { catColor } from "./catColor";
 
 const i = (n: number) => ({ "--i": n }) as CSSProperties;
 
-// Orbit rings in the design's 600x600 space: radius, ring colour token and the dots on it (angles in degrees).
-const rings = [
-  { r: 250, color: "var(--ex-on-dark-muted)", dots: [-35] },
-  { r: 195, color: "var(--ex-green)", dots: [-27, 150] },
-  { r: 140, color: "var(--ex-magenta)", dots: [-70, -17, 40, 87, 135, 200, 250].map((d) => d) },
-  { r: 85, color: "var(--ex-link-on-dark)", dots: [118] },
-] as const;
-const dot = (r: number, deg: number) => [300 + r * Math.cos((deg * Math.PI) / 180), 300 + r * Math.sin((deg * Math.PI) / 180)] as const;
-const pillColors = ["var(--ex-on-dark-muted)", "var(--ex-green)", "var(--ex-magenta)", "var(--ex-link-on-dark)"] as const;
+function Chip({ cat, label }: { cat: PartnerCategory; label: string }) {
+  return (
+    <li className="glass inline-flex h-[34px] items-center gap-2 rounded-full px-3.5 text-[13px] text-body">
+      <span aria-hidden="true" className="dot" style={{ "--c": catColor[cat] } as CSSProperties} />
+      {label}
+    </li>
+  );
+}
 
-/** Dark hero with the orbit diagram (Compliance, Data, Implementation and Technology rings around the Exeevo mark). */
+/** Light hero: category chips, display heading (light + bold), two paragraphs, two pills, and four glass tiles with the partner counts. */
 export function PartnersHero() {
   const p = partnersPage;
+  const counts: Record<string, number> = { tech: 1 };
+  for (const x of partners) counts[x.cat] = (counts[x.cat] ?? 0) + 1;
   return (
-    <section className="on-dark relative overflow-hidden bg-ink pb-24 text-[#EEF2F4] lg:pb-32">
-      <div aria-hidden="true" className="co-grid-bg pointer-events-none absolute inset-0" />
-      <div className="frame relative grid items-center gap-12 pt-[128px] lg:grid-cols-[minmax(0,660px)_1fr] lg:gap-6 lg:pt-[150px]">
-        <div className="flex min-w-0 flex-col gap-6">
-          <p className="rise text-[15px] text-on-dark-muted" style={i(0)}>{p.label}</p>
-          <h1 className="rise text-[clamp(38px,4.2vw,60px)] leading-[1.05] tracking-[-0.035em]" style={i(1)}>{p.h1}</h1>
-          <p className="rise text-[18px] font-[350] leading-[1.65] text-on-dark" style={i(2)}>{p.intro}</p>
-          <p className="rise text-[16px] leading-[1.65] text-on-dark-muted" style={i(3)}>{p.body}</p>
-          <div className="rise flex flex-wrap gap-3 pt-1.5" style={i(4)}>
-            <Button href="#directory" size="hero">{p.browse}</Button>
-            <a href="#become" className="glass-dark nav-link nav-link-dark inline-flex h-14 items-center rounded-[17px] px-6 text-[16px] font-medium leading-[normal] text-white">{p.becomeLabel}</a>
+    <section className="relative overflow-hidden bg-porcelain pb-[110px] pt-[140px] lg:pt-[150px]">
+      <div className="gridbg" aria-hidden="true" />
+      <span className="aura right-[60px] top-[60px] size-[420px] bg-magenta opacity-10 max-lg:hidden" aria-hidden="true" />
+      <span className="aura -right-20 top-[300px] size-[460px] bg-brand-blue opacity-[.14] max-lg:hidden" aria-hidden="true" />
+      <span className="aura right-[360px] top-[380px] size-80 bg-brand-green opacity-[.13] max-lg:hidden" aria-hidden="true" />
+      <div className="frame relative grid items-center gap-12 lg:grid-cols-12 lg:gap-x-6">
+        <div className="flex flex-col items-start gap-[26px] lg:col-span-7">
+          <ul className="rise flex flex-wrap gap-2" style={i(0)}>
+            <Chip cat="comp" label="Compliance" />
+            <Chip cat="data" label="Data" />
+            <Chip cat="impl" label="Implementation" />
+            <Chip cat="tech" label="Technology" />
+          </ul>
+          <h1 className="h1 rise" style={i(1)}>{p.h1Light} <b>{p.h1Bold}</b></h1>
+          <p className="text-[18px] font-[350] leading-[1.6] tracking-normal text-muted [text-wrap:pretty] rise max-w-[620px]" style={i(2)}>{p.intro}</p>
+          <p className="body-text rise max-w-[620px] !text-[16px]" style={i(3)}>{p.body}</p>
+          <div className="rise flex flex-wrap gap-2.5" style={i(4)}>
+            <Button href="#browse">{p.browse}</Button>
+            <Button href="#become" variant="secondary">{p.becomeLabel}</Button>
           </div>
         </div>
-        <div aria-hidden="true" className="relative mx-auto aspect-square w-full max-w-[560px] lg:max-w-[600px]">
-          <Glow parallax color="gradient" className="left-[20%] top-[20%] h-[60%] w-[60%] blur-[110px]" style={{ opacity: 0.45 }} />
-          <svg viewBox="0 0 600 600" className="absolute inset-0 size-full overflow-visible">
-            {Array.from({ length: 60 }, (_, k) => {
-              const a = (k * 6 * Math.PI) / 180;
-              const long = k % 6 === 0;
-              const [x1, y1] = [300 + 290 * Math.cos(a), 300 + 290 * Math.sin(a)];
-              const [x2, y2] = [300 + (long ? 278 : 284) * Math.cos(a), 300 + (long ? 278 : 284) * Math.sin(a)];
-              return <line key={k} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#fff" strokeOpacity={long ? 0.4 : 0.18} />;
-            })}
-            {rings.map((ring) => (
-              <g key={ring.r}>
-                <circle cx="300" cy="300" r={ring.r} fill="none" stroke={ring.color} strokeOpacity=".55" strokeWidth="1.5" />
-                {ring.dots.map((d) => {
-                  const [cx, cy] = dot(ring.r, d);
-                  return <circle key={d} cx={cx} cy={cy} r="7" fill={ring.color} stroke="var(--ex-ink)" strokeWidth="3" />;
-                })}
-              </g>
-            ))}
-          </svg>
-          {p.orbit.map((name, n) => (
-            <span key={name} className="absolute left-[40%] flex h-[30px] items-center gap-2 whitespace-nowrap rounded-full border border-white/[.14] bg-ink/80 px-3 text-[12.5px] font-semibold text-white" style={{ top: `${((35 + n * 55) / 600) * 100}%` }}>
-              <span className="size-2 rounded-full" style={{ background: pillColors[n] }} />
-              {name}
-            </span>
+        <ul className="fi grid grid-cols-2 gap-3 lg:col-span-4 lg:col-start-9">
+          {p.heroTiles.map((t) => (
+            <li key={t.cat}>
+              <Link href={t.href} className="glass lift flex min-h-[170px] flex-col justify-between rounded-[24px] p-[22px]">
+                <span className="flex items-center justify-between text-[13.5px] font-medium text-body">
+                  <span className="flex items-center gap-2">
+                    <span aria-hidden="true" className="dot" style={{ "--c": catColor[t.cat] } as CSSProperties} />
+                    {catNames[t.cat]}
+                  </span>
+                  <ArrowDown aria-hidden="true" size={15} strokeWidth={1.6} />
+                </span>
+                <span className="num text-[56px] font-extralight leading-none tracking-[-0.05em] text-heading">{String(counts[t.cat]).padStart(2, "0")}</span>
+              </Link>
+            </li>
           ))}
-          <span className="glass-dark absolute left-[42.3%] top-[42.3%] flex size-[15.3%] items-center justify-center rounded-full border-[1.5px] border-white/60 bg-ink/60">
-            <Image src="/brand/exeevo-icon.png" alt="" width={42} height={42} className="size-[46%]" />
-          </span>
-        </div>
+        </ul>
       </div>
     </section>
   );

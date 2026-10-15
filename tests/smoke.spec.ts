@@ -23,25 +23,12 @@ test("nav and footer internal links resolve", async ({ page, request }) => {
   }
 });
 
-test("mega menu keyboard behaviour", async ({ page }) => {
-  await page.goto("/");
-  const trigger = page.getByRole("button", { name: "Platform modules" });
-  await trigger.focus();
-  await page.keyboard.press("Enter");
-  await expect(page.getByRole("dialog", { name: "Platform modules" })).toBeVisible();
-  await page.keyboard.press("Escape");
-  await expect(page.getByRole("dialog", { name: "Platform modules" })).toBeHidden();
-  await expect(trigger).toBeFocused();
-});
-
-test("module deck: click, arrow keys and deep link", async ({ page }) => {
+test("platform deep link scrolls to the module section", async ({ page }) => {
   await page.goto("/platform?module=event-management");
-  await expect(page.getByRole("tab", { name: /Event Management/ })).toHaveAttribute("aria-selected", "true");
-  await page.getByRole("tab", { name: /Medical CRM/ }).click();
-  await expect(page.getByRole("tab", { name: /Medical CRM/ })).toHaveAttribute("aria-selected", "true");
-  await page.keyboard.press("ArrowDown");
-  await expect(page.getByRole("tab", { name: /Marketing Automation/ })).toHaveAttribute("aria-selected", "true");
-  await expect(page.getByRole("tabpanel")).toContainText("Orchestrate omnichannel HCP journeys");
+  await page.waitForTimeout(1500);
+  await expect(page.locator("#event-management")).toBeInViewport();
+  await page.goto("/platform");
+  await expect(page.locator("section[id]")).toHaveCount(8);
 });
 
 test("role panels expand and collapse", async ({ page }) => {

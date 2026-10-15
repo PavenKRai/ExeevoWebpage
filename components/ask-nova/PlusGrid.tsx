@@ -2,19 +2,19 @@
 import { features } from "@/content/askNova";
 import { useNova } from "./NovaProvider";
 
-/** The nine Ask-Nova Plus features as buttons: each opens that feature in the carousel above. */
+/** The Ask-Nova Plus features as buttons: each scrolls to that feature in the list below and highlights it. */
 export function PlusGrid() {
   const { openFeature } = useNova();
   return (
-    <ul className="stagger grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
       {features
         .map((f, i) => ({ f, i }))
         .filter(({ f }) => f.tier === "plus")
         .map(({ f, i }) => (
           <li key={f.slug}>
-            <button type="button" onClick={() => openFeature(i)} className="glass-dark lift flex h-[78px] w-full flex-col justify-between rounded-[18px] px-4 py-3 text-left text-white">
-              <span className="font-display text-[13px] text-on-dark-muted">{f.num}</span>
-              <span className="text-[16px] font-semibold tracking-[-0.01em]">{f.name}</span>
+            <button type="button" onClick={() => openFeature(i)} className="row flex min-h-11 w-full items-center gap-2.5 rounded-[14px] border border-hairline bg-white/60 px-3.5 py-3 text-left text-[14px] text-heading">
+              <span className="num text-[12px] text-muted">{f.num}</span>
+              {f.name}
             </button>
           </li>
         ))}

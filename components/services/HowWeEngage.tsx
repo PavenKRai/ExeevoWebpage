@@ -1,55 +1,62 @@
 import Link from "next/link";
-import { Layer } from "@/components/scene/Layer";
-import { phases, servicesPage } from "@/content/services";
+import { ArrowRight } from "lucide-react";
+import { phaseRange, phases, servicesPage } from "@/content/services";
 import { cn } from "@/components/ui/cn";
 import { phaseStyle } from "./phaseStyle";
 
-/** "How we engage": the three phases as a timeline with their numbered services (each links to that service). */
+const bracket = "relative h-3 border-x border-[#8A969E] after:absolute after:inset-x-0 after:top-1/2 after:h-px after:bg-[#8A969E] after:content-['']";
+
+/** "How we engage": the three phases in one hairline-bordered card; each service links to `?service=<slug>`. */
 export function HowWeEngage() {
+  const e = servicesPage.engage;
   return (
-    <div id="how-we-engage" className="frame grid scroll-mt-28 gap-10 pb-24 pt-16 lg:grid-cols-12 lg:gap-x-6 lg:pb-[120px] lg:pt-[96px]">
-      <Layer from={{ o: 0, y: 30 }} className="flex flex-col gap-5 lg:col-span-4">
-        <h2 className="text-[clamp(32px,3.4vw,42px)] leading-[1.06] tracking-[-0.03em]">{servicesPage.engage.title}</h2>
-        <p className="max-w-[340px] text-[17px] leading-[1.65] text-on-dark">{servicesPage.engage.body}</p>
-      </Layer>
-      <div className="flex flex-col gap-8 lg:col-span-8 lg:col-start-5">
-        <Layer from={{ o: 0, y: 20 }} aria-hidden="true" className="relative mx-2.5 hidden h-[30px] lg:block">
-          <span className="absolute inset-x-0 top-[15px] h-px bg-white/[.22]" />
-          <span className="absolute left-0 top-[15px] h-[15px] w-px bg-white/[.22]" />
-          <span className="absolute right-0 top-[15px] h-[15px] w-px bg-white/[.22]" />
-          <span className="absolute left-1/2 top-0 flex h-[30px] -translate-x-1/2 items-center whitespace-nowrap rounded-[15px] border border-white/[.22] bg-ink px-4 text-[13px] text-[#DCE3E7]">
-            {servicesPage.engage.bracket}
-          </span>
-        </Layer>
-        <div className="relative">
-          <span aria-hidden="true" className="ln absolute inset-x-2.5 top-0 hidden h-0.5 bg-[image:var(--ex-gradient)] lg:block" />
-          <span aria-hidden="true" className="absolute -top-[5px] right-0.5 hidden size-3 rotate-45 border-r-2 border-t-2 border-brand-green lg:block" />
-          <ol className="grid gap-8 lg:grid-cols-3 lg:gap-0">
+    <section id="engage" aria-labelledby="engage-title" className="scroll-mt-20 bg-white py-20 lg:py-[120px]">
+      <div className="frame flex flex-col gap-14">
+        <div className="sr flex max-w-[760px] flex-col gap-5">
+          <h2 id="engage-title" className="h2">{e.titleLight} <b>{e.titleBold}</b></h2>
+          <p className="text-[18px] font-[350] leading-[1.6] tracking-normal text-muted [text-wrap:pretty] max-w-[640px]">{e.body}</p>
+        </div>
+        <div className="sr overflow-hidden rounded-[28px] border border-hairline bg-white">
+          <ol className="grid lg:grid-cols-3">
             {phases.map((p, n) => (
-              <Layer as="li" key={p.slug} from={{ o: 0, y: 40, s: 0.96 }} range={[n * 0.1, 1]} className="relative flex flex-col rounded-[24px] px-0 pb-6 pt-8 lg:px-[26px] lg:pt-10">
-                <span aria-hidden="true" className={cn("absolute left-0 top-[-7px] size-3.5 rounded-full shadow-[0_0_0_5px_var(--ex-ink),0_0_18px_currentColor] lg:left-[26px]", phaseStyle[p.color].dot, phaseStyle[p.color].textOnDark)} />
+              <li key={p.slug} className={cn("flex flex-col gap-5 px-7 pb-7 pt-[30px]", n > 0 && "max-lg:border-t border-hairline lg:border-l")}>
+                <div className="flex flex-col gap-2.5">
+                  <p className="flex items-center gap-[9px] text-[13.5px] font-medium text-heading">
+                    <span aria-hidden="true" className={cn("dot", phaseStyle[p.color].dot)} />
+                    {servicesPage.phaseWord} {n + 1}
+                  </p>
+                  <div aria-hidden="true" className={bracket} />
+                </div>
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-[26px] leading-[1.1] tracking-[-0.025em]">
+                  <h3 className="text-[34px] font-normal leading-none tracking-[-0.03em] text-heading">
                     <a href={`#${p.slug}`} className="hover:underline">{p.title}</a>
                   </h3>
-                  <span className={cn("text-[13px]", phaseStyle[p.color].textOnDark)}>{p.services.length} services</span>
+                  <span aria-hidden="true" className="num text-[13px] text-[#6A777F]">{phaseRange(p)}</span>
                 </div>
-                <p className="mt-3 min-h-[70px] text-[14.5px] leading-[1.6] text-on-dark">{p.blurb}</p>
-                <ul className="mt-[22px] border-b border-white/[.08]">
+                <p className="body-text min-h-12">{p.blurb}</p>
+                <ul className="mt-1 flex flex-col">
                   {p.services.map((s) => (
-                    <li key={s.slug} className="border-t border-white/[.08]">
-                      <Link href={`/services?service=${s.slug}`} className="flex min-h-11 items-baseline gap-3.5 py-3 text-[14px] leading-[1.4] text-[#DCE3E7] hover:text-white">
-                        <span className="w-5 shrink-0 text-[12px] tabular-nums text-on-dark-muted">{s.num}</span>
+                    <li key={s.slug} className="border-t border-dashed border-[#D9E0E5]">
+                      <Link href={`/services?service=${s.slug}`} className="grid min-h-11 grid-cols-[30px_minmax(0,1fr)] gap-2.5 py-3 text-[14px] leading-[1.4] text-body hover:text-heading">
+                        <span className="num pt-px text-[12px] text-muted">{s.num}</span>
                         {s.title}
                       </Link>
                     </li>
                   ))}
                 </ul>
-              </Layer>
+                <a href={`#${p.slug}`} className="tlink mt-auto pt-2 text-[14px]">
+                  {servicesPage.engage_cta(p.title)}
+                  <ArrowRight aria-hidden="true" size={15} strokeWidth={1.6} />
+                </a>
+              </li>
             ))}
           </ol>
+          <div className="flex flex-col gap-2.5 border-t border-hairline bg-porcelain px-7 pb-6 pt-[18px]">
+            <div aria-hidden="true" className={bracket} />
+            <p className="self-center text-[13.5px] font-medium text-muted">{e.bracket}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

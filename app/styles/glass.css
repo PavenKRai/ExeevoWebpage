@@ -84,14 +84,6 @@
   outline-color: var(--ex-link-on-dark);
 }
 
-/* Hover lift for cards */
-.lift {
-  transition: transform var(--ex-dur-base) var(--ex-ease-soft);
-}
-.lift:hover {
-  transform: perspective(1000px) rotateX(5deg) rotateY(-6deg) translateY(-8px);
-}
-
 /* Lab grid ground */
 .lab-grid {
   background-image:

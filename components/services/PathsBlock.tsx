@@ -1,15 +1,25 @@
-import { GoLivePaths } from "@/components/sections/GoLivePaths";
 import { gettingStarted, servicesPage } from "@/content/services";
 
-/** "Two paths to go live" (Core / Enterprise), shown at the top of the Implement phase. */
+/** "Two paths to go live" (Core / Enterprise) at the top of the Implement phase. */
 export function PathsBlock() {
   return (
-    <div className="mb-6 flex flex-col gap-[22px] lg:mb-[72px] lg:gap-3.5">
-      <div className="sr flex flex-col justify-between gap-3 lg:flex-row lg:items-end lg:gap-6">
-        <h3 className="text-[clamp(22px,1.7vw,24px)] leading-[1.1] tracking-[-0.02em]">{servicesPage.paths.title}</h3>
-        <p className="max-w-[400px] text-[15px] leading-[1.55] text-muted">{servicesPage.paths.body}</p>
+    <div className="sr grid gap-4 md:grid-cols-2">
+      <div className="flex flex-col gap-2 pb-2 md:col-span-2">
+        <h3 className="h3 !text-[26px] !font-normal">{servicesPage.paths.title}</h3>
+        <p className="body-text">{servicesPage.paths.body}</p>
       </div>
-      <GoLivePaths paths={gettingStarted.paths} connector={gettingStarted.connector} reveal />
+      {gettingStarted.paths.map((p) => (
+        <div key={p.slug} className="card lift flex flex-col gap-3 p-[26px]">
+          <p className="text-[13.5px] font-medium text-muted">{p.tag}</p>
+          <h3 className="h3">{p.title}</h3>
+          <p className="body-text">{p.body}</p>
+          <ul className="flex flex-wrap gap-1.5 pt-1.5">
+            {p.chips.map((c) => (
+              <li key={c} className="rounded-full border border-hairline bg-porcelain px-[11px] py-[7px] text-[13.5px] font-medium text-body">{c}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 }

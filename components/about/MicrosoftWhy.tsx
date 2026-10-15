@@ -1,42 +1,33 @@
 import Image from "next/image";
-import Link from "next/link";
-import { Glow } from "@/components/glass/Glow";
 import { about } from "@/content/about";
+import { Button } from "@/components/ui/Button";
 
-/** Dark band: the Microsoft partnership, then "Why life sciences chooses Exeevo" as five ruled rows. */
+/** "The best of both worlds" (Microsoft partnership and badge) beside "Why life sciences chooses Exeevo" as five ruled rows. */
 export function MicrosoftWhy() {
   const m = about.microsoft;
   const w = about.why;
   return (
-    <section aria-labelledby="ms-title" className="on-dark relative overflow-hidden bg-ink py-20 text-[#EEF2F4] lg:py-[110px]">
-      <Glow parallax color="blue" className="-left-24 bottom-0 h-[420px] w-[520px] blur-[120px] max-lg:hidden" style={{ opacity: 0.3 }} />
-      <div className="frame relative">
-        <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-x-6">
-          <div className="srl flex flex-col gap-5 lg:col-span-7">
-            <p className="text-[15px] text-on-dark-muted">{m.label}</p>
-            <h2 id="ms-title" className="text-[clamp(32px,3.4vw,46px)] leading-[1.06] tracking-[-0.03em]">{m.title}</h2>
-            {m.body.map((p, n) => (
-              <p key={n} className={n === 0 ? "max-w-[640px] text-[17px] leading-[1.65] text-on-dark" : "max-w-[640px] text-[16px] leading-[1.65] text-on-dark-muted"}>{p}</p>
-            ))}
-          </div>
-          <div className="srr flex flex-col gap-5 lg:col-span-4 lg:col-start-9 lg:pt-20">
-            <div className="flex items-center justify-center rounded-3xl bg-white p-8">
-              <Image src={m.badge.src} alt={m.badge.alt} width={773} height={246} sizes="300px" className="w-full max-w-[300px]" />
-            </div>
-            <Link href="/partners" className="inline-flex min-h-11 items-center self-start border-b-2 border-brand-blue font-semibold text-white">{m.link}</Link>
+    <section aria-labelledby="ms-title" className="overflow-x-clip bg-white pb-20 lg:pb-[120px]">
+      <div className="frame grid grid-cols-1 items-start gap-x-6 gap-y-12 lg:grid-cols-12">
+        <div className="flex flex-col gap-6 lg:col-span-6">
+          <h2 id="ms-title" className="h2 sr max-w-[760px]">{m.parts.light} <b>{m.parts.bold}</b></h2>
+          <p className="lead sr">{m.body[0]}</p>
+          <p className="body-text sr !text-[16px]">{m.body[1]}</p>
+          <div className="card sr flex flex-wrap items-center justify-between gap-x-6 gap-y-3 bg-porcelain px-[26px] py-[22px]">
+            <Image src={m.badge.src} alt={m.badge.alt} width={773} height={225} sizes="220px" className="h-16 w-auto mix-blend-multiply" />
+            <Button href="/partners" variant="text">{m.link}</Button>
           </div>
         </div>
-
-        <div className="mt-20 lg:mt-[110px]">
-          <h2 className="sr text-[clamp(28px,2.7vw,38px)] leading-[1.1] tracking-[-0.03em]">{w.title}</h2>
-          <ul className="stagger mt-10 border-b border-white/10">
-            {w.items.map((it) => (
-              <li key={it.title} className="grid gap-3 border-t border-white/10 py-6 lg:grid-cols-12 lg:gap-x-6 lg:py-7">
-                <h3 className="font-display text-[clamp(20px,1.7vw,24px)] font-semibold leading-[1.2] tracking-[-0.02em] text-white lg:col-span-6">{it.title}</h3>
-                <p className="text-[16px] leading-[1.6] text-on-dark lg:col-span-6 lg:col-start-7">{it.body}</p>
+        <div className="flex flex-col gap-[18px] lg:col-span-5 lg:col-start-8">
+          <h3 className="sr text-[28px] font-[350] leading-[1.15] tracking-[-0.025em] text-heading">{w.title}</h3>
+          <ol>
+            {w.items.map((it, n) => (
+              <li key={it.title} className="sr grid grid-cols-[44px_minmax(0,1fr)] gap-3.5 border-t border-hairline py-5">
+                <span className="num text-[13px] text-brand-blue">{String(n + 1).padStart(2, "0")}</span>
+                <p className="text-[16px] leading-[1.55] text-muted"><span className="font-medium text-heading">{it.title}</span> {it.body}</p>
               </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </div>
     </section>

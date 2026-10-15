@@ -1,6 +1,9 @@
-export type PhaseSlug = "advise" | "implement" | "operate";
+export type PhaseSlug = "consult" | "implement" | "operate";
 export type Service = { slug: string; num: string; title: string; tag: string; desc: string; inc: string[]; val: string };
 export type Phase = { slug: PhaseSlug; title: string; blurb: string; color: "magenta" | "blue" | "green"; services: Service[] };
+
+/** "01–02" style range of service numbers in a phase. */
+export const phaseRange = (p: Phase) => `${p.services[0].num}–${p.services[p.services.length - 1].num}`;
 
 /** Copy comes verbatim from the Professional Services design. Service numbers (01-10) are a real sequence. */
 export const servicesPage = {
@@ -12,6 +15,8 @@ export const servicesPage = {
   secondaryCta: "See all 10 services",
   engage: {
     title: "How we engage",
+    titleLight: "How",
+    titleBold: "we engage",
     body: "Most clients start with one service and add others as the programme develops. Services can be bought individually or as a single end-to-end engagement.",
     bracket: "or as one end-to-end engagement",
   },
@@ -22,13 +27,14 @@ export const servicesPage = {
   interested: { before: "Interested in", cta: "Talk to us about it" },
   valueLabel: "Value to clients",
   includedLabel: "What's included",
-  dock: "Service phases",
+  engage_cta: (phase: string) => `View ${phase.toLowerCase()} services`,
+  phaseWord: "Phase",
 } as const;
 
 export const phases: Phase[] = [
   {
-    "slug": "advise",
-    "title": "Advise",
+    "slug": "consult",
+    "title": "Consult",
     "blurb": "Define the scope, business case and roadmap before committing to a build.",
     "color": "magenta",
     "services": [
