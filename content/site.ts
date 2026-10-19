@@ -10,10 +10,10 @@ export const site = {
     { label: "Platform", href: "/platform" },
     { label: "Ask-Nova", href: "/ask-nova" },
     { label: "Services", href: "/services" },
-    { label: "Partnerships", href: "/partners" },
     { label: "Why Exeevo", href: "/why-exeevo" },
     { label: "Microsoft", href: "/microsoft" },
     { label: "About", href: "/about" },
+    { label: "Partnerships", href: "/partners" },
     { label: "Resources", href: "/resources" },
   ] satisfies NavLink[],
   footer: {

@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const navLabels = ["Platform", "Ask-Nova", "Services", "Partnerships", "Why Exeevo", "Microsoft", "About", "Resources"];
+const navLabels = ["Platform", "Ask-Nova", "Services", "Why Exeevo", "Microsoft", "About", "Partnerships", "Resources"];
 
 test.describe("desktop navigation", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
