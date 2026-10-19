@@ -5,7 +5,7 @@
 Customer data is stored and processed in the customer's own Microsoft Azure environment. It is not sold, shared or used to train AI models across other customers.
 
 ## Key pages
-- [Home](/): what Exeevo is and who it is for
+- [Home](/): what Exeevo is and who it is for, why a Microsoft foundation matters (security, compliance, regional hosting, always current), the eight modules and the two go-live paths
 - [Platform](/platform): the eight modules in one view
 - [Why Exeevo](/why-exeevo): built natively for life sciences, regulatory and compliance coverage, comparison with generic CRM platforms and point-solution add-ons
 - [Industries](/industries): pharma and MedTech

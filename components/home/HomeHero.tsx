@@ -1,9 +1,10 @@
+import Image from "next/image";
 import type { CSSProperties, ReactNode } from "react";
 import { Play, ShieldCheck, LockKeyhole } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { home } from "@/content/home";
 import { site } from "@/content/site";
-import { FieldDemo } from "./FieldDemo";
+import { RecordDemo } from "./RecordDemo";
 
 const i = (n: number) => ({ "--i": n }) as CSSProperties;
 const iconBox = "inline-flex size-[26px] items-center justify-center rounded-lg bg-white shadow-[0_0_0_1px_var(--ex-hairline)]";
@@ -24,10 +25,10 @@ export function HomeHero() {
       <div className="aura right-[60px] top-[520px] size-[300px] bg-brand-green opacity-[.14] max-lg:hidden" aria-hidden="true" />
       <div className="hm-wrap grid items-center gap-12 lg:grid-cols-12 lg:gap-x-6">
         <div className="flex flex-col items-start gap-7 lg:col-span-6">
-          <span className="glass rise inline-flex h-9 items-center gap-2.5 rounded-full pl-2.5 pr-5 text-[13px] text-body" style={i(0)}>
-            <span aria-hidden="true" className="size-4 rounded-full bg-[image:var(--ex-orb)]" />
+          <span className="glass rise inline-flex min-h-[46px] items-center gap-3 rounded-full py-1.5 pl-3.5 pr-[22px] text-[15px] text-body max-sm:gap-2 max-sm:pr-4 max-sm:text-[13px]" style={i(0)}>
+            <span aria-hidden="true" className="size-[18px] rounded-full bg-[image:var(--ex-orb)]" />
             {home.chip}
-            <span role="img" aria-label={home.chipBrand} className="hm-mslogo" />
+            <Image src="/microsoft/microsoft-wordmark.webp" alt={home.chipBrand} width={100} height={20} className="block h-5 w-auto" />
           </span>
           <h1 className="h1 rise" style={i(1)}>
             {home.h1.light} <b>{home.h1.bold}</b>
@@ -35,14 +36,18 @@ export function HomeHero() {
           <p className="hm-lead rise max-w-[560px]" style={i(2)}>{home.paragraph}</p>
           <div className="rise flex flex-wrap gap-2.5" style={i(3)}>
             <Button href={site.demoHref}>{home.primaryCta}</Button>
-            <Button href="/platform" variant="secondary">
+            <Button href="/microsoft" variant="secondary">
               <Play size={16} strokeWidth={1.6} aria-hidden="true" />
-              {home.videoCta}
+              {home.secondaryCta}
             </Button>
           </div>
         </div>
         <div className="fi relative min-w-0 lg:col-span-6">
-          <FieldDemo />
+          <div className="relative ml-auto h-[508px] w-[583px] max-w-full overflow-hidden max-sm:h-[300px] max-sm:w-full">
+            <div className="absolute right-0 top-0 w-[620px] origin-top-right scale-[.94] max-sm:left-0 max-sm:origin-top-left max-sm:scale-[.55]">
+              <RecordDemo label={home.recordLabel} />
+            </div>
+          </div>
         </div>
       </div>
       <div className="hm-wrap mt-16 lg:mt-[72px]">

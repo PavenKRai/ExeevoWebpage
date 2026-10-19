@@ -58,10 +58,14 @@ function Launch({ l }: { l: { tools: readonly string[]; from: string; to: string
 /** Three outcomes as glass cards, each with a small looping visual. */
 export function Outcomes() {
   return (
-    <section aria-label="Outcomes" className="relative overflow-hidden bg-white py-20 lg:py-[120px]">
+    <section aria-labelledby="outcomes-title" className="relative overflow-hidden bg-white py-20 lg:py-[120px]">
       <div className="aura left-[10%] top-[30%] h-[360px] w-[560px] bg-brand-blue opacity-10 max-lg:hidden" aria-hidden="true" />
       <div className="aura right-[5%] top-[40%] h-[320px] w-[420px] bg-brand-green opacity-10 max-lg:hidden" aria-hidden="true" />
-      <div className="hm-wrap">
+      <div className="hm-wrap flex flex-col gap-12">
+        <div className="sr mx-auto flex max-w-[760px] flex-col items-center gap-4 text-center">
+          <h2 id="outcomes-title" className="h2">{home.outcomesHead.h2.light} <b>{home.outcomesHead.h2.bold}</b></h2>
+          <p className="lead max-w-[600px]">{home.outcomesHead.lead}</p>
+        </div>
         <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {(home.outcomes as readonly Outcome[]).map((o, n) => (
             <li key={o.statement} className="glass srg relative flex flex-col overflow-hidden rounded-[28px] p-3.5">

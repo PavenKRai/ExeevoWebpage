@@ -2,26 +2,79 @@
 export const home = {
   chip: "Life sciences CRM, built natively on",
   chipBrand: "Microsoft",
-  h1: { light: "Built to grow HCP relationships.", bold: "Prove it every quarter." },
+  h1: { light: "Life sciences CRM,", bold: "on the Microsoft cloud you already trust." },
   paragraph:
-    "Exeevo gives commercial, medical, and marketing teams one system to hit call-plan attainment, launch faster, and get more out of every territory, instead of reps and KAMs juggling five disconnected tools.",
+    "Exeevo CRM is built on Microsoft Power Platform, Dynamics 365 and Azure. Commercial, medical and marketing teams get pharma-ready modules, with Microsoft's security, compliance and global data residency underneath.",
   primaryCta: "Get a demo",
-  videoCta: "See the platform in 90 seconds",
-  demo: {
-    title: "Exeevo CRM · Field view",
-    app: "Exeevo CRM",
-    list: "My HCPs · this cycle",
-    count: "04",
-    tiers: ["Tier 1", "Tier 1", "Tier 2", "Tier 3"],
-    hcp: { name: "Tier 1 HCP", meta: "HCP 360 · Sales CRM" },
-    alert: { title: "Coverage gap flagged", body: "A Tier 1 HCP hasn't been reached this cycle." },
-    add: "+ Add to route",
-    added: "Added to Thursday's route",
-    ask: { placeholder: "Ask Nova anything…", typed: "Prep me for this call" },
-    reply: { title: "Call prep is ready", body: "Latest publications linked to this KOL's profile before you walk in." },
-    toast: { title: "MLR approved in Teams", body: "E-signature captured. Audit trail logged." },
-    label:
-      "Animated demo: a rep opens a Tier 1 HCP, sees a coverage gap flagged and adds the visit to Thursday's route, asks Ask-Nova to prep the call, and receives an MLR approval in Teams.",
+  secondaryCta: "Why Microsoft matters",
+  recordLabel:
+    "Animated demo: a pointer hovers over parts of an HCP record in Exeevo CRM and reveals the Microsoft technology underneath each: Power Platform, Dataverse field security, Microsoft Foundry and global Azure regions.",
+  tech: {
+    label: "Microsoft technologies Exeevo is built on",
+    builtOn: "Built entirely on",
+    items: [
+      { label: "Power Platform", logo: "/microsoft/power-platform.png" },
+      { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
+      { label: "Dataverse", logo: "/microsoft/dataverse.png" },
+      { label: "Entra ID", logo: "/microsoft/entra.png" },
+      { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
+      { label: "Copilot Studio", logo: "/microsoft/copilot-studio.svg" },
+      { label: "Teams", logo: "/microsoft/teams.png" },
+      { label: "Microsoft 365 Copilot", logo: "/microsoft/m365-copilot.png" },
+      { label: "Power BI", logo: "/microsoft/power-bi.png" },
+      { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
+      { label: "Microsoft Fabric", logo: "/microsoft/fabric.png" },
+      { label: "Azure SQL", logo: "/microsoft/azure-sql.svg" },
+      { label: "Power Automate", logo: "/microsoft/power-automate.png" },
+    ],
+    trusted: "Trusted by life sciences leaders",
+    clients: [
+      { name: "Daiichi-Sankyo", logo: "/home/client-daiichi-sankyo.png", h: 30, w: 126 },
+      { name: "Johnson & Johnson MedTech", logo: "/home/client-jnj-medtech.png", h: 34, w: 136 },
+      { name: "Sanofi", logo: "/home/client-sanofi.png", h: 30, w: 122 },
+    ],
+    more: "+ many more",
+  },
+  underneath: {
+    h2: { light: "Microsoft underneath,", bold: "so your CRM is trusted, tested and always current" },
+    cta: "See the full Microsoft stack",
+    cards: [
+      {
+        visual: "trust",
+        title: { light: "Trusted", bold: "by IT" },
+        body: "Every user signs in with Microsoft Entra ID, and Microsoft's global security and compliance certifications and regional hosting carry through to your CRM and its AI.",
+        chips: [
+          { label: "Entra ID", logo: "/microsoft/entra.png" },
+          { label: "Dataverse security", logo: "/microsoft/dataverse.png" },
+          { label: "Regional hosting", logo: "/microsoft/azure-regions.png" },
+        ],
+      },
+      {
+        visual: "scale",
+        title: { light: "Tested", bold: "at global scale" },
+        body: "Exeevo CRM runs on the same Microsoft business platform that organisations of every size use every day, with Dataverse and Power Platform under every module.",
+        note: "Sources: Microsoft FY25 Q3 and FY26 Q1 earnings calls; Exeevo.",
+      },
+      {
+        visual: "updates",
+        title: { light: "Always", bold: "up to date" },
+        body: "New Dynamics 365, Azure and Microsoft AI capabilities reach Exeevo CRM as Microsoft releases them. Existing Microsoft licences and skills are reused, not duplicated.",
+        chips: [
+          { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
+          { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
+          { label: "Copilot Studio", logo: "/microsoft/copilot-studio.svg" },
+        ],
+      },
+    ],
+  },
+  outcomesHead: {
+    h2: { light: "What changes", bold: "for your teams" },
+    lead: "Three outcomes commercial, medical and marketing leaders see once everyone works in one system.",
+  },
+  closing: {
+    h2: { light: "Pharma-ready CRM,", bold: "on the cloud your IT team already runs" },
+    primary: "Get a demo",
+    secondary: "Built on Microsoft",
   },
   trust: [
     { icon: "shield", title: "Compliance by design", body: "FDA 21 CFR Part 11, GDPR, PIPL, and more: the regulatory groundwork life sciences teams need, wherever you operate" },
@@ -49,7 +102,7 @@ export const home = {
     },
   ],
   platform: {
-    h2: { light: "Everything", bold: "in one view" },
+    h2: { light: "Everything in one view,", bold: "each module on Microsoft" },
     body: "Eight modules, one data model, one license. Read this once and you know the whole platform. Click through only where you need more.",
     legend: [
       { category: "commercial", text: "Commercial: CRM, Marketing, Events, Mobile" },
@@ -58,6 +111,17 @@ export const home = {
       { category: "ai", text: "AI: Ask-Nova Studio" },
     ],
     cta: "Explore all eight modules",
+    /** The Microsoft product each module runs on (shown as "On …" on the card). */
+    on: {
+      "crm-sales": { label: "Power Platform", logo: "/microsoft/power-platform.png" },
+      "medical-crm": { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
+      "marketing-automation": { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
+      "event-management": { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
+      "content-management": { label: "Dataverse", logo: "/microsoft/dataverse.png" },
+      "customer-insights": { label: "Customer Insights", logo: "/microsoft/insights-data.svg" },
+      "mobile-app": { label: "Power Platform", logo: "/microsoft/power-platform.png" },
+      "ask-nova-studio": { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
+    } as Record<string, { label: string; logo: string }>,
     /** Card titles break onto two lines as in the design. */
     breaks: { "crm-sales": ["CRM", "(Sales)"], "mobile-app": ["Mobile", "App"] } as Record<string, string[]>,
   },
@@ -81,13 +145,5 @@ export const home = {
     h2: { light: "Two paths", bold: "to go live" },
     body: "Both run on the same platform, so moving from one to the other is an expansion, not a migration.",
     cta: "Talk to our team",
-  },
-  pathways: {
-    h2: { light: "Not sure", bold: "where to start?" },
-    lead: "Pick the path that matches why you're here.",
-    items: [
-      { persona: "Evaluating vendors", category: "medical", question: "Comparing platforms for your evaluation?", body: "See how a life sciences-native platform differs from a generic CRM or a stack of point solutions.", cta: "Go to Why Exeevo", href: "/why-exeevo" },
-      { persona: "Exploring the product", category: "commercial", question: "Want to see what's actually included?", body: "All eight modules on one screen, no digging through eight separate pages.", cta: "Go to Platform Overview", href: "/platform" },
-    ],
   },
 } as const;
