@@ -22,6 +22,8 @@
 .d-h1 { animation: dH1 14s linear infinite; } .d-h2 { animation: dH2 14s linear infinite; }
 .d-h3 { animation: dH3 14s linear infinite; } .d-h4 { animation: dH4 14s linear infinite; }
 [data-orb][data-paused="true"] *, [data-orb][data-paused="true"] { animation-play-state: paused !important; }
+/* No script / animation off: only the first note shows (the loop, CSS or script, animates opacity over these). */
+.d-t2, .d-t3, .d-t4, .d-cur { opacity: 0; }
 
 /* Data flowing from the Exeevo app down to the Microsoft backend */
 @keyframes spFlow { 0% { background-position: 0 0; } 100% { background-position: 0 24px; } }

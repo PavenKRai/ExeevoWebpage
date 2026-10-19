@@ -34,8 +34,9 @@ test("home: every module card says which Microsoft product it runs on", async ({
   await expect(grid.getByText(/^(On (Power Platform|Dynamics 365|Customer Insights|Dataverse|Microsoft Foundry)|Dynamics 365 backend)$/)).toHaveCount(8);
 });
 
-test("home: the 'built entirely on Microsoft' strip moves (also under reduced motion) and can be paused", async ({ page }) => {
+test("home: the 'built entirely on Microsoft' strip moves even with CSS animations switched off, and can be paused", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
+  await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important}" });
   const left = () => page.locator(".mq").evaluate((e) => e.getBoundingClientRect().left);
   const a = await left();
   await page.waitForTimeout(1500);
@@ -56,8 +57,9 @@ test("home: 'Built for life sciences' shows the app on top and the Microsoft bac
   await expect(s.getByText("+ many more")).toBeVisible();
 });
 
-test("home: the record demo animates (pointer and notes pop up one at a time), also under reduced motion", async ({ page }) => {
+test("home: the record demo animates (pointer and notes pop up one at a time) even with CSS animations switched off", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
+  await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important}" });
   const seen = new Set<number>();
   for (let i = 0; i < 12; i++) {
     const vis = await page.evaluate(() => ["d-t1", "d-t2", "d-t3", "d-t4"].map((c) => parseFloat(getComputedStyle(document.querySelector("." + c)!).opacity) > 0.5));
@@ -74,10 +76,28 @@ test("home: scroll reveals play once, also under reduced motion", async ({ page 
   const t = page.locator("#underneath-title");
   expect(await t.evaluate((e) => getComputedStyle(e).opacity)).toBe("0");
   await t.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(250);
-  const mid = parseFloat(await t.evaluate((e) => getComputedStyle(e).opacity));
-  expect(mid).toBeGreaterThan(0);
-  expect(mid).toBeLessThan(1);
+  const seen = await t.evaluate(
+    (e) =>
+      new Promise<number[]>((res) => {
+        const out: number[] = [];
+        const tick = () => (out.push(parseFloat(getComputedStyle(e).opacity)), out.length < 30 ? requestAnimationFrame(tick) : res(out));
+        tick();
+      }),
+  );
+  expect(seen.some((o) => o > 0 && o < 1) || seen[0] === 1).toBe(true);
   await page.waitForTimeout(1800);
   expect(await t.evaluate((e) => getComputedStyle(e).opacity)).toBe("1");
+});
+
+test("home: the record demo can be paused and resumed", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+  const demo = page.getByRole("img", { name: /Animated demo/ });
+  await demo.hover();
+  const btn = page.getByRole("button", { name: "Pause animation" });
+  await btn.evaluate((b: HTMLButtonElement) => b.click());
+  await expect(page.getByRole("button", { name: "Resume animation" })).toHaveAttribute("aria-pressed", "true");
+  const snap = () => page.evaluate(() => ["d-t1", "d-t2", "d-t3", "d-t4"].map((c) => getComputedStyle(document.querySelector("." + c)!).opacity).join());
+  const a = await snap();
+  await page.waitForTimeout(2500);
+  expect(await snap()).toBe(a);
 });

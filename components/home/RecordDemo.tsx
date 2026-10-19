@@ -1,7 +1,13 @@
+"use client";
 import Image from "next/image";
+import { useRef } from "react";
+import { Pause, Play } from "lucide-react";
+import { useRecordLoop } from "./useRecordLoop";
 
 /** The animated HCP 360 record: a pointer hovers four parts of the screen and each reveals the Microsoft technology underneath. Pure CSS loop (14s), decorative and described by `label`; under reduced motion only the first note shows. */
-export function RecordDemo({ label }: { label: string }) {
+export function RecordDemo({ label, pause, play }: { label: string; pause: string; play: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const loop = useRecordLoop(ref);
   return (
     <div
       style={{
@@ -23,6 +29,7 @@ export function RecordDemo({ label }: { label: string }) {
         }}
       >
         <div
+          ref={ref}
           role="img"
           aria-label={label}
           data-orb=""
@@ -514,7 +521,8 @@ export function RecordDemo({ label }: { label: string }) {
                     Purpose-built Exeevo CRM
                   </span>
                   <span style={{ fontSize: "11.5px", lineHeight: "1.45", color: "#56636C" }}>
-                    Designed for life sciences field teams, with its own native mobile app and pharma data model.
+                    Designed for life sciences field teams, with its own native mobile app and
+                    pharma data model.
                   </span>
                 </div>
               </div>
@@ -553,7 +561,8 @@ export function RecordDemo({ label }: { label: string }) {
                     Dynamics 365 and Dataverse
                   </span>
                   <span style={{ fontSize: "11.5px", lineHeight: "1.45", color: "#56636C" }}>
-                    The backend behind every screen: role-based security down to the record and field.
+                    The backend behind every screen: role-based security down to the record and
+                    field.
                   </span>
                 </div>
               </div>
@@ -660,6 +669,19 @@ export function RecordDemo({ label }: { label: string }) {
           </div>
         </div>
       </div>
+      <button
+        type="button"
+        aria-pressed={loop.paused}
+        aria-label={loop.paused ? play : pause}
+        onClick={loop.toggle}
+        className="absolute left-1/2 top-full z-10 flex size-11 -translate-x-1/2 translate-y-1 items-center justify-center rounded-full bg-white/90 text-[#1D262D] opacity-0 shadow-[0_0_0_1px_#E1E6EA] transition-opacity focus-visible:opacity-100 [div:hover>&]:opacity-100"
+      >
+        {loop.paused ? (
+          <Play size={16} strokeWidth={1.8} aria-hidden="true" />
+        ) : (
+          <Pause size={16} strokeWidth={1.8} aria-hidden="true" />
+        )}
+      </button>
     </div>
   );
 }

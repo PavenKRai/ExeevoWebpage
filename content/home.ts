@@ -7,6 +7,8 @@ export const home = {
     "Exeevo CRM is designed from the ground up for pharma, biotech and MedTech teams, with its own native mobile app for the field. Underneath, it runs on Microsoft Dynamics 365, Dataverse and Azure, with Microsoft's security, compliance and global data residency.",
   primaryCta: "Get a demo",
   secondaryCta: "Why Microsoft matters",
+  recordPause: "Pause animation",
+  recordPlay: "Resume animation",
   recordLabel:
     "Animated demo: a pointer hovers over parts of an HCP record in Exeevo CRM and reveals the Microsoft technology underneath each: Power Platform, Dataverse field security, Microsoft Foundry and global Azure regions.",
   tech: {

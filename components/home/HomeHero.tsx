@@ -44,7 +44,7 @@ export function HomeHero() {
         </div>
         <div className="fi relative min-w-0 lg:col-span-6">
           <div className="max-sm:[zoom:.55]">
-            <RecordDemo label={home.recordLabel} />
+            <RecordDemo label={home.recordLabel} pause={home.recordPause} play={home.recordPlay} />
           </div>
         </div>
       </div>

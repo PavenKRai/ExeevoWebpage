@@ -1,5 +1,5 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Pause, Play } from "lucide-react";
 
 const fade = "linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)";
@@ -7,8 +7,22 @@ const fade = "linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)";
 /** Scrolling strip with a pause control (WCAG 2.2.2). It keeps drifting slowly under reduced motion, as the product strip is meant to move; the button stops it. */
 export function Marquee({ children, pause, play }: { children: ReactNode; pause: string; play: string }) {
   const [stopped, setStopped] = useState(false);
+  const box = useRef<HTMLDivElement>(null);
+  const anim = useRef<Animation | null>(null);
+  // Script animation (Web Animations API): a global `animation: none` rule cannot stop it, so the strip always moves.
+  useEffect(() => {
+    const list = box.current?.querySelector<HTMLElement>(".mq");
+    if (!list || typeof list.animate !== "function") return;
+    const slow = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    anim.current = list.animate([{ transform: "translateX(0)" }, { transform: "translateX(-50%)" }], { duration: slow ? 90000 : 40000, iterations: Infinity, easing: "linear" });
+    return () => anim.current?.cancel();
+  }, []);
+  useEffect(() => {
+    if (stopped) anim.current?.pause();
+    else anim.current?.play();
+  }, [stopped]);
   return (
-    <div className="mq-wrap relative" data-stopped={stopped}>
+    <div ref={box} className="mq-wrap relative" data-stopped={stopped}>
       <div style={{ WebkitMaskImage: fade, maskImage: fade }}>{children}</div>
       <button
         type="button"
