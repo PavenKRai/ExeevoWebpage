@@ -55,3 +55,15 @@ test("home: 'Built for life sciences' shows the app on top and the Microsoft bac
   await expect(s.locator("li").filter({ hasText: /^(Dynamics 365|Dataverse|Application Insights)$/ })).toHaveCount(3);
   await expect(s.getByText("+ many more")).toBeVisible();
 });
+
+test("home: the record demo animates (pointer and notes pop up one at a time), also under reduced motion", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+  const seen = new Set<number>();
+  for (let i = 0; i < 12; i++) {
+    const vis = await page.evaluate(() => ["d-t1", "d-t2", "d-t3", "d-t4"].map((c) => parseFloat(getComputedStyle(document.querySelector("." + c)!).opacity) > 0.5));
+    expect(vis.filter(Boolean).length, "at most one note at a time").toBeLessThanOrEqual(1);
+    vis.forEach((v, k) => v && seen.add(k));
+    await page.waitForTimeout(1250);
+  }
+  expect(seen.size).toBeGreaterThanOrEqual(3);
+});

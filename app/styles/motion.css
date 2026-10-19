@@ -46,5 +46,11 @@
   .sr, .srl, .srr, .srg, .srt, .srs, .srf, .px, .ln, .ln-y, .drift, .stagger > *, .rise, .tilt-in { opacity: 1 !important; translate: none !important; scale: none !important; rotate: none !important; filter: none !important; }
   /* Exception: the Home "built entirely on Microsoft" strip keeps drifting slowly (it has a pause button and pauses on hover). */
   .mq { animation: mq 90s linear infinite !important; }
-  .mq-wrap:hover .mq, .mq-wrap[data-stopped="true"] .mq { animation-play-state: paused !important; }
+  .mq-wrap[data-stopped="true"] .mq { animation-play-state: paused !important; }
+  /* Exception: the Home record demo (a pointer revealing the Microsoft technology under each part) is the point of the hero, so it keeps playing. */
+  .d-cur { animation: dCur 14s cubic-bezier(.45,.05,.25,1) infinite !important; }
+  .d-t1 { animation: dT1 14s cubic-bezier(.16,1,.3,1) infinite !important; } .d-t2 { animation: dT2 14s cubic-bezier(.16,1,.3,1) infinite !important; }
+  .d-t3 { animation: dT3 14s cubic-bezier(.16,1,.3,1) infinite !important; } .d-t4 { animation: dT4 14s cubic-bezier(.16,1,.3,1) infinite !important; }
+  .d-h1 { animation: dH1 14s linear infinite !important; } .d-h2 { animation: dH2 14s linear infinite !important; }
+  .d-h3 { animation: dH3 14s linear infinite !important; } .d-h4 { animation: dH4 14s linear infinite !important; }
 }

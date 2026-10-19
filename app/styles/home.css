@@ -3,7 +3,7 @@
 @media (max-width: 700px) { .hm-wrap { padding-inline: 20px; } }
 .hm-mslogo { display: inline-block; width: 66px; height: 14px; background: var(--ex-text); -webkit-mask: url(/home/microsoft-wordmark.webp) center / contain no-repeat; mask: url(/home/microsoft-wordmark.webp) center / contain no-repeat; }
 
-/* HCP record demo: one 14s loop of a pointer over four parts of the record, pure CSS. Reduced motion: no pointer, only the first note shows. */
+/* HCP record demo: one 14s loop of a pointer over four parts of the record, pure CSS. Keeps playing under reduced motion (exception in motion.css). */
 .cur { position: absolute; width: 22px; height: 22px; z-index: 9; pointer-events: none; }
 .rip { position: absolute; left: -14px; top: -14px; width: 28px; height: 28px; border-radius: 50%; background: rgba(7,98,200,.35); opacity: 0; }
 @keyframes dCur{0%,3%{left:560px;top:470px;opacity:0}6%{opacity:1}12%{left:205px;top:52px}30%{left:205px;top:52px}36%{left:500px;top:224px}54%{left:500px;top:224px}60%{left:526px;top:54px}74%{left:526px;top:54px}80%{left:96px;top:464px}92%{left:96px;top:464px;opacity:1}97%,100%{left:560px;top:470px;opacity:0}}
@@ -22,7 +22,6 @@
 .d-h1 { animation: dH1 14s linear infinite; } .d-h2 { animation: dH2 14s linear infinite; }
 .d-h3 { animation: dH3 14s linear infinite; } .d-h4 { animation: dH4 14s linear infinite; }
 [data-orb][data-paused="true"] *, [data-orb][data-paused="true"] { animation-play-state: paused !important; }
-@media (prefers-reduced-motion: reduce) { .d-cur, .d-t2, .d-t3, .d-t4 { display: none; } }
 
 /* Data flowing from the Exeevo app down to the Microsoft backend */
 @keyframes spFlow { 0% { background-position: 0 0; } 100% { background-position: 0 24px; } }
@@ -32,7 +31,7 @@
 /* Technology strip and the three "Microsoft underneath" visuals */
 @keyframes mq { to { transform: translateX(-50%); } }
 .mq { animation: mq 40s linear infinite; }
-.mq-wrap:hover .mq, .mq-wrap[data-stopped="true"] .mq { animation-play-state: paused !important; }
+.mq-wrap[data-stopped="true"] .mq { animation-play-state: paused !important; }
 .client { transition: transform .4s; } .client:hover { transform: translateY(-2px); }
 @keyframes ttFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -6px; } }
 .tt-chip { animation: ttFloat 4.5s ease-in-out infinite; }

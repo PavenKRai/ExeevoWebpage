@@ -4,7 +4,7 @@ import { Pause, Play } from "lucide-react";
 
 const fade = "linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)";
 
-/** Scrolling strip with a pause control (WCAG 2.2.2). It keeps drifting slowly under reduced motion, as the product strip is meant to move; the button and hover stop it. */
+/** Scrolling strip with a pause control (WCAG 2.2.2). It keeps drifting slowly under reduced motion, as the product strip is meant to move; the button stops it. */
 export function Marquee({ children, pause, play }: { children: ReactNode; pause: string; play: string }) {
   const [stopped, setStopped] = useState(false);
   return (
