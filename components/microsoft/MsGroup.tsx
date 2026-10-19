@@ -20,9 +20,13 @@ export function MsGroup({ group, tone, auras }: { group: Group; tone: "porcelain
           {group.cards.map((c) => (
             <li key={c.id} className="flex">
               <article id={c.id} className="glass srg mscard flex w-full scroll-mt-[110px] flex-col gap-4 rounded-3xl p-[26px]">
-                <span className="flex size-[46px] shrink-0 items-center justify-center rounded-[13px] bg-white shadow-[0_0_0_1px_var(--ex-hairline)]">
-                  <Image src={c.logo} alt="" width={26} height={26} className="size-[26px]" />
-                </span>
+                <div className="flex flex-wrap gap-2">
+                  {[c.logo, ...(c.extraLogos ?? [])].map((src) => (
+                    <span key={src} className="flex size-[46px] shrink-0 items-center justify-center rounded-[13px] bg-white shadow-[0_0_0_1px_var(--ex-hairline)]">
+                      <Image src={src} alt="" width={26} height={26} className="size-[26px]" />
+                    </span>
+                  ))}
+                </div>
                 <h3 className="mt-1 min-h-[50px] text-[20px] font-[450] leading-[1.25] tracking-[-0.015em] text-heading">{c.title}</h3>
                 <p className="body-text">{c.desc}</p>
                 <ul className="flex flex-col gap-[9px]">

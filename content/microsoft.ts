@@ -253,6 +253,7 @@ export const microsoft = {
         {
           id: "ms-datalake",
           logo: "/microsoft/data-lake.svg",
+          extraLogos: ["/microsoft/synapse-link.svg"],
           title: "Azure Data Lake & Synapse Link",
           desc: "A continuous, near real-time copy of CRM data in your own data lake.",
           bullets: [
@@ -297,6 +298,7 @@ export const microsoft = {
         {
           id: "ms-copilot",
           logo: "/microsoft/copilot-studio.svg",
+          extraLogos: ["/microsoft/m365-copilot.png", "/microsoft/teams.png"],
           title: "Copilot Studio, Microsoft 365 Copilot & Teams",
           desc: "Brings Ask-Nova into the Microsoft tools reps already open every day.",
           bullets: [
@@ -309,6 +311,7 @@ export const microsoft = {
         {
           id: "ms-monitor",
           logo: "/microsoft/azure-monitor.svg",
+          extraLogos: ["/microsoft/application-insights.svg"],
           title: "Azure Monitor & Application Insights",
           desc: "End-to-end monitoring for the platform, integrations and AI.",
           bullets: [
