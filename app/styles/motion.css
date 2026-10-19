@@ -44,4 +44,7 @@
     scroll-behavior: auto !important;
   }
   .sr, .srl, .srr, .srg, .srt, .srs, .srf, .px, .ln, .ln-y, .drift, .stagger > *, .rise, .tilt-in { opacity: 1 !important; translate: none !important; scale: none !important; rotate: none !important; filter: none !important; }
+  /* Exception: the Home "built entirely on Microsoft" strip keeps drifting slowly (it has a pause button and pauses on hover). */
+  .mq { animation: mq 90s linear infinite !important; }
+  .mq-wrap:hover .mq, .mq-wrap[data-stopped="true"] .mq { animation-play-state: paused !important; }
 }

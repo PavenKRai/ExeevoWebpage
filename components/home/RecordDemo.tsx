@@ -502,7 +502,7 @@ export function RecordDemo({ label }: { label: string }) {
                 }}
               >
                 <Image
-                  src="/microsoft/power-platform.png"
+                  src="/brand/exeevo-icon.png"
                   alt=""
                   width={28}
                   height={28}
@@ -510,10 +510,10 @@ export function RecordDemo({ label }: { label: string }) {
                 />
                 <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                   <span style={{ fontSize: "13px", fontWeight: "500", color: "#1D262D" }}>
-                    Microsoft Power Platform
+                    Purpose-built Exeevo CRM
                   </span>
                   <span style={{ fontSize: "11.5px", lineHeight: "1.45", color: "#56636C" }}>
-                    This record screen is a Power App on Dataverse, with Exeevo’s pharma data model.
+                    Designed for life sciences field teams, with its own native mobile app and pharma data model.
                   </span>
                 </div>
               </div>
@@ -549,11 +549,10 @@ export function RecordDemo({ label }: { label: string }) {
                 />
                 <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                   <span style={{ fontSize: "13px", fontWeight: "500", color: "#1D262D" }}>
-                    Microsoft Dataverse
+                    Dynamics 365 and Dataverse
                   </span>
                   <span style={{ fontSize: "11.5px", lineHeight: "1.45", color: "#56636C" }}>
-                    Role-based security down to the record and field. You only see what your role
-                    allows.
+                    The backend behind every screen: role-based security down to the record and field.
                   </span>
                 </div>
               </div>

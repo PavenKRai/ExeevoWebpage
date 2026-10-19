@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { BuiltForLifeSciences } from "@/components/home/BuiltForLifeSciences";
 import { ClosingCta } from "@/components/home/ClosingCta";
 import { GoLive } from "@/components/home/GoLive";
 import { HomeHero } from "@/components/home/HomeHero";
@@ -18,6 +19,7 @@ export default function Home() {
     <>
       <HomeHero />
       <TechStrip />
+      <BuiltForLifeSciences />
       <MicrosoftUnderneath />
       <Outcomes />
       <ModuleGrid />

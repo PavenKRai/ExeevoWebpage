@@ -4,10 +4,10 @@ test("home: one h1 with the light and bold phrases, demo described for assistive
   await page.goto("/", { waitUntil: "networkidle" });
   const h1 = page.getByRole("heading", { level: 1 });
   await expect(h1).toHaveCount(1);
-  await expect(h1).toContainText("Life sciences CRM,");
-  await expect(h1.locator("b")).toHaveText("on the Microsoft cloud you already trust.");
+  await expect(h1).toContainText("Purpose-built for life sciences.");
+  await expect(h1.locator("b")).toHaveText("Powered by Microsoft.");
   await expect(page.getByRole("img", { name: /Animated demo/ })).toBeVisible();
-  for (const name of [/Microsoft underneath/, "What changes for your teams", /Everything in one view/, /Your data stays where you put it/, "Two paths to go live", /Pharma-ready CRM/]) await expect(page.getByRole("heading", { name })).toBeVisible();
+  for (const name of [/Built for life sciences/, /Microsoft underneath/, "What changes for your teams", /Everything in one view/, /Your data stays where you put it/, "Two paths to go live", /Pharma-ready CRM/]) await expect(page.getByRole("heading", { name })).toBeVisible();
 });
 
 test("home: all eight modules link into the platform and the CTAs go to the form", async ({ page }) => {
@@ -31,5 +31,27 @@ test("home: Microsoft links, technology strip and client logos", async ({ page }
 test("home: every module card says which Microsoft product it runs on", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
   const grid = page.locator("#platform-title").locator("xpath=ancestor::section");
-  await expect(grid.getByText(/^On (Power Platform|Dynamics 365|Customer Insights|Dataverse|Microsoft Foundry)$/)).toHaveCount(8);
+  await expect(grid.getByText(/^(On (Power Platform|Dynamics 365|Customer Insights|Dataverse|Microsoft Foundry)|Dynamics 365 backend)$/)).toHaveCount(8);
+});
+
+test("home: the 'built entirely on Microsoft' strip moves (also under reduced motion) and can be paused", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+  const left = () => page.locator(".mq").evaluate((e) => e.getBoundingClientRect().left);
+  const a = await left();
+  await page.waitForTimeout(1500);
+  expect(await left()).toBeLessThan(a - 5);
+  const strip = page.getByRole("region", { name: "Microsoft technologies Exeevo is built on" });
+  await strip.getByRole("button", { name: "Pause scrolling" }).evaluate((b: HTMLButtonElement) => b.click());
+  await expect(strip.getByRole("button", { name: "Resume scrolling" })).toHaveAttribute("aria-pressed", "true");
+  const b = await left();
+  await page.waitForTimeout(800);
+  expect(Math.abs((await left()) - b)).toBeLessThan(1);
+});
+
+test("home: 'Built for life sciences' shows the app on top and the Microsoft backend below", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+  const s = page.locator("#builtfor-title").locator("xpath=ancestor::section");
+  await expect(s.getByText("Native mobile app for iOS, Android, Windows and web")).toBeVisible();
+  await expect(s.locator("li").filter({ hasText: /^(Dynamics 365|Dataverse|Application Insights)$/ })).toHaveCount(3);
+  await expect(s.getByText("+ many more")).toBeVisible();
 });

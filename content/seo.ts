@@ -7,10 +7,10 @@ export type PageSeo = { path: string; title: string; description: string; absolu
 export const seo = {
   home: {
     path: "/",
-    title: "Life sciences CRM on the Microsoft cloud you already trust | Exeevo",
+    title: "Purpose-built life sciences CRM, powered by Microsoft | Exeevo",
     absoluteTitle: true,
     description:
-      "Exeevo is a unified, AI-powered life sciences CRM built natively on Microsoft Power Platform, Dynamics 365 and Azure, with Microsoft security underneath.",
+      "Exeevo is a purpose-built, AI-powered life sciences CRM with a native mobile app, running on Microsoft Dynamics 365, Dataverse and Azure.",
   },
   platform: {
     path: "/platform",

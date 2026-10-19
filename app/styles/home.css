@@ -24,16 +24,21 @@
 [data-orb][data-paused="true"] *, [data-orb][data-paused="true"] { animation-play-state: paused !important; }
 @media (prefers-reduced-motion: reduce) { .d-cur, .d-t2, .d-t3, .d-t4 { display: none; } }
 
+/* Data flowing from the Exeevo app down to the Microsoft backend */
+@keyframes spFlow { 0% { background-position: 0 0; } 100% { background-position: 0 24px; } }
+.sp-line { width: 2px; height: 100%; background: repeating-linear-gradient(180deg, #0762C8 0 6px, transparent 6px 12px); opacity: .45; animation: spFlow 1.2s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .sp-line { animation: none; } }
+
 /* Technology strip and the three "Microsoft underneath" visuals */
 @keyframes mq { to { transform: translateX(-50%); } }
 .mq { animation: mq 40s linear infinite; }
-.mq-wrap:hover .mq { animation-play-state: paused; }
+.mq-wrap:hover .mq, .mq-wrap[data-stopped="true"] .mq { animation-play-state: paused !important; }
 .client { transition: transform .4s; } .client:hover { transform: translateY(-2px); }
 @keyframes ttFloat { 0%,100% { translate: 0 0; } 50% { translate: 0 -6px; } }
 .tt-chip { animation: ttFloat 4.5s ease-in-out infinite; }
 @keyframes upCycle { 0% { transform: translateY(110%); opacity: 0; } 6%,22% { transform: translateY(0); opacity: 1; } 28%,100% { transform: translateY(-110%); opacity: 0; } }
 .up-item { animation: upCycle 8s cubic-bezier(.2,.8,.2,1) infinite; }
-@media (prefers-reduced-motion: reduce) { .mq { animation: none; } .up-item:not(:first-child) { display: none; } .up-item { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .up-item:not(:first-child) { display: none; } .up-item { transform: none; opacity: 1; } }
 
 /* Tenant diagram: packets flow inside the boundary; the shared-AI packet is blocked at the edge */
 .t-box { animation: tBox 8s linear infinite; }

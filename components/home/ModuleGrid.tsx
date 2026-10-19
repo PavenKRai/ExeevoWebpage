@@ -46,7 +46,7 @@ export function ModuleGrid() {
                     {p.on[m.slug] && (
                       <span className="inline-flex items-center gap-1.5 text-[12px] text-muted">
                         <Image src={p.on[m.slug].logo} alt="" width={14} height={14} className="size-3.5" />
-                        <span>On {p.on[m.slug].label}</span>
+                        <span>{p.on[m.slug].label}</span>
                       </span>
                     )}
                     <span className="label">{m.category === "ai" ? "AI" : m.categoryLabel}</span>

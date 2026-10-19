@@ -2,9 +2,9 @@
 export const home = {
   chip: "Life sciences CRM, built natively on",
   chipBrand: "Microsoft",
-  h1: { light: "Life sciences CRM,", bold: "on the Microsoft cloud you already trust." },
+  h1: { light: "Purpose-built for life sciences.", bold: "Powered by Microsoft." },
   paragraph:
-    "Exeevo CRM is built on Microsoft Power Platform, Dynamics 365 and Azure. Commercial, medical and marketing teams get pharma-ready modules, with Microsoft's security, compliance and global data residency underneath.",
+    "Exeevo CRM is designed from the ground up for pharma, biotech and MedTech teams, with its own native mobile app for the field. Underneath, it runs on Microsoft Dynamics 365, Dataverse and Azure, with Microsoft's security, compliance and global data residency.",
   primaryCta: "Get a demo",
   secondaryCta: "Why Microsoft matters",
   recordLabel:
@@ -12,6 +12,8 @@ export const home = {
   tech: {
     label: "Microsoft technologies Exeevo is built on",
     builtOn: "Built entirely on",
+    pause: "Pause scrolling",
+    play: "Resume scrolling",
     items: [
       { label: "Power Platform", logo: "/microsoft/power-platform.png" },
       { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
@@ -34,6 +36,32 @@ export const home = {
       { name: "Sanofi", logo: "/home/client-sanofi.png", h: 30, w: 122 },
     ],
     more: "+ many more",
+  },
+  builtFor: {
+    h2: { light: "Built for life sciences,", bold: "running on Microsoft" },
+    lead: "Exeevo is not a configured template. The CRM your reps, MSLs and KAMs use, including the mobile app, is purpose-built by Exeevo for life sciences. Microsoft Dynamics 365 and Dataverse sit underneath as the backend, so you get both: software designed for your teams, on infrastructure your IT team already trusts.",
+    app: { title: "Exeevo CRM", note: "What your teams use", points: ["Native mobile app for iOS, Android, Windows and web", "Offline-first, with voice-to-text capture and geo-routing", "Pharma data model: HCPs, HCOs, territories, samples", "Compliance built in: Part 11, GDPR, Sunshine Act"] },
+    syncs: "Syncs with",
+    backend: {
+      title: "backend",
+      note: "What IT trusts",
+      items: [
+        { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
+        { label: "Dataverse", logo: "/microsoft/dataverse.png" },
+        { label: "Power Platform", logo: "/microsoft/power-platform.png" },
+        { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
+        { label: "Power Automate", logo: "/microsoft/power-automate.png" },
+        { label: "Power BI", logo: "/microsoft/power-bi.png" },
+        { label: "Entra ID", logo: "/microsoft/entra.png" },
+        { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
+        { label: "Copilot Studio", logo: "/microsoft/copilot-studio.svg" },
+        { label: "Azure Functions", logo: "/microsoft/azure-functions.svg" },
+        { label: "Azure SQL", logo: "/microsoft/azure-sql.svg" },
+        { label: "Microsoft Fabric", logo: "/microsoft/fabric.png" },
+        { label: "Application Insights", logo: "/microsoft/application-insights.svg" },
+      ],
+      more: "+ many more",
+    },
   },
   underneath: {
     h2: { light: "Microsoft underneath,", bold: "so your CRM is trusted, tested and always current" },
@@ -113,14 +141,14 @@ export const home = {
     cta: "Explore all eight modules",
     /** The Microsoft product each module runs on (shown as "On …" on the card). */
     on: {
-      "crm-sales": { label: "Power Platform", logo: "/microsoft/power-platform.png" },
-      "medical-crm": { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
-      "marketing-automation": { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
-      "event-management": { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
-      "content-management": { label: "Dataverse", logo: "/microsoft/dataverse.png" },
-      "customer-insights": { label: "Customer Insights", logo: "/microsoft/insights-data.svg" },
-      "mobile-app": { label: "Power Platform", logo: "/microsoft/power-platform.png" },
-      "ask-nova-studio": { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
+      "crm-sales": { label: "On Power Platform", logo: "/microsoft/power-platform.png" },
+      "medical-crm": { label: "On Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
+      "marketing-automation": { label: "On Customer Insights", logo: "/microsoft/insights-journeys.png" },
+      "event-management": { label: "On Customer Insights", logo: "/microsoft/insights-journeys.png" },
+      "content-management": { label: "On Dataverse", logo: "/microsoft/dataverse.png" },
+      "customer-insights": { label: "On Customer Insights", logo: "/microsoft/insights-data.svg" },
+      "mobile-app": { label: "Dynamics 365 backend", logo: "/microsoft/dynamics-customer-service.png" },
+      "ask-nova-studio": { label: "On Microsoft Foundry", logo: "/microsoft/foundry.svg" },
     } as Record<string, { label: string; logo: string }>,
     /** Card titles break onto two lines as in the design. */
     breaks: { "crm-sales": ["CRM", "(Sales)"], "mobile-app": ["Mobile", "App"] } as Record<string, string[]>,

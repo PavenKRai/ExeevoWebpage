@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { home } from "@/content/home";
+import { Marquee } from "./Marquee";
 
 const pill = "inline-flex items-center gap-2.5 whitespace-nowrap rounded-full bg-white py-2.5 pl-3 pr-[18px] text-[14px] text-heading shadow-[0_0_0_1px_var(--ex-hairline)]";
-const fade = "linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)";
 
 /** "Built entirely on Microsoft": a looping strip of the Microsoft products Exeevo runs on, then the client logos. The repeated half is hidden from assistive tech. */
 export function TechStrip() {
@@ -13,7 +13,7 @@ export function TechStrip() {
         <span className="text-[14px] text-muted">{t.builtOn}</span>
         <Image src="/microsoft/microsoft-wordmark.webp" alt="Microsoft" width={100} height={20} className="h-5 w-auto" />
       </div>
-      <div className="mq-wrap" style={{ WebkitMaskImage: fade, maskImage: fade }}>
+      <Marquee pause={t.pause} play={t.play}>
         <ul className="mq flex w-max gap-3">
           {[0, 1].map((copy) =>
             t.items.map((it) => (
@@ -24,7 +24,7 @@ export function TechStrip() {
             )),
           )}
         </ul>
-      </div>
+      </Marquee>
       <div className="hm-wrap mt-[30px] flex flex-col items-center gap-5 border-t border-mist pt-[34px]">
         <span className="text-[14px] text-muted">{t.trusted}</span>
         <ul className="flex flex-wrap items-center justify-center gap-x-16 gap-y-7 max-sm:gap-x-9">
