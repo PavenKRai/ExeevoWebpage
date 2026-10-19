@@ -1,5 +1,5 @@
 export type Tier = "inc" | "plus" | "tbc";
-export type NovaFeature = { num: string; slug: string; name: string; tier: Tier; stage: 0 | 1 | 2 | 3; icon: string; desc: string };
+export type NovaFeature = { num: string; slug: string; name: string; tier: Tier; stage: 0 | 1 | 2 | 3; icon: string; desc: string; built: readonly string[] };
 
 /** Copy comes verbatim from the Ask-Nova design. */
 export const askNova = {
@@ -105,6 +105,17 @@ export const novaStages = [
 /** Index of the first feature of each stage (the stage tabs jump here). */
 export const stageFirst = [0, 2, 6, 8] as const;
 
+/** Logos for the "Built on" lists (shared with the Microsoft page). Azure has none, so it shows as text only. */
+export const builtLogos: Record<string, string | undefined> = {
+  "Microsoft Foundry": "/microsoft/foundry.svg",
+  "Azure SQL": "/microsoft/azure-sql.svg",
+  Dataverse: "/microsoft/dataverse.png",
+  "Copilot Studio": "/microsoft/copilot-studio.svg",
+  "Microsoft 365 Copilot": "/microsoft/m365-copilot.png",
+  Teams: "/microsoft/teams.png",
+  "Power Platform": "/microsoft/power-platform.png",
+};
+
 export const features: NovaFeature[] = [
   {
     "num": "01",
@@ -113,7 +124,8 @@ export const features: NovaFeature[] = [
     "tier": "inc",
     "stage": 0,
     "icon": "M7 3h10v18H7z M10 8h4 M10 12h4 M10 16h2",
-    "desc": "A short brief on an HCP or HCO on its record page, or on the whole territory from the home page, so reps walk in prepared."
+    "desc": "A short brief on an HCP or HCO on its record page, or on the whole territory from the home page, so reps walk in prepared.",
+    "built": ["Microsoft Foundry", "Dataverse"]
   },
   {
     "num": "02",
@@ -122,7 +134,8 @@ export const features: NovaFeature[] = [
     "tier": "inc",
     "stage": 0,
     "icon": "M12 2v3 M12 19v3 M2 12h3 M19 12h3 M12 8a4 4 0 1 0 0 8a4 4 0 1 0 0-8",
-    "desc": "Flags what is worth knowing about the customer or account the rep is viewing, without the rep having to ask."
+    "desc": "Flags what is worth knowing about the customer or account the rep is viewing, without the rep having to ask.",
+    "built": ["Microsoft Foundry", "Dataverse"]
   },
   {
     "num": "03",
@@ -131,7 +144,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 1,
     "icon": "M3 12h2 M7 8v8 M11 4v16 M15 8v8 M19 10v4",
-    "desc": "Captures the meeting and who said what, then pulls out sentiment, key messages, follow-up actions and coaching tips."
+    "desc": "Captures the meeting and who said what, then pulls out sentiment, key messages, follow-up actions and coaching tips.",
+    "built": ["Microsoft Foundry", "Azure"]
   },
   {
     "num": "04",
@@ -140,7 +154,8 @@ export const features: NovaFeature[] = [
     "tier": "inc",
     "stage": 1,
     "icon": "M4 20l4-1 11-11-3-3L5 16z M14 7l3 3",
-    "desc": "Turns a spoken or typed note into the CRM meeting record and sets objectives for the next call."
+    "desc": "Turns a spoken or typed note into the CRM meeting record and sets objectives for the next call.",
+    "built": ["Microsoft Foundry", "Dataverse"]
   },
   {
     "num": "05",
@@ -149,7 +164,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 1,
     "icon": "M8 2h8v20H8z M11 18h2",
-    "desc": "Fills in the call report after a meeting and detects the HCP, products discussed and next best action."
+    "desc": "Fills in the call report after a meeting and detects the HCP, products discussed and next best action.",
+    "built": ["Microsoft Foundry", "Dataverse"]
   },
   {
     "num": "06",
@@ -158,7 +174,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 1,
     "icon": "M4 5h16v11H10l-5 4v-4H4z M8 10h8",
-    "desc": "Answers plain-English questions such as “When did I last meet this customer?”, in the CRM app and in Teams, Copilot and Claude."
+    "desc": "Answers plain-English questions such as “When did I last meet this customer?”, in the CRM app and in the AI tools reps already use.",
+    "built": ["Microsoft Foundry", "Copilot Studio", "Teams"]
   },
   {
     "num": "07",
@@ -167,7 +184,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 2,
     "icon": "M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z M5 11a7 7 0 0 0 14 0 M12 18v3",
-    "desc": "Reps talk to Ask-Nova hands-free between calls, without typing on a phone or tablet."
+    "desc": "Reps talk to Ask-Nova hands-free between calls, without typing on a phone or tablet.",
+    "built": ["Microsoft Foundry"]
   },
   {
     "num": "08",
@@ -176,7 +194,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 2,
     "icon": "M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18 M3 12h18 M12 3c3 3 3 15 0 18 M12 3c-3 3-3 15 0 18",
-    "desc": "Questions and note capture in multiple languages, so regional teams work in their own language."
+    "desc": "Questions and note capture in multiple languages, so regional teams work in their own language.",
+    "built": ["Microsoft Foundry"]
   },
   {
     "num": "09",
@@ -185,7 +204,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 3,
     "icon": "M4 4h7v7H4z M13 4h7v7h-7z M4 13h7v7H4z M13 16.5h7 M16.5 13v7",
-    "desc": "Build custom AI skills, tools and agents on your CRM data, or bring in third-party agents."
+    "desc": "Build custom AI skills, tools and agents on your CRM data, or bring in third-party agents.",
+    "built": ["Microsoft Foundry", "Power Platform", "Dataverse"]
   },
   {
     "num": "10",
@@ -194,7 +214,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 3,
     "icon": "M5 6c0-1.7 3.1-3 7-3s7 1.3 7 3-3.1 3-7 3-7-1.3-7-3z M5 6v12c0 1.7 3.1 3 7 3s7-1.3 7-3V6 M5 12c0 1.7 3.1 3 7 3s7-1.3 7-3",
-    "desc": "Answers draw on CRM data, device context, SAP and other business systems you connect."
+    "desc": "Answers draw on CRM data, device context, SAP and other business systems you connect.",
+    "built": ["Dataverse", "Azure SQL"]
   },
   {
     "num": "11",
@@ -203,7 +224,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 3,
     "icon": "M9 3v5 M15 3v5 M6 8h12v4a6 6 0 0 1-12 0z M12 18v3",
-    "desc": "Lets Claude, Copilot, ChatGPT, Teams and partner tools work with your CRM data, under each user's own access."
+    "desc": "Lets Copilot, Teams, Claude, ChatGPT and partner tools work with your CRM data, under each user's own access.",
+    "built": ["Copilot Studio", "Microsoft 365 Copilot", "Teams"]
   },
   {
     "num": "12",
@@ -212,7 +234,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 3,
     "icon": "M4 7h9 M17 7h3 M15 5v4 M4 17h3 M11 17h9 M9 15v4",
-    "desc": "Guides admins through setting up a new business unit, from data to territories."
+    "desc": "Guides admins through setting up a new business unit, from data to territories.",
+    "built": ["Microsoft Foundry", "Power Platform", "Dataverse"]
   },
   {
     "num": "13",
@@ -221,7 +244,8 @@ export const features: NovaFeature[] = [
     "tier": "plus",
     "stage": 3,
     "icon": "M11 4a7 7 0 1 0 0 14a7 7 0 1 0 0-14 M16 16l5 5 M8 11h6",
-    "desc": "Lets support and admin teams query CRM data in plain English to resolve issues faster."
+    "desc": "Lets support and admin teams query CRM data in plain English to resolve issues faster.",
+    "built": ["Microsoft Foundry", "Dataverse"]
   }
 ];
 

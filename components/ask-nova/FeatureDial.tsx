@@ -1,5 +1,6 @@
 "use client";
 import type { CSSProperties, KeyboardEvent } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { askNova, features, novaStages } from "@/content/askNova";
 import { cn } from "@/components/ui/cn";
@@ -19,7 +20,11 @@ function DetailCard({ className, style }: { className?: string; style?: CSSPrope
       <span className="num text-[12px] text-muted">{f.num} of 13 · {novaStages[f.stage].short}</span>
       <span className="text-[22px] font-[450] leading-[1.15] tracking-[-0.02em] text-heading">{f.name}</span>
       <div className="flex"><TierBadge tier={f.tier} /></div>
-      <p className="text-[13px] leading-[1.5] text-muted">{f.desc}</p>
+      <p className="line-clamp-3 text-[13px] leading-[1.5] text-muted">{f.desc}</p>
+      <span className="flex items-center gap-1.5 text-[11.5px] text-body">
+        <Image src="/microsoft/microsoft-square.png" alt="" width={11} height={11} />
+        {f.built.join(" · ")}
+      </span>
       <div className="mt-auto flex items-center pt-1 justify-between gap-2">
         <button type="button" onClick={() => openFeature(sel)} className="tlink relative !min-h-0 whitespace-nowrap text-[13px] after:absolute after:-inset-y-3 after:-inset-x-1 after:content-['']">{askNova.dial.read}</button>
         <span className="flex gap-2.5">

@@ -1,26 +1,30 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const navLabels = ["Platform", "Ask-Nova", "Services", "Industries", "Why Exeevo", "About", "Resources"];
+const navLabels = ["Platform", "Ask-Nova", "Services", "Partnerships", "Why Exeevo", "Microsoft", "About", "Resources"];
 
 test.describe("desktop navigation", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
-  test("plain links in order, About included, Solutions by role not linked", async ({ page }) => {
+  test("plain links in order (Partnerships replaces Industries, Microsoft added), Solutions by role not linked", async ({ page }) => {
     await page.goto("/");
     const nav = page.getByRole("navigation", { name: "Primary" });
     const texts = await nav.getByRole("link").allInnerTexts();
     expect(texts.map((t) => t.trim())).toEqual(navLabels);
     await expect(page.locator("header a[href='/solutions-by-role'], footer a[href='/solutions-by-role']")).toHaveCount(0);
+    await expect(nav.getByRole("link", { name: "Partnerships" })).toHaveAttribute("href", "/partners");
+    await expect(nav.getByRole("link", { name: "Microsoft" })).toHaveAttribute("href", "/microsoft");
+    await expect(nav.getByRole("link", { name: "Industries" })).toHaveCount(0);
+    await expect(page.getByRole("contentinfo").getByRole("link", { name: "Pharma" })).toHaveAttribute("href", "/industries?industry=pharma");
   });
 
   test("keyboard: every nav link is reachable with Tab and shows focus", async ({ page }) => {
     await page.goto("/");
-    const link = page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Industries" });
+    const link = page.getByRole("navigation", { name: "Primary" }).getByRole("link", { name: "Partnerships" });
     await link.focus();
     await expect(link).toBeFocused();
     await page.keyboard.press("Enter");
-    await expect(page).toHaveURL(/\/industries/);
+    await expect(page).toHaveURL(/\/partners/);
   });
 
   test("footer Trust & Compliance link lands on the compliance tiles", async ({ page }) => {
