@@ -3,6 +3,7 @@ export type MsColor = "blue" | "magenta" | "green" | "violet" | "sky";
 export type MsCard = {
   id: string;
   logo: string;
+  extraLogos?: string[];
   title: string;
   desc: string;
   bullets: string[];
