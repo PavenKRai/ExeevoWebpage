@@ -14,7 +14,7 @@ const DELAY_CLASS: Record<string, number> = { d1: 80, d2: 150, d3: 220 };
  */
 export function RevealObserver() {
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; // Home opts out with data-reveal-always
 
     const seen = new WeakSet<Element>();
 
@@ -53,6 +53,7 @@ export function RevealObserver() {
           return;
         }
         seen.add(el);
+        if (reduce && !el.closest("[data-reveal-always]")) return;
         if (el.getBoundingClientRect().top < vh * 0.98) return; // already on screen (or above): leave it alone
         // explicit stagger: <Layer> sets --rv-delay inline; d1-d3 classes; children of .stagger by index
         const inline = el.style.getPropertyValue("--rv-delay");

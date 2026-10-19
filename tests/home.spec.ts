@@ -67,3 +67,17 @@ test("home: the record demo animates (pointer and notes pop up one at a time), a
   }
   expect(seen.size).toBeGreaterThanOrEqual(3);
 });
+
+test("home: scroll reveals play once, also under reduced motion", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+  await page.waitForTimeout(800);
+  const t = page.locator("#underneath-title");
+  expect(await t.evaluate((e) => getComputedStyle(e).opacity)).toBe("0");
+  await t.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(250);
+  const mid = parseFloat(await t.evaluate((e) => getComputedStyle(e).opacity));
+  expect(mid).toBeGreaterThan(0);
+  expect(mid).toBeLessThan(1);
+  await page.waitForTimeout(1800);
+  expect(await t.evaluate((e) => getComputedStyle(e).opacity)).toBe("1");
+});

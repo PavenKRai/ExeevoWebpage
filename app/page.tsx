@@ -16,7 +16,7 @@ export const metadata: Metadata = pageMetadata(seo.home);
 
 export default function Home() {
   return (
-    <>
+    <div data-reveal-always style={{ display: "contents" }}>
       <HomeHero />
       <TechStrip />
       <BuiltForLifeSciences />
@@ -26,6 +26,6 @@ export default function Home() {
       <PrivacyTenant />
       <GoLive />
       <ClosingCta />
-    </>
+    </div>
   );
 }
