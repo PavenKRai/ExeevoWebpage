@@ -24,7 +24,7 @@ Customer data is stored and processed in the customer's own Microsoft Azure envi
 - Operate: Managed Services; Hosting & Platform Operations; AI Enablement Services; Machine Learning Services
 
 ## The eight modules
-- CRM (Sales): HCP targeting and segmentation, territory alignment, call planning and sample compliance
+- Sales CRM: HCP targeting and segmentation, territory alignment, call planning and sample compliance
 - Medical CRM: scientific plans, adverse event and medical inquiry case management, KOL engagement tracking
 - Marketing Automation: omnichannel HCP journeys, segment building and campaign reporting
 - Event Management: virtual, hybrid and in-person events with native Microsoft Teams webinars

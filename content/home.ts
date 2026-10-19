@@ -13,7 +13,7 @@ export const home = {
     list: "My HCPs · this cycle",
     count: "04",
     tiers: ["Tier 1", "Tier 1", "Tier 2", "Tier 3"],
-    hcp: { name: "Tier 1 HCP", meta: "HCP 360 · CRM (Sales)" },
+    hcp: { name: "Tier 1 HCP", meta: "HCP 360 · Sales CRM" },
     alert: { title: "Coverage gap flagged", body: "A Tier 1 HCP hasn't been reached this cycle." },
     add: "+ Add to route",
     added: "Added to Thursday's route",

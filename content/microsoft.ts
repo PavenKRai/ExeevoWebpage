@@ -120,7 +120,7 @@ export const microsoft = {
             "Field coaching, goals and activity tracking",
           ],
           powers: [
-            { label: "CRM (Sales)", color: "blue" },
+            { label: "Sales CRM", color: "blue" },
             { label: "Mobile App", color: "blue" },
           ],
         },

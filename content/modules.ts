@@ -33,7 +33,7 @@ const FIT = "Good fit if you need";
 export const modules: Module[] = [
   {
     slug: "crm-sales",
-    name: "CRM (Sales)",
+    name: "Sales CRM",
     category: "commercial",
     categoryLabel: "Commercial",
     menuBlurb: "Territory, targeting, call planning",
