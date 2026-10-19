@@ -1,4 +1,5 @@
 import { about } from "@/content/about";
+import { microsoft } from "@/content/microsoft";
 import { partners } from "@/content/partners";
 import { absoluteUrl } from "./seo";
 import { siteUrl } from "./siteUrl";
@@ -46,6 +47,24 @@ export function partnersJsonLd() {
         },
       },
       crumbs("Partners", "/partners"),
+    ],
+  };
+}
+
+/** Microsoft page: WebPage describing the stack (product names as listed on the page) plus breadcrumbs. */
+export function microsoftJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": `${absoluteUrl("/microsoft")}#page`,
+        url: absoluteUrl("/microsoft"),
+        name: "Exeevo CRM is built on Microsoft",
+        description: microsoft.hero.lead,
+        about: microsoft.groups.flatMap((g) => g.cards.map((c) => ({ "@type": "Thing", name: c.title }))),
+      },
+      crumbs("Microsoft", "/microsoft"),
     ],
   };
 }

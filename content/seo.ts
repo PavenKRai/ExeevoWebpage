@@ -48,6 +48,12 @@ export const seo = {
     description:
       "Exeevo is a life sciences CRM on Microsoft Dynamics 365, founded in 2017 and part of Valsoft, with 15,000+ users and offices in the US, India and China.",
   },
+  microsoft: {
+    path: "/microsoft",
+    title: "Life sciences CRM built entirely on Microsoft",
+    description:
+      "Exeevo CRM runs on Power Platform, Dynamics 365, Dataverse, Azure and Foundry: one Microsoft estate for IT, with Microsoft security and compliance underneath.",
+  },
   partners: {
     path: "/partners",
     title: "Exeevo partners: technology, implementation, data and compliance",

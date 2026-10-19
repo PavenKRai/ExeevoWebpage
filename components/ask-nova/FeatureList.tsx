@@ -1,5 +1,6 @@
 "use client";
-import { askNova, features, novaStages } from "@/content/askNova";
+import Image from "next/image";
+import { askNova, builtLogos, features, novaStages } from "@/content/askNova";
 import { cn } from "@/components/ui/cn";
 import { NovaIcon } from "./NovaIcon";
 import { useNova } from "./NovaProvider";
@@ -62,7 +63,21 @@ export function FeatureList() {
                         <span className={cn("num text-[13px] transition-colors duration-500", hot ? "text-brand-blue" : "text-muted")}>{f.num}</span>
                         <span className={cn("flex size-10 items-center justify-center rounded-xl border border-hairline bg-porcelain transition-colors duration-500", hot ? "text-brand-blue" : "text-heading")}><NovaIcon d={f.icon} size={20} /></span>
                         <h4 className={cn("text-[19px] font-[450] leading-[1.25] tracking-[-0.015em] transition-colors duration-500", hot ? "text-brand-blue" : "text-heading")}>{f.name}</h4>
-                        <p className={cn("body-text col-start-3 !text-[14.5px] transition-colors duration-500 lg:col-start-auto", hot && "!text-brand-blue")}>{f.desc}</p>
+                        <div className="col-start-3 flex flex-col gap-2.5 lg:col-start-auto">
+                          <p className={cn("body-text !text-[14.5px] transition-colors duration-500", hot && "!text-brand-blue")}>{f.desc}</p>
+                          <ul aria-label="Built on" className="flex flex-wrap items-center gap-[5px]">
+                            <li aria-hidden="true" className="mr-0.5 inline-flex items-center gap-1.5 text-[12px] text-muted">
+                              <Image src="/microsoft/microsoft-square.png" alt="" width={11} height={11} />
+                              Built on
+                            </li>
+                            {f.built.map((b) => (
+                              <li key={b} className="inline-flex items-center gap-1.5 rounded-full bg-white/80 px-[9px] py-[3px] text-[12px] text-body shadow-[0_0_0_1px_var(--ex-hairline)]">
+                                {builtLogos[b] && <Image src={builtLogos[b]} alt="" width={14} height={14} className="size-3.5" />}
+                                {b}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                         <div className="col-start-3 flex lg:col-start-auto lg:justify-end"><TierBadge tier={f.tier} /></div>
                       </li>
                     );

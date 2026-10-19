@@ -14,11 +14,12 @@ Instructions for AI coding agents working on the Exeevo marketing website. Read 
 | `/` | Home |
 | `/platform` | Platform overview (eight stacked module sections; `?module=<slug>` scrolls to one) |
 | `/why-exeevo` | Why Exeevo |
+| `/microsoft` | Built on Microsoft (the stack, stats, product cards; logos in `public/microsoft/`) |
 | `/industries` | Industries |
 | `/solutions-by-role` | Solutions by Role (live, but not in the nav or footer; not yet redesigned) |
 | `/ask-nova` | Ask-Nova Studio & AI |
 | `/services` | Professional Services: Consult, Implement, Operate (replaced Getting Started; `/getting-started` redirects here) |
-| `/about`, `/partners` | About, Partners |
+| `/about`, `/partners` | About, Partners (nav label "Partnerships"; Industries is no longer in the nav bar, the page and footer links stay) |
 | `/resources`, `/events`, `/glossary` and detail pages | Resources (CMS content; light-touch styling until redesigned) |
 
 ## Stack

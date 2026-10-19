@@ -1,0 +1,14 @@
+/* Microsoft page: stack card links, and the product card that lights up when a link jumps to it. */
+.es-i, .es-m { transition: transform 0.3s var(--ex-ease-soft), box-shadow 0.3s, background 0.3s, color 0.3s, border-color 0.3s; }
+.es-i:hover { transform: translateY(-2px); box-shadow: 0 0 0 1.5px var(--ex-blue), 0 10px 20px -14px rgba(7, 98, 200, 0.5) !important; }
+.es-m:hover { background: #fff; color: var(--ex-blue); border-color: var(--ex-blue); }
+.mscard:target { animation: msFlash 2.4s ease-in-out; }
+@keyframes msFlash {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(29, 38, 45, 0.05), 0 24px 48px -30px rgba(29, 38, 45, 0.3); }
+  15%, 60% { box-shadow: 0 0 0 2px var(--ex-blue), 0 24px 48px -26px rgba(7, 98, 200, 0.45); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .es-i, .es-m { transition: none; }
+  .es-i:hover { transform: none; }
+  .mscard:target { animation: none; }
+}

@@ -5,6 +5,8 @@
   --ex-blue: #0762c8;
   --ex-green: #00c389;
   --ex-purple: #6e5bd8;
+  --ex-violet: #7a3fc0;
+  --ex-sky: #00a4ef;
   --ex-gradient: linear-gradient(100deg, #df1995, #0762c8 55%, #00c389);
   --ex-orb: conic-gradient(from 200deg, #df1995, #0762c8, #00c389, #0762c8, #df1995);
 
@@ -82,6 +84,8 @@
   --color-brand-blue: var(--ex-blue);
   --color-brand-green: var(--ex-green);
   --color-purple: var(--ex-purple);
+  --color-violet: var(--ex-violet);
+  --color-sky: var(--ex-sky);
   --color-ink: var(--ex-ink);
   --color-ink-deep: var(--ex-ink-deep);
   --color-heading: var(--ex-heading);

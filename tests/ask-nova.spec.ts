@@ -51,6 +51,7 @@ test("demo buttons lead to the Talk to our team form; JSON-LD lists 13 features;
   const nav = page.getByRole("navigation", { name: "Primary" }).getByRole("link");
   const names = await nav.allTextContents();
   expect(names.map((n) => n.trim()).slice(0, 3)).toEqual(["Platform", "Ask-Nova", "Services"]);
+  await expect(page.locator("#features ul[aria-label=\"Built on\"]")).toHaveCount(13);
   const html = await (await request.get("/ask-nova")).text();
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
   const app = blocks.flatMap((b) => b["@graph"] ?? []).find((n: { "@type": string }) => n["@type"] === "SoftwareApplication");

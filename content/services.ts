@@ -211,8 +211,8 @@ export const gettingStarted = {
       name: "Core",
       title: "Core: live in as little as 4 weeks",
       tag: "Start focused",
-      body: "A focused, standard configuration for teams launching their first unified CRM: one country, one brand, fast time to value.",
-      chips: ["One country", "One brand", "Standard configuration"],
+      body: "A focused, standard configuration for teams launching their first unified CRM, in one country or several: fast time to value.",
+      chips: ["Standard configuration", "Multi country"],
     },
     {
       slug: "enterprise",

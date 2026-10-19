@@ -5,14 +5,15 @@ export const site = {
   tagline: "A unified, AI-powered life sciences CRM built natively on Microsoft.",
   demoHref: "/services#demo",
   videoUrl: "[VIDEO URL]",
-  /** Primary navigation (new design): plain links, no dropdowns. Solutions by role is no longer linked from the nav or footer; the page stays live. */
+  /** Primary navigation (new design): plain links, no dropdowns. Industries is not in the bar (Partnerships replaced it); the page and the footer links stay. Solutions by role is no longer linked from the nav or footer; the page stays live. */
   nav: [
     { label: "Platform", href: "/platform" },
     { label: "Ask-Nova", href: "/ask-nova" },
     { label: "Services", href: "/services" },
-    { label: "Industries", href: "/industries" },
     { label: "Why Exeevo", href: "/why-exeevo" },
+    { label: "Microsoft", href: "/microsoft" },
     { label: "About", href: "/about" },
+    { label: "Partnerships", href: "/partners" },
     { label: "Resources", href: "/resources" },
   ] satisfies NavLink[],
   footer: {
@@ -23,6 +24,7 @@ export const site = {
           { label: "Overview", href: "/platform" },
           { label: "Ask-Nova Studio & AI", href: "/ask-nova" },
           { label: "Why Exeevo", href: "/why-exeevo" },
+          { label: "Built on Microsoft", href: "/microsoft" },
           { label: "Professional Services", href: "/services" },
         ],
       },
@@ -37,7 +39,7 @@ export const site = {
         title: "Company",
         links: [
           { label: "About", href: "/about" },
-          { label: "Partners", href: "/partners" },
+          { label: "Partnerships", href: "/partners" },
           { label: "Case Studies", href: "/resources/case-studies" },
           { label: "Trust & Compliance", href: "/why-exeevo#compliance" },
         ],

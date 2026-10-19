@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 };
 
 const groups = [
-  { title: "Main pages", links: [{ label: "Home", href: "/" }, ...site.nav.filter((l) => !l.href.includes("#"))] },
+  { title: "Main pages", links: [{ label: "Home", href: "/" }, ...site.nav.filter((l) => !l.href.includes("#")), { label: "Industries", href: "/industries" }, { label: "Solutions by role", href: "/solutions-by-role" }] },
   { title: "Platform modules", links: modules.map((m) => ({ label: m.name, href: `/platform?module=${m.slug}` })) },
   { title: "Resources", links: [{ label: "All resources", href: "/resources" }, ...resourceTypes.map((t) => ({ label: t.label, href: t.path }))] },
-  { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Partners", href: "/partners" }, { label: "Careers", href: "/careers" }, { label: "Privacy policy", href: "/privacy" }, { label: "Cookie policy", href: "/cookies" }] },
+  { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Careers", href: "/careers" }, { label: "Privacy policy", href: "/privacy" }, { label: "Cookie policy", href: "/cookies" }] },
 ];
 
 export default function SiteMapPage() {
