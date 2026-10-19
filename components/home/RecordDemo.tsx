@@ -27,6 +27,7 @@ export function RecordDemo({ label }: { label: string }) {
           aria-label={label}
           data-orb=""
           style={{
+            lineHeight: "normal",
             position: "relative",
             width: "620px",
             height: "540px",

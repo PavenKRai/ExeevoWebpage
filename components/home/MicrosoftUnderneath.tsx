@@ -26,7 +26,7 @@ export function MicrosoftUnderneath() {
         <ul className="grid gap-5 lg:grid-cols-3">
           {u.cards.map((c) => (
             <li key={c.visual} className="glass srg relative flex flex-col overflow-hidden rounded-[28px] p-3.5">
-              <div aria-hidden="true">{visuals[c.visual]}</div>
+              <div aria-hidden="true" className="leading-[normal]">{visuals[c.visual]}</div>
               <div className="flex flex-1 flex-col gap-2.5 px-3.5 pb-4 pt-6">
                 <h3 className="text-[30px] font-[350] leading-[1.05] tracking-[-0.03em] text-soft">{c.title.light} <b className="font-medium text-heading">{c.title.bold}</b></h3>
                 <p className="body-text">{c.body}</p>

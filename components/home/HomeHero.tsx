@@ -43,10 +43,8 @@ export function HomeHero() {
           </div>
         </div>
         <div className="fi relative min-w-0 lg:col-span-6">
-          <div className="relative ml-auto h-[508px] w-[583px] max-w-full overflow-hidden max-sm:h-[300px] max-sm:w-full">
-            <div className="absolute right-0 top-0 w-[620px] origin-top-right scale-[.94] max-sm:left-0 max-sm:origin-top-left max-sm:scale-[.55]">
-              <RecordDemo label={home.recordLabel} />
-            </div>
+          <div className="max-sm:[zoom:.55]">
+            <RecordDemo label={home.recordLabel} />
           </div>
         </div>
       </div>
