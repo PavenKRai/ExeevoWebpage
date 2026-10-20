@@ -6,7 +6,7 @@ test("home: one h1 with the light and bold phrases, demo described for assistive
   await page.goto("/", { waitUntil: "networkidle" });
   const h1 = page.getByRole("heading", { level: 1 });
   await expect(h1).toHaveCount(1);
-  await expect(h1).toContainText("The Microsoft-native platform");
+  await expect(h1).toContainText("The Microsoft-native CRM");
   await expect(h1.locator("b")).toHaveText("for life sciences.");
   await expect(page.getByRole("img", { name: /Animated demo: a pointer hovers/ })).toBeVisible();
   const order = [/Adoption/, "What changes for your teams", /One licence/, /Purpose-built shows up/, /Everything in one view/, /Microsoft underneath/, /Your data stays where you put it/, "Two paths to go live", /Pharma-ready CRM/];

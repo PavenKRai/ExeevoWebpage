@@ -7,7 +7,7 @@ export type PageSeo = { path: string; title: string; description: string; absolu
 export const seo = {
   home: {
     path: "/",
-    title: "The Microsoft-native CRM platform for life sciences | Exeevo",
+    title: "The Microsoft-native CRM for life sciences | Exeevo",
     absoluteTitle: true,
     description:
       "One CRM for commercial, medical and marketing teams: purpose-built for life sciences, with an offline-first mobile app and AI, on the Microsoft cloud.",

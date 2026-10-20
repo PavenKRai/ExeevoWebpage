@@ -2,7 +2,7 @@
 export const home = {
   chip: "Life sciences CRM, built natively on",
   chipBrand: "Microsoft",
-  h1: { light: "The Microsoft-native platform", bold: "for life sciences." },
+  h1: { light: "The Microsoft-native CRM", bold: "for life sciences." },
   paragraph:
     "Give your field force the insight to win every call, and yourself the visibility to prove it every cycle. One CRM for commercial, medical and marketing, running on the Microsoft cloud your company already trusts, so you launch faster and your reps work in the tools they already use.",
   primaryCta: "Get a demo",
