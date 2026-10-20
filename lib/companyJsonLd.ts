@@ -26,6 +26,12 @@ export function aboutJsonLd() {
         parentOrganization: { "@type": "Organization", name: "Valsoft" },
         location: about.offices.list.map((o) => ({ "@type": "Place", name: o.city, address: o.addr.join(", ") })),
       },
+      ...about.leadership.people.map((p) => ({
+        "@type": "Person",
+        name: `${p.first} ${p.last}`,
+        jobTitle: p.title,
+        worksFor: { "@id": `${siteUrl}/#organization` },
+      })),
       crumbs("About", "/about"),
     ],
   };

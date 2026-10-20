@@ -9,7 +9,7 @@ export const about = {
     { text: "One platform. One licence.", strong: false },
     { text: "Every team on the same underlying data.", strong: true },
   ],
-  heroImage: { src: "/about/hero.webp", alt: "An Exeevo user reviewing clinical data on a tablet with a physician in a hospital corridor", width: 1280, height: 300, tag: "Field view · HCP detailing" },
+  heroImage: { src: "/about/hero.jpg", alt: "A field representative reviewing data on a tablet with a physician in a clinic", width: 4128, height: 1024, tag: "Field view · HCP detailing" },
   stats: [
     { value: "2017", label: "Founded" },
     { value: "15,000+", label: "Life sciences users" },
@@ -75,14 +75,88 @@ export const about = {
       { title: "Industry Collaboration", body: "We work as one team with our customers, implementation partners and Microsoft, bringing together diverse skills and perspectives to deliver modern, next-generation CRM and AI solutions.", dot: "var(--ex-green)" },
     ],
   },
+  leadership: {
+    title: "Our leadership",
+    parts: { light: "Our", bold: "leadership" },
+    lead: "The people behind Exeevo, combining decades of life sciences, commercial and technology experience.",
+    people: [
+      {
+        "first": "Ludovic",
+        "last": "Petit",
+        "title": "Chief Executive Officer",
+        "photo": "/about/leaders/ludovic-petit.jpg",
+        "alt": "Portrait of Ludovic Petit",
+        "bio": [
+          "Ludovic Petit is the Chief Executive Officer of Exeevo, where he leads the company’s mission to redefine the life sciences commercial ecosystem through AI-driven innovation. Since joining Exeevo in April 2022, he has been a driving force behind the company’s strategic growth, previously serving as Vice President of AI and Product Strategies.",
+          "With over 25 years of experience, Ludovic is a recognised expert in digital transformation and in scaling technology platforms that bridge the gap between complex market data and commercial execution. Before Exeevo, he held senior leadership roles at ICON plc, where he was instrumental in designing next-generation commercial and clinical solutions across Product Management and Business Consulting.",
+          "His expertise in global CRM and Business Intelligence includes 15 years at Cegedim Dendrite (now IQVIA), where he led expansion across EMEA and LATAM and played a key role in developing CRM infrastructure in North America.",
+          "Ludovic began his career as a System and Network Engineer at Electronic Data Systems (EDS). He holds a Bachelor of Science from Paris Descartes (University Paris V) and a Master of Computer Science from Paris Diderot (University Paris VII)."
+        ]
+      },
+      {
+        "first": "Reeba",
+        "last": "Thomas",
+        "title": "Head of People",
+        "photo": "/about/leaders/reeba-thomas.jpg",
+        "alt": "Portrait of Reeba Thomas",
+        "bio": [
+          "Reeba Thomas is a transformative people leader with over 25 years of experience shaping enterprise HR strategy at the intersection of talent, technology and business transformation. At Exeevo, she helps power the company’s growth by reimagining how people, data and AI come together to drive performance, innovation and scale.",
+          "Partnering closely with senior leaders, she aligns workforce strategy with business priorities, builds future-ready capabilities and leads change at scale, embedding digital fluency, leadership effectiveness and resilience into the organisation. A passionate advocate for AI-led HR transformation, she champions advanced analytics and intelligent tools for smarter decisions and an elevated employee experience.",
+          "Reeba previously held senior HR leadership roles at Microsoft, TE Connectivity, Thermo Fisher Scientific and the Azim Premji Foundation, and is a Certified Independent Board Director, bringing a strong governance mindset and enterprise perspective to her work."
+        ]
+      },
+      {
+        "first": "Vivek",
+        "last": "Iyer",
+        "title": "Head of IT and AI Initiatives",
+        "photo": "/about/leaders/vivek-iyer.jpg",
+        "alt": "Portrait of Vivek Iyer",
+        "bio": [
+          "Vivek leads IT and AI initiatives at Exeevo, spearheading the strategic evolution of the company’s enterprise technology and intelligent systems. With over 18 years of experience across the Microsoft ecosystem, he specialises in architecting complex Dynamics 365 and Power Platform solutions that bridge functional design and scalable enterprise integration.",
+          "A specialist in the life sciences and financial services domains, Vivek provides technical leadership for strategic presales and orchestrates agentic AI frameworks for Pharma and MedTech on Microsoft Azure AI Foundry. Beyond product innovation, he is driving the cross-departmental integration of AI and modernising DevOps operations to improve internal efficiency and delivery across the organisation.",
+          "Vivek ensures enterprise initiatives remain compliant with global requirements such as ISO, GDPR and the Sunshine Act. Working with cross-functional teams, he guides the transition from legacy systems to AI-augmented ecosystems, keeping technology aligned with the data rigours of modern life sciences."
+        ]
+      },
+      {
+        "first": "Lokesh",
+        "last": "Shetty",
+        "title": "Head of Professional Services",
+        "photo": "/about/leaders/lokesh-shetty.jpg",
+        "alt": "Portrait of Lokesh Shetty",
+        "bio": [
+          "Lokesh Shetty leads Professional Services at Exeevo, overseeing the global teams that deliver mission-critical CRM solutions for the life sciences industry. With over 19 years of experience in enterprise technology and consulting, he specialises in complex Microsoft Dynamics 365 implementations, multi-country rollouts and quality engineering for the pharmaceutical, biotech and MedTech sectors.",
+          "His leadership spans North America, Europe and Asia, where he manages large-scale digital transformation programmes. He is modernising the delivery lifecycle with AI-powered automation and intelligent quality engineering, so Exeevo’s clients achieve faster time-to-value and greater platform reliability.",
+          "Lokesh holds a Bachelor of Engineering and champions a high-performance culture in and out of the office. An avid endurance athlete, he spends his time away from technology running marathons, hiking and scuba diving."
+        ]
+      },
+      {
+        "first": "Simmya",
+        "last": "Velutan",
+        "title": "Head of R&D",
+        "photo": "/about/leaders/simmya-velutan.jpg",
+        "alt": "Portrait of Simmya Velutan",
+        "bio": [
+          "Simmya leads R&D at Exeevo, directing the development of enterprise-grade CRM and mobile solutions for the global life sciences industry. With deep expertise in Microsoft Dynamics 365, cloud-native microservices and hybrid mobile architectures, she manages high-performing full-stack teams focused on scalable, high-performance digital platforms.",
+          "A champion of technical modernisation, Simmya is spearheading the integration of generative AI and intelligent automation into Exeevo’s core product suite. By architecting AI-driven data insights and agentic workflows, she helps pharmaceutical organisations accelerate product innovation and streamline clinical engagement.",
+          "Dedicated to engineering excellence, she drives AI-augmented development workflows and performance optimisation, and mentors her teams to bridge legacy systems and intelligent, future-ready architectures, keeping Exeevo at the forefront of digital transformation in healthcare."
+        ]
+      }
+    ],
+  },
   offices: {
     label: "Offices",
     title: "Where to find us",
     parts: { light: "Where to", bold: "find us" },
-    body: "Supporting more than 15,000 users across EMEA, the Americas and APAC. Select an office to see its address.",
-    mapLabel: "World map showing Exeevo offices in Clearwater, Bangalore and Shanghai",
+    body: "Supporting more than 15,000 users across EMEA, the Americas and APAC. Our people work across the United Kingdom, Portugal, the United States, Canada, India and China. Select an office to see its address.",
+    mapLabel: "World map showing Exeevo offices in Clearwater, Montreal, Bangalore and Shanghai, and team members in the United Kingdom and Portugal",
+    legend: { office: "Office", team: "Team members" },
+    team: [
+      { id: "uk", name: "United Kingdom", x: 599.6, y: 78.3, side: "right" },
+      { id: "pt", name: "Portugal", x: 569.6, y: 120.9, side: "left" },
+    ],
     list: [
       { id: "clw", city: "Clearwater, Florida", region: "North America", addr: ["19321 US Hwy 19 N, Suite 607", "Clearwater, FL 33764", "United States"], x: 324.2, y: 156.7, color: "var(--ex-green)" },
+      { id: "mtl", city: "Montreal, Canada", region: "Canada", addr: ["7405 Rte Transcanadienne #100", "Saint-Laurent, QC H4T 1Z2", "Canada"], x: 354.5, y: 98.2, color: "#7A3FC0" },
       { id: "blr", city: "Bangalore, India", region: "India", addr: ["12th Floor, Summit A, Brigade Metropolis", "Mahadevapura (Garudachar Palya), Bangalore North", "Karnataka 560048, India"], x: 859.0, y: 206.7, color: "var(--ex-magenta)" },
       { id: "sha", city: "Shanghai, China", region: "China", addr: ["Exeevo Shanghai Limited", "Room 04-168 of We Work Liwei Jiang commercial Info consulting co ltd", "333 Cheng Du Bei Lu, Shanghai"], x: 1004.8, y: 145.9, color: "var(--ex-blue)" },
     ],

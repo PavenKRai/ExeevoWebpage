@@ -89,7 +89,7 @@
 @keyframes scan { from { top: 0; } to { top: 100%; } }
 .scan { position: absolute; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(7, 98, 200, 0.55), transparent); animation: scan 6s linear infinite alternate; pointer-events: none; }
 @keyframes focusIn { from { opacity: 0; filter: blur(12px); scale: 0.96; } to { opacity: 1; filter: none; scale: 1; } }
-.fi { animation: focusIn 1.2s 0.25s var(--ex-ease-out) both; }
+.fi { animation: focusIn 1.2s 0.25s var(--ex-ease-out) backwards; } /* backwards: no filter is left on the element afterwards, so glass inside keeps its backdrop blur */
 
 /* Content column used by the page designs: 1280px with 40px (20px on phones) side padding. */
 .wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 40px; position: relative; }

@@ -33,3 +33,21 @@ for (const w of [390, 768]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)).toBe(false);
   });
 }
+
+test("microsoft: strip moves even with CSS animations off; built-for section and Dataverse chips are present", async ({ page }) => {
+  await page.goto("/microsoft", { waitUntil: "networkidle" });
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("built natively on Microsoft");
+  await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important}" });
+  const left = () => page.locator(".mq").evaluate((e) => e.getBoundingClientRect().left);
+  const a = await left();
+  await page.waitForTimeout(1500);
+  expect(await left()).toBeLessThan(a - 5);
+  const strip = page.getByRole("region", { name: "Microsoft technologies Exeevo is built on" });
+  await expect(strip.locator("li[aria-hidden='true']")).toHaveCount(13);
+  await expect(page.getByRole("button", { name: /Pause|Resume/ })).toHaveCount(0);
+  await expect(page.getByRole("heading", { name: /Built for life sciences/ })).toBeVisible();
+  const dv = page.locator("#ms-dataverse");
+  await expect(dv.getByText("Mobile App", { exact: true })).toBeVisible();
+  await expect(dv.getByText("Ask-Nova", { exact: true })).toBeVisible();
+  await expect(page.locator("#ms-foundry").getByText("Ask-Nova Studio", { exact: true })).toBeVisible();
+});

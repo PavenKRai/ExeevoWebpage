@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AboutHero } from "@/components/about/AboutHero";
 import { ClosingCards } from "@/components/about/ClosingCards";
+import { LeadershipSection } from "@/components/about/LeadershipSection";
 import { MicrosoftWhy } from "@/components/about/MicrosoftWhy";
 import { OfficesMap } from "@/components/about/OfficesMap";
 import { StoryTimeline } from "@/components/about/StoryTimeline";
@@ -22,6 +23,7 @@ export default function AboutPage() {
       <MicrosoftWhy />
       <ValsoftSection />
       <ValuesSection />
+      <LeadershipSection />
       <OfficesMap />
       <ClosingCards />
     </>

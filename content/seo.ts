@@ -7,10 +7,10 @@ export type PageSeo = { path: string; title: string; description: string; absolu
 export const seo = {
   home: {
     path: "/",
-    title: "Life sciences CRM built natively on Microsoft | Exeevo",
+    title: "The Microsoft-native CRM platform for life sciences | Exeevo",
     absoluteTitle: true,
     description:
-      "Exeevo is a unified, AI-powered life sciences CRM built natively on Microsoft. One system for commercial, medical and marketing teams.",
+      "One CRM for commercial, medical and marketing teams: purpose-built for life sciences, with an offline-first mobile app and AI, on the Microsoft cloud.",
   },
   platform: {
     path: "/platform",
@@ -46,11 +46,11 @@ export const seo = {
     path: "/about",
     title: "About Exeevo: life sciences CRM built natively on Microsoft",
     description:
-      "Exeevo is a life sciences CRM on Microsoft Dynamics 365, founded in 2017 and part of Valsoft, with 15,000+ users and offices in the US, India and China.",
+      "Exeevo is a life sciences CRM on Microsoft Dynamics 365, part of Valsoft. Meet the leadership team and find our offices in the US, Canada, India and China.",
   },
   microsoft: {
     path: "/microsoft",
-    title: "Life sciences CRM built entirely on Microsoft",
+    title: "Life sciences CRM built natively on Microsoft",
     description:
       "Exeevo CRM runs on Power Platform, Dynamics 365, Dataverse, Azure and Foundry: one Microsoft estate for IT, with Microsoft security and compliance underneath.",
   },

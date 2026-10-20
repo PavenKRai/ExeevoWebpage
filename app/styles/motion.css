@@ -43,5 +43,8 @@
     transition: none !important;
     scroll-behavior: auto !important;
   }
-  .sr, .srl, .srr, .srg, .srt, .srs, .srf, .px, .ln, .ln-y, .drift, .stagger > *, .rise, .tilt-in { opacity: 1 !important; translate: none !important; scale: none !important; rotate: none !important; filter: none !important; }
+  :is(.sr, .srl, .srr, .srg, .srt, .srs, .srf, .px, .ln, .ln-y, .drift, .stagger > *, .rise, .tilt-in):not([data-reveal-always] *) { opacity: 1 !important; translate: none !important; scale: none !important; rotate: none !important; filter: none !important; }
+  /* Exception: Home (data-reveal-always) keeps its one-time scroll reveals. */
+  [data-reveal-always] .rv-in { transition: opacity .8s var(--ex-ease-out), translate .8s var(--ex-ease-out), scale .8s var(--ex-ease-out), rotate .8s var(--ex-ease-out) !important; transition-delay: var(--rv-delay, 0s) !important; }
+  /* Exception for Home: the record demo and the technology strip are driven by the Web Animations API (see useRecordLoop / Marquee), which this rule does not touch. */
 }

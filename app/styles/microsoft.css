@@ -12,3 +12,13 @@
   .es-i:hover { transform: none; }
   .mscard:target { animation: none; }
 }
+
+/* Data flowing from the Exeevo app down to the Microsoft backend */
+@keyframes spFlow { 0% { background-position: 0 0; } 100% { background-position: 0 24px; } }
+.sp-line { width: 2px; height: 100%; background: repeating-linear-gradient(180deg, #0762C8 0 6px, transparent 6px 12px); opacity: .45; animation: spFlow 1.2s linear infinite; }
+@media (prefers-reduced-motion: reduce) { .sp-line { animation: none; } }
+
+/* Technology strip and the three "Microsoft underneath" visuals */
+@keyframes mq { to { transform: translateX(-50%); } }
+.mq { animation: mq 40s linear infinite; }
+.client { transition: transform .4s; } .client:hover { transform: translateY(-2px); }

@@ -1,8 +1,9 @@
 /** Microsoft page copy (from the Microsoft design). Logos live in public/microsoft/. */
-export type MsColor = "blue" | "magenta" | "green" | "violet" | "sky";
+export type MsColor = "blue" | "magenta" | "green" | "violet" | "sky" | "ai";
 export type MsCard = {
   id: string;
   logo: string;
+  extraLogos?: string[];
   title: string;
   desc: string;
   bullets: string[];
@@ -14,10 +15,64 @@ export type MsWhyIcon = "home" | "shield" | "refresh" | "arrow";
 export const microsoft = {
   hero: {
     chip: "Built on Microsoft",
-    h1: { light: "One platform,", bold: "built entirely on Microsoft" },
+    h1: { light: "One platform,", bold: "built natively on Microsoft" },
     lead: "Exeevo CRM is built on Microsoft Power Platform, Dynamics 365 and Azure. You get pharma-ready modules on the enterprise cloud your IT team already trusts, with Microsoft's security, compliance and global data residency underneath.",
     primary: "Get a demo",
     secondary: "See the stack",
+  },
+  strip: {
+    label: "Microsoft technologies Exeevo is built on",
+    builtOn: "Built natively on",
+    items: [
+      { label: "Power Platform", logo: "/microsoft/power-platform.png" },
+      { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
+      { label: "Dataverse", logo: "/microsoft/dataverse.png" },
+      { label: "Entra ID", logo: "/microsoft/entra.png" },
+      { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
+      { label: "Copilot Studio", logo: "/microsoft/copilot-studio.svg" },
+      { label: "Teams", logo: "/microsoft/teams.png" },
+      { label: "Microsoft 365 Copilot", logo: "/microsoft/m365-copilot.png" },
+      { label: "Power BI", logo: "/microsoft/power-bi.png" },
+      { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
+      { label: "Microsoft Fabric", logo: "/microsoft/fabric.png" },
+      { label: "Azure SQL", logo: "/microsoft/azure-sql.svg" },
+      { label: "Power Automate", logo: "/microsoft/power-automate.png" },
+    ],
+  },
+  builtFor: {
+    h2: { light: "Built for life sciences,", bold: "running on Microsoft" },
+    lead: "Exeevo is not a configured template. The CRM your reps, MSLs and KAMs use, including the mobile app, is purpose-built by Exeevo for life sciences. Microsoft Dynamics 365 and Dataverse sit underneath as the backend, so you get both: software designed for your teams, on infrastructure your IT team already trusts.",
+    app: {
+      title: "Exeevo CRM",
+      note: "What your teams use",
+      points: [
+        "Native mobile app for iOS, Android, Windows and web",
+        "Offline-first, with voice-to-text capture and geo-routing",
+        "Pharma data model: HCPs, HCOs, territories, samples",
+        "Compliance built in: Part 11, GDPR, Sunshine Act",
+      ],
+    },
+    syncs: "Syncs with",
+    backend: {
+      title: "backend",
+      note: "What IT trusts",
+      items: [
+        { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
+        { label: "Dataverse", logo: "/microsoft/dataverse.png" },
+        { label: "Power Platform", logo: "/microsoft/power-platform.png" },
+        { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
+        { label: "Power Automate", logo: "/microsoft/power-automate.png" },
+        { label: "Power BI", logo: "/microsoft/power-bi.png" },
+        { label: "Entra ID", logo: "/microsoft/entra.png" },
+        { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
+        { label: "Copilot Studio", logo: "/microsoft/copilot-studio.svg" },
+        { label: "Azure Functions", logo: "/microsoft/azure-functions.svg" },
+        { label: "Azure SQL", logo: "/microsoft/azure-sql.svg" },
+        { label: "Microsoft Fabric", logo: "/microsoft/fabric.png" },
+        { label: "Application Insights", logo: "/microsoft/application-insights.svg" },
+      ],
+      more: "+ many more",
+    },
   },
   tenant: {
     title: "Your Microsoft tenant",
@@ -118,10 +173,7 @@ export const microsoft = {
             "Call planning, call reporting and sample management",
             "Field coaching, goals and activity tracking",
           ],
-          powers: [
-            { label: "CRM (Sales)", color: "blue" },
-            { label: "Mobile App", color: "blue" },
-          ],
+          powers: [{ label: "Sales CRM", color: "blue" }],
         },
         {
           id: "ms-customer-service",
@@ -180,7 +232,10 @@ export const microsoft = {
             "Role-based security down to the record and field level",
             "Change auditing built into the platform",
           ],
-          powers: [],
+          powers: [
+            { label: "Mobile App", color: "blue" },
+            { label: "Ask-Nova", color: "ai" },
+          ],
         },
         {
           id: "ms-power-automate",
@@ -253,6 +308,7 @@ export const microsoft = {
         {
           id: "ms-datalake",
           logo: "/microsoft/data-lake.svg",
+          extraLogos: ["/microsoft/synapse-link.svg"],
           title: "Azure Data Lake & Synapse Link",
           desc: "A continuous, near real-time copy of CRM data in your own data lake.",
           bullets: [
@@ -292,11 +348,15 @@ export const microsoft = {
             "Client data is not used to train the models",
             "Option to run agents in your own Foundry instance",
           ],
-          powers: [],
+          powers: [
+            { label: "Ask-Nova", color: "ai" },
+            { label: "Ask-Nova Studio", color: "ai" },
+          ],
         },
         {
           id: "ms-copilot",
           logo: "/microsoft/copilot-studio.svg",
+          extraLogos: ["/microsoft/m365-copilot.png", "/microsoft/teams.png"],
           title: "Copilot Studio, Microsoft 365 Copilot & Teams",
           desc: "Brings Ask-Nova into the Microsoft tools reps already open every day.",
           bullets: [
@@ -304,11 +364,15 @@ export const microsoft = {
             "CRM questions answered inside Teams and Microsoft 365 Copilot",
             "Your IT team controls who can use it and where",
           ],
-          powers: [],
+          powers: [
+            { label: "Ask-Nova Assistant", color: "ai" },
+            { label: "MCP Server", color: "ai" },
+          ],
         },
         {
           id: "ms-monitor",
           logo: "/microsoft/azure-monitor.svg",
+          extraLogos: ["/microsoft/application-insights.svg"],
           title: "Azure Monitor & Application Insights",
           desc: "End-to-end monitoring for the platform, integrations and AI.",
           bullets: [

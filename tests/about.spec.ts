@@ -42,3 +42,37 @@ test("about: no horizontal overflow and the hero ends fully visible", async ({ p
   await page.waitForTimeout(1500);
   expect(Number(await page.getByRole("heading", { level: 1 }).evaluate((e) => getComputedStyle(e).opacity))).toBe(1);
 });
+
+test("about: leadership section has five leaders with portraits and bios, between Values and Offices", async ({ page, request }) => {
+  const html = await (await request.get("/about")).text();
+  const esc = (t: string) => t.replace(/'/g, "&#x27;").replace(/&/g, "&amp;").replace(/’/g, "’");
+  for (const p of about.leadership.people) expect(html, p.last).toContain(esc(p.bio[0].slice(0, 50)));
+  await page.goto("/about", { waitUntil: "networkidle" });
+  const ys: number[] = [];
+  for (const name of [/Our\s+values/, /Our\s+leadership/, /Where to\s+find us/]) {
+    const h = page.getByRole("heading", { name, level: 2 });
+    await expect(h).toBeVisible();
+    ys.push((await h.boundingBox())!.y + (await page.evaluate(() => scrollY)));
+  }
+  expect(ys[0]).toBeLessThan(ys[1]);
+  expect(ys[1]).toBeLessThan(ys[2]);
+  const sec = page.locator("#leadership-title").locator("xpath=ancestor::section");
+  await expect(sec.locator("li")).toHaveCount(5);
+  for (const p of about.leadership.people) {
+    await expect(sec.getByRole("img", { name: p.alt })).toHaveCount(1);
+    await expect(sec.getByText(p.title, { exact: true })).toBeVisible();
+  }
+});
+
+test("about: four offices (incl. Montreal) and team-member locations on the map with a legend", async ({ page, request }) => {
+  await page.goto("/about", { waitUntil: "networkidle" });
+  expect(about.offices.list.map((o) => o.id)).toEqual(["clw", "mtl", "blr", "sha"]);
+  const map = page.getByRole("img", { name: /World map showing Exeevo offices/ });
+  await expect(map).toContainText("United Kingdom");
+  await expect(map).toContainText("Portugal");
+  await expect(page.getByText("Team members", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: /Montreal/ }).click();
+  await expect(page.getByText("7405 Rte Transcanadienne #100", { exact: true })).toBeVisible();
+  const html = await (await request.get("/about")).text();
+  expect((html.match(/"@type":"Person"/g) ?? []).length).toBe(5);
+});

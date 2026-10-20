@@ -60,7 +60,7 @@ test.describe("mobile menu", () => {
 test("industry cards and role panels link to modules", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto("/industries");
-  await expect(page.getByRole("link", { name: "CRM (Sales)" }).first()).toHaveAttribute("href", "/platform?module=crm-sales");
+  await expect(page.getByRole("link", { name: "Sales CRM" }).first()).toHaveAttribute("href", "/platform?module=crm-sales");
   await page.goto("/solutions-by-role");
   await expect(page.getByRole("link", { name: "Mobile App" }).first()).toHaveAttribute("href", "/platform?module=mobile-app");
 });

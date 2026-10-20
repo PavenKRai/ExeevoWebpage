@@ -104,7 +104,8 @@ export function FeatureDial() {
             </button>
           );
         })}
-        <DetailCard className="absolute !backdrop-blur-[54px]" style={{ left: 104, top: C, width: 272, minHeight: 248, transform: "translateY(-50%)" }} />
+        {/* 54px (the design value) stops blurring on a box this small and the ring shows through, so use a radius the browser applies */}
+        <DetailCard className="absolute" style={{ left: 104, top: C, width: 272, minHeight: 248, transform: "translateY(-50%)", backdropFilter: "blur(16px) saturate(160%)", WebkitBackdropFilter: "blur(16px) saturate(160%)" }} />
       </div>
     </div>
   );

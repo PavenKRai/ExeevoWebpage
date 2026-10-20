@@ -46,6 +46,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .rv-hide { opacity: 1 !important; translate: none !important; scale: none !important; rotate: none !important; }
-  .rv-in { transition: none !important; }
+  .rv-hide:not([data-reveal-always] .rv-hide) { opacity: 1 !important; translate: none !important; scale: none !important; rotate: none !important; }
+  .rv-in:not([data-reveal-always] .rv-in) { transition: none !important; }
 }
