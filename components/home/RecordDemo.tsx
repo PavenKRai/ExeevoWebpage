@@ -1,13 +1,12 @@
 "use client";
 import Image from "next/image";
 import { useRef } from "react";
-import { Pause, Play } from "lucide-react";
 import { RECORD_LOOPS, useLoops } from "./useLoops";
 
 /** The animated HCP 360 record: a pointer hovers four parts of the screen and each reveals the Microsoft technology underneath. Pure CSS loop (14s), decorative and described by `label`; under reduced motion only the first note shows. */
-export function RecordDemo({ label, pause, play }: { label: string; pause: string; play: string }) {
+export function RecordDemo({ label }: { label: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const loop = useLoops(ref, RECORD_LOOPS);
+  useLoops(ref, RECORD_LOOPS);
   return (
     <div
       style={{
@@ -669,19 +668,6 @@ export function RecordDemo({ label, pause, play }: { label: string; pause: strin
           </div>
         </div>
       </div>
-      <button
-        type="button"
-        aria-pressed={loop.paused}
-        aria-label={loop.paused ? play : pause}
-        onClick={loop.toggle}
-        className="absolute left-1/2 top-full z-10 flex size-11 -translate-x-1/2 translate-y-1 items-center justify-center rounded-full bg-white/90 text-[#1D262D] opacity-0 shadow-[0_0_0_1px_#E1E6EA] transition-opacity focus-visible:opacity-100 [div:hover>&]:opacity-100"
-      >
-        {loop.paused ? (
-          <Play size={16} strokeWidth={1.8} aria-hidden="true" />
-        ) : (
-          <Pause size={16} strokeWidth={1.8} aria-hidden="true" />
-        )}
-      </button>
     </div>
   );
 }

@@ -79,16 +79,9 @@ test("home: the adoption phone and the licence stack animate even with CSS anima
   }
 });
 
-test("home: each animated visual has a working pause control", async ({ page }) => {
+test("home: no pause or play buttons on the animated visuals", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
-  const buttons = page.getByRole("button", { name: "Pause animation" });
-  await expect(buttons).toHaveCount(6);
-  await buttons.first().evaluate((b: HTMLButtonElement) => b.click());
-  await expect(page.getByRole("button", { name: "Resume animation" })).toHaveAttribute("aria-pressed", "true");
-  const snap = () => page.evaluate(() => ["d-t1", "d-t2", "d-t3", "d-t4"].map((c) => getComputedStyle(document.querySelector("." + c)!).opacity).join());
-  const a = await snap();
-  await page.waitForTimeout(2500);
-  expect(await snap()).toBe(a);
+  await expect(page.getByRole("button", { name: /Pause|Resume/ })).toHaveCount(0);
 });
 
 test("home: scroll reveals play once, also under reduced motion", async ({ page }) => {

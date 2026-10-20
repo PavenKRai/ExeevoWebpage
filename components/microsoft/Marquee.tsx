@@ -1,38 +1,21 @@
 "use client";
-import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Pause, Play } from "lucide-react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 const fade = "linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)";
 
-/** Scrolling strip with a pause control (WCAG 2.2.2). It keeps drifting slowly under reduced motion, as the product strip is meant to move; the button stops it. */
-export function Marquee({ children, pause, play }: { children: ReactNode; pause: string; play: string }) {
-  const [stopped, setStopped] = useState(false);
+/** Scrolling strip. It is driven by the Web Animations API, which a global `animation: none` rule (reduced-motion handling) cannot stop; under reduced motion it drifts more slowly. */
+export function Marquee({ children }: { children: ReactNode }) {
   const box = useRef<HTMLDivElement>(null);
-  const anim = useRef<Animation | null>(null);
-  // Script animation (Web Animations API): a global `animation: none` rule cannot stop it, so the strip always moves.
   useEffect(() => {
     const list = box.current?.querySelector<HTMLElement>(".mq");
     if (!list || typeof list.animate !== "function") return;
     const slow = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    anim.current = list.animate([{ transform: "translateX(0)" }, { transform: "translateX(-50%)" }], { duration: slow ? 90000 : 40000, iterations: Infinity, easing: "linear" });
-    return () => anim.current?.cancel();
+    const anim = list.animate([{ transform: "translateX(0)" }, { transform: "translateX(-50%)" }], { duration: slow ? 90000 : 40000, iterations: Infinity, easing: "linear" });
+    return () => anim.cancel();
   }, []);
-  useEffect(() => {
-    if (stopped) anim.current?.pause();
-    else anim.current?.play();
-  }, [stopped]);
   return (
-    <div ref={box} className="mq-wrap relative" data-stopped={stopped}>
+    <div ref={box} className="mq-wrap relative">
       <div style={{ WebkitMaskImage: fade, maskImage: fade }}>{children}</div>
-      <button
-        type="button"
-        aria-pressed={stopped}
-        aria-label={stopped ? play : pause}
-        onClick={() => setStopped((v) => !v)}
-        className="absolute right-3 top-1/2 z-[2] hidden size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-heading opacity-0 shadow-[0_0_0_1px_var(--ex-hairline)] transition-opacity focus-visible:opacity-100 group-hover:opacity-100 [.mq-wrap:hover_&]:opacity-100 sm:flex"
-      >
-        {stopped ? <Play size={16} strokeWidth={1.8} aria-hidden="true" /> : <Pause size={16} strokeWidth={1.8} aria-hidden="true" />}
-      </button>
     </div>
   );
 }

@@ -57,12 +57,7 @@ export function PrivacyTenant() {
             <ArrowRight size={16} strokeWidth={1.6} aria-hidden="true" />
           </Link>
         </div>
-        <LoopScope
-          loops={TENANT_LOOPS}
-          pause={p.pause}
-          play={p.play}
-          className="lg:col-span-6 lg:col-start-7"
-        >
+        <LoopScope loops={TENANT_LOOPS} className="lg:col-span-6 lg:col-start-7">
           <div className="srg relative overflow-hidden rounded-[32px] border border-hairline bg-porcelain p-7">
             <div
               className="aura -right-[60px] -top-[60px] size-[300px] bg-brand-green opacity-20"

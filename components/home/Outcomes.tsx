@@ -1,7 +1,6 @@
 "use client";
 import { useRef } from "react";
 import { home } from "@/content/home";
-import { LoopToggle } from "./LoopToggle";
 import { OUTCOME_LOOPS } from "./loops";
 import { useLoops } from "./useLoops";
 
@@ -116,7 +115,7 @@ function Launch({ l }: { l: { tools: readonly string[]; from: string; to: string
 /** Three outcomes as glass cards, each with a small looping visual. */
 export function Outcomes() {
   const ref = useRef<HTMLUListElement>(null);
-  const loop = useLoops(ref, OUTCOME_LOOPS);
+  useLoops(ref, OUTCOME_LOOPS);
   return (
     <section
       aria-labelledby="outcomes-title"
@@ -137,7 +136,7 @@ export function Outcomes() {
           </h2>
           <p className="lead max-w-[600px]">{home.outcomesHead.lead}</p>
         </div>
-        <div className="group relative">
+        <div className="relative">
           <ul ref={ref} className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {(home.outcomes as readonly Outcome[]).map((o, n) => (
               <li
@@ -164,12 +163,6 @@ export function Outcomes() {
               </li>
             ))}
           </ul>
-          <LoopToggle
-            paused={loop.paused}
-            onToggle={loop.toggle}
-            pause={home.outcomesHead.pause}
-            play={home.outcomesHead.play}
-          />
         </div>
       </div>
     </section>

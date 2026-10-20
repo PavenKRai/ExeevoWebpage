@@ -118,7 +118,7 @@ Full detail in `docs/design-system.md`.
   - Page transitions: fade, 16px rise and blur-out.
   - Shared hero orb: `layoutId="hero-orb"`.
 - **Easing:** `--ex-ease-out` for arrivals, `--ex-ease-soft` for hover.
-- **Home exceptions to reduced motion:** the Home record demo, adoption phone and licence stack (`useLoops`) and the Microsoft page strip (`Marquee`) run on the Web Animations API so a global `animation: none` cannot freeze them, each with a pause button, and Home keeps its one-time scroll reveals (`data-reveal-always`). Everything else follows the setting.
+- **Home exceptions to reduced motion:** the Home record demo, adoption phone and licence stack (`useLoops`) and the Microsoft page strip (`Marquee`) run on the Web Animations API so a global `animation: none` cannot freeze them and Home keeps its one-time scroll reveals (`data-reveal-always`). Everything else follows the setting.
 - **Reduced motion:** under `prefers-reduced-motion: reduce`, every animation and transition is disabled and Motion uses `useReducedMotion()` to make changes instant. Nothing may be hidden when motion is off.
 
 ## Accessibility (required)

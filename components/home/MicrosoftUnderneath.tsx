@@ -41,7 +41,7 @@ export function MicrosoftUnderneath() {
             <ArrowRight size={16} strokeWidth={1.6} aria-hidden="true" />
           </Button>
         </div>
-        <LoopScope loops={UNDERNEATH_LOOPS} pause={u.pause} play={u.play}>
+        <LoopScope loops={UNDERNEATH_LOOPS}>
           <ul className="grid gap-5 lg:grid-cols-3">
             {u.cards.map((c) => (
               <li

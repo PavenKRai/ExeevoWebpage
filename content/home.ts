@@ -7,8 +7,6 @@ export const home = {
     "Give your field force the insight to win every call, and yourself the visibility to prove it every cycle. One CRM for commercial, medical and marketing, running on the Microsoft cloud your company already trusts, so you launch faster and your reps work in the tools they already use.",
   primaryCta: "Get a demo",
   secondaryCta: "Why Microsoft matters",
-  recordPause: "Pause animation",
-  recordPlay: "Resume animation",
   recordLabel:
     "Animated demo: a pointer hovers over parts of an HCP record in Exeevo CRM and reveals the Microsoft technology underneath each: Power Platform, Dataverse field security, Microsoft Foundry and global Azure regions.",
   adoption: {
@@ -20,14 +18,10 @@ export const home = {
       { title: "Briefed before every visit", body: "Ask-Nova prepares a short brief on the HCP, so reps walk in prepared instead of digging through notes." },
     ],
     label: "Animated demo: a rep opens an Ask-Nova call brief before a visit, records a voice note after it while offline, the note syncs to Exeevo CRM when back online, and an approved follow-up is sent from Teams.",
-    pause: "Pause animation",
-    play: "Resume animation",
   },
   licence: {
     h2: { light: "One licence,", bold: "instead of a stack" },
     lead: "A single licence replaces multiple subscriptions. AI is included, and every user can extend the platform with Power Platform at no extra per-user cost.",
-    pause: "Pause animation",
-    play: "Resume animation",
   },
   moments: {
     h2: { light: "Purpose-built shows up", bold: "in the moments that matter" },
@@ -42,8 +36,6 @@ export const home = {
     ],
   },
   underneath: {
-    pause: "Pause animation",
-    play: "Resume animation",
     h2: { light: "Microsoft underneath,", bold: "so your CRM is trusted, tested and always current" },
     cta: "See the full Microsoft stack",
     cards: [
@@ -76,8 +68,6 @@ export const home = {
     ],
   },
   outcomesHead: {
-    pause: "Pause animation",
-    play: "Resume animation",
     h2: { light: "What changes", bold: "for your teams" },
     lead: "Three outcomes commercial, medical and marketing leaders see once everyone works in one system.",
   },
@@ -125,8 +115,6 @@ export const home = {
     breaks: { "crm-sales": ["CRM", "(Sales)"], "mobile-app": ["Mobile", "App"] } as Record<string, string[]>,
   },
   privacy: {
-    pause: "Pause animation",
-    play: "Resume animation",
     h2: { light: "Your data stays where you put it.", bold: "It never leaves your Microsoft tenant." },
     body: "Your customer data is stored and processed in your own Microsoft Azure environment. We don't sell it, share it, or use it to train AI models across other customers, and it's never moved outside the tenant you control.",
     link: "See how Exeevo compares",

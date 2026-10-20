@@ -23,8 +23,6 @@ export const microsoft = {
   strip: {
     label: "Microsoft technologies Exeevo is built on",
     builtOn: "Built natively on",
-    pause: "Pause scrolling",
-    play: "Resume scrolling",
     items: [
       { label: "Power Platform", logo: "/microsoft/power-platform.png" },
       { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },

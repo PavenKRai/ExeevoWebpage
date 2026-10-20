@@ -13,7 +13,7 @@ export function MsStrip() {
         <span className="text-[14px] text-muted">{t.builtOn}</span>
         <Image src="/microsoft/microsoft-wordmark.webp" alt="Microsoft" width={100} height={20} className="h-5 w-auto" />
       </div>
-      <Marquee pause={t.pause} play={t.play}>
+      <Marquee>
         <ul className="mq flex w-max gap-3">
           {[0, 1].map((copy) =>
             t.items.map((it) => (

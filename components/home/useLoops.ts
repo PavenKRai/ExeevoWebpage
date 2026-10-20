@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
+import { useCallback, useEffect, useRef, type RefObject } from "react";
 
 /**
  * The HCP record demo's 14s loop, copied from the design's CSS keyframes but run with the Web Animations API.
@@ -78,15 +78,13 @@ function parse(frames: string, easing: string): Keyframe[] {
   return out.sort((a, b) => (a.offset as number) - (b.offset as number));
 }
 
-/** Starts the loops on a visual's root; pauses it off-screen and on request. Returns the user-facing pause state. */
+/** Starts the loops on a visual's root and pauses them while it is off-screen. */
 export function useLoops(ref: RefObject<HTMLElement | null>, loops: Loop[]) {
   const anims = useRef<Animation[]>([]);
-  const userPaused = useRef(false);
   const visible = useRef(true);
-  const [paused, setPaused] = useState(false);
 
   const sync = useCallback(() => {
-    const run = visible.current && !userPaused.current;
+    const run = visible.current;
     anims.current.forEach((a) => (run ? a.play() : a.pause()));
   }, []);
 
@@ -98,7 +96,12 @@ export function useLoops(ref: RefObject<HTMLElement | null>, loops: Loop[]) {
         // an inline animation-delay (typed letters, waveform bars) is read from the style attribute, which a global `animation: none` cannot reset
         const raw = el.style.animationDelay || "0";
         const delay = parseFloat(raw) * (raw.endsWith("ms") ? 1 : 1000);
-        return el.animate(parse(l.frames, l.easing), { duration: l.duration ?? DURATION, iterations: Infinity, fill: "both", delay: Number.isFinite(delay) ? delay : 0 });
+        return el.animate(parse(l.frames, l.easing), {
+          duration: l.duration ?? DURATION,
+          iterations: Infinity,
+          fill: "both",
+          delay: Number.isFinite(delay) ? delay : 0,
+        });
       }),
     );
     root.dataset.loop = "js";
@@ -114,12 +117,4 @@ export function useLoops(ref: RefObject<HTMLElement | null>, loops: Loop[]) {
       delete root.dataset.loop;
     };
   }, [ref, sync, loops]);
-
-  const toggle = useCallback(() => {
-    userPaused.current = !userPaused.current;
-    setPaused(userPaused.current);
-    sync();
-  }, [sync]);
-
-  return { paused, toggle };
 }

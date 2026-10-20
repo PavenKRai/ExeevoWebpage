@@ -1,16 +1,15 @@
 "use client";
 import Image from "next/image";
 import { useRef } from "react";
-import { LoopToggle } from "./LoopToggle";
 import { LICENCE_LOOPS } from "./loops";
 import { useLoops } from "./useLoops";
 
 /** What teams often pay for today (five contracts) flowing into one Exeevo licence. Script-driven 12s loop (see useLoops); decorative. */
-export function LicenceStack({ pause, play }: { pause: string; play: string }) {
+export function LicenceStack() {
   const ref = useRef<HTMLDivElement>(null);
-  const loop = useLoops(ref, LICENCE_LOOPS);
+  useLoops(ref, LICENCE_LOOPS);
   return (
-    <div className="group relative">
+    <div className="relative">
       <div
         ref={ref}
         aria-hidden="true"
@@ -574,7 +573,6 @@ export function LicenceStack({ pause, play }: { pause: string; play: string }) {
           </div>
         </div>
       </div>
-      <LoopToggle paused={loop.paused} onToggle={loop.toggle} pause={pause} play={play} />
     </div>
   );
 }

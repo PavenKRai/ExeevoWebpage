@@ -21,5 +21,4 @@
 /* Technology strip and the three "Microsoft underneath" visuals */
 @keyframes mq { to { transform: translateX(-50%); } }
 .mq { animation: mq 40s linear infinite; }
-.mq-wrap[data-stopped="true"] .mq { animation-play-state: paused !important; }
 .client { transition: transform .4s; } .client:hover { transform: translateY(-2px); }

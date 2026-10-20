@@ -1,24 +1,15 @@
 "use client";
 import Image from "next/image";
 import { useRef } from "react";
-import { LoopToggle } from "./LoopToggle";
 import { ADOPTION_LOOPS } from "./loops";
 import { useLoops } from "./useLoops";
 
 /** The animated phone: a rep opens the Ask-Nova call brief, records a voice note offline, the note syncs and Ask-Nova follows up in Teams. Script-driven 14s loop (see useLoops), decorative and described by `label`. */
-export function AdoptionPhone({
-  label,
-  pause,
-  play,
-}: {
-  label: string;
-  pause: string;
-  play: string;
-}) {
+export function AdoptionPhone({ label }: { label: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const loop = useLoops(ref, ADOPTION_LOOPS);
+  useLoops(ref, ADOPTION_LOOPS);
   return (
-    <div className="group relative">
+    <div className="relative">
       <div
         role="img"
         aria-label={label}
@@ -664,7 +655,6 @@ export function AdoptionPhone({
           ></div>
         </div>
       </div>
-      <LoopToggle paused={loop.paused} onToggle={loop.toggle} pause={pause} play={play} />
     </div>
   );
 }
