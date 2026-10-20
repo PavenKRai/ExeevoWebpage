@@ -2,68 +2,44 @@
 export const home = {
   chip: "Life sciences CRM, built natively on",
   chipBrand: "Microsoft",
-  h1: { light: "Purpose-built for life sciences.", bold: "Powered by Microsoft." },
+  h1: { light: "The Microsoft-native platform", bold: "for life sciences." },
   paragraph:
-    "Exeevo CRM is designed from the ground up for pharma, biotech and MedTech teams, with its own native mobile app for the field. Underneath, it runs on Microsoft Dynamics 365, Dataverse and Azure, with Microsoft's security, compliance and global data residency.",
+    "Give your field force the insight to win every call, and yourself the visibility to prove it every cycle. One CRM for commercial, medical and marketing, running on the Microsoft cloud your company already trusts, so you launch faster and your reps work in the tools they already use.",
   primaryCta: "Get a demo",
   secondaryCta: "Why Microsoft matters",
   recordPause: "Pause animation",
   recordPlay: "Resume animation",
   recordLabel:
     "Animated demo: a pointer hovers over parts of an HCP record in Exeevo CRM and reveals the Microsoft technology underneath each: Power Platform, Dataverse field security, Microsoft Foundry and global Azure regions.",
-  tech: {
-    label: "Microsoft technologies Exeevo is built on",
-    builtOn: "Built entirely on",
-    pause: "Pause scrolling",
-    play: "Resume scrolling",
+  adoption: {
+    h2: { light: "Adoption,", bold: "not resistance" },
+    lead: "The CRM only pays off if reps use it. Exeevo is built around the field's day, so it becomes the tool they reach for, not the one they log into at the end of the week.",
     items: [
-      { label: "Power Platform", logo: "/microsoft/power-platform.png" },
-      { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
-      { label: "Dataverse", logo: "/microsoft/dataverse.png" },
-      { label: "Entra ID", logo: "/microsoft/entra.png" },
-      { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
-      { label: "Copilot Studio", logo: "/microsoft/copilot-studio.svg" },
-      { label: "Teams", logo: "/microsoft/teams.png" },
-      { label: "Microsoft 365 Copilot", logo: "/microsoft/m365-copilot.png" },
-      { label: "Power BI", logo: "/microsoft/power-bi.png" },
-      { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
-      { label: "Microsoft Fabric", logo: "/microsoft/fabric.png" },
-      { label: "Azure SQL", logo: "/microsoft/azure-sql.svg" },
-      { label: "Power Automate", logo: "/microsoft/power-automate.png" },
+      { title: "Works where reps already are", body: "Outlook, Teams and the native Exeevo mobile app, in a modern interface reps actually want to open." },
+      { title: "Offline-first, with voice capture", body: "Full functionality with no connection. Reps log visits hands-free right after a call, and it syncs when they are back online." },
+      { title: "Briefed before every visit", body: "Ask-Nova prepares a short brief on the HCP, so reps walk in prepared instead of digging through notes." },
     ],
-    trusted: "Trusted by life sciences leaders",
-    clients: [
-      { name: "Daiichi-Sankyo", logo: "/home/client-daiichi-sankyo.png", h: 30, w: 126 },
-      { name: "Johnson & Johnson MedTech", logo: "/home/client-jnj-medtech.png", h: 34, w: 136 },
-      { name: "Sanofi", logo: "/home/client-sanofi.png", h: 30, w: 122 },
-    ],
-    more: "+ many more",
+    label: "Animated demo: a rep opens an Ask-Nova call brief before a visit, records a voice note after it while offline, the note syncs to Exeevo CRM when back online, and an approved follow-up is sent from Teams.",
+    pause: "Pause animation",
+    play: "Resume animation",
   },
-  builtFor: {
-    h2: { light: "Built for life sciences,", bold: "running on Microsoft" },
-    lead: "Exeevo is not a configured template. The CRM your reps, MSLs and KAMs use, including the mobile app, is purpose-built by Exeevo for life sciences. Microsoft Dynamics 365 and Dataverse sit underneath as the backend, so you get both: software designed for your teams, on infrastructure your IT team already trusts.",
-    app: { title: "Exeevo CRM", note: "What your teams use", points: ["Native mobile app for iOS, Android, Windows and web", "Offline-first, with voice-to-text capture and geo-routing", "Pharma data model: HCPs, HCOs, territories, samples", "Compliance built in: Part 11, GDPR, Sunshine Act"] },
-    syncs: "Syncs with",
-    backend: {
-      title: "backend",
-      note: "What IT trusts",
-      items: [
-        { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
-        { label: "Dataverse", logo: "/microsoft/dataverse.png" },
-        { label: "Power Platform", logo: "/microsoft/power-platform.png" },
-        { label: "Customer Insights", logo: "/microsoft/insights-journeys.png" },
-        { label: "Power Automate", logo: "/microsoft/power-automate.png" },
-        { label: "Power BI", logo: "/microsoft/power-bi.png" },
-        { label: "Entra ID", logo: "/microsoft/entra.png" },
-        { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
-        { label: "Copilot Studio", logo: "/microsoft/copilot-studio.svg" },
-        { label: "Azure Functions", logo: "/microsoft/azure-functions.svg" },
-        { label: "Azure SQL", logo: "/microsoft/azure-sql.svg" },
-        { label: "Microsoft Fabric", logo: "/microsoft/fabric.png" },
-        { label: "Application Insights", logo: "/microsoft/application-insights.svg" },
-      ],
-      more: "+ many more",
-    },
+  licence: {
+    h2: { light: "One licence,", bold: "instead of a stack" },
+    lead: "A single licence replaces multiple subscriptions. AI is included, and every user can extend the platform with Power Platform at no extra per-user cost.",
+    pause: "Pause animation",
+    play: "Resume animation",
+  },
+  moments: {
+    h2: { light: "Purpose-built shows up", bold: "in the moments that matter" },
+    lead: "The difference between a generic CRM and one built for life sciences is not a feature list. It is how your teams' day actually goes.",
+    generic: "With a generic CRM",
+    exeevo: "With Exeevo",
+    rows: [
+      { title: "Prepping a call", generic: "The rep pieces together notes from the CRM, email and a separate content library before every visit.", exeevo: "Ask-Nova briefs the rep on the HCP from the record page, so they walk in prepared." },
+      { title: "Seeing the whole HCP", generic: "Sales, Medical and Marketing each keep their own version of the same account.", exeevo: "A KAM, an MSL and a brand manager working the same HCP all see the same engagement history." },
+      { title: "Following up compliantly", generic: "Follow-up emails are written by hand, then chased for MLR approval.", exeevo: "Pre-approved content goes out automatically after the call, logged for MLR audit. No manual follow-up." },
+      { title: "Realigning territories", generic: "Every realignment becomes a project: exports, spreadsheets and retraining.", exeevo: "Territories align to real HCP potential, in tools reps already use, without months of change management." },
+    ],
   },
   underneath: {
     h2: { light: "Microsoft underneath,", bold: "so your CRM is trusted, tested and always current" },
@@ -72,7 +48,7 @@ export const home = {
       {
         visual: "trust",
         title: { light: "Trusted", bold: "by IT" },
-        body: "Every user signs in with Microsoft Entra ID, and Microsoft's global security and compliance certifications and regional hosting carry through to your CRM and its AI.",
+        body: "Your IT and security teams already approve Microsoft. Exeevo builds on that, so sign-off is faster and customer data is protected to the standard your company already holds.",
         chips: [
           { label: "Entra ID", logo: "/microsoft/entra.png" },
           { label: "Dataverse security", logo: "/microsoft/dataverse.png" },
@@ -82,13 +58,13 @@ export const home = {
       {
         visual: "scale",
         title: { light: "Tested", bold: "at global scale" },
-        body: "Exeevo CRM runs on the same Microsoft business platform that organisations of every size use every day, with Dataverse and Power Platform under every module.",
+        body: "The same Microsoft foundation runs some of the world's largest organisations every day. Your teams get proven reliability from day one, not a platform still finding its feet.",
         note: "Sources: Microsoft FY25 Q3 and FY26 Q1 earnings calls; Exeevo.",
       },
       {
         visual: "updates",
         title: { light: "Always", bold: "up to date" },
-        body: "New Dynamics 365, Azure and Microsoft AI capabilities reach Exeevo CRM as Microsoft releases them. Existing Microsoft licences and skills are reused, not duplicated.",
+        body: "New Microsoft capabilities, including AI, reach your teams as soon as they're released. No upgrade projects, no migrations, and no paying twice for what you already license.",
         chips: [
           { label: "Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
           { label: "Microsoft Foundry", logo: "/microsoft/foundry.svg" },
@@ -132,7 +108,7 @@ export const home = {
     },
   ],
   platform: {
-    h2: { light: "Everything in one view,", bold: "each module on Microsoft" },
+    h2: { light: "Everything", bold: "in one view" },
     body: "Eight modules, one data model, one license. Read this once and you know the whole platform. Click through only where you need more.",
     legend: [
       { category: "commercial", text: "Commercial: CRM, Marketing, Events, Mobile" },
@@ -141,17 +117,6 @@ export const home = {
       { category: "ai", text: "AI: Ask-Nova Studio" },
     ],
     cta: "Explore all eight modules",
-    /** The Microsoft product each module runs on (shown as "On …" on the card). */
-    on: {
-      "crm-sales": { label: "On Power Platform", logo: "/microsoft/power-platform.png" },
-      "medical-crm": { label: "On Dynamics 365", logo: "/microsoft/dynamics-customer-service.png" },
-      "marketing-automation": { label: "On Customer Insights", logo: "/microsoft/insights-journeys.png" },
-      "event-management": { label: "On Customer Insights", logo: "/microsoft/insights-journeys.png" },
-      "content-management": { label: "On Dataverse", logo: "/microsoft/dataverse.png" },
-      "customer-insights": { label: "On Customer Insights", logo: "/microsoft/insights-data.svg" },
-      "mobile-app": { label: "Dynamics 365 backend", logo: "/microsoft/dynamics-customer-service.png" },
-      "ask-nova-studio": { label: "On Microsoft Foundry", logo: "/microsoft/foundry.svg" },
-    } as Record<string, { label: string; logo: string }>,
     /** Card titles break onto two lines as in the design. */
     breaks: { "crm-sales": ["CRM", "(Sales)"], "mobile-app": ["Mobile", "App"] } as Record<string, string[]>,
   },

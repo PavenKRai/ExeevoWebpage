@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { MsBuiltFor } from "@/components/microsoft/MsBuiltFor";
 import { MsGroup } from "@/components/microsoft/MsGroup";
 import { MsHero } from "@/components/microsoft/MsHero";
 import { MsStats } from "@/components/microsoft/MsStats";
+import { MsStrip } from "@/components/microsoft/MsStrip";
 import { MsWhy } from "@/components/microsoft/MsWhy";
 import { JsonLd } from "@/components/resources/JsonLd";
 import { microsoft } from "@/content/microsoft";
@@ -24,7 +26,9 @@ export default function MicrosoftPage() {
     <>
       <JsonLd data={microsoftJsonLd()} />
       <MsHero />
+      <MsStrip />
       <MsStats />
+      <MsBuiltFor />
       {microsoft.groups.map((g, k) => (
         <MsGroup key={g.id} group={g} tone={grounds[k].tone} auras={[...grounds[k].auras]} />
       ))}

@@ -14,7 +14,7 @@ Instructions for AI coding agents working on the Exeevo marketing website. Read 
 | `/` | Home |
 | `/platform` | Platform overview (eight stacked module sections; `?module=<slug>` scrolls to one) |
 | `/why-exeevo` | Why Exeevo |
-| `/microsoft` | Built on Microsoft (the stack, stats, product cards; logos in `public/microsoft/`) |
+| `/microsoft` | Built natively on Microsoft (technology strip, stats, "built for life sciences", product cards; logos in `public/microsoft/`) |
 | `/industries` | Industries |
 | `/solutions-by-role` | Solutions by Role (live, but not in the nav or footer; not yet redesigned) |
 | `/ask-nova` | Ask-Nova Studio & AI |
@@ -118,7 +118,7 @@ Full detail in `docs/design-system.md`.
   - Page transitions: fade, 16px rise and blur-out.
   - Shared hero orb: `layoutId="hero-orb"`.
 - **Easing:** `--ex-ease-out` for arrivals, `--ex-ease-soft` for hover.
-- **Home exceptions to reduced motion:** the record demo and the technology strip run on the Web Animations API (`useRecordLoop`, `Marquee`) so a global `animation: none` cannot freeze them, each with a pause button, and Home keeps its one-time scroll reveals (`data-reveal-always`). Everything else follows the setting.
+- **Home exceptions to reduced motion:** the Home record demo, adoption phone and licence stack (`useLoops`) and the Microsoft page strip (`Marquee`) run on the Web Animations API so a global `animation: none` cannot freeze them, each with a pause button, and Home keeps its one-time scroll reveals (`data-reveal-always`). Everything else follows the setting.
 - **Reduced motion:** under `prefers-reduced-motion: reduce`, every animation and transition is disabled and Motion uses `useReducedMotion()` to make changes instant. Nothing may be hidden when motion is off.
 
 ## Accessibility (required)

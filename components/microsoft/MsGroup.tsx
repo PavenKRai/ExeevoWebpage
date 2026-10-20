@@ -42,7 +42,7 @@ export function MsGroup({ group, tone, auras }: { group: Group; tone: "porcelain
                     <span className="mr-0.5 text-[12.5px] text-muted">Powers</span>
                     {c.powers.map((p) => (
                       <span key={p.label} className="inline-flex items-center gap-[7px] rounded-full bg-white/85 px-[11px] py-[5px] text-[12.5px] text-heading shadow-[0_0_0_1px_var(--ex-hairline)]">
-                        <span aria-hidden="true" className="dot !size-[9px]" style={dotStyle(p.color)} />
+                        <span aria-hidden="true" className={p.color === "ai" ? "dot dot-ai !size-[9px]" : "dot !size-[9px]"} style={dotStyle(p.color)} />
                         {p.label}
                       </span>
                     ))}

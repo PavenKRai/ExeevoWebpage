@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
@@ -43,12 +42,6 @@ export function ModuleGrid() {
                     <span className="text-[18px] font-[450] tracking-[-0.01em] text-heading">
                       {lines ? lines.map((l, k) => <span key={l}>{k > 0 && <br />}{l}</span>) : m.name}
                     </span>
-                    {p.on[m.slug] && (
-                      <span className="inline-flex items-center gap-1.5 text-[12px] text-muted">
-                        <Image src={p.on[m.slug].logo} alt="" width={14} height={14} className="size-3.5" />
-                        <span>{p.on[m.slug].label}</span>
-                      </span>
-                    )}
                     <span className="label">{m.category === "ai" ? "AI" : m.categoryLabel}</span>
                   </span>
                 </Link>

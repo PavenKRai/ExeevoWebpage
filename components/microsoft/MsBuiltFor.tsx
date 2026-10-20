@@ -1,17 +1,17 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { home } from "@/content/home";
+import { microsoft } from "@/content/microsoft";
 
 const item = "inline-flex items-center gap-2 rounded-xl bg-white py-[9px] pl-2.5 pr-3.5 text-[13px] text-heading shadow-[0_0_0_1px_var(--ex-hairline)]";
 
 /** "Built for life sciences, running on Microsoft": the purpose-built Exeevo app on top, syncing down to the Microsoft backend IT trusts. White ground. */
-export function BuiltForLifeSciences() {
-  const b = home.builtFor;
+export function MsBuiltFor() {
+  const b = microsoft.builtFor;
   return (
     <section aria-labelledby="builtfor-title" className="relative overflow-hidden bg-white py-20 lg:py-[120px]">
       <div className="aura -left-20 top-[10%] h-[380px] w-[520px] bg-magenta opacity-[.08] max-lg:hidden" aria-hidden="true" />
       <div className="aura -bottom-0 -right-20 h-[400px] w-[560px] bg-brand-blue opacity-[.12] max-lg:hidden" aria-hidden="true" />
-      <div className="hm-wrap grid items-center gap-10 lg:grid-cols-12 lg:gap-x-6">
+      <div className="wrap grid items-center gap-10 lg:grid-cols-12 lg:gap-x-6">
         <div className="flex flex-col gap-[22px] lg:col-span-5">
           <h2 id="builtfor-title" className="h2 sr">{b.h2.light} <b>{b.h2.bold}</b></h2>
           <p className="lead sr">{b.lead}</p>

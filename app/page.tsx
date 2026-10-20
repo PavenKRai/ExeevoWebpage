@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { BuiltForLifeSciences } from "@/components/home/BuiltForLifeSciences";
+import { Adoption } from "@/components/home/Adoption";
 import { ClosingCta } from "@/components/home/ClosingCta";
 import { GoLive } from "@/components/home/GoLive";
 import { HomeHero } from "@/components/home/HomeHero";
+import { Licence } from "@/components/home/Licence";
 import { MicrosoftUnderneath } from "@/components/home/MicrosoftUnderneath";
 import { ModuleGrid } from "@/components/home/ModuleGrid";
+import { Moments } from "@/components/home/Moments";
 import { Outcomes } from "@/components/home/Outcomes";
 import { PrivacyTenant } from "@/components/home/PrivacyTenant";
-import { TechStrip } from "@/components/home/TechStrip";
 import { seo } from "@/content/seo";
 import { pageMetadata } from "@/lib/seo";
 import "@/app/styles/home.css";
@@ -18,11 +19,12 @@ export default function Home() {
   return (
     <div data-reveal-always style={{ display: "contents" }}>
       <HomeHero />
-      <TechStrip />
-      <BuiltForLifeSciences />
-      <MicrosoftUnderneath />
+      <Adoption />
       <Outcomes />
+      <Licence />
+      <Moments />
       <ModuleGrid />
+      <MicrosoftUnderneath />
       <PrivacyTenant />
       <GoLive />
       <ClosingCta />

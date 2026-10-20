@@ -6,10 +6,11 @@ import { useCallback, useEffect, useRef, useState, type RefObject } from "react"
  * Animations created from script are not switched off by a global `animation: none` rule (reduced-motion handling,
  * stale or overridden CSS), so the hero demo plays everywhere. Each block is `offsets{property:value;...}` as in CSS.
  */
+export type Loop = { selector: string; easing: string; frames: string; duration?: number };
 const DURATION = 14000;
 const SOFT = "cubic-bezier(.16,1,.3,1)";
 const CURSOR = "cubic-bezier(.45,.05,.25,1)";
-const LOOPS: { selector: string; easing: string; frames: string }[] = [
+export const RECORD_LOOPS: Loop[] = [
   {
     selector: ".d-cur",
     easing: CURSOR,
@@ -77,8 +78,8 @@ function parse(frames: string, easing: string): Keyframe[] {
   return out.sort((a, b) => (a.offset as number) - (b.offset as number));
 }
 
-/** Starts the loop on the demo root; pauses it off-screen and on request. Returns the user-facing pause state. */
-export function useRecordLoop(ref: RefObject<HTMLElement | null>) {
+/** Starts the loops on a visual's root; pauses it off-screen and on request. Returns the user-facing pause state. */
+export function useLoops(ref: RefObject<HTMLElement | null>, loops: Loop[]) {
   const anims = useRef<Animation[]>([]);
   const userPaused = useRef(false);
   const visible = useRef(true);
@@ -92,14 +93,13 @@ export function useRecordLoop(ref: RefObject<HTMLElement | null>) {
   useEffect(() => {
     const root = ref.current;
     if (!root || typeof root.animate !== "function") return;
-    anims.current = LOOPS.flatMap((l) =>
-      Array.from(root.querySelectorAll<HTMLElement>(l.selector)).map((el) =>
-        el.animate(parse(l.frames, l.easing), {
-          duration: DURATION,
-          iterations: Infinity,
-          fill: "both",
-        }),
-      ),
+    anims.current = loops.flatMap((l) =>
+      Array.from(root.querySelectorAll<HTMLElement>(l.selector)).map((el) => {
+        // an inline animation-delay (typed letters, waveform bars) is read from the style attribute, which a global `animation: none` cannot reset
+        const raw = el.style.animationDelay || "0";
+        const delay = parseFloat(raw) * (raw.endsWith("ms") ? 1 : 1000);
+        return el.animate(parse(l.frames, l.easing), { duration: l.duration ?? DURATION, iterations: Infinity, fill: "both", delay: Number.isFinite(delay) ? delay : 0 });
+      }),
     );
     root.dataset.loop = "js";
     const io = new IntersectionObserver(([e]) => {
@@ -113,7 +113,7 @@ export function useRecordLoop(ref: RefObject<HTMLElement | null>) {
       anims.current = [];
       delete root.dataset.loop;
     };
-  }, [ref, sync]);
+  }, [ref, sync, loops]);
 
   const toggle = useCallback(() => {
     userPaused.current = !userPaused.current;

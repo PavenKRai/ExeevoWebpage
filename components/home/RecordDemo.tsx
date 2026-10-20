@@ -2,12 +2,12 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { Pause, Play } from "lucide-react";
-import { useRecordLoop } from "./useRecordLoop";
+import { RECORD_LOOPS, useLoops } from "./useLoops";
 
 /** The animated HCP 360 record: a pointer hovers four parts of the screen and each reveals the Microsoft technology underneath. Pure CSS loop (14s), decorative and described by `label`; under reduced motion only the first note shows. */
 export function RecordDemo({ label, pause, play }: { label: string; pause: string; play: string }) {
   const ref = useRef<HTMLDivElement>(null);
-  const loop = useRecordLoop(ref);
+  const loop = useLoops(ref, RECORD_LOOPS);
   return (
     <div
       style={{

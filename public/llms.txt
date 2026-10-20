@@ -5,7 +5,7 @@
 Customer data is stored and processed in the customer's own Microsoft Azure environment. It is not sold, shared or used to train AI models across other customers.
 
 ## Key pages
-- [Home](/): what Exeevo is and who it is for (purpose-built for life sciences, with a native mobile app, running on Microsoft Dynamics 365, Dataverse and Azure), why a Microsoft foundation matters (security, compliance, regional hosting, always current), the eight modules and the two go-live paths
+- [Home](/): what Exeevo is and who it is for (a Microsoft-native, purpose-built CRM for life sciences), why reps adopt it (offline-first mobile app, voice capture, Ask-Nova call briefs), one licence instead of a stack, purpose-built moments versus a generic CRM, the eight modules, and the two go-live paths
 - [Platform](/platform): the eight modules in one view
 - [Why Exeevo](/why-exeevo): built natively for life sciences, regulatory and compliance coverage, comparison with generic CRM platforms and point-solution add-ons
 - [Industries](/industries): pharma and MedTech
