@@ -9,7 +9,7 @@ export const about = {
     { text: "One platform. One licence.", strong: false },
     { text: "Every team on the same underlying data.", strong: true },
   ],
-  heroImage: { src: "/about/hero.jpg", alt: "A field representative reviewing data on a tablet with a physician in a clinic", width: 2400, height: 596, tag: "Field view · HCP detailing" },
+  heroImage: { src: "/about/hero.jpg", alt: "A field representative reviewing data on a tablet with a physician in a clinic", width: 4128, height: 1024, tag: "Field view · HCP detailing" },
   stats: [
     { value: "2017", label: "Founded" },
     { value: "15,000+", label: "Life sciences users" },
