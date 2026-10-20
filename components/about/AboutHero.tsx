@@ -23,7 +23,7 @@ export function AboutHero() {
       </div>
       <div className="frame fi mt-10 lg:mt-14">
         <figure className="relative h-[260px] overflow-hidden rounded-[32px] bg-mist sm:h-[320px] lg:h-[380px]">
-          <Image src={a.heroImage.src} alt={a.heroImage.alt} fill priority sizes="(min-width: 1440px) 1280px, 100vw" className="object-cover object-[60%_40%]" />
+          <Image src={a.heroImage.src} alt={a.heroImage.alt} fill priority sizes="(min-width: 1440px) 1280px, 100vw" className="object-cover object-[52%_35%]" />
           <div className="scan" aria-hidden="true" />
           <div className="glass absolute bottom-6 right-6 hidden max-w-[340px] flex-col gap-1 rounded-[22px] px-6 py-5 sm:flex">
             {a.oneLines.map((l) => (

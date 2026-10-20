@@ -46,7 +46,7 @@ export const seo = {
     path: "/about",
     title: "About Exeevo: life sciences CRM built natively on Microsoft",
     description:
-      "Exeevo is a life sciences CRM on Microsoft Dynamics 365, founded in 2017 and part of Valsoft, with 15,000+ users and offices in the US, India and China.",
+      "Exeevo is a life sciences CRM on Microsoft Dynamics 365, part of Valsoft. Meet the leadership team and find our offices in the US, Canada, India and China.",
   },
   microsoft: {
     path: "/microsoft",

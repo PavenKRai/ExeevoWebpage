@@ -3,7 +3,7 @@ import { useState } from "react";
 import { about } from "@/content/about";
 import { cn } from "@/components/ui/cn";
 
-/** "Where to find us": pick an office in the list (or on the map) to see its address. All three addresses stay in the HTML. */
+/** "Where to find us": pick an office in the list (or on the map) to see its address. All four addresses stay in the HTML. */
 export function OfficesMap() {
   const o = about.offices;
   const [sel, setSel] = useState<string>(o.list[0].id);
@@ -57,7 +57,24 @@ export function OfficesMap() {
                   </g>
                 );
               })}
+              {o.team.map((m) => (
+                <g key={m.id} aria-hidden="true">
+                  <circle cx={m.x} cy={m.y} r="6" fill="#fff" stroke="var(--ex-blue)" strokeWidth="2" />
+                  <circle cx={m.x} cy={m.y} r="2.2" fill="var(--ex-blue)" />
+                  <text x={m.side === "right" ? m.x + 12 : m.x - 12} y={m.y + 4} textAnchor={m.side === "right" ? "start" : "end"} fontFamily="Geist, Segoe UI, sans-serif" fontSize="13" fill="#333F48">{m.name}</text>
+                </g>
+              ))}
             </svg>
+            <p className="flex gap-5 px-1.5 pt-2.5 text-[12.5px] text-muted">
+              <span className="inline-flex items-center gap-2">
+                <span aria-hidden="true" className="size-2.5 rounded-full bg-brand-blue shadow-[0_0_0_2px_#fff,0_0_0_3px_var(--ex-blue)]" />
+                {o.legend.office}
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span aria-hidden="true" className="size-2.5 rounded-full border-2 border-brand-blue bg-white" />
+                {o.legend.team}
+              </span>
+            </p>
           </div>
         </div>
       </div>
