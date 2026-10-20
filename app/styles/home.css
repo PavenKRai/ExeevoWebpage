@@ -29,7 +29,7 @@
 .tt-chip { animation: ttFloat 4.5s ease-in-out infinite; }
 @keyframes upCycle { 0% { transform: translateY(110%); opacity: 0; } 6%,22% { transform: translateY(0); opacity: 1; } 28%,100% { transform: translateY(-110%); opacity: 0; } }
 .up-item { animation: upCycle 8s cubic-bezier(.2,.8,.2,1) infinite; }
-@media (prefers-reduced-motion: reduce) { .up-item:not(:first-child) { display: none; } .up-item { transform: none; opacity: 1; } }
+.up-item { opacity: 0; } .up-item:first-child { opacity: 1; } /* base state; the loop (script) animates these */
 
 /* Tenant diagram: packets flow inside the boundary; the shared-AI packet is blocked at the edge */
 .t-box { animation: tBox 8s linear infinite; }
@@ -44,7 +44,7 @@
 @keyframes tBox{0%,61%{border-color:#9AA7AF;box-shadow:none}64%{border-color:#DF1995;box-shadow:0 0 0 6px rgba(223,25,149,.1)}80%,100%{border-color:#9AA7AF;box-shadow:none}}
 @keyframes tTag{0%,62%{opacity:0;translate:0 6px}66%,88%{opacity:1;translate:0 0}94%,100%{opacity:0}}
 @keyframes tX{0%,62%{scale:1}65%{scale:1.15}68%{scale:.95}71%,100%{scale:1}}
-@media (prefers-reduced-motion: reduce) { .t-pk, .t-out { display: none; } .t-tag { opacity: 1; } }
+.t-tag { opacity: 1; } /* base state; the loop (script) fades it */
 
 .hm-lead { font-size: 18px; line-height: 1.6; font-weight: 350; color: var(--ex-muted); text-wrap: pretty; letter-spacing: normal; }
 

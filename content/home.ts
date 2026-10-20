@@ -42,6 +42,8 @@ export const home = {
     ],
   },
   underneath: {
+    pause: "Pause animation",
+    play: "Resume animation",
     h2: { light: "Microsoft underneath,", bold: "so your CRM is trusted, tested and always current" },
     cta: "See the full Microsoft stack",
     cards: [
@@ -74,6 +76,8 @@ export const home = {
     ],
   },
   outcomesHead: {
+    pause: "Pause animation",
+    play: "Resume animation",
     h2: { light: "What changes", bold: "for your teams" },
     lead: "Three outcomes commercial, medical and marketing leaders see once everyone works in one system.",
   },
@@ -121,6 +125,8 @@ export const home = {
     breaks: { "crm-sales": ["CRM", "(Sales)"], "mobile-app": ["Mobile", "App"] } as Record<string, string[]>,
   },
   privacy: {
+    pause: "Pause animation",
+    play: "Resume animation",
     h2: { light: "Your data stays where you put it.", bold: "It never leaves your Microsoft tenant." },
     body: "Your customer data is stored and processed in your own Microsoft Azure environment. We don't sell it, share it, or use it to train AI models across other customers, and it's never moved outside the tenant you control.",
     link: "See how Exeevo compares",

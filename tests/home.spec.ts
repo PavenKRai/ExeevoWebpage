@@ -68,7 +68,7 @@ test("home: the adoption phone and the licence stack animate even with CSS anima
   await page.goto("/", { waitUntil: "networkidle" });
   await page.addStyleTag({ content: KILL_CSS });
   const time = (sel: string) => page.evaluate((s) => { const a = document.querySelector(s)?.getAnimations()[0]; return a ? [a.playState, Number(a.currentTime)] as const : null; }, sel);
-  for (const sel of [".ad-brief", ".ad-toast", ".ad-mic", ".li-l0", ".li-ck4", ".li-flow"]) {
+  for (const sel of [".ad-brief", ".ad-toast", ".ad-mic", ".li-l0", ".li-ck4", ".li-flow", ".oc-seg", ".oc-flag", ".oc-bar", ".oc-dash", ".tt-chip", ".up-item", ".t-pk", ".t-out", ".t-box", ".t-tag", ".t-x"]) {
     await page.locator(sel).first().evaluate((e) => e.scrollIntoView({ block: "center", behavior: "instant" }));
     const a = await time(sel);
     expect(a, `${sel} has a running animation`).not.toBeNull();
@@ -82,7 +82,7 @@ test("home: the adoption phone and the licence stack animate even with CSS anima
 test("home: each animated visual has a working pause control", async ({ page }) => {
   await page.goto("/", { waitUntil: "networkidle" });
   const buttons = page.getByRole("button", { name: "Pause animation" });
-  await expect(buttons).toHaveCount(3);
+  await expect(buttons).toHaveCount(6);
   await buttons.first().evaluate((b: HTMLButtonElement) => b.click());
   await expect(page.getByRole("button", { name: "Resume animation" })).toHaveAttribute("aria-pressed", "true");
   const snap = () => page.evaluate(() => ["d-t1", "d-t2", "d-t3", "d-t4"].map((c) => getComputedStyle(document.querySelector("." + c)!).opacity).join());
