@@ -79,3 +79,9 @@ test("platform: 'Contract teams' role filter shows Account Management", async ({
   await expect(page.locator("#cap-accounts")).toBeVisible();
   await expect(page.getByRole("option", { name: "Tender and contract teams" })).toHaveCount(0);
 });
+
+test("platform: Ask-Nova capability has a button to the Ask-Nova page, no placeholder text", async ({ page }) => {
+  await page.goto("/platform", { waitUntil: "networkidle" });
+  await expect(page.getByText("Description to be added")).toHaveCount(0);
+  await expect(page.locator("#cap-ask-nova").getByRole("link", { name: /Explore Ask-Nova features in depth/ })).toHaveAttribute("href", "/ask-nova");
+});

@@ -10,7 +10,7 @@ export type Capability = {
   ai: string;
   /** Web, Tablet, Phone, Offline. */
   avail: boolean[];
-  features: { title: string; body: string; industry?: PlatformIndustry }[];
+  features: { title: string; body: string; industry?: PlatformIndustry; link?: { label: string; href: string } }[];
   /** Optional screenshot (1600 x 1000). Without one, the design's dashed placeholder frame shows. */
   shot?: string;
 };
@@ -406,7 +406,8 @@ export const capabilities: Capability[] = [
       },
       {
         title: "Ask-Nova Plus",
-        body: "Description to be added with its deep dive.",
+        body: "",
+        link: { label: "Explore Ask-Nova features in depth", href: "/ask-nova" },
       },
     ],
   },

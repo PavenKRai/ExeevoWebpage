@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 import { type Capability, platformIndustries, platformPage } from "@/content/platform";
 
 const chip = "inline-flex items-center gap-1.5 rounded-full bg-white/70 px-2.5 py-1 text-[12px] text-heading shadow-[0_0_0_1px_var(--ex-hairline)]";
@@ -83,7 +84,16 @@ export function CapabilitySection({ cap, index, features }: { cap: Capability; i
                     {f.title}
                     {f.industry && <span className={tag}>{f.industry}</span>}
                   </h3>
-                  <p className="text-[14px] leading-[1.5] text-muted">{f.body}</p>
+                  {f.link ? (
+                    <div>
+                      <Button href={f.link.href} variant="secondary" size="nav">
+                        {f.link.label}
+                        <ArrowRight size={16} strokeWidth={1.6} aria-hidden="true" />
+                      </Button>
+                    </div>
+                  ) : (
+                    <p className="text-[14px] leading-[1.5] text-muted">{f.body}</p>
+                  )}
                 </div>
               ))
             ) : (
