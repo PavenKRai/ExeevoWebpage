@@ -140,6 +140,17 @@ export const about = {
           "A champion of technical modernisation, Simmya is spearheading the integration of generative AI and intelligent automation into Exeevo’s core product suite. By architecting AI-driven data insights and agentic workflows, she helps pharmaceutical organisations accelerate product innovation and streamline clinical engagement.",
           "Dedicated to engineering excellence, she drives AI-augmented development workflows and performance optimisation, and mentors her teams to bridge legacy systems and intelligent, future-ready architectures, keeping Exeevo at the forefront of digital transformation in healthcare."
         ]
+      },
+      {
+        "first": "Raja Somasekhar",
+        "last": "Gupta",
+        "title": "Director – Finance & Accounts",
+        "photo": "/about/leaders/raja-somasekhar-gupta.jpg",
+        "alt": "Portrait of Raja Somasekhar Gupta",
+        "bio": [
+          "Raja Somasekhar Gupta partners with Exeevo’s CEO and the Valsoft leadership team to shape the company’s financial strategy and long-term growth. He leads the finance function end to end across all of Exeevo’s geographies, covering financial reporting, budgeting and forecasting, pricing, treasury, accounts receivable and payable, and regulatory compliance, and also supports the company on legal matters.",
+          "A Chartered Accountant (Institute of Chartered Accountants of India) with nearly two decades of experience in finance, Somasekhar previously served as Finance Controller – APAC at Pega and Global Finance Centre Controller at Honeywell, and began his career in audit and assurance at Deloitte."
+        ]
       }
     ],
   },

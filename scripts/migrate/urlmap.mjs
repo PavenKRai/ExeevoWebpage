@@ -58,7 +58,7 @@ const rules = [
   [/(^|\/)(a-propos|sobre-nosotros|ueber-uns|kaisha-gaiyo|about-us)\/(presse|pulse|shinbun|press)$|^\/press$/, "/resources/press-releases"],
   [/nos-leaders|liderazgo|fuehrung|ridashippu|our-people|%d9%82%d9%8a%d8%a7%d8%af%d8%a9|قيادة/, "/about"],
   [/partenaires|socios|\/partner$|patona|partners$/, "/partners"],
-  [/carrieres|carreras|karriere|kyaria|careers/, "/careers"],
+  [/carrieres|carreras|karriere|kyaria|careers/, "/about"],
   [/^\/(a-propos|sobre-nosotros|ueber-uns|kaisha-gaiyo|about-us)$/, "/about"],
   [/politique-de-confidentialite|politica-de-privacidad|datenschutzbestimmungen|puraibashi-porishi|privacy-policy/, "/privacy"],
   [/politique-relative-aux-cookies|politica-de-cookies|kukki-porishi|cookie-policy/, "/cookies"],

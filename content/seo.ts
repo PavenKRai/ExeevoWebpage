@@ -7,16 +7,16 @@ export type PageSeo = { path: string; title: string; description: string; absolu
 export const seo = {
   home: {
     path: "/",
-    title: "The Microsoft-native CRM platform for life sciences | Exeevo",
+    title: "The Microsoft-native CRM for life sciences | Exeevo",
     absoluteTitle: true,
     description:
       "One CRM for commercial, medical and marketing teams: purpose-built for life sciences, with an offline-first mobile app and AI, on the Microsoft cloud.",
   },
   platform: {
     path: "/platform",
-    title: "Life sciences CRM platform: eight modules, one view",
+    title: "Life sciences CRM capabilities, in one view",
     description:
-      "Eight modules, one data model, one license: CRM, Medical CRM, Marketing Automation, Events, Content, Customer Insights, Mobile App and Ask-Nova Studio.",
+      "Field sales, account management, medical affairs, marketing, events, content and MLR, compliance, insights and Ask-Nova AI on one Microsoft-native platform.",
   },
   why: {
     path: "/why-exeevo",

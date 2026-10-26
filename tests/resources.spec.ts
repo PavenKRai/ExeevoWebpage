@@ -3,7 +3,7 @@ import { localResources as getResources } from "../content/resources/local";
 import type { ResourceType } from "../content/resources/types";
 import { resourceHref } from "../lib/resources";
 
-const lists = ["/resources", "/resources/blog", "/resources/white-papers", "/resources/webinars", "/resources/case-studies", "/resources/press-releases", "/resources/analyst-reports", "/events", "/glossary", "/about", "/partners", "/careers", "/privacy", "/cookies", "/site-map"];
+const lists = ["/resources", "/resources/blog", "/resources/white-papers", "/resources/webinars", "/resources/case-studies", "/resources/press-releases", "/resources/analyst-reports", "/events", "/glossary", "/about", "/partners", "/privacy", "/cookies", "/site-map"];
 const types: ResourceType[] = ["blog", "white-papers", "webinars", "case-studies", "press-releases", "analyst-reports", "events", "glossary"];
 
 for (const route of lists) {

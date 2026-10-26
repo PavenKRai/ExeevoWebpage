@@ -57,7 +57,7 @@ test("about: leadership section has five leaders with portraits and bios, betwee
   expect(ys[0]).toBeLessThan(ys[1]);
   expect(ys[1]).toBeLessThan(ys[2]);
   const sec = page.locator("#leadership-title").locator("xpath=ancestor::section");
-  await expect(sec.locator("li")).toHaveCount(5);
+  await expect(sec.locator("li")).toHaveCount(6);
   for (const p of about.leadership.people) {
     await expect(sec.getByRole("img", { name: p.alt })).toHaveCount(1);
     await expect(sec.getByText(p.title, { exact: true })).toBeVisible();
@@ -74,5 +74,5 @@ test("about: four offices (incl. Montreal) and team-member locations on the map 
   await page.getByRole("button", { name: /Montreal/ }).click();
   await expect(page.getByText("7405 Rte Transcanadienne #100", { exact: true })).toBeVisible();
   const html = await (await request.get("/about")).text();
-  expect((html.match(/"@type":"Person"/g) ?? []).length).toBe(5);
+  expect((html.match(/"@type":"Person"/g) ?? []).length).toBe(6);
 });

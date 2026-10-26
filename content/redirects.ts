@@ -64,7 +64,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/a-propos/carrieres",
-    "destination": "/careers",
+    "destination": "/about",
     "permanent": true
   },
   {
@@ -89,7 +89,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/about-us/careers",
-    "destination": "/careers",
+    "destination": "/about",
     "permanent": true
   },
   {
@@ -539,7 +539,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/kaisha-gaiyo/kyaria",
-    "destination": "/careers",
+    "destination": "/about",
     "permanent": true
   },
   {
@@ -1679,7 +1679,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/sobre-nosotros/carreras",
-    "destination": "/careers",
+    "destination": "/about",
     "permanent": true
   },
   {
@@ -1729,7 +1729,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/ueber-uns/karriere",
-    "destination": "/careers",
+    "destination": "/about",
     "permanent": true
   },
   {

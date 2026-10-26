@@ -1,26 +1,28 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { CapabilityExplorer } from "@/components/platform/CapabilityExplorer";
 import { ModuleScroll } from "@/components/platform/ModuleScroll";
-import { ModuleSection } from "@/components/platform/ModuleSection";
-import { PlatformIntro } from "@/components/platform/PlatformIntro";
-import { modules } from "@/content/modules";
-import "@/app/styles/platform.css";
+import { PlatformCta } from "@/components/platform/PlatformCta";
+import { PlatformHero } from "@/components/platform/PlatformHero";
+import { JsonLd } from "@/components/resources/JsonLd";
 import { seo } from "@/content/seo";
+import { platformJsonLd } from "@/lib/platformJsonLd";
 import { pageMetadata } from "@/lib/seo";
+import "@/app/styles/platform.css";
 
 export const metadata: Metadata = pageMetadata(seo.platform);
 
-/** Intro with the module list, then the eight modules stacked (all in the server HTML). `?module=` scrolls to a section. */
+/** Hero, the filterable list of eleven capabilities (all in the server HTML), then the closing call to action. `?module=` (old slugs) and `#cap-<id>` scroll to a section. */
 export default function PlatformPage() {
   return (
     <>
+      <JsonLd data={platformJsonLd()} />
       <Suspense fallback={null}>
         <ModuleScroll />
       </Suspense>
-      <PlatformIntro />
-      {modules.map((m, n) => (
-        <ModuleSection key={m.slug} module={m} index={n} />
-      ))}
+      <PlatformHero />
+      <CapabilityExplorer />
+      <PlatformCta />
     </>
   );
 }

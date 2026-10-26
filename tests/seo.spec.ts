@@ -94,3 +94,12 @@ test("roles page heading order: h1 then h2 (no skipped level)", async ({ page })
   const levels = await page.evaluate(() => [...document.querySelectorAll("h1,h2,h3,h4")].map((h) => +h.tagName[1]));
   for (let i = 1; i < levels.length; i++) expect(levels[i] - levels[i - 1], `heading jump at ${i}`).toBeLessThanOrEqual(1);
 });
+
+test("careers page is removed: 404, not in the sitemaps, old URLs go to About", async ({ request }) => {
+  expect((await request.get("/careers")).status()).toBe(404);
+  expect(await (await request.get("/sitemap.xml")).text()).not.toContain("/careers");
+  expect(await (await request.get("/site-map")).text()).not.toContain("/careers");
+  const r = await request.get("/about-us/careers", { maxRedirects: 0 });
+  expect([301, 308]).toContain(r.status());
+  expect(r.headers()["location"]).toMatch(/\/about$/);
+});

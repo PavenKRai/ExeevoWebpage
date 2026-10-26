@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ResourceShell } from "@/components/resources/ResourceShell";
 import { resourceTypes } from "@/content/resources/config";
-import { modules } from "@/content/modules";
+import { capabilities } from "@/content/platform";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 
 const groups = [
   { title: "Main pages", links: [{ label: "Home", href: "/" }, ...site.nav.filter((l) => !l.href.includes("#")), { label: "Industries", href: "/industries" }, { label: "Solutions by role", href: "/solutions-by-role" }] },
-  { title: "Platform modules", links: modules.map((m) => ({ label: m.name, href: `/platform?module=${m.slug}` })) },
+  { title: "Platform capabilities", links: capabilities.map((c) => ({ label: c.name, href: `/platform#cap-${c.id}` })) },
   { title: "Resources", links: [{ label: "All resources", href: "/resources" }, ...resourceTypes.map((t) => ({ label: t.label, href: t.path }))] },
-  { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Careers", href: "/careers" }, { label: "Privacy policy", href: "/privacy" }, { label: "Cookie policy", href: "/cookies" }] },
+  { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Privacy policy", href: "/privacy" }, { label: "Cookie policy", href: "/cookies" }] },
 ];
 
 export default function SiteMapPage() {
