@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
 const routes = [
-  "/", "/platform", "/ask-nova", "/why-exeevo", "/microsoft", "/industries", "/solutions-by-role", "/services",
+  "/", "/platform", "/ask-nova", "/why-exeevo", "/microsoft", "/services",
   "/resources", "/resources/blog", "/resources/blog/mastering-life-sciences-events", "/resources/white-papers", "/resources/webinars", "/resources/case-studies", "/resources/press-releases", "/events", "/glossary", "/about", "/privacy", "/site-map",
 ];
 

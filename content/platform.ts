@@ -58,6 +58,10 @@ export const platformIndustries: { name: PlatformIndustry; color: string }[] = [
   { name: "Consumer Health", color: "var(--ex-green)" },
 ];
 
+/** URL slugs for the filtered views (`/platform?industry=medtech`, `/platform?role=msl`), used by the footer and the old Industries / Solutions by role redirects. */
+export const industrySlugs: Record<string, PlatformIndustry> = { pharma: "Pharma", medtech: "MedTech", "consumer-health": "Consumer Health" };
+export const roleSlugs: Record<string, string> = { "field-rep": "Field reps", msl: "MSLs", kam: "Key account managers" };
+
 export const platformRoles: string[] = [
   "Field reps",
   "First-line managers",

@@ -24,7 +24,7 @@ export const platformPage = {
   band: {
     text: "Role-specific tools for Field Reps, MSLs, Key Account Managers, and Consumer/Animal Health teams are covered once, in Solutions by Role, rather than repeated on every module page.",
     cta: "Solutions by Role",
-    href: "/solutions-by-role",
+    href: "/platform",
   },
 } as const;
 
@@ -184,7 +184,7 @@ export const modules: Module[] = [
       "MSLs: scientific plans, case routing",
       "Account Managers: CPQ, bids & tenders",
     ],
-    link: { label: "See full role breakdown", href: "/solutions-by-role" },
+    link: { label: "See full role breakdown", href: "/platform" },
   },
   {
     slug: "ask-nova-studio",

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/platform", "/ask-nova", "/about", "/partners", "/microsoft", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
+const routes = ["/", "/platform", "/ask-nova", "/about", "/partners", "/microsoft", "/why-exeevo", "/services"];
 
 for (const route of routes) {
   test(`route ${route} returns 200 and renders one h1`, async ({ page }) => {
@@ -29,34 +29,6 @@ test("platform deep link scrolls to the capability section", async ({ page }) =>
   await expect(page.locator("#cap-events")).toBeInViewport();
   await page.goto("/platform");
   await expect(page.locator("section[id^='cap-']")).toHaveCount(11);
-});
-
-test("role panels expand and collapse", async ({ page }) => {
-  await page.goto("/solutions-by-role");
-  const field = page.locator("#role-button-field-rep");
-  const msl = page.locator("#role-button-msl");
-  await expect(field).toHaveAttribute("aria-expanded", "true");
-  await msl.click();
-  await expect(msl).toHaveAttribute("aria-expanded", "true");
-  await expect(field).toHaveAttribute("aria-expanded", "false");
-});
-
-test("clicking anywhere on a collapsed role panel opens it", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/solutions-by-role");
-  await page.evaluate(() => window.scrollTo(0, 250));
-  const panel = page.locator("article").filter({ has: page.locator("#role-button-kam") });
-  const box = (await panel.boundingBox())!;
-  await page.mouse.click(box.x + box.width / 2, box.y + 120);
-  await expect(page.locator("#role-button-kam")).toHaveAttribute("aria-expanded", "true");
-});
-
-test("industry toggle and deep link", async ({ page }) => {
-  await page.goto("/industries?industry=medtech");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Commercial complexity beyond the pill");
-  await page.getByRole("button", { name: "Pharma" }).click();
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Built for pharma's complexity");
-  await expect(page).toHaveURL(/industry=pharma/);
 });
 
 test("talk to our team form: validation and success", async ({ page }) => {

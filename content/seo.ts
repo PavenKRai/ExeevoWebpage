@@ -24,18 +24,6 @@ export const seo = {
     description:
       "Most CRMs add life sciences features later. Exeevo is built natively for the industry, with 21 CFR Part 11, GDPR, PIPL and HIPAA in your own Microsoft tenant.",
   },
-  industries: {
-    path: "/industries",
-    title: "CRM for pharma and MedTech teams",
-    description:
-      "Pharma and MedTech teams run commercial, medical, marketing and IT on one platform, without separate systems or separate vendors.",
-  },
-  roles: {
-    path: "/solutions-by-role",
-    title: "CRM for Field Reps, MSLs and Key Account Managers",
-    description:
-      "Role-specific tools for Field Reps, Medical Science Liaisons, Key Account Managers and Consumer & Animal Health reps, all on the same HCP record.",
-  },
   askNova: {
     path: "/ask-nova",
     title: "Ask-Nova: AI for life sciences CRM, before and after meetings",
