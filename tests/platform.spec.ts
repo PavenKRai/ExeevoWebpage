@@ -9,6 +9,9 @@ test("platform: one h1, all eleven capabilities and a feature from each are in t
     expect(html, c.name).toContain(`id="cap-${c.id}"`);
     expect(html).toContain(esc(c.features[0].title));
   }
+  expect(html).toContain("Actionable rep metrics");
+  for (const gone of ["Territory performance map", "Product adoption journey", "Approved email at scale"]) expect(html, gone).not.toContain(gone);
+  expect(html).not.toMatch(/>Tenders</);
   expect((html.match(/"@type":"ListItem"/g) ?? []).length).toBeGreaterThanOrEqual(11);
   await page.goto("/platform", { waitUntil: "networkidle" });
   await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
@@ -30,13 +33,15 @@ test("platform: industry filter hides other industries' capabilities and tagged 
   await expect(page.locator("#cap-field-sales").getByRole("heading", { name: /^Samples/ })).toBeVisible();
 });
 
-test("platform: 'Used by' filter narrows to matching capabilities and shows an empty state", async ({ page }) => {
+test("platform: 'Used by' filter narrows to matching capabilities (plus those open to every user)", async ({ page }) => {
   await page.goto("/platform", { waitUntil: "networkidle" });
   await page.getByLabel("Filter by who uses it").selectOption("MSLs");
-  await expect(page.locator("section[id^='cap-']")).toHaveCount(1);
+  await expect(page.locator("section[id^='cap-']")).toHaveCount(2);
   await expect(page.locator("#cap-medical")).toBeVisible();
+  await expect(page.locator("#cap-ask-nova")).toBeVisible();
   await page.getByRole("button", { name: "Consumer Health", exact: true }).click();
-  await expect(page.getByText("No capabilities match this combination. Try another industry or role.")).toBeVisible();
+  await expect(page.locator("#cap-medical")).toHaveCount(0);
+  await expect(page.locator("#cap-ask-nova")).toBeVisible();
   await page.getByRole("button", { name: "All industries" }).click();
   await page.getByLabel("Filter by who uses it").selectOption("All");
   await expect(page.locator("section[id^='cap-']")).toHaveCount(11);
@@ -66,4 +71,11 @@ test("platform: no sideways scroll at phone and tablet width", async ({ page }) 
     await page.goto("/platform", { waitUntil: "networkidle" });
     expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth), `${w}px`).toBe(0);
   }
+});
+
+test("platform: 'Contract teams' role filter shows Account Management", async ({ page }) => {
+  await page.goto("/platform", { waitUntil: "networkidle" });
+  await page.getByLabel("Filter by who uses it").selectOption("Contract teams");
+  await expect(page.locator("#cap-accounts")).toBeVisible();
+  await expect(page.getByRole("option", { name: "Tender and contract teams" })).toHaveCount(0);
 });

@@ -17,7 +17,7 @@ export type Capability = {
 
 export const platformPage = {
   h1: { light: "Everything in", bold: "one view" },
-  lead: "Exeevo capabilities: see what each one does, who uses it and what changes for the business.",
+  lead: "See what each capability does, who uses it and what changes for the business.",
   devices: {
     title: "One platform, wherever your teams work",
     items: ["Web", "Tablet", "Phone", "Offline in the field"],
@@ -63,7 +63,7 @@ export const platformRoles: string[] = [
   "First-line managers",
   "Key account managers",
   "MedTech reps",
-  "Tender and contract teams",
+  "Contract teams",
   "MSLs",
   "Medical information",
   "Medical directors",
@@ -147,7 +147,7 @@ export const capabilities: Capability[] = [
     name: "Account Management",
     promise: "Plan, price and win at the account level.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
-    roles: ["Key account managers", "MedTech reps", "Tender and contract teams"],
+    roles: ["Key account managers", "MedTech reps", "Contract teams"],
     outcomes: [
       "One view of every key account and who influences it",
       "Pipeline visible from first conversation to order",
@@ -167,10 +167,6 @@ export const capabilities: Capability[] = [
       {
         title: "Pricing and contracts",
         body: "Account-specific prices, discounts and contracts applied automatically to quotes and orders.",
-      },
-      {
-        title: "Tenders",
-        body: "Every bid tracked from draft to award, so deadlines don’t slip and pricing stays consistent.",
       },
       {
         title: "Orders",
@@ -243,10 +239,6 @@ export const capabilities: Capability[] = [
       {
         title: "Field alerts",
         body: "Engaged HCPs flagged to their rep while interest is high, so marketing and the field act on the same moment.",
-      },
-      {
-        title: "Approved email at scale",
-        body: "The same MLR-approved templates reps use, sent at scale through journeys and campaigns.",
       },
     ],
   },
@@ -369,16 +361,12 @@ export const capabilities: Capability[] = [
     avail: [true, true, true, false],
     features: [
       {
-        title: "Territory performance map",
-        body: "Every customer and territory on a map, coloured by Rx and sales trend and filterable by product, segment and period, so reps see where to act.",
-      },
-      {
-        title: "Product adoption journey",
-        body: "Each HCP’s and account’s stage on the adoption ladder per product, with recommended reach, frequency, key messages and content.",
+        title: "Actionable rep metrics",
+        body: "Call plan progress and customer-level metrics shown inside the rep’s daily screens, each with a clear next action, so reps act without opening a report.",
       },
       {
         title: "Customer 360",
-        body: "Every call, email, event, sample and inquiry on one HCP profile with an AI summary, plus third-party data where you connect it.",
+        body: "Every interaction with a customer on one profile, with an AI summary and where they stand on the adoption journey for each product.",
       },
       {
         title: "Team dashboards",

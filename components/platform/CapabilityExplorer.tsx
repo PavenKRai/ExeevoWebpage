@@ -10,7 +10,7 @@ export function CapabilityExplorer() {
   const p = platformPage;
   const [industry, setIndustry] = useState<IndustryFilter>("All");
   const [role, setRole] = useState("All");
-  const visible = capabilities.filter((c) => (industry === "All" || c.industries.includes(industry)) && (role === "All" || c.roles.includes(role)));
+  const visible = capabilities.filter((c) => (industry === "All" || c.industries.includes(industry)) && (role === "All" || c.roles.includes(role) || c.roles.includes("Every user")));
   const roleOn = role !== "All";
   return (
     <>
