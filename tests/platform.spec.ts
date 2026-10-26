@@ -10,7 +10,8 @@ test("platform: one h1, all eleven capabilities and a feature from each are in t
     expect(html).toContain(esc(c.features[0].title));
   }
   expect(html).toContain("Actionable rep metrics");
-  for (const gone of ["Territory performance map", "Product adoption journey", "Approved email at scale"]) expect(html, gone).not.toContain(gone);
+  expect(html).toContain("Approved email at scale");
+  for (const gone of ["Territory performance map", "Product adoption journey"]) expect(html, gone).not.toContain(gone);
   expect(html).not.toMatch(/>Tenders</);
   expect((html.match(/"@type":"ListItem"/g) ?? []).length).toBeGreaterThanOrEqual(11);
   await page.goto("/platform", { waitUntil: "networkidle" });

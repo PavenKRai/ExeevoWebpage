@@ -240,6 +240,10 @@ export const capabilities: Capability[] = [
         title: "Field alerts",
         body: "Engaged HCPs flagged to their rep while interest is high, so marketing and the field act on the same moment.",
       },
+      {
+        title: "Approved email at scale",
+        body: "The same MLR-approved templates reps use, sent at scale through journeys and campaigns.",
+      },
     ],
   },
   {
