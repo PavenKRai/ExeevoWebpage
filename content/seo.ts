@@ -14,9 +14,9 @@ export const seo = {
   },
   platform: {
     path: "/platform",
-    title: "Life sciences CRM platform: eight modules, one view",
+    title: "Life sciences CRM capabilities, in one view",
     description:
-      "Eight modules, one data model, one license: CRM, Medical CRM, Marketing Automation, Events, Content, Customer Insights, Mobile App and Ask-Nova Studio.",
+      "Field sales, account management, medical affairs, marketing, events, content and MLR, compliance, insights and Ask-Nova AI on one Microsoft-native platform.",
   },
   why: {
     path: "/why-exeevo",

@@ -23,12 +23,12 @@ test("nav and footer internal links resolve", async ({ page, request }) => {
   }
 });
 
-test("platform deep link scrolls to the module section", async ({ page }) => {
+test("platform deep link scrolls to the capability section", async ({ page }) => {
   await page.goto("/platform?module=event-management");
   await page.waitForTimeout(1500);
-  await expect(page.locator("#event-management")).toBeInViewport();
+  await expect(page.locator("#cap-events")).toBeInViewport();
   await page.goto("/platform");
-  await expect(page.locator("section[id]")).toHaveCount(8);
+  await expect(page.locator("section[id^='cap-']")).toHaveCount(11);
 });
 
 test("role panels expand and collapse", async ({ page }) => {

@@ -6,7 +6,7 @@ Customer data is stored and processed in the customer's own Microsoft Azure envi
 
 ## Key pages
 - [Home](/): what Exeevo is and who it is for (a Microsoft-native, purpose-built CRM for life sciences), why reps adopt it (offline-first mobile app, voice capture, Ask-Nova call briefs), one licence instead of a stack, purpose-built moments versus a generic CRM, the eight modules, and the two go-live paths
-- [Platform](/platform): the eight modules in one view
+- [Platform](/platform): eleven capabilities in one view, filterable by industry (Pharma, MedTech, Consumer Health) and by who uses them: Field Sales, Account Management, Medical Affairs, Marketing and Omnichannel, Events, Content and MLR, Compliance and Transparency, Insights and Analytics, Ask-Nova, Retail Execution (Consumer Health), Cases, Assets and Kits (MedTech); available on web, tablet, phone and offline
 - [Why Exeevo](/why-exeevo): built natively for life sciences, regulatory and compliance coverage, comparison with generic CRM platforms and point-solution add-ons
 - [Industries](/industries): pharma and MedTech
 - [Solutions by role](/solutions-by-role): Field Rep, Medical Science Liaison, Key Account Manager, Consumer & Animal Health Rep
