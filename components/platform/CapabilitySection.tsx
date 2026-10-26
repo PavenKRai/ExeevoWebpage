@@ -85,8 +85,8 @@ export function CapabilitySection({ cap, index, features }: { cap: Capability; i
                     {f.industry && <span className={tag}>{f.industry}</span>}
                   </h3>
                   {f.link ? (
-                    <div>
-                      <Button href={f.link.href} variant="secondary" size="nav">
+                    <div className="sm:flex sm:justify-end">
+                      <Button href={f.link.href} size="nav">
                         {f.link.label}
                         <ArrowRight size={16} strokeWidth={1.6} aria-hidden="true" />
                       </Button>
