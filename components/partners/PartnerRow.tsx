@@ -12,7 +12,7 @@ export function PartnerRow({ partner, first, open, onToggle }: { partner: Partne
     <article className={cn("flex flex-col gap-4 py-[26px]", !first && "border-t border-[rgba(29,38,45,.1)]")}>
       <div className="grid grid-cols-[96px_minmax(0,1fr)_auto] items-center gap-4 sm:grid-cols-[150px_minmax(0,1fr)_auto] sm:gap-[22px]">
         <div className="relative h-[72px] rounded-2xl bg-white shadow-[0_0_0_1px_#E1E6EA]">
-          <Image src={partner.image} alt={`${partner.name} logo`} fill sizes="150px" className="object-contain px-[18px] py-[14px]" />
+          <Image src={partner.image} alt={`${partner.name} logo`} fill sizes="150px" className="object-contain px-[18px] py-[14px]" style={partner.imageShift ? { transform: `translateY(${partner.imageShift}%)` } : undefined} />
         </div>
         <div className="flex min-w-0 flex-col gap-2">
           <h3 className="text-[21px] font-[450] leading-[1.2] tracking-[-0.015em] text-heading">{partner.name}</h3>

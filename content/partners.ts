@@ -1,5 +1,5 @@
 export type PartnerCategory = "tech" | "impl" | "sol" | "data" | "comp";
-export type Partner = { id: string; cat: Exclude<PartnerCategory, "tech">; name: string; spec: string; regions: string[]; body: string[]; image: string };
+export type Partner = { id: string; cat: Exclude<PartnerCategory, "tech">; name: string; spec: string; regions: string[]; body: string[]; image: string; /** Nudges a logo whose artwork sits high in its box (e.g. a descender below the baseline), as a % of its height. */ imageShift?: number };
 
 /** Copy comes verbatim from the Partners design. */
 export const partnersPage = {
@@ -221,6 +221,7 @@ export const partners: Partner[] = [
       "The suite covers medical information management (IRMS MAX), a secure, branded portal for approved, published content for healthcare providers and consumers (iCare MAX), publication planning and scientific communication strategy (Pubstrat MAX), and AI-enabled intake of voice and email medical inquiries (IRMS Assist).",
       "Anju supports more than 300 life sciences companies in over 100 countries. Exeevo's Medical Affairs capability is powered by Anju."
     ],
-    "image": "/partners/anju.png"
+    "image": "/partners/anju.png",
+    "imageShift": 9
   }
 ];

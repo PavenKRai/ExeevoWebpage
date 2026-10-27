@@ -48,7 +48,7 @@ export function CapabilitySection({ cap, index, features }: { cap: Capability; i
               <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1.5">
                 <Link href={cap.poweredBy.href} aria-label={`${cap.poweredBy.prefix} ${cap.poweredBy.name}`} className="inline-flex min-h-11 items-center gap-2.5 rounded-full bg-white px-4 py-1.5 text-[13px] text-muted shadow-[0_0_0_1px_var(--ex-hairline)]">
                   {cap.poweredBy.prefix}
-                  <Image src={cap.poweredBy.logo} alt="" width={64} height={22} className="h-[22px] w-auto" />
+                  <Image src={cap.poweredBy.logo} alt="" width={48} height={16} className="h-4 w-auto translate-y-[3px]" />
                 </Link>
                 <Link href={cap.poweredBy.href} className="tlink !min-h-11 text-[14px]">
                   {cap.poweredBy.cta}
