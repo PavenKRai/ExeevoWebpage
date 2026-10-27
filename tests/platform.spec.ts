@@ -125,3 +125,11 @@ test("old Industries and Solutions by role URLs redirect to the filtered Platfor
   expect(map).not.toContain('href="/industries');
   expect(map).not.toContain("/solutions-by-role");
 });
+
+test("platform: Medical Affairs is powered by Anju and links to the partner section", async ({ page }) => {
+  await page.goto("/platform", { waitUntil: "networkidle" });
+  const med = page.locator("#cap-medical");
+  await expect(med.getByRole("link", { name: "Powered by Anju" })).toHaveAttribute("href", "/partners#sol");
+  await expect(med.getByRole("link", { name: /Explore Medical Affairs Solutions/ })).toHaveAttribute("href", "/partners#sol");
+  await expect(page.getByRole("link", { name: "Powered by Anju" })).toHaveCount(1);
+});

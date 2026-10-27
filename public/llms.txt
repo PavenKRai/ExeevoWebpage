@@ -13,7 +13,7 @@ Customer data is stored and processed in the customer's own Microsoft Azure envi
 - [Resources](/resources): blog, white papers, webinars, case studies, press releases, events, analyst reports
 - [About](/about): company story (founded 2017, part of Valsoft since December 2024), what Exeevo does, leadership team (Ludovic Petit, CEO; Reeba Thomas, Head of People; Vivek Iyer, Head of IT and AI Initiatives; Lokesh Shetty, Head of Professional Services; Simmya Velutan, Head of R&D; Raja Somasekhar Gupta, Head of Finance), offices in Clearwater (US), Montreal (Canada), Bangalore (India) and Shanghai (China), team members in the United Kingdom and Portugal
 - [Built on Microsoft](/microsoft): the Microsoft stack Exeevo CRM runs on (Power Platform, Dynamics 365 Customer Service, Customer Insights, Dataverse, Power Automate, Power BI, Entra ID, Azure Functions and SQL, Data Lake, Fabric, Foundry, Copilot Studio, Microsoft 365 Copilot, Teams, Azure Monitor, Azure regions) and why a Microsoft foundation matters
-- [Partners](/partners): Microsoft, system integrators (NNIT, msg industry advisors, Hitachi Solutions, NTT DATA, TCS, Deloitte, Capgemini), data partners (MedPro, IQVIA) and compliance partner QPharma
+- [Partners](/partners): Microsoft, system integrators (NNIT, msg industry advisors, Hitachi Solutions, NTT DATA, TCS, Deloitte, Capgemini), Medical Affairs solutions (Anju Software), data partners (MedPro, IQVIA) and compliance partner QPharma
 
 ## Professional Services (10 services)
 - Consult: Consulting & Solution Advisory; AI Readiness & Advisory

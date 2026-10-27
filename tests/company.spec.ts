@@ -43,3 +43,20 @@ test("partners: the plus button expands a partner in place; all text stays in th
   await expect(page.getByRole("button", { name: /Show less about NNIT/ })).toHaveAttribute("aria-expanded", "true");
   await expect(page.getByText("Together, Exeevo and NNIT")).toBeVisible();
 });
+
+test("partners: Medical Affairs Solutions sits between System Integrators and Data Vendors, with Anju", async ({ page, request }) => {
+  const html = await (await request.get("/partners")).text();
+  expect(html).toContain("Anju Software");
+  expect(html).toContain("IRMS MAX");
+  await page.goto("/partners#sol", { waitUntil: "networkidle" });
+  const ys: number[] = [];
+  for (const name of ["System Integrators", "Medical Affairs Solutions", "Data Vendors & Connectors"]) {
+    const h = page.getByRole("heading", { level: 2, name });
+    await expect(h).toHaveCount(1);
+    ys.push((await h.boundingBox())!.y + (await page.evaluate(() => scrollY)));
+  }
+  expect(ys[0]).toBeLessThan(ys[1]);
+  expect(ys[1]).toBeLessThan(ys[2]);
+  await expect(page.locator("#sol").getByRole("img", { name: "Anju Software logo" })).toBeVisible();
+  await expect(page.getByRole("group", { name: "Filter partners by type" }).getByRole("button", { name: /^Solutions/ })).toBeVisible();
+});

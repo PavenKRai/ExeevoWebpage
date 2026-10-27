@@ -1,4 +1,4 @@
-export type PartnerCategory = "tech" | "impl" | "data" | "comp";
+export type PartnerCategory = "tech" | "impl" | "sol" | "data" | "comp";
 export type Partner = { id: string; cat: Exclude<PartnerCategory, "tech">; name: string; spec: string; regions: string[]; body: string[]; image: string };
 
 /** Copy comes verbatim from the Partners design. */
@@ -27,6 +27,7 @@ export const partnersPage = {
     { id: "all", name: "All partners" },
     { id: "tech", name: "Technology" },
     { id: "impl", name: "Implementation" },
+    { id: "sol", name: "Solutions" },
     { id: "data", name: "Data" },
     { id: "comp", name: "Compliance" },
   ],
@@ -44,6 +45,7 @@ export const partnersPage = {
   },
   sections: [
     { cat: "impl", kicker: "Implementation partners", title: "System Integrators", body: "Our System Integrator partners combine life sciences expertise with Microsoft delivery capability to plan, implement, integrate and support Exeevo CRM programmes, from single-country launches to global rollouts." },
+    { cat: "sol", kicker: "Solution partners", title: "Medical Affairs Solutions", body: "Specialist solutions that extend Exeevo CRM into Medical Affairs, from our sister companies in the Valsoft family and other partners." },
     { cat: "data", kicker: "Data partners", title: "Data Vendors & Connectors", body: "Exeevo connects natively to the reference data that life sciences teams rely on, so HCP and HCO records stay accurate, compliant and ready to use from the first day of a rollout." },
     { cat: "comp", kicker: "Compliance partners", title: "Compliance & Support (US)", body: "Compliance and commercial support for US field operations, alongside Exeevo CRM." },
   ],
@@ -57,7 +59,7 @@ export const partnersPage = {
   modal: { close: "Close", previous: "Previous", next: "Next partner", of: "of", readMore: "Read more" },
 } as const;
 
-export const catNames: Record<PartnerCategory, string> = { tech: "Technology", impl: "Implementation", data: "Data", comp: "Compliance" };
+export const catNames: Record<PartnerCategory, string> = { tech: "Technology", impl: "Implementation", sol: "Solutions", data: "Data", comp: "Compliance" };
 
 export const partners: Partner[] = [
   {
@@ -207,5 +209,18 @@ export const partners: Partner[] = [
       "Together, Exeevo and QPharma help US customers run compliant sampling and field operations, with Exeevo CRM as the system of engagement and QPharma supporting the regulatory processes around it."
     ],
     "image": "/partners/qpharma.webp"
+  },
+  {
+    "id": "anju",
+    "cat": "sol",
+    "name": "Anju Software",
+    "spec": "Medical Affairs suite",
+    "regions": [],
+    "body": [
+      "Anju Software, a sister company in the Valsoft family, provides a Medical Affairs suite for pharmaceutical, biotech and medical device companies, described as a comprehensive end-to-end solution for the entire Medical Affairs experience.",
+      "The suite covers medical information management (IRMS MAX), a secure, branded portal for approved, published content for healthcare providers and consumers (iCare MAX), publication planning and scientific communication strategy (Pubstrat MAX), and AI-enabled intake of voice and email medical inquiries (IRMS Assist).",
+      "Anju supports more than 300 life sciences companies in over 100 countries. Exeevo's Medical Affairs capability is powered by Anju."
+    ],
+    "image": "/partners/anju.png"
   }
 ];

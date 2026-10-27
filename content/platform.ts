@@ -11,6 +11,8 @@ export type Capability = {
   /** Web, Tablet, Phone, Offline. */
   avail: boolean[];
   features: { title: string; body: string; industry?: PlatformIndustry; link?: { label: string; href: string } }[];
+  /** "Powered by" partner shown under the outcomes (Medical Affairs: Anju). */
+  poweredBy?: { prefix: string; name: string; logo: string; href: string; cta: string };
   /** Optional screenshot (1600 x 1000). Without one, the design's dashed placeholder frame shows. */
   shot?: string;
 };
@@ -191,6 +193,7 @@ export const capabilities: Capability[] = [
     ],
     ai: "Insight tagging and scientific summaries.",
     avail: [true, true, true, true],
+    poweredBy: { prefix: "Powered by", name: "Anju", logo: "/partners/anju.png", href: "/partners#sol", cta: "Explore Medical Affairs Solutions" },
     features: [
       {
         title: "Scientific plans",

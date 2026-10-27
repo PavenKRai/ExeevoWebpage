@@ -17,8 +17,8 @@ export function PartnerDirectory() {
   const counts: Record<string, number> = { all: partners.length + 1, tech: 1 };
   for (const x of partners) counts[x.cat] = (counts[x.cat] ?? 0) + 1;
   const show = (c: Filter) => filter === "all" || filter === c;
-  const grounds = { impl: "bg-white", data: "bg-porcelain", comp: "bg-white" } as const;
-  const auras = { impl: "#DF1995", data: "#00C389", comp: "#56636C" } as const;
+  const grounds = { impl: "bg-white", sol: "bg-porcelain", data: "bg-white", comp: "bg-porcelain" } as const;
+  const auras = { impl: "#DF1995", sol: "#7A3FC0", data: "#00C389", comp: "#56636C" } as const;
 
   return (
     <div id="directory" className="relative">
