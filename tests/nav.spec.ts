@@ -11,11 +11,11 @@ test.describe("desktop navigation", () => {
     const nav = page.getByRole("navigation", { name: "Primary" });
     const texts = await nav.getByRole("link").allInnerTexts();
     expect(texts.map((t) => t.trim())).toEqual(navLabels);
-    await expect(page.locator("header a[href='/solutions-by-role'], footer a[href='/solutions-by-role']")).toHaveCount(0);
+    await expect(page.locator("header a[href='/solutions-by-role'], footer a[href='/solutions-by-role'], footer a[href^='/industries']")).toHaveCount(0);
     await expect(nav.getByRole("link", { name: "Partnerships" })).toHaveAttribute("href", "/partners");
     await expect(nav.getByRole("link", { name: "Microsoft" })).toHaveAttribute("href", "/microsoft");
     await expect(nav.getByRole("link", { name: "Industries" })).toHaveCount(0);
-    await expect(page.getByRole("contentinfo").getByRole("link", { name: "Pharma" })).toHaveAttribute("href", "/industries?industry=pharma");
+    await expect(page.getByRole("contentinfo").getByRole("link", { name: "Pharma" })).toHaveAttribute("href", "/platform?industry=pharma");
   });
 
   test("keyboard: every nav link is reachable with Tab and shows focus", async ({ page }) => {
@@ -57,10 +57,3 @@ test.describe("mobile menu", () => {
   });
 });
 
-test("industry cards and role panels link to modules", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/industries");
-  await expect(page.getByRole("link", { name: "Sales CRM" }).first()).toHaveAttribute("href", "/platform?module=crm-sales");
-  await page.goto("/solutions-by-role");
-  await expect(page.getByRole("link", { name: "Mobile App" }).first()).toHaveAttribute("href", "/platform?module=mobile-app");
-});

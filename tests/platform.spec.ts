@@ -86,3 +86,50 @@ test("platform: Ask-Nova capability has a button to the Ask-Nova page, no placeh
   await expect(page.getByText("Description to be added")).toHaveCount(0);
   await expect(page.locator("#cap-ask-nova").getByRole("link", { name: /Explore Ask-Nova features in depth/ })).toHaveAttribute("href", "/ask-nova");
 });
+
+test("platform: ?industry= and ?role= open a filtered view, and changing a filter updates the address", async ({ page }) => {
+  await page.goto("/platform?industry=medtech", { waitUntil: "networkidle" });
+  await expect(page.getByRole("button", { name: "MedTech", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator("#cap-cases")).toBeVisible();
+  await expect(page.locator("#cap-retail")).toHaveCount(0);
+  await page.getByRole("button", { name: "Pharma", exact: true }).click();
+  await expect(page).toHaveURL(/\/platform\?industry=pharma$/);
+  await page.getByRole("button", { name: "All industries" }).click();
+  await expect(page).toHaveURL(/\/platform$/);
+  await page.goto("/platform?role=msl", { waitUntil: "networkidle" });
+  await expect(page.getByLabel("Filter by who uses it")).toHaveValue("MSLs");
+  await expect(page.locator("#cap-medical")).toBeVisible();
+  await expect(page.locator("#cap-field-sales")).toHaveCount(0);
+});
+
+test("old Industries and Solutions by role URLs redirect to the filtered Platform page", async ({ request }) => {
+  const cases: [string, RegExp][] = [
+    ["/industries", /\/platform$/],
+    ["/industries?industry=pharma", /\/platform\?industry=pharma$/],
+    ["/industries?industry=medtech", /\/platform\?industry=medtech$/],
+    ["/solutions-by-role", /\/platform$/],
+    ["/solutions-by-role?role=msl", /\/platform\?role=msl$/],
+    ["/solutions-by-role?role=kam", /\/platform\?role=kam$/],
+    ["/solutions-by-role?role=consumer-animal-health", /\/platform\?.*industry=consumer-health$/],
+    ["/pharma-crm", /\/platform\?industry=pharma$/],
+  ];
+  for (const [from, to] of cases) {
+    const r = await request.get(from, { maxRedirects: 0 });
+    expect([301, 308], from).toContain(r.status());
+    expect(r.headers()["location"], from).toMatch(to);
+  }
+  const xml = await (await request.get("/sitemap.xml")).text();
+  expect(xml).not.toContain("/industries");
+  expect(xml).not.toContain("/solutions-by-role");
+  const map = await (await request.get("/site-map")).text();
+  expect(map).not.toContain('href="/industries');
+  expect(map).not.toContain("/solutions-by-role");
+});
+
+test("platform: Medical Affairs is powered by Anju and links to the partner section", async ({ page }) => {
+  await page.goto("/platform", { waitUntil: "networkidle" });
+  const med = page.locator("#cap-medical");
+  await expect(med.getByRole("link", { name: "Powered by Anju" })).toHaveAttribute("href", "/partners#sol");
+  await expect(med.getByRole("link", { name: /Explore Medical Affairs Solutions/ })).toHaveAttribute("href", "/partners#sol");
+  await expect(page.getByRole("link", { name: "Powered by Anju" })).toHaveCount(1);
+});

@@ -2,7 +2,6 @@ import analystReports from "./analyst-reports.json";
 import blog from "./blog.json";
 import caseStudies from "./case-studies.json";
 import events from "./events.json";
-import glossary from "./glossary.json";
 import pressReleases from "./press-releases.json";
 import webinars from "./webinars.json";
 import whitePapers from "./white-papers.json";
@@ -18,7 +17,6 @@ const data: Record<ResourceType, Resource[]> = {
   "case-studies": caseStudies,
   "analyst-reports": analystReports,
   events,
-  glossary,
 } as Record<ResourceType, Resource[]>;
 
 export const localResources = (type: ResourceType): Resource[] => data[type];

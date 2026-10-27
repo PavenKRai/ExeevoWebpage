@@ -11,6 +11,8 @@ export type Capability = {
   /** Web, Tablet, Phone, Offline. */
   avail: boolean[];
   features: { title: string; body: string; industry?: PlatformIndustry; link?: { label: string; href: string } }[];
+  /** "Powered by" partner shown under the outcomes (Medical Affairs: Anju). */
+  poweredBy?: { prefix: string; name: string; logo: string; href: string; cta: string };
   /** Optional screenshot (1600 x 1000). Without one, the design's dashed placeholder frame shows. */
   shot?: string;
 };
@@ -57,6 +59,10 @@ export const platformIndustries: { name: PlatformIndustry; color: string }[] = [
   { name: "MedTech", color: "var(--ex-magenta)" },
   { name: "Consumer Health", color: "var(--ex-green)" },
 ];
+
+/** URL slugs for the filtered views (`/platform?industry=medtech`, `/platform?role=msl`), used by the footer and the old Industries / Solutions by role redirects. */
+export const industrySlugs: Record<string, PlatformIndustry> = { pharma: "Pharma", medtech: "MedTech", "consumer-health": "Consumer Health" };
+export const roleSlugs: Record<string, string> = { "field-rep": "Field reps", msl: "MSLs", kam: "Key account managers" };
 
 export const platformRoles: string[] = [
   "Field reps",
@@ -169,7 +175,7 @@ export const capabilities: Capability[] = [
         body: "Account-specific prices, discounts and contracts applied automatically to quotes and orders.",
       },
       {
-        title: "Orders",
+        title: "Order management",
         body: "Direct and wholesaler orders with approvals and ERP sync, so customer service stops re-keying.",
       },
     ],
@@ -187,6 +193,7 @@ export const capabilities: Capability[] = [
     ],
     ai: "Insight tagging and scientific summaries.",
     avail: [true, true, true, true],
+    poweredBy: { prefix: "Powered by", name: "Anju", logo: "/partners/anju.png", href: "/partners#sol", cta: "Explore Medical Affairs Solutions" },
     features: [
       {
         title: "Scientific plans",
@@ -377,7 +384,7 @@ export const capabilities: Capability[] = [
         body: "Call-plan attainment, reach and frequency, and meeting and email engagement by rep and team, so managers coach on facts.",
       },
       {
-        title: "Power BI reports",
+        title: "Reporting",
         body: "Your own reports on the same data, alongside the standard dashboards.",
       },
     ],

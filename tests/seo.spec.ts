@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const routes = ["/", "/platform", "/ask-nova", "/about", "/partners", "/microsoft", "/why-exeevo", "/industries", "/solutions-by-role", "/services"];
+const routes = ["/", "/platform", "/ask-nova", "/about", "/partners", "/microsoft", "/why-exeevo", "/services"];
 
 const meta = (html: string, re: RegExp) => html.match(re)?.[1] ?? "";
 
@@ -32,7 +32,7 @@ test("every page has a unique keyword-led title, a description <= 160 chars, a c
 });
 
 test("query-string views canonicalise to the base page", async ({ request }) => {
-  for (const r of ["/platform?module=medical-crm", "/industries?industry=medtech", "/solutions-by-role?role=msl"]) {
+  for (const r of ["/platform?module=medical-crm", "/platform?industry=medtech", "/platform?role=msl"]) {
     const html = await (await request.get(r)).text();
     const canonical = meta(html, /<link rel="canonical" href="([^"]*)"/);
     expect(canonical, r).not.toContain("?");
@@ -53,7 +53,7 @@ test("sitemap lists every route (core pages, resources, migrated pages) with a l
   const locs = xml.match(/<loc>/g) ?? [];
   expect(locs.length).toBeGreaterThanOrEqual(routes.length);
   expect((xml.match(/<lastmod>/g) ?? []).length).toBe(locs.length);
-  for (const p of ["/resources/blog", "/glossary", "/events", "/about", "/privacy"]) expect(xml, p).toContain(`${p}</loc>`);
+  for (const p of ["/resources/blog", "/events", "/about", "/privacy"]) expect(xml, p).toContain(`${p}</loc>`);
 });
 
 test("brand assets: favicon, apple icon, manifest, share image and llms.txt are served", async ({ request }) => {
@@ -87,12 +87,6 @@ test("HTML hygiene: exactly one h1 and one <main>, and the page wrapper is never
     expect(html, `${r} page wrapper`).toContain('class="page-in"');
     expect(html, `${r} no localhost leak check`).toBeTruthy();
   }
-});
-
-test("roles page heading order: h1 then h2 (no skipped level)", async ({ page }) => {
-  await page.goto("/solutions-by-role");
-  const levels = await page.evaluate(() => [...document.querySelectorAll("h1,h2,h3,h4")].map((h) => +h.tagName[1]));
-  for (let i = 1; i < levels.length; i++) expect(levels[i] - levels[i - 1], `heading jump at ${i}`).toBeLessThanOrEqual(1);
 });
 
 test("careers page is removed: 404, not in the sitemaps, old URLs go to About", async ({ request }) => {

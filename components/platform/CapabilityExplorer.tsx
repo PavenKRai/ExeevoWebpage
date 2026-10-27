@@ -1,15 +1,33 @@
 "use client";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
-import { capabilities, platformIndustries, platformPage, platformRoles, type PlatformIndustry } from "@/content/platform";
+import { capabilities, industrySlugs, platformIndustries, platformPage, platformRoles, roleSlugs, type PlatformIndustry } from "@/content/platform";
 import { CapabilitySection } from "./CapabilitySection";
 
 type IndustryFilter = "All" | PlatformIndustry;
 
 /** Filter bar (industry + who uses it), the "Jump to a capability" row, and the capability sections. Everything renders on the server; filtering only hides what does not match. */
 export function CapabilityExplorer() {
+  const params = useSearchParams();
+  return <CapabilityExplorerView initialIndustry={industrySlugs[params.get("industry") ?? ""] ?? "All"} initialRole={roleSlugs[params.get("role") ?? ""] ?? "All"} />;
+}
+
+/** The explorer itself. Also the Suspense fallback of the page (unfiltered), so the full list is in the server HTML. */
+export function CapabilityExplorerView({ initialIndustry = "All", initialRole = "All" }: { initialIndustry?: IndustryFilter; initialRole?: string }) {
   const p = platformPage;
-  const [industry, setIndustry] = useState<IndustryFilter>("All");
-  const [role, setRole] = useState("All");
+  const [industry, setIndustryState] = useState<IndustryFilter>(initialIndustry);
+  const [role, setRoleState] = useState(initialRole);
+  // Keep the address in step with the filters so a filtered view can be shared; no scroll, no navigation.
+  const sync = (nextIndustry: string, nextRole: string) => {
+    const q = new URLSearchParams();
+    const iSlug = Object.entries(industrySlugs).find(([, v]) => v === nextIndustry)?.[0];
+    const rSlug = Object.entries(roleSlugs).find(([, v]) => v === nextRole)?.[0];
+    if (iSlug) q.set("industry", iSlug);
+    if (rSlug) q.set("role", rSlug);
+    window.history.replaceState(null, "", `${window.location.pathname}${q.size ? `?${q}` : ""}${window.location.hash}`);
+  };
+  const setIndustry = (v: IndustryFilter) => (setIndustryState(v), sync(v, role));
+  const setRole = (v: string) => (setRoleState(v), sync(industry, v));
   const visible = capabilities.filter((c) => (industry === "All" || c.industries.includes(industry)) && (role === "All" || c.roles.includes(role) || c.roles.includes("Every user")));
   const roleOn = role !== "All";
   return (

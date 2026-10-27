@@ -56,25 +56,27 @@ p { max-width: 640px; }
 }
 }
 
-/* Migrated article HTML (components/resources/ArticleBody): semantic tags only, styled here. */
+/* Article body (Portable Text and migrated HTML): semantic tags only, styled to the Resources article design. */
 @layer components {
-  .article-body { max-width: 720px; font-size: 17px; line-height: 1.7; color: var(--ex-text); overflow-wrap: break-word; }
-  .article-body > * + * { margin-top: 1.1em; }
-  .article-body h2 { margin-top: 2em; font-size: clamp(26px, 2.4vw + 8px, 34px); line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance; }
-  .article-body h3 { margin-top: 1.8em; font-size: clamp(21px, 1.2vw + 12px, 25px); line-height: 1.2; letter-spacing: -0.02em; }
-  .article-body h4, .article-body h5 { margin-top: 1.6em; font-family: var(--ex-font-text); font-size: 18px; font-weight: 600; color: var(--ex-heading); }
+  .article-body { max-width: 760px; font-size: 17px; line-height: 1.75; color: var(--ex-text); overflow-wrap: break-word; }
+  .article-body > * + * { margin-top: 18px; }
+  .article-body h2 { margin-top: 30px; margin-bottom: 16px; scroll-margin-top: 110px; font-size: 28px; line-height: 1.2; font-weight: 450; letter-spacing: -0.025em; color: var(--ex-heading); text-wrap: balance; }
+  .article-body h3 { margin-top: 28px; margin-bottom: 12px; font-size: 21px; line-height: 1.3; font-weight: 450; color: var(--ex-heading); }
+  .article-body h4, .article-body h5 { margin-top: 24px; font-size: 18px; font-weight: 500; color: var(--ex-heading); }
   .article-body p { max-width: none; }
-  .article-body a { color: var(--ex-blue); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
-  .article-body ul, .article-body ol { padding-left: 1.4em; }
-  .article-body ul { list-style: disc; }
-  .article-body ol { list-style: decimal; }
-  .article-body li + li { margin-top: 0.4em; }
-  .article-body img { max-width: 100%; height: auto; border-radius: 20px; }
-  .article-body figure { margin-block: 1.6em; }
-  .article-body figcaption { margin-top: 0.6em; font-size: 14px; color: var(--ex-muted); }
-  .article-body blockquote { padding: 1.2em 1.4em; border-radius: 22px; background: rgba(255, 255, 255, 0.6); font-size: 1.05em; }
-  .article-body table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  .article-body th, .article-body td { padding: 10px 12px; border-bottom: 1px solid var(--ex-hairline); text-align: left; vertical-align: top; }
+  .article-body a { color: var(--ex-blue); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+  .article-body ul, .article-body ol { display: flex; flex-direction: column; gap: 10px; padding: 0; margin-bottom: 22px; }
+  .article-body ul { list-style: none; }
+  .article-body ul > li { position: relative; padding-left: 19px; }
+  .article-body ul > li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 7px; height: 7px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.75), var(--ex-blue) 55%); }
+  .article-body ol { list-style: decimal; padding-left: 1.4em; }
+  .article-body img { max-width: 100%; height: auto; border-radius: 18px; }
+  .article-body figure { margin-block: 6px 26px; }
+  .article-body figcaption { padding-top: 8px; font-size: 13px; color: var(--ex-muted); }
+  .article-body blockquote { margin-block: 6px 24px; padding: 6px 0 6px 20px; border-left: 2px solid var(--ex-blue); font-size: 20px; line-height: 1.5; font-weight: 350; color: var(--ex-heading); }
+  .article-body table { display: block; overflow-x: auto; width: 100%; margin-block: 6px 26px; border-radius: 18px; background: rgba(255, 255, 255, 0.72); box-shadow: 0 0 0 1px var(--ex-hairline); border-collapse: collapse; font-size: 15px; }
+  .article-body th, .article-body td { padding: 14px 18px; border-top: 1px solid var(--ex-mist); text-align: left; vertical-align: top; }
+  .article-body th { border-top: 0; border-bottom: 1px solid var(--ex-hairline); font-size: 13px; font-weight: 500; color: var(--ex-muted); }
   .article-body iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 22px; }
   .article-body hr { border: 0; border-top: 1px solid var(--ex-hairline); margin-block: 2em; }
   .article-body sup { font-size: 0.7em; }

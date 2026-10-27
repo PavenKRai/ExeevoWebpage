@@ -2,35 +2,15 @@ import Image from "next/image";
 import type { Resource } from "@/content/resources";
 import { cn } from "../ui/cn";
 
-/** Card/hero image. Items without a featured image get the sphere artwork from the design (decorative). */
-export function ResourceArt({ image, seed = 0, className, sizes, priority }: { image: Resource["image"]; seed?: number; className?: string; sizes: string; priority?: boolean }) {
+/** Card and hero image. Items without a featured image get the design's two-glow artwork (decorative, no text). */
+export function ResourceArt({ image, art = ["#0762C8", "#7A3FC0"], className, sizes, priority }: { image: Resource["image"]; art?: [string, string]; className?: string; sizes: string; priority?: boolean }) {
   return (
-    <div aria-hidden={image ? undefined : true} className={cn("relative overflow-hidden bg-ink", className)}>
-      {image ? (
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          sizes={sizes}
-          priority={priority}
-          unoptimized={image.src.endsWith(".gif")}
-          className="object-cover"
-        />
-      ) : (
-        <>
-          <span
-            className="absolute rounded-full"
-            style={{
-              width: 190 + (seed % 5) * 20,
-              height: 190 + (seed % 5) * 20,
-              left: `${12 + (seed % 7) * 8}%`,
-              top: `${-10 + (seed % 4) * 12}%`,
-              background: `radial-gradient(circle at 32% 28%, rgba(255,255,255,.55), rgba(255,255,255,0) 24%), conic-gradient(from ${(seed * 67) % 360}deg, var(--ex-magenta), var(--ex-blue), var(--ex-green), var(--ex-blue), var(--ex-magenta))`,
-            }}
-          />
-          <span className="glass-dark absolute rounded-full" style={{ width: 150, height: 150, left: `${30 + (seed % 5) * 9}%`, top: `${15 + (seed % 3) * 14}%` }} />
-        </>
-      )}
+    <div
+      aria-hidden={image ? undefined : true}
+      className={cn("relative overflow-hidden", className)}
+      style={image ? undefined : { background: `radial-gradient(70% 80% at 20% 20%,${art[0]}cc,transparent 70%),radial-gradient(70% 80% at 85% 85%,${art[1]}bb,transparent 70%),linear-gradient(135deg,#2A343B,#1D262D)` }}
+    >
+      {image && <Image src={image.src} alt={image.alt} fill sizes={sizes} priority={priority} unoptimized={image.src.endsWith(".gif")} className="object-cover" />}
     </div>
   );
 }

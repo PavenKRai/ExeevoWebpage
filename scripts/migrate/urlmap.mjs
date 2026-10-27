@@ -20,7 +20,7 @@ export const typeRoutes = [
   ["/recursos/publicaciones/seminarios-web", "/resources/webinars"],
   ["/recursos/publicaciones/comunicados-de-prensa", "/resources/press-releases"],
   ["/events", "/events"],
-  ["/glossary", "/glossary"],
+  ["/glossary", "/resources"],
 ];
 
 const modules = {
@@ -40,8 +40,8 @@ const rules = [
   [/^\/products\/(?:omnipresence(?:-crm)?\/)?([^/]+)$/, (m) => modules[m[1]] ?? "/platform"],
   [/^\/(omnipresence|omnicare|omnisight|crm)$|^\/products\/omnipresence-copilot(\/|$)|^\/products\/(crm|omnipresence)$|%e8%a3%bd%e5%93%81|製品/, (m) => modules[p_last(m.input)] ?? "/platform"],
   [/^\/about-us\/leadership$/, "/about"],
-  [/^\/pharma-crm$/, "/industries?industry=pharma"],
-  [/^\/(medtech|medical-device)-crm$/, "/industries?industry=medtech"],
+  [/^\/pharma-crm$/, "/platform?industry=pharma"],
+  [/^\/(medtech|medical-device)-crm$/, "/platform?industry=medtech"],
   [/customer-insights-for-ls/, modules["customer-insights"]],
   [/marketing-automation-for-life-sciences/, modules["marketing-automation"]],
   [/event-management-life-sciences/, modules["event-management"]],

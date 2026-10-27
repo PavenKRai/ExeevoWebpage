@@ -614,7 +614,7 @@ export const pageRedirects: Redirect[] = [
   },
   {
     "source": "/pharma-crm",
-    "destination": "/industries?industry=pharma",
+    "destination": "/platform?industry=pharma",
     "permanent": true
   },
   {

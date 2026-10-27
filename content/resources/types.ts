@@ -4,7 +4,7 @@ import type { PortableTextBlock } from "@portabletext/react";
  * Content migrated from the old exeevo.com (WordPress) by scripts/migrate. Bodies are sanitised HTML.
  * Facts the old site did not hold (speakers, durations, event dates, customer logos) are simply absent: never invented.
  */
-export type ResourceType = "blog" | "white-papers" | "webinars" | "press-releases" | "case-studies" | "analyst-reports" | "events" | "glossary";
+export type ResourceType = "blog" | "white-papers" | "webinars" | "press-releases" | "case-studies" | "analyst-reports" | "events";
 
 export type Resource = {
   slug: string;
@@ -20,6 +20,11 @@ export type Resource = {
   seo: { title: string; description: string };
   videoUrl?: string;
   pdfUrl?: string;
+  /** Events only (Sanity fields): ISO date-times, a place such as "Dublin, Clayton Hotel" or "Online", and the sign-up link. Absent when not filled in. */
+  startDate?: string;
+  endDate?: string;
+  location?: string;
+  registerUrl?: string;
   words: number;
   /** Sanitised HTML (bundled JSON fallback and imported legacy items). */
   bodyHtml?: string;

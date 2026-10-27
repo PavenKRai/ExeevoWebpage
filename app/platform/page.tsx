@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { CapabilityExplorer } from "@/components/platform/CapabilityExplorer";
+import { CapabilityExplorer, CapabilityExplorerView } from "@/components/platform/CapabilityExplorer";
 import { ModuleScroll } from "@/components/platform/ModuleScroll";
 import { PlatformCta } from "@/components/platform/PlatformCta";
 import { PlatformHero } from "@/components/platform/PlatformHero";
@@ -21,7 +21,9 @@ export default function PlatformPage() {
         <ModuleScroll />
       </Suspense>
       <PlatformHero />
-      <CapabilityExplorer />
+      <Suspense fallback={<CapabilityExplorerView />}>
+        <CapabilityExplorer />
+      </Suspense>
       <PlatformCta />
     </>
   );

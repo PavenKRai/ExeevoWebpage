@@ -5,7 +5,7 @@ export const site = {
   tagline: "A unified, AI-powered life sciences CRM built natively on Microsoft.",
   demoHref: "/services#demo",
   videoUrl: "[VIDEO URL]",
-  /** Primary navigation (new design): plain links, no dropdowns. Industries is not in the bar (Partnerships replaced it); the page and the footer links stay. Solutions by role is no longer linked from the nav or footer; the page stays live. */
+  /** Primary navigation (new design): plain links, no dropdowns. Industries is not in the bar (Partnerships replaced it); the footer links go to the filtered Platform page. Solutions by role is no longer linked from the nav or footer; the page stays live. */
   nav: [
     { label: "Platform", href: "/platform" },
     { label: "Ask-Nova", href: "/ask-nova" },
@@ -31,8 +31,9 @@ export const site = {
       {
         title: "Industries",
         links: [
-          { label: "Pharma", href: "/industries?industry=pharma" },
-          { label: "MedTech", href: "/industries?industry=medtech" },
+          { label: "Pharma", href: "/platform?industry=pharma" },
+          { label: "MedTech", href: "/platform?industry=medtech" },
+          { label: "Consumer Health", href: "/platform?industry=consumer-health" },
         ],
       },
       {
@@ -52,15 +53,6 @@ export const site = {
       { label: "Site Map", href: "/site-map" },
     ],
   },
-  rolesMenu: {
-    blurb: "Field Rep, MSL, KAM, Account Mgr",
-    items: [
-      { label: "Field Rep", slug: "field-rep" },
-      { label: "Medical Science Liaison", slug: "msl" },
-      { label: "Key Account Manager", slug: "kam" },
-      { label: "Consumer & Animal Health Rep", slug: "consumer-animal-health" },
-    ],
-  },
   /** Mobile sheet groups (Platform's modules come from content/modules.ts). */
   mobile: {
     more: [
@@ -70,8 +62,4 @@ export const site = {
       { label: "Resources", href: "/resources" },
     ],
   },
-  industriesMenu: [
-    { label: "Pharma", href: "/industries?industry=pharma", blurb: "Commercial, Medical, Marketing, IT" },
-    { label: "MedTech", href: "/industries?industry=medtech", blurb: "Device & diagnostics commercial teams" },
-  ],
 } as const;

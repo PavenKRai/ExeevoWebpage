@@ -1,7 +1,0 @@
-/* Panels arrive from depth once on load (time-based). `backwards` fill so the hover lift still works afterwards. */
-@media (min-width: 768px) {
-  #roles-scene .role-arrive {
-    animation: rise var(--ex-dur-slow) var(--ex-ease-out) backwards;
-    animation-delay: calc(0.3s + var(--i, 0) * 0.1s);
-  }
-}

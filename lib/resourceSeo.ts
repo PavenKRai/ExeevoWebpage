@@ -51,9 +51,18 @@ export function resourceJsonLd(type: ResourceType, item: Resource) {
   };
   const common = { "@id": `${url}#page`, mainEntityOfPage: url, url, headline: item.title, description: item.summary || item.seo.description, datePublished: item.date, dateModified: item.updated, inLanguage: "en", publisher: { "@id": `${siteUrl}/#organization` }, ...(item.image ? { image: abs(item.image.src) } : {}) };
   let main: Record<string, unknown>;
-  if (type === "glossary") main = { "@type": "DefinedTerm", "@id": `${url}#term`, name: item.title, description: item.summary, url, inDefinedTermSet: abs("/glossary") };
-  else if (type === "webinars" && item.videoUrl)
+  if (type === "webinars" && item.videoUrl)
     main = { "@type": "VideoObject", ...common, name: item.title, uploadDate: item.date, embedUrl: item.videoUrl, ...(item.image ? { thumbnailUrl: abs(item.image.src) } : { thumbnailUrl: abs("/opengraph-image") }) };
+  else if (type === "events" && item.startDate)
+    main = {
+      "@type": "Event",
+      ...common,
+      name: item.title,
+      startDate: item.startDate,
+      ...(item.endDate ? { endDate: item.endDate } : {}),
+      ...(item.location ? { location: /^online$/i.test(item.location) ? { "@type": "VirtualLocation", url } : { "@type": "Place", name: item.location } } : {}),
+      ...(item.registerUrl ? { offers: { "@type": "Offer", url: item.registerUrl } } : {}),
+    };
   else main = { "@type": type === "blog" ? "BlogPosting" : type === "press-releases" ? "NewsArticle" : "Article", ...common };
   return { "@context": "https://schema.org", "@graph": [main, crumbs] };
 }
