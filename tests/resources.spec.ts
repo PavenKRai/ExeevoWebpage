@@ -73,3 +73,62 @@ test("old WordPress URLs redirect permanently to their new home", async ({ reque
     expect(res.headers()["location"], from).toContain(to);
   }
 });
+
+test("hub: tabs with counts, a featured article and a row per type that has content", async ({ page }) => {
+  await page.goto("/resources", { waitUntil: "networkidle" });
+  const tabs = page.getByRole("navigation", { name: "Resource types" });
+  await expect(tabs.getByRole("link", { name: /^All$/ })).toHaveAttribute("aria-current", "page");
+  await expect(tabs.getByRole("link", { name: /^Blog\s*\d+$/ })).toHaveAttribute("href", "/resources/blog");
+  await expect(tabs.getByRole("link", { name: /^Events\s*\d+$/ })).toHaveAttribute("href", "/events");
+  await expect(tabs.getByRole("link", { name: /Glossary/ })).toHaveAttribute("href", "/glossary");
+  await expect(page.getByRole("region", { name: "Featured" })).toBeVisible();
+  for (const [type, label] of [["blog", "Blog"], ["white-papers", "White papers"], ["webinars", "Webinars"]] as const) {
+    const group = page.locator(`section[aria-labelledby="grp-${type}"]`);
+    await expect(group.getByRole("heading", { level: 2, name: label })).toBeVisible();
+    await expect(group.locator("article")).toHaveCount(3);
+  }
+});
+
+test("type page: item count, topic chips and the matching action on cards", async ({ page }) => {
+  await page.goto("/resources/white-papers", { waitUntil: "networkidle" });
+  await expect(page.getByRole("navigation", { name: "Resource types" }).getByRole("link", { name: /^White papers/ })).toHaveAttribute("aria-current", "page");
+  await expect(page.getByText(/^\d+ items?$/)).toBeVisible();
+  const withPdf = getResources("white-papers").filter((r) => r.pdfUrl).length;
+  if (withPdf) await expect(page.getByRole("link", { name: "Download PDF" }).first()).toBeVisible();
+  await page.goto("/resources/webinars", { waitUntil: "networkidle" });
+  const withVideo = getResources("webinars").filter((r) => r.videoUrl).length;
+  if (withVideo) await expect(page.getByRole("link", { name: "Watch recording" }).first()).toBeVisible();
+});
+
+test("article: details only for fields that exist, On this page from H2s, demo card, Keep reading", async ({ page }) => {
+  const blog = getResources("blog").find((r) => r.bodyHtml?.includes("<h2")) ?? getResources("blog")[0];
+  await page.goto(resourceHref("blog", blog.slug), { waitUntil: "networkidle" });
+  await expect(page.getByRole("navigation", { name: "Breadcrumb" }).getByRole("link", { name: "Blog" })).toHaveAttribute("href", "/resources/blog");
+  await expect(page.getByRole("region", { name: "Details" })).toHaveCount(0);
+  const toc = page.getByRole("navigation", { name: "On this page" });
+  await expect(toc.getByRole("link").first()).toBeVisible();
+  const first = toc.getByRole("link").first();
+  const id = (await first.getAttribute("href"))!.slice(1);
+  await expect(page.locator(`h2#${id}`)).toHaveCount(1);
+  await expect(page.getByRole("link", { name: "Get a demo" }).first()).toHaveAttribute("href", "/services#demo");
+  await expect(page.locator("section[aria-labelledby='keep-reading-title'] li")).toHaveCount(3);
+  const wp = getResources("white-papers").find((r) => r.pdfUrl);
+  if (wp) {
+    await page.goto(resourceHref("white-papers", wp.slug), { waitUntil: "networkidle" });
+    await expect(page.getByRole("region", { name: "Details" }).getByRole("link", { name: "Download PDF" })).toBeVisible();
+  }
+  const wb = getResources("webinars").find((r) => r.videoUrl);
+  if (wb) {
+    await page.goto(resourceHref("webinars", wb.slug), { waitUntil: "networkidle" });
+    await expect(page.getByRole("region", { name: "Details" }).getByRole("link", { name: "Watch recording" })).toHaveAttribute("href", "#recording");
+  }
+});
+
+test("no placeholder text on Resources pages (only what comes from the content)", async ({ request }) => {
+  const paths = ["/resources", "/resources/blog", "/resources/white-papers", "/events", "/glossary", resourceHref("events", getResources("events")[0].slug), resourceHref("blog", getResources("blog")[0].slug)];
+  for (const p of paths) {
+    const html = await (await request.get(p)).text();
+    const text = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<style[\s\S]*?<\/style>/g, "").replace(/<[^>]+>/g, " ");
+    expect(text, p).not.toMatch(/\[(Title|Summary|Topics|Featured image|Publication date|Read time|Starts|Ends|Location|Registration link|PDF|Recording address|Newsletter description)[^\]]*\]/);
+  }
+});

@@ -34,6 +34,10 @@ const BASE = `
   "seo": { "title": coalesce(seo.title, title), "description": coalesce(seo.description, summary) },
   videoUrl,
   "pdfUrl": coalesce(pdf.asset->url, pdfUrl),
+  startDate,
+  endDate,
+  location,
+  registerUrl,
   "words": select(
     defined(legacyHtml) => length(string::split(legacyHtml, " ")),
     length(string::split(pt::text(body), " "))
@@ -52,11 +56,15 @@ const BODY = `
   }
 `;
 
-type Raw = Omit<Resource, "image" | "videoUrl" | "pdfUrl" | "bodyHtml"> & {
+type Raw = Omit<Resource, "image" | "videoUrl" | "pdfUrl" | "bodyHtml" | "startDate" | "endDate" | "location" | "registerUrl"> & {
   image: Resource["image"] | null;
   videoUrl?: string | null;
   pdfUrl?: string | null;
   bodyHtml?: string | null;
+  startDate?: string | null;
+  endDate?: string | null;
+  location?: string | null;
+  registerUrl?: string | null;
 };
 
 /** Watch/share links are stored in Sanity; the page embeds the privacy-friendly player. */
@@ -72,6 +80,10 @@ const normalise = (r: Raw): Resource => ({
   image: r.image ?? null,
   videoUrl: r.videoUrl ? toEmbedUrl(r.videoUrl) : undefined,
   pdfUrl: r.pdfUrl ?? undefined,
+  startDate: r.startDate ?? undefined,
+  endDate: r.endDate ?? undefined,
+  location: r.location ?? undefined,
+  registerUrl: r.registerUrl ?? undefined,
   bodyHtml: r.bodyHtml ?? undefined,
   words: r.words || 0,
 });

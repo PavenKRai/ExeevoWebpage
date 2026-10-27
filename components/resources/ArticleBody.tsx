@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { PortableText, type PortableTextBlock, type PortableTextComponents } from "@portabletext/react";
 import { toEmbedUrl } from "@/content/resources";
+import { headingsFromBody, headingsFromHtml } from "@/lib/resources";
 
 type Img = { url?: string; alt?: string; caption?: string; width?: number; height?: number };
 type Row = { cells?: string[] };
@@ -34,12 +35,17 @@ const components: PortableTextComponents = {
   },
 };
 
-/** Article body: Portable Text from Sanity, or sanitised HTML (bundled JSON and imported legacy items). */
+/** Article body: Portable Text from Sanity, or sanitised HTML (bundled JSON and imported legacy items). H2s get ids that the "On this page" list links to. */
 export function ArticleBody({ body, html }: { body?: PortableTextBlock[]; html?: string }) {
-  if (html && !(body && body.length)) return <div className="article-body" dangerouslySetInnerHTML={{ __html: html }} />;
+  if (html && !(body && body.length)) return <div className="article-body" dangerouslySetInnerHTML={{ __html: headingsFromHtml(html).html }} />;
+  const ids = new Map(headingsFromBody(body as Parameters<typeof headingsFromBody>[0]).map((h) => [h.key, h.id]));
+  const withIds: PortableTextComponents = {
+    ...components,
+    block: { h2: ({ children, value }) => <h2 id={ids.get((value as { _key?: string })._key ?? "")}>{children}</h2> },
+  };
   return (
     <div className="article-body">
-      <PortableText value={body ?? []} components={components} />
+      <PortableText value={body ?? []} components={withIds} />
     </div>
   );
 }
