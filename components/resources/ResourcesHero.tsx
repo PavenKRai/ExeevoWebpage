@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { getResources, type ResourceType } from "@/content/resources";
@@ -8,10 +7,9 @@ import { cn } from "../ui/cn";
 const i = (n: number) => ({ "--i": n }) as CSSProperties;
 const tab = "inline-flex h-11 shrink-0 items-center gap-2 rounded-full border px-4 text-[14px] transition-all duration-300";
 
-/** Resources header on every Resources page: `h1`, lead and the tab row (All + the types with their counts, Glossary as a text link). Counts come from the content. */
+/** Resources header on every Resources page: `h1`, lead and the tab row (All + the types with their counts). Counts come from the content. */
 export async function ResourcesHero({ h1 = resourcesHub.h1, intro = resourcesHub.intro, active }: { h1?: string; intro?: string; active?: ResourceType | "all" }) {
-  const types = resourceTypes.filter((t) => t.type !== "glossary");
-  const glossary = resourceTypes.find((t) => t.type === "glossary")!;
+  const types = resourceTypes;
   const counts = await Promise.all(types.map(async (t) => (await getResources(t.type)).length));
   return (
     <section className="relative overflow-hidden bg-porcelain pb-[60px] pt-[128px] lg:pt-[160px]">
@@ -32,10 +30,6 @@ export async function ResourcesHero({ h1 = resourcesHub.h1, intro = resourcesHub
               <span className={cn("text-[12px]", active === t.type ? "text-white/80" : "text-muted")}>{counts[n]}</span>
             </Link>
           ))}
-          <Link href={glossary.path} aria-current={active === "glossary" ? "page" : undefined} className="tlink shrink-0 !min-h-11 px-4">
-            {glossary.label}
-            <ArrowRight size={16} strokeWidth={1.6} aria-hidden="true" />
-          </Link>
         </nav>
       </div>
     </section>

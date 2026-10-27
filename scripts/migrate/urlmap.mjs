@@ -20,7 +20,7 @@ export const typeRoutes = [
   ["/recursos/publicaciones/seminarios-web", "/resources/webinars"],
   ["/recursos/publicaciones/comunicados-de-prensa", "/resources/press-releases"],
   ["/events", "/events"],
-  ["/glossary", "/glossary"],
+  ["/glossary", "/resources"],
 ];
 
 const modules = {

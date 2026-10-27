@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 /** All: the lead article, then a row of the three newest items for every type that has content. */
 export default async function ResourcesPage() {
   const groups = (
-    await Promise.all(resourceTypes.filter((t) => t.type !== "glossary").map(async (t) => ({ type: t.type, items: await getResources(t.type) })))
+    await Promise.all(resourceTypes.map(async (t) => ({ type: t.type, items: await getResources(t.type) })))
   ).filter((g) => g.items.length > 0);
   const lead = groups.find((g) => g.type === "blog") ?? groups[0];
   const featured = lead ? (lead.items.find((r) => r.image) ?? lead.items[0]) : undefined;

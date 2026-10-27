@@ -27,7 +27,6 @@ export const resourceTypes: ResourceTypeConfig[] = [
   { type: "case-studies", label: "Case studies", cta: "Read the case study", path: "/resources/case-studies", h1: "Case studies", intro: "How life sciences teams use Exeevo across commercial, medical and marketing work.", perPage: 12, color: "var(--ex-green)", art: ["#00C389", "#0762C8"], single: "Case study" },
   { type: "press-releases", label: "Press", cta: "Read release", path: "/resources/press-releases", h1: "Press", intro: "News, announcements and resources for journalists covering Exeevo.", perPage: 12, color: "var(--ex-muted)", art: ["#56636C", "#0762C8"], single: "Press" },
   { type: "analyst-reports", label: "Analyst reports", cta: "Read the report", path: "/resources/analyst-reports", h1: "Analyst reports", intro: "What industry analysts have said about Exeevo.", perPage: 12, color: "var(--ex-heading)", art: ["#1D262D", "#7A3FC0"], single: "Analyst report" },
-  { type: "glossary", label: "Glossary", cta: "Read definition", path: "/glossary", h1: "Glossary", intro: "Plain-language definitions of the terms used across life sciences commercial, medical and compliance work.", perPage: 50, color: "var(--ex-muted)", art: ["#56636C", "#0762C8"], single: "Glossary" },
 ];
 
 export const resourceConfig = (type: ResourceType) => resourceTypes.find((t) => t.type === type)!;

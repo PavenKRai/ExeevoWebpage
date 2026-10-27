@@ -4,7 +4,7 @@ import type { PortableTextBlock } from "@portabletext/react";
  * Content migrated from the old exeevo.com (WordPress) by scripts/migrate. Bodies are sanitised HTML.
  * Facts the old site did not hold (speakers, durations, event dates, customer logos) are simply absent: never invented.
  */
-export type ResourceType = "blog" | "white-papers" | "webinars" | "press-releases" | "case-studies" | "analyst-reports" | "events" | "glossary";
+export type ResourceType = "blog" | "white-papers" | "webinars" | "press-releases" | "case-studies" | "analyst-reports" | "events";
 
 export type Resource = {
   slug: string;

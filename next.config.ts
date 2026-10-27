@@ -6,6 +6,8 @@ const q = (key: string, value: string) => [{ type: "query" as const, key, value 
 const filterRedirects = [
   ...["pharma", "medtech"].map((v) => ({ source: "/industries", has: q("industry", v), destination: `/platform?industry=${v}`, permanent: true })),
   { source: "/industries", destination: "/platform", permanent: true },
+  { source: "/glossary", destination: "/resources", permanent: true },
+  { source: "/glossary/:slug", destination: "/resources", permanent: true },
   ...["field-rep", "msl", "kam"].map((v) => ({ source: "/solutions-by-role", has: q("role", v), destination: `/platform?role=${v}`, permanent: true })),
   { source: "/solutions-by-role", has: q("role", "consumer-animal-health"), destination: "/platform?industry=consumer-health", permanent: true },
   { source: "/solutions-by-role", destination: "/platform", permanent: true },

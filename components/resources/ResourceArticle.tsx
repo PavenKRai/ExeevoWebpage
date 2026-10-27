@@ -20,8 +20,7 @@ async function related(type: ResourceType, item: Resource) {
 /** Detail page: breadcrumb, topic, one h1, meta, image or video, summary and body with the sidebar (Details, On this page, Get a demo), Keep reading, newsletter. Every block appears only when the item has the data for it. */
 export async function ResourceArticle({ type, item }: { type: ResourceType; item: Resource }) {
   const c = resourceConfig(type);
-  const glossary = type === "glossary";
-  const more = glossary ? [] : await related(type, item);
+  const more = await related(type, item);
   const headings = headingsOf(item);
   const topic = item.categories.join(", ");
   return (
@@ -60,7 +59,7 @@ export async function ResourceArticle({ type, item }: { type: ResourceType; item
             )}
           </p>
         </div>
-        {!glossary && (item.videoUrl || item.image) && (
+        {(item.videoUrl || item.image) && (
           <div className="wrap mt-[30px] max-w-[1080px]">
             {item.videoUrl ? (
               <figure id="recording" className="glass scroll-mt-28 rounded-[28px] p-3">
@@ -74,11 +73,11 @@ export async function ResourceArticle({ type, item }: { type: ResourceType; item
       </section>
       <section className="bg-white pb-[90px] pt-[30px]">
         <div className="wrap grid items-start gap-x-10 gap-y-8 lg:grid-cols-12">
-          <article className={glossary ? "lg:col-span-8" : "max-w-[760px] lg:col-span-8"}>
-            {item.summary && !glossary && <p className="mb-[26px] text-[20px] font-[350] leading-[1.6] text-heading">{item.summary}</p>}
+          <article className="max-w-[760px] lg:col-span-8">
+            {item.summary && <p className="mb-[26px] text-[20px] font-[350] leading-[1.6] text-heading">{item.summary}</p>}
             <ArticleBody body={item.body} html={item.bodyHtml} />
           </article>
-          {!glossary && <ArticleSidebar type={type} item={item} headings={headings} />}
+          <ArticleSidebar type={type} item={item} headings={headings} />
         </div>
       </section>
       <KeepReading type={type} items={more} />

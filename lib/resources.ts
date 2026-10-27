@@ -6,7 +6,7 @@ export const resourceHref = (type: ResourceType, slug: string) => `${resourceCon
 
 const fmt = new Intl.DateTimeFormat("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" });
 export const formatDate = (iso: string) => fmt.format(new Date(`${iso}T00:00:00Z`));
-/** Read time makes sense for written pieces only (not events, webinars or glossary terms). */
+/** Read time makes sense for written pieces only (not events or webinars). */
 export const showsReadTime = (type: ResourceType) => type === "blog" || type === "white-papers" || type === "case-studies" || type === "press-releases" || type === "analyst-reports";
 export const readMinutes = (r: Resource) => Math.max(1, Math.round(r.words / 220));
 

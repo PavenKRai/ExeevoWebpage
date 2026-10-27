@@ -13,7 +13,6 @@ const SANITY_TYPE: Record<ResourceType, string> = {
   "case-studies": "caseStudy",
   "analyst-reports": "analystReport",
   events: "event",
-  glossary: "glossaryTerm",
 };
 
 // Fields shared by list and detail reads. Lists leave the body out (it is large); `words` still drives "n min read".
