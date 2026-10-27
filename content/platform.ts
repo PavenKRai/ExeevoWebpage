@@ -173,7 +173,7 @@ export const capabilities: Capability[] = [
         body: "Account-specific prices, discounts and contracts applied automatically to quotes and orders.",
       },
       {
-        title: "Orders",
+        title: "Order management",
         body: "Direct and wholesaler orders with approvals and ERP sync, so customer service stops re-keying.",
       },
     ],
@@ -381,7 +381,7 @@ export const capabilities: Capability[] = [
         body: "Call-plan attainment, reach and frequency, and meeting and email engagement by rep and team, so managers coach on facts.",
       },
       {
-        title: "Power BI reports",
+        title: "Reporting",
         body: "Your own reports on the same data, alongside the standard dashboards.",
       },
     ],

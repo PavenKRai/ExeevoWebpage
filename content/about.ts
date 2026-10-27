@@ -144,7 +144,7 @@ export const about = {
       {
         "first": "Raja Somasekhar",
         "last": "Gupta",
-        "title": "Director – Finance & Accounts",
+        "title": "Head of Finance",
         "photo": "/about/leaders/raja-somasekhar-gupta.jpg",
         "alt": "Portrait of Raja Somasekhar Gupta",
         "bio": [
