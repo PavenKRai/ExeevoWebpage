@@ -9,7 +9,7 @@ const ok = {
   country: "United States",
   service: "Not sure yet: help me choose",
   message: "Hello",
-  consent: true,
+  consent: false,
   website: "",
 };
 const ip = (n: number) => `10.${Math.floor(Math.random() * 250)}.${n}.${Math.floor(Math.random() * 250)}`;

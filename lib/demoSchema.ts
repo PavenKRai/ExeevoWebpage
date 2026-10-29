@@ -18,7 +18,7 @@ export const demoSchema = z.object({
     .min(1, "Select the capability you are interested in.")
     .refine((v) => capabilityOptions.includes(v), "Select one of the listed capabilities."),
   message: z.string().trim().max(2000, "Use 2000 characters or fewer."),
-  consent: z.boolean().refine((v) => v === true, "Confirm consent so we can contact you."),
+  consent: z.boolean(), // marketing opt-in: optional, sent to the flow as true or false
 });
 
 export type DemoInput = z.infer<typeof demoSchema>;

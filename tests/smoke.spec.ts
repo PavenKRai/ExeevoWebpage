@@ -46,6 +46,7 @@ test("talk to our team form (Home): validation, optional fields, request body an
   await expect(page.locator("#demo-email-error")).toBeVisible();
   await expect(page.locator("#demo-job-error")).toHaveCount(0); // job title and message are optional
   await expect(page.locator("#demo-message-error")).toHaveCount(0);
+  await expect(page.locator("#demo-consent-error")).toHaveCount(0); // the marketing checkbox is optional
   await form.locator("#demo-name").fill("Test Person");
   await form.locator("#demo-email").fill("test@example.com");
   await form.locator("#demo-job").fill("Head of Sales");
@@ -53,10 +54,9 @@ test("talk to our team form (Home): validation, optional fields, request body an
   await form.locator("#demo-country").fill("United States");
   await form.locator("#demo-service").selectOption({ index: 1 });
   await form.locator("#demo-message").fill("We would like a walkthrough.");
-  await form.locator("#demo-consent").check();
   await form.getByRole("button", { name: "Send request" }).click();
   await expect(page.getByRole("status")).toContainText("Request received.");
-  expect(body).toMatchObject({ jobTitle: "Head of Sales", message: "We would like a walkthrough.", website: "" });
+  expect(body).toMatchObject({ consent: false, jobTitle: "Head of Sales", message: "We would like a walkthrough.", website: "" });
   expect(Number(body.startedAt)).toBeGreaterThan(0);
 });
 

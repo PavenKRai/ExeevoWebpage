@@ -68,18 +68,11 @@ export function DemoForm() {
             <input
               id="demo-consent"
               type="checkbox"
-              aria-invalid={errors.consent ? true : undefined}
-              aria-describedby={errors.consent ? "demo-consent-error" : undefined}
               className="size-[18px] shrink-0 accent-[#1D262D]"
               {...register("consent")}
             />
             <span>{demo.consent}</span>
           </label>
-          {errors.consent && (
-            <p id="demo-consent-error" className="text-[13.5px] font-medium text-error">
-              {errors.consent.message}
-            </p>
-          )}
         </div>
         <Button type="submit" disabled={isSubmitting} className="disabled:opacity-70">
           {isSubmitting ? demo.sending : demo.submit}
