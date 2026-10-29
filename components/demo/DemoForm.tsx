@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Check } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { capabilityOptions, demo } from "@/content/demo";
@@ -10,16 +11,29 @@ import { SelectField, TextAreaField, TextField } from "./DemoFields";
 export function DemoForm() {
   const [done, setDone] = useState(false);
   const [failure, setFailure] = useState<string | null>(null);
-  const [startedAt] = useState(() => Date.now());
+  const [startedAt, setStartedAt] = useState(() => Date.now());
   const [trap, setTrap] = useState("");
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<DemoInput>({
     resolver: zodResolver(demoSchema),
     defaultValues: { fullName: "", email: "", jobTitle: "", company: "", country: "", service: capabilityOptions[0], message: "", consent: false },
   });
+
+  // After a successful send: show the green tick for a few seconds, then bring back a fresh, empty form.
+  useEffect(() => {
+    if (!done) return;
+    const t = setTimeout(() => {
+      reset();
+      setTrap("");
+      setStartedAt(Date.now());
+      setDone(false);
+    }, 3500);
+    return () => clearTimeout(t);
+  }, [done, reset]);
 
   async function onSubmit(values: DemoInput) {
     setFailure(null);
@@ -37,8 +51,11 @@ export function DemoForm() {
 
   if (done) {
     return (
-      <div role="status" className="grid min-h-[320px] content-center gap-3 text-heading">
-        <p className="text-[28px] font-light leading-tight tracking-[-0.02em]">{demo.success}</p>
+      <div role="status" className="grid min-h-[320px] place-items-center content-center gap-4 text-center text-heading">
+        <span aria-hidden="true" className="flex size-16 items-center justify-center rounded-full bg-[#E3F7EF] text-green-ink">
+          <Check size={32} strokeWidth={1.8} />
+        </span>
+        <p className="text-[24px] font-light leading-tight tracking-[-0.02em]">{demo.success}</p>
       </div>
     );
   }
