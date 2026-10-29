@@ -44,7 +44,7 @@ test("talk to our team form (Home): validation, optional fields, request body an
   await form.getByRole("button", { name: "Send request" }).click();
   await expect(page.locator("#demo-name-error")).toBeVisible();
   await expect(page.locator("#demo-email-error")).toBeVisible();
-  await expect(page.locator("#demo-company-error")).toHaveCount(0); // everything but name and email is optional
+  await expect(page.locator("#demo-company-error")).toBeVisible(); // name, email and company are required; the rest is optional
   await expect(page.locator("#demo-country-error")).toHaveCount(0);
   await expect(page.locator("#demo-job-error")).toHaveCount(0);
   await expect(page.locator("#demo-message-error")).toHaveCount(0);

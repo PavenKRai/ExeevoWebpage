@@ -50,7 +50,7 @@ export function DemoForm() {
         <TextField id="demo-name" label="Full name" required autoComplete="name" error={errors.fullName?.message} {...register("fullName")} />
         <TextField id="demo-email" label="Work email" required type="email" autoComplete="email" error={errors.email?.message} {...register("email")} />
         <TextField id="demo-job" label={demo.jobTitleLabel} autoComplete="organization-title" error={errors.jobTitle?.message} {...register("jobTitle")} />
-        <TextField id="demo-company" label="Company" autoComplete="organization" error={errors.company?.message} {...register("company")} />
+        <TextField id="demo-company" label="Company" required autoComplete="organization" error={errors.company?.message} {...register("company")} />
         <div className="sm:col-span-2">
           <TextField id="demo-country" label="Country" autoComplete="country-name" error={errors.country?.message} {...register("country")} />
         </div>
