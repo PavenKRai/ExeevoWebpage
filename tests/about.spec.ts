@@ -27,7 +27,7 @@ test("about: choosing an office shows its address", async ({ page }) => {
 test("about: closing cards lead to Partners and the demo form; JSON-LD describes the organisation", async ({ page, request }) => {
   await page.goto("/about", { waitUntil: "networkidle" });
   await expect(page.getByRole("link", { name: new RegExp(about.closing.partners.cta) })).toHaveAttribute("href", "/partners");
-  await expect(page.getByRole("link", { name: new RegExp(about.closing.contact.cta) })).toHaveAttribute("href", "/services#demo");
+  await expect(page.getByRole("link", { name: new RegExp(about.closing.contact.cta) })).toHaveAttribute("href", "/#demo");
   const html = await (await request.get("/about")).text();
   expect(html).toContain("application/ld+json");
   expect(html).toContain("AboutPage");

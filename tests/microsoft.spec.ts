@@ -21,7 +21,7 @@ test("microsoft: every stack-card link lands on a real card or group", async ({ 
 
 test("microsoft: Get a demo goes to the form; the page is in the nav and the sitemap", async ({ page, request }) => {
   await page.goto("/microsoft", { waitUntil: "networkidle" });
-  for (const b of await page.getByRole("link", { name: "Get a demo" }).all()) await expect(b).toHaveAttribute("href", "/services#demo");
+  for (const b of await page.getByRole("link", { name: "Get a demo" }).all()) await expect(b).toHaveAttribute("href", "/#demo");
   expect(await (await request.get("/sitemap.xml")).text()).toContain("/microsoft");
   expect(await (await request.get("/llms.txt")).text()).toContain("(/microsoft)");
 });

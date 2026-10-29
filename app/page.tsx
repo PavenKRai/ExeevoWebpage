@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DemoSection } from "@/components/demo/DemoSection";
 import { Adoption } from "@/components/home/Adoption";
 import { ClosingCta } from "@/components/home/ClosingCta";
 import { GoLive } from "@/components/home/GoLive";
@@ -28,6 +29,7 @@ export default function Home() {
       <PrivacyTenant />
       <GoLive />
       <ClosingCta />
+      <DemoSection />
     </div>
   );
 }

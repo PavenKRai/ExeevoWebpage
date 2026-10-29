@@ -60,10 +60,10 @@ test("platform: jump links and old ?module= deep links scroll to the right secti
 
 test("platform: every capability shows the screenshot placeholder, device availability and the Ask-Nova note", async ({ page }) => {
   await page.goto("/platform", { waitUntil: "networkidle" });
-  await expect(page.getByText("1600 × 1000 px recommended")).toHaveCount(11);
+  await expect(page.getByText("1600 × 1000 px recommended")).toHaveCount(capabilities.filter((c) => !c.shot).length); // the rest show their screenshot
   await expect(page.getByText("Available on")).toHaveCount(11);
   await expect(page.getByText("Ask-Nova AI", { exact: true })).toHaveCount(11);
-  await expect(page.getByRole("link", { name: "Get a demo" }).last()).toHaveAttribute("href", "/services#demo");
+  await expect(page.getByRole("link", { name: "Get a demo" }).last()).toHaveAttribute("href", "/#demo");
 });
 
 test("platform: no sideways scroll at phone and tablet width", async ({ page }) => {
@@ -132,4 +132,24 @@ test("platform: Medical Affairs is powered by Anju and links to the partner sect
   await expect(med.getByRole("link", { name: "Powered by Anju" })).toHaveAttribute("href", "/partners#sol");
   await expect(med.getByRole("link", { name: /Explore Medical Affairs Solutions/ })).toHaveAttribute("href", "/partners#sol");
   await expect(page.getByRole("link", { name: "Powered by Anju" })).toHaveCount(1);
+});
+
+test("screenshots open in a dialog; the close button, Escape and a click outside close it", async ({ page }) => {
+  await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
+  for (const id of ["field-sales", "medical", "marketing", "compliance", "insights"]) {
+    await expect(page.locator(`#cap-${id} button[aria-haspopup="dialog"]`), id).toHaveCount(1);
+  }
+  const open = page.locator("#cap-field-sales button[aria-haspopup='dialog']");
+  await open.click();
+  const dialog = page.getByRole("dialog", { name: /Field Sales/ });
+  await expect(dialog).toBeVisible();
+  await dialog.getByRole("button", { name: "Close screenshot" }).click();
+  await expect(dialog).toHaveCount(0);
+  await expect(open).toBeFocused();
+  await open.click();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await open.click();
+  await page.mouse.click(5, 300);
+  await expect(dialog).toHaveCount(0);
 });

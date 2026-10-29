@@ -47,7 +47,7 @@ test("'Read about this feature' and the Plus tiles jump to that feature in the l
 
 test("demo buttons lead to the Talk to our team form; JSON-LD lists 13 features; the nav has Ask-Nova after Platform", async ({ page, request }) => {
   await page.goto("/ask-nova", { waitUntil: "networkidle" });
-  for (const b of await page.getByRole("link", { name: "Get a demo" }).all()) await expect(b).toHaveAttribute("href", "/services#demo");
+  for (const b of await page.getByRole("link", { name: "Get a demo" }).all()) await expect(b).toHaveAttribute("href", "/#demo");
   const nav = page.getByRole("navigation", { name: "Primary" }).getByRole("link");
   const names = await nav.allTextContents();
   expect(names.map((n) => n.trim()).slice(0, 3)).toEqual(["Platform", "Ask-Nova", "Services"]);

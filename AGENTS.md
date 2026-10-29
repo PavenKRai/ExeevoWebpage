@@ -85,7 +85,7 @@ tests/          smoke.spec.ts, a11y.spec.ts
 - **Deep links:**
   - Platform module: `/platform?module=<slug>`
   - Industry: `/industries?industry=pharma|medtech`
-  - Demo / contact form: `/services#demo`
+  - Demo / contact form: `/#demo` (last section of Home)
   - Service: `/services?service=<slug>` (selects it; slugs in `content/services.ts`)
 - Keep components under about 200 lines. Split sections instead of growing files.
 
@@ -162,7 +162,7 @@ Design widths are 390, 768, 1024 and 1440. Below 1024px the nav collapses into a
 - `app/api/demo/route.ts` validates with the same Zod schema as the client and forwards to `process.env.CRM_FORM_ENDPOINT`.
 - Never log personal data. Never put personal data in URLs or query strings.
 - Keep secrets in environment variables and document them in `.env.example`: `CRM_FORM_ENDPOINT`, `NEXT_PUBLIC_SITE_URL`.
-- Consent copy is a placeholder (`[Privacy consent copy and link]`) until legal provides it.
+- Consent copy is a professional placeholder until legal provides final wording and a privacy link.
 
 ## Testing
 

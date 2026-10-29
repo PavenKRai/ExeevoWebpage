@@ -94,3 +94,6 @@
 /* Content column used by the page designs: 1280px with 40px (20px on phones) side padding. */
 .wrap { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 40px; position: relative; }
 @media (max-width: 700px) { .wrap { padding: 0 20px; } }
+
+/* Honeypot field: off-screen for people, still present for bots that fill every input. */
+.hp { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }

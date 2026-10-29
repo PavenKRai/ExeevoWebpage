@@ -13,8 +13,10 @@ export type Capability = {
   features: { title: string; body: string; industry?: PlatformIndustry; link?: { label: string; href: string } }[];
   /** "Powered by" partner shown under the outcomes (Medical Affairs: Anju). */
   poweredBy?: { prefix: string; name: string; logo: string; href: string; cta: string };
-  /** Optional screenshot (1600 x 1000). Without one, the design's dashed placeholder frame shows. */
+  /** Optional screenshot (16:10, click to enlarge). Without one, the design's dashed placeholder frame shows. */
   shot?: string;
+  /** Pixel size of the screenshot when it is not 1600 x 1000. */
+  shotSize?: [number, number];
 };
 
 export const platformPage = {
@@ -44,6 +46,8 @@ export const platformPage = {
     shotNote: "1600 × 1000 px recommended",
     frame: (n: string) => `Exeevo CRM · ${n}`,
     shotAlt: (n: string) => `Screenshot of ${n} in Exeevo CRM`,
+    enlarge: (n: string) => `Enlarge the ${n} screenshot`,
+    closeShot: "Close screenshot",
   },
   devicesList: ["Web", "Tablet", "Phone", "Offline"],
   cta: {
@@ -105,6 +109,8 @@ export const moduleToCapability: Record<string, string> = {
 export const capabilities: Capability[] = [
   {
     id: "field-sales",
+    shot: "/platform/field-sales.jpg",
+    shotSize: [1584, 953],
     name: "Field Sales",
     promise: "Every rep working the right HCPs, every quarter.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -182,6 +188,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "medical",
+    shot: "/platform/medical.png",
     name: "Medical Affairs",
     promise: "Scientific engagement, kept separate from promotion.",
     industries: ["Pharma", "MedTech"],
@@ -223,6 +230,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "marketing",
+    shot: "/platform/marketing.png",
     name: "Marketing and Omnichannel",
     promise: "Journeys that know what happened in the field.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -323,6 +331,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "compliance",
+    shot: "/platform/compliance.png",
     name: "Compliance and Transparency",
     promise: "Compliant by design, in every market you sell in.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -359,6 +368,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "insights",
+    shot: "/platform/insights.png",
     name: "Insights and Analytics",
     promise: "From activity to impact, by brand and territory.",
     industries: ["Pharma", "MedTech", "Consumer Health"],

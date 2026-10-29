@@ -224,28 +224,3 @@ export const gettingStarted = {
     },
   ],
 } as const;
-
-export const contact = {
-  title: "Talk to our team",
-  body: "To discuss any of these services, contact your Exeevo account team, or tell us where you are and we'll come back with the right starting point.",
-  consent: "[Privacy consent copy and link]",
-  success: "Request received. [CONFIRMATION COPY]",
-  submit: "Send request",
-  serviceLabel: "Which service are you interested in?",
-  serviceOptions: [
-    "Not sure yet: help me choose",
-    ...[
-  "Consulting & Solution Advisory",
-  "AI Readiness & Advisory",
-  "Implementation",
-  "Data Migration & Data Operations",
-  "Integrations & Connectivity",
-  "Training & Enablement",
-  "Managed Services",
-  "Hosting & Platform Operations",
-  "AI Enablement Services",
-  "Machine Learning Services"
-],
-    "End-to-end engagement",
-  ],
-} as const;

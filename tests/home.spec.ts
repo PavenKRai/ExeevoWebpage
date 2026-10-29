@@ -34,8 +34,8 @@ test("home: all eight modules link into the platform and the CTAs go to the righ
   await expect(grid.locator("a[href^='/platform?module='], a[href='/ask-nova']")).toHaveCount(8);
   await expect(grid.getByText(/^On /)).toHaveCount(0);
   const main = page.getByRole("main");
-  await expect(main.getByRole("link", { name: "Get a demo" }).first()).toHaveAttribute("href", "/services#demo");
-  await expect(main.getByRole("link", { name: "Talk to our team" })).toHaveAttribute("href", "/services#demo");
+  await expect(main.getByRole("link", { name: "Get a demo" }).first()).toHaveAttribute("href", "/#demo");
+  await expect(main.getByRole("link", { name: "Talk to our team" })).toHaveAttribute("href", "/#demo");
   for (const name of ["Why Microsoft matters", "See the full Microsoft stack", "Built on Microsoft"]) await expect(main.getByRole("link", { name }).first()).toHaveAttribute("href", "/microsoft");
 });
 
