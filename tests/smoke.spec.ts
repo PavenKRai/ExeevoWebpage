@@ -57,7 +57,9 @@ test("talk to our team form (Home): validation, optional fields, request body an
   await form.locator("#demo-service").selectOption({ index: 1 });
   await form.locator("#demo-message").fill("We would like a walkthrough.");
   await form.getByRole("button", { name: "Send request" }).click();
-  await expect(page.getByRole("status")).toContainText("Request received.");
+  await expect(page.getByRole("status")).toContainText("Request sent");
+  await expect(form).toBeVisible({ timeout: 8000 }); // the form comes back, empty, after the confirmation
+  await expect(page.locator("#demo-name")).toHaveValue("");
   expect(body).toMatchObject({ consent: false, jobTitle: "Head of Sales", message: "We would like a walkthrough.", website: "" });
   expect(Number(body.startedAt)).toBeGreaterThan(0);
 });
