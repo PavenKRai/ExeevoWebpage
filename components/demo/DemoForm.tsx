@@ -47,8 +47,8 @@ export function DemoForm() {
     <form aria-label={demo.title} noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-[18px]">
       <input type="text" name="website" value={trap} onChange={(e) => setTrap(e.target.value)} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hp" />
       <div className="grid gap-4 sm:grid-cols-2">
-        <TextField id="demo-name" label="Full name" autoComplete="name" error={errors.fullName?.message} {...register("fullName")} />
-        <TextField id="demo-email" label="Work email" type="email" autoComplete="email" error={errors.email?.message} {...register("email")} />
+        <TextField id="demo-name" label="Full name" required autoComplete="name" error={errors.fullName?.message} {...register("fullName")} />
+        <TextField id="demo-email" label="Work email" required type="email" autoComplete="email" error={errors.email?.message} {...register("email")} />
         <TextField id="demo-job" label={demo.jobTitleLabel} autoComplete="organization-title" error={errors.jobTitle?.message} {...register("jobTitle")} />
         <TextField id="demo-company" label="Company" autoComplete="organization" error={errors.company?.message} {...register("company")} />
         <div className="sm:col-span-2">
