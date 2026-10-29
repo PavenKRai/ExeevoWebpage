@@ -71,7 +71,7 @@ function Viewer({ src, alt, closeLabel, onClose, reduce }: { src: string; alt: s
         className="max-h-[calc(100vh-7rem)] max-w-full overflow-auto rounded-[20px] bg-white/80 p-2 shadow-[0_0_0_1px_var(--ex-hairline)] sm:p-3 lg:overflow-visible"
         tabIndex={0}
       >
-        <Image src={src} alt={alt} width={1600} height={1000} quality={90} sizes="90vw" className="block h-auto w-[1000px] max-w-none rounded-[14px] lg:max-h-[calc(100vh-9rem)] lg:w-auto lg:max-w-[min(1600px,calc(100vw-4rem))] lg:object-contain" />
+        <Image src={src} alt={alt} width={1600} height={1000} quality={90} sizes="(min-width: 1024px) 95vw, 1000px" className="block aspect-[16/10] h-auto w-[1000px] max-w-none rounded-[14px] object-contain lg:w-[min(2000px,calc(100vw-4rem),calc((100vh-9rem)*1.6))]" />
       </motion.div>
     </motion.div>
   );
