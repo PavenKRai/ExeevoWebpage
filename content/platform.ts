@@ -15,6 +15,8 @@ export type Capability = {
   poweredBy?: { prefix: string; name: string; logo: string; href: string; cta: string };
   /** Optional screenshot (16:10, click to enlarge). Without one, the design's dashed placeholder frame shows. */
   shot?: string;
+  /** Pixel size of the screenshot when it is not 1600 x 1000. */
+  shotSize?: [number, number];
 };
 
 export const platformPage = {
@@ -107,7 +109,8 @@ export const moduleToCapability: Record<string, string> = {
 export const capabilities: Capability[] = [
   {
     id: "field-sales",
-    shot: "/platform/field-sales.png",
+    shot: "/platform/field-sales.jpg",
+    shotSize: [1584, 953],
     name: "Field Sales",
     promise: "Every rep working the right HCPs, every quarter.",
     industries: ["Pharma", "MedTech", "Consumer Health"],

@@ -1,14 +1,15 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Maximize2, X } from "lucide-react";
 import { useFocusTrap } from "../layout/useFocusTrap";
 
-type Props = { src: string; alt: string; enlargeLabel: string; closeLabel: string };
+type Size = [number, number];
+type Props = { src: string; alt: string; enlargeLabel: string; closeLabel: string; size?: Size };
 
 /** A capability screenshot that opens a larger view in a glass dialog. Escape, the close button or a click outside closes it. */
-export function ShotViewer({ src, alt, enlargeLabel, closeLabel }: Props) {
+export function ShotViewer({ src, alt, enlargeLabel, closeLabel, size = [1600, 1000] }: Props) {
   const [open, setOpen] = useState(false);
   const close = useCallback(() => setOpen(false), []);
   const reduce = useReducedMotion();
@@ -21,21 +22,21 @@ export function ShotViewer({ src, alt, enlargeLabel, closeLabel }: Props) {
         onClick={() => setOpen(true)}
         className="group relative block w-full cursor-zoom-in rounded-[14px]"
       >
-        <Image src={src} alt={alt} width={1600} height={1000} sizes="(min-width: 1024px) 700px, 100vw" className="block aspect-[16/10] w-full rounded-[14px] object-cover object-left-top" />
+        <Image src={src} alt={alt} width={size[0]} height={size[1]} sizes="(min-width: 1024px) 700px, 100vw" className="block aspect-[16/10] w-full rounded-[14px] object-cover object-left-top" />
         <span aria-hidden="true" className="glass absolute bottom-3 right-3 flex size-10 items-center justify-center rounded-full text-heading transition-opacity group-hover:opacity-100 lg:opacity-70">
           <Maximize2 size={18} strokeWidth={1.8} />
         </span>
       </button>
       <AnimatePresence>
         {open && (
-          <Viewer key="viewer" src={src} alt={alt} closeLabel={closeLabel} onClose={close} reduce={!!reduce} />
+          <Viewer key="viewer" size={size} src={src} alt={alt} closeLabel={closeLabel} onClose={close} reduce={!!reduce} />
         )}
       </AnimatePresence>
     </>
   );
 }
 
-function Viewer({ src, alt, closeLabel, onClose, reduce }: { src: string; alt: string; closeLabel: string; onClose: () => void; reduce: boolean }) {
+function Viewer({ src, alt, closeLabel, onClose, reduce, size }: { size: Size; src: string; alt: string; closeLabel: string; onClose: () => void; reduce: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   useFocusTrap(ref, true, onClose);
   useEffect(() => {
@@ -71,7 +72,16 @@ function Viewer({ src, alt, closeLabel, onClose, reduce }: { src: string; alt: s
         className="max-h-[calc(100vh-7rem)] max-w-full overflow-auto rounded-[20px] bg-white/80 p-2 shadow-[0_0_0_1px_var(--ex-hairline)] sm:p-3 lg:overflow-visible"
         tabIndex={0}
       >
-        <Image src={src} alt={alt} width={1600} height={1000} quality={90} sizes="(min-width: 1024px) 95vw, 1000px" className="block aspect-[16/10] h-auto w-[1000px] max-w-none rounded-[14px] object-contain lg:w-[min(2000px,calc(100vw-4rem),calc((100vh-9rem)*1.6))]" />
+        <Image
+          src={src}
+          alt={alt}
+          width={size[0]}
+          height={size[1]}
+          quality={90}
+          sizes="(min-width: 1024px) 95vw, 1000px"
+          style={{ aspectRatio: `${size[0]} / ${size[1]}`, "--r": size[0] / size[1] } as CSSProperties}
+          className="block h-auto w-[1000px] max-w-none rounded-[14px] object-contain lg:w-[min(2000px,calc(100vw-4rem),calc((100vh-9rem)*var(--r)))]"
+        />
       </motion.div>
     </motion.div>
   );
