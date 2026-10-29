@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { allServices, contact, phases } from "../content/services";
+import { allServices, phases, servicesPage } from "../content/services";
 
 test("services page: one h1, three phases and every service's copy is in the HTML", async ({ request, page }) => {
   const html = await (await request.get("/services")).text();
@@ -37,16 +37,14 @@ test("?service= deep link selects that service", async ({ page }) => {
   await page.goto("/services?service=managed-services", { waitUntil: "networkidle" });
   const operate = page.locator("#operate");
   await expect(operate.getByRole("tab", { name: /Managed Services/ })).toHaveAttribute("aria-selected", "true");
-  await page.goto("/services?service=ai-readiness-advisory#demo", { waitUntil: "networkidle" });
+  await page.goto("/services?service=ai-readiness-advisory", { waitUntil: "networkidle" });
   await expect(page.locator("#consult").getByRole("tab", { name: /AI Readiness/ })).toHaveAttribute("aria-selected", "true");
-  await expect(page.locator("#demo-service")).toHaveValue("AI Readiness & Advisory");
 });
 
-test("form offers every service plus 'not sure' and 'end-to-end'", async ({ page }) => {
+test("the Services page has no form; 'Talk to us about it' leads to the Home form", async ({ page }) => {
   await page.goto("/services", { waitUntil: "networkidle" });
-  const options = await page.locator("#demo-service option").allTextContents();
-  expect(options).toEqual([...contact.serviceOptions]);
-  expect(options.length).toBe(12);
+  await expect(page.locator("form")).toHaveCount(0);
+  for (const l of await page.getByRole("link", { name: servicesPage.interested.cta }).all()) await expect(l).toHaveAttribute("href", "/#demo");
 });
 
 test("JSON-LD lists the 10 services", async ({ request }) => {

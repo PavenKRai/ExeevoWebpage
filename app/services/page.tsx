@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/resources/JsonLd";
-import { ContactSection } from "@/components/services/ContactSection";
 import { HowWeEngage } from "@/components/services/HowWeEngage";
 import { PathsBlock } from "@/components/services/PathsBlock";
 import { PhaseSection } from "@/components/services/PhaseSection";
@@ -25,7 +24,6 @@ export default function ServicesPage() {
           {p.slug === "implement" && <PathsBlock />}
         </PhaseSection>
       ))}
-      <ContactSection />
     </ServiceParamProvider>
   );
 }

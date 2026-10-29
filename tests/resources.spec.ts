@@ -101,7 +101,7 @@ test("article: details only for fields that exist, On this page from H2s, demo c
   const first = toc.getByRole("link").first();
   const id = (await first.getAttribute("href"))!.slice(1);
   await expect(page.locator(`h2#${id}`)).toHaveCount(1);
-  await expect(page.getByRole("link", { name: "Get a demo" }).first()).toHaveAttribute("href", "/services#demo");
+  await expect(page.getByRole("link", { name: "Get a demo" }).first()).toHaveAttribute("href", "/#demo");
   await expect(page.locator("section[aria-labelledby='keep-reading-title'] li")).toHaveCount(3);
   const wp = getResources("white-papers").find((r) => r.pdfUrl);
   if (wp) {

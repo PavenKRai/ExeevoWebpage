@@ -4,6 +4,7 @@ import { ArrowRight, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/components/ui/cn";
 import { servicesPage, type Phase } from "@/content/services";
+import { site } from "@/content/site";
 import { phaseStyle } from "./phaseStyle";
 import { useServiceParam } from "./ServiceParam";
 
@@ -89,7 +90,7 @@ export function PhaseSection({ phase, children }: { phase: Phase; children?: Rea
               <p className="text-[14px] text-muted">
                 {servicesPage.interested.before} <span className="font-medium text-heading">{cur.title}</span>?
               </p>
-              <Link href={`/services?service=${cur.slug}#demo`} className="tlink text-[14px]">
+              <Link href={site.demoHref} className="tlink text-[14px]">
                 {servicesPage.interested.cta}
                 <ArrowRight aria-hidden="true" size={15} strokeWidth={1.6} />
               </Link>

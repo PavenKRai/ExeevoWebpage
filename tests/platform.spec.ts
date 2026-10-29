@@ -63,7 +63,7 @@ test("platform: every capability shows the screenshot placeholder, device availa
   await expect(page.getByText("1600 × 1000 px recommended")).toHaveCount(11);
   await expect(page.getByText("Available on")).toHaveCount(11);
   await expect(page.getByText("Ask-Nova AI", { exact: true })).toHaveCount(11);
-  await expect(page.getByRole("link", { name: "Get a demo" }).last()).toHaveAttribute("href", "/services#demo");
+  await expect(page.getByRole("link", { name: "Get a demo" }).last()).toHaveAttribute("href", "/#demo");
 });
 
 test("platform: no sideways scroll at phone and tablet width", async ({ page }) => {

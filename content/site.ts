@@ -3,7 +3,7 @@ export type NavLink = { label: string; href: string };
 export const site = {
   name: "Exeevo",
   tagline: "A unified, AI-powered life sciences CRM built natively on Microsoft.",
-  demoHref: "/services#demo",
+  demoHref: "/#demo",
   videoUrl: "[VIDEO URL]",
   /** Primary navigation (new design): plain links, no dropdowns. Industries is not in the bar (Partnerships replaced it); the footer links go to the filtered Platform page. Solutions by role is no longer linked from the nav or footer; the page stays live. */
   nav: [

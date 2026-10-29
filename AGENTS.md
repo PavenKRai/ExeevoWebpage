@@ -85,7 +85,7 @@ tests/          smoke.spec.ts, a11y.spec.ts
 - **Deep links:**
   - Platform module: `/platform?module=<slug>`
   - Industry: `/industries?industry=pharma|medtech`
-  - Demo / contact form: `/services#demo`
+  - Demo / contact form: `/#demo` (last section of Home)
   - Service: `/services?service=<slug>` (selects it; slugs in `content/services.ts`)
 - Keep components under about 200 lines. Split sections instead of growing files.
 

@@ -88,7 +88,7 @@ test("server HTML shows everything: no hidden classes, content present without J
     expect(await page.locator(".rv-hide").count(), `${r} hidden`).toBe(0);
     await expect(page.getByRole("heading", { level: 1 }).first()).toBeVisible();
   }
-  await page.goto("/services");
+  await page.goto("/");
   await expect(page.getByRole("heading", { name: "Talk to our team" })).toBeVisible();
   await ctx.close();
 });
@@ -102,9 +102,8 @@ test("reduced motion: everything visible immediately", async ({ browser }) => {
   await ctx.close();
 });
 
-test("/services#demo lands with the form visible (and so does the old /getting-started#demo link)", async ({ page }) => {
-  await page.goto("/getting-started#demo");
-  await expect(page).toHaveURL(/\/services#demo$/);
+test("/#demo lands with the form visible", async ({ page }) => {
+  await page.goto("/#demo");
   await page.waitForTimeout(1500);
   await expect(page.getByRole("form", { name: "Talk to our team" })).toBeInViewport();
   await page.locator("#demo-name").fill("Test");

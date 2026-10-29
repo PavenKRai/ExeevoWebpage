@@ -33,3 +33,20 @@ export function SelectField({ label, error, id, options, ...rest }: Base & { opt
     </Wrap>
   );
 }
+
+export function TextAreaField({ label, error, id, hint, ...rest }: Base & { hint?: string } & ComponentProps<"textarea">) {
+  const described = [hint ? `${id}-hint` : null, error ? `${id}-error` : null].filter(Boolean).join(" ") || undefined;
+  return (
+    <Wrap id={id} label={label} error={error}>
+      <textarea
+        id={id}
+        rows={4}
+        className="w-full resize-y rounded-input border border-[#D3DBE0] bg-white px-4 py-3 text-[15px] text-heading"
+        aria-invalid={error ? true : undefined}
+        aria-describedby={described}
+        {...rest}
+      />
+      {hint && <p id={`${id}-hint`} className="text-[13px] text-muted">{hint}</p>}
+    </Wrap>
+  );
+}
