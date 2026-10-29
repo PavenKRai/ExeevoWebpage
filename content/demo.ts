@@ -3,7 +3,7 @@ import { capabilities } from "./platform";
 export const demo = {
   title: "Talk to our team",
   body: "To discuss any of our capabilities, contact your Exeevo account team, or tell us where you are and we'll come back with the right starting point.",
-  consent: "[Privacy consent copy and link]",
+  consent: "Consent to marketing",
   success: "Request received. [CONFIRMATION COPY]",
   submit: "Send request",
   sending: "Sending…",
