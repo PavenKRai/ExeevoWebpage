@@ -162,7 +162,7 @@ Design widths are 390, 768, 1024 and 1440. Below 1024px the nav collapses into a
 - `app/api/demo/route.ts` validates with the same Zod schema as the client and forwards to `process.env.CRM_FORM_ENDPOINT`.
 - Never log personal data. Never put personal data in URLs or query strings.
 - Keep secrets in environment variables and document them in `.env.example`: `CRM_FORM_ENDPOINT`, `NEXT_PUBLIC_SITE_URL`.
-- Consent copy is "Consent to marketing" until legal provides final wording and a privacy link.
+- Consent copy is a professional placeholder until legal provides final wording and a privacy link.
 
 ## Testing
 

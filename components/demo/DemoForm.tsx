@@ -64,7 +64,7 @@ export function DemoForm() {
       )}
       <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
         <div className="grid gap-1">
-          <label htmlFor="demo-consent" className="flex min-h-11 max-w-[300px] cursor-pointer items-center gap-2.5 text-[13px] leading-[1.45] text-muted">
+          <label htmlFor="demo-consent" className="flex min-h-11 max-w-[420px] cursor-pointer items-center gap-2.5 text-[13px] leading-[1.45] text-muted">
             <input
               id="demo-consent"
               type="checkbox"
