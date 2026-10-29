@@ -11,8 +11,8 @@ export const demoSchema = z.object({
     .max(200, "Use 200 characters or fewer.")
     .pipe(z.email("Enter a valid email address, for example name@company.com.")),
   jobTitle: z.string().trim().max(120, "Use 120 characters or fewer."),
-  company: z.string().trim().min(1, "Enter your company.").max(160, "Use 160 characters or fewer."),
-  country: z.string().trim().min(1, "Enter your country.").max(100, "Use 100 characters or fewer."),
+  company: z.string().trim().max(160, "Use 160 characters or fewer."),
+  country: z.string().trim().max(100, "Use 100 characters or fewer."),
   service: z
     .string()
     .min(1, "Select the capability you are interested in.")
