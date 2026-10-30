@@ -278,6 +278,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "events",
+    shot: "/platform/events.png",
     name: "Events",
     promise: "Speaker programmes to congresses, in one workflow.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
