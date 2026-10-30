@@ -315,6 +315,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "content",
+    shot: "/platform/content.png",
     name: "Content and MLR",
     promise: "Approved content, faster, wherever it’s used.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -488,6 +489,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "cases",
+    shot: "/platform/cases.png",
     name: "Cases, Assets and Kits",
     promise: "Every procedure covered, every device and kit accounted for.",
     industries: ["MedTech"],
