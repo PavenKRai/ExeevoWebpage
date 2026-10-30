@@ -17,6 +17,8 @@ export type Capability = {
   shot?: string;
   /** Pixel size of the screenshot when it is not 1600 x 1000. */
   shotSize?: [number, number];
+  /** Several screenshots: shown as a carousel, in this order, each with the label for the frame's title bar. Replaces `shot`. */
+  shots?: { src: string; label: string; size?: [number, number] }[];
 };
 
 export const platformPage = {
@@ -48,6 +50,11 @@ export const platformPage = {
     shotAlt: (n: string) => `Screenshot of ${n} in Exeevo CRM`,
     enlarge: (n: string) => `Enlarge the ${n} screenshot`,
     closeShot: "Close screenshot",
+    prevShot: "Previous screenshot",
+    nextShot: "Next screenshot",
+    goToShot: "Go to screenshot {n}",
+    shotGroup: (n: string, count: number) => `${n}: ${count} screenshots`,
+    shotLabelAlt: (n: string, label: string) => `${n} screenshot: ${label}`,
   },
   devicesList: ["Web", "Tablet", "Phone", "Offline"],
   cta: {
@@ -109,8 +116,12 @@ export const moduleToCapability: Record<string, string> = {
 export const capabilities: Capability[] = [
   {
     id: "field-sales",
-    shot: "/platform/field-sales.jpg",
-    shotSize: [1584, 953],
+    shots: [
+      { src: "/platform/field-sales-0.png", label: "My customers · goal completion by customer", size: [1855, 1156] },
+      { src: "/platform/field-sales-1.png", label: "Recommended customers · priority clusters on the map" },
+      { src: "/platform/field-sales-2.png", label: "Why a customer is recommended · the top factors" },
+      { src: "/platform/field-sales-3.png", label: "Visit list · planned by area on the map" },
+    ],
     name: "Field Sales",
     promise: "Every rep working the right HCPs, every quarter.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
