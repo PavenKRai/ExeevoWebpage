@@ -160,7 +160,7 @@ test.describe("Field Sales carousel", () => {
   const group = (page: import("@playwright/test").Page) => page.locator("#cap-field-sales [role=group][aria-roledescription=carousel]");
 
   test("four slides in file order; title bar shows the label and counter; arrows and dots navigate", async ({ page }) => {
-    expect(shots.map((s) => s.src)).toEqual([0, 1, 2, 3].map((n) => `/platform/field-sales-${n}.png`));
+    expect(shots.map((s) => s.src)).toEqual([0, 1, 2, 3].map((n) => `/platform/field-sales-${n}.webp`));
     await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
     const g = group(page);
     await expect(g.getByText(shots[0].label)).toBeVisible();

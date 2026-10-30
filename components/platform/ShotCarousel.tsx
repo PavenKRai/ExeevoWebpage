@@ -17,6 +17,7 @@ export function ShotCarousel({ slides, text, interval = 5000 }: { slides: Slide[
   const [stopped, setStopped] = useState(false); // the user took over
   const [hold, setHold] = useState(false); // pointer or focus inside
   const [onScreen, setOnScreen] = useState(false);
+  const [near, setNear] = useState(false); // close to the viewport: load every slide now (stacked, transparent images are otherwise never lazy-loaded)
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
   const root = useRef<HTMLDivElement>(null);
@@ -31,7 +32,12 @@ export function ShotCarousel({ slides, text, interval = 5000 }: { slides: Slide[
     if (!el) return;
     const io = new IntersectionObserver(([e]) => setOnScreen(e.isIntersecting), { threshold: 0.4 });
     io.observe(el);
-    return () => io.disconnect();
+    const nearIo = new IntersectionObserver(([e]) => e.isIntersecting && setNear(true), { rootMargin: "900px 0px" });
+    nearIo.observe(el);
+    return () => {
+      io.disconnect();
+      nearIo.disconnect();
+    };
   }, []);
 
   useEffect(() => {
@@ -100,6 +106,8 @@ export function ShotCarousel({ slides, text, interval = 5000 }: { slides: Slide[
         <div aria-live={stopped ? "polite" : "off"} className="absolute inset-0">
           {slides.map((s, k) => (
             <Image
+              unoptimized
+              loading={near ? "eager" : "lazy"}
               key={s.src}
               src={s.src}
               alt={s.alt}
@@ -126,7 +134,7 @@ export function ShotCarousel({ slides, text, interval = 5000 }: { slides: Slide[
       {dots("flex justify-center pt-1")}
       <AnimatePresence>
         {open && (
-          <ShotDialog key="dialog" src={cur.src} alt={cur.label} size={cur.size} closeLabel={text.close} onClose={close} reduce={!!reduce}>
+          <ShotDialog key="dialog" unoptimized src={cur.src} alt={cur.label} size={cur.size} closeLabel={text.close} onClose={close} reduce={!!reduce}>
             <button type="button" aria-label={text.prev} onClick={() => step(-1)} className="btn btn-glass absolute left-3 top-1/2 z-10 size-12 -translate-y-1/2 !p-0 sm:left-6">
               <ChevronLeft size={22} strokeWidth={1.6} />
             </button>

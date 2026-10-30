@@ -117,10 +117,10 @@ export const capabilities: Capability[] = [
   {
     id: "field-sales",
     shots: [
-      { src: "/platform/field-sales-0.png", label: "My customers · goal completion by customer", size: [1855, 1156] },
-      { src: "/platform/field-sales-1.png", label: "Recommended customers · priority clusters on the map" },
-      { src: "/platform/field-sales-2.png", label: "Why a customer is recommended · the top factors" },
-      { src: "/platform/field-sales-3.png", label: "Visit list · planned by area on the map" },
+      { src: "/platform/field-sales-0.webp", label: "My customers · goal completion by customer", size: [1855, 1156] },
+      { src: "/platform/field-sales-1.webp", label: "Recommended customers · priority clusters on the map" },
+      { src: "/platform/field-sales-2.webp", label: "Why a customer is recommended · the top factors" },
+      { src: "/platform/field-sales-3.webp", label: "Visit list · planned by area on the map" },
     ],
     name: "Field Sales",
     promise: "Every rep working the right HCPs, every quarter.",
