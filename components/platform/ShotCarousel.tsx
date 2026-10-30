@@ -12,7 +12,7 @@ const arrow = "btn btn-glass absolute top-1/2 z-20 size-12 -translate-y-1/2 !p-0
 const arrowShow = "opacity-0 group-hover/shot:opacity-100 group-focus-within/shot:opacity-100 [@media(hover:none)]:opacity-100";
 
 /** The capability frame as a carousel: label and counter in the title bar, slides that cross-fade, arrows that appear on hover, dots underneath and the expand button. Plays on its own until the user uses an arrow or a dot. */
-export function ShotCarousel({ slides, text, interval = 5000 }: { slides: Slide[]; text: Text; interval?: number }) {
+export function ShotCarousel({ slides, text, interval = 3000 }: { slides: Slide[]; text: Text; interval?: number }) {
   const [i, setI] = useState(0);
   const [stopped, setStopped] = useState(false); // the user took over
   const [hold, setHold] = useState(false); // pointer or focus inside

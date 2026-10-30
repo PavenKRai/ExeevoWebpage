@@ -136,7 +136,7 @@ test("platform: Medical Affairs is powered by Anju and links to the partner sect
 
 test("screenshots open in a dialog; the close button, Escape and a click outside close it", async ({ page }) => {
   await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
-  for (const id of ["field-sales", "medical", "marketing", "compliance", "insights", "events", "content", "cases"]) {
+  for (const id of ["field-sales", "medical", "marketing", "compliance", "insights", "events", "content", "cases", "retail"]) {
     await expect(page.locator(`#cap-${id} button[aria-haspopup="dialog"]`), id).toHaveCount(1);
   }
   const open = page.locator("#cap-field-sales button[aria-haspopup='dialog']");
@@ -160,7 +160,7 @@ test.describe("Field Sales carousel", () => {
   const group = (page: import("@playwright/test").Page) => page.locator("#cap-field-sales [role=group][aria-roledescription=carousel]");
 
   test("four slides in file order; title bar shows the label and counter; arrows and dots navigate", async ({ page }) => {
-    expect(shots.map((s) => s.src)).toEqual([0, 1, 2, 3].map((n) => `/platform/field-sales-${n}.webp`));
+    expect(shots.map((s) => s.src)).toEqual([1, 0, 2, 3].map((n) => `/platform/field-sales-${n}.webp`)); // "Recommended customers" leads
     await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
     const g = group(page);
     await expect(g.getByText(shots[0].label)).toBeVisible();
