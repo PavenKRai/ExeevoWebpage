@@ -73,7 +73,7 @@ export const home = {
   },
   closing: {
     h2: { light: "Pharma-ready CRM,", bold: "on the cloud your IT team already runs" },
-    primary: "Get a demo",
+    primary: "Explore capabilities",
     secondary: "Built on Microsoft",
   },
   trust: [

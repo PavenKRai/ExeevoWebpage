@@ -36,6 +36,12 @@ test("home: all eight modules link into the platform and the CTAs go to the righ
   const main = page.getByRole("main");
   await expect(main.getByRole("link", { name: "Get a demo" }).first()).toHaveAttribute("href", "/#demo");
   await expect(main.getByRole("link", { name: "Talk to our team" })).toHaveAttribute("href", "/#demo");
+  await expect(main.getByRole("link", { name: "Explore capabilities" })).toHaveAttribute("href", "/platform");
+  const order = await page.evaluate(() => {
+    const y = (sel: string) => document.querySelector(sel)!.getBoundingClientRect().top;
+    return y("#talk") < y("#closing-title");
+  });
+  expect(order, "the demo form sits above the closing banner").toBe(true);
   for (const name of ["Why Microsoft matters", "See the full Microsoft stack", "Built on Microsoft"]) await expect(main.getByRole("link", { name }).first()).toHaveAttribute("href", "/microsoft");
 });
 
