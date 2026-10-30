@@ -31,7 +31,7 @@ export const why = {
       { title: "Analytics & Reporting", body: "Embedded dashboards, extended with Microsoft Power BI." },
       { title: "Nova AI", body: "AI summaries, proactive insights and a conversational assistant built into every screen, included in the licence." },
     ],
-    image: { label: "Exeevo CRM across devices", src: "/why/platform.webp", alt: "Exeevo CRM across devices: the marketing journey builder on a desktop monitor, the customer map on a tablet and the mobile app on a phone", width: 1306, height: 816 },
+    image: { label: "Device agnostic · desktop, tablet and mobile", src: "/why/platform.webp", alt: "Exeevo CRM across devices: the marketing journey builder on a desktop monitor, the customer map on a tablet and the mobile app on a phone", width: 1306, height: 816 },
   },
   compare: { heading: { light: "How the approaches", bold: "compare" } },
   tenant: {
