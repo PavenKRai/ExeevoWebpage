@@ -315,7 +315,8 @@ export const capabilities: Capability[] = [
   },
   {
     id: "content",
-    shot: "/platform/content.png",
+    shot: "/platform/content-mlr.jpg",
+    shotSize: [1591, 967],
     name: "Content and MLR",
     promise: "Approved content, faster, wherever it’s used.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
