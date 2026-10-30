@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { ShotCarousel } from "./ShotCarousel";
 import { ShotViewer } from "./ShotViewer";
 import { type Capability, platformIndustries, platformPage } from "@/content/platform";
 
@@ -60,20 +61,29 @@ export function CapabilitySection({ cap, index, features }: { cap: Capability; i
           </div>
           <div className={`srg lg:col-span-7 lg:row-start-1 ${flip ? "lg:col-start-1" : "lg:col-start-6"}`}>
             <div className={`${panel} p-2.5`}>
-              <div className="flex items-center gap-1.5 px-1.5 pb-2.5 pt-1" aria-hidden="true">
-                <span className="size-[9px] rounded-full bg-hairline" />
-                <span className="size-[9px] rounded-full bg-hairline" />
-                <span className="size-[9px] rounded-full bg-hairline" />
-                <span className="ml-2 text-[12px] text-muted">{p.section.frame(cap.name)}</span>
-              </div>
-              {cap.shot ? (
-                <ShotViewer src={cap.shot} size={cap.shotSize} alt={p.section.shotAlt(cap.name)} enlargeLabel={p.section.enlarge(cap.name)} closeLabel={p.section.closeShot} />
+              {cap.shots ? (
+                <ShotCarousel
+                  slides={cap.shots.map((x) => ({ src: x.src, label: x.label, alt: p.section.shotLabelAlt(cap.name, x.label), size: x.size ?? [1600, 1000] }))}
+                  text={{ group: p.section.shotGroup(cap.name, cap.shots.length), prev: p.section.prevShot, next: p.section.nextShot, goTo: p.section.goToShot, enlarge: p.section.enlarge(cap.name), close: p.section.closeShot }}
+                />
               ) : (
-                <div className="flex aspect-[16/10] flex-col items-center justify-center gap-2 rounded-[14px] border-[1.5px] border-dashed border-[#B6C1C8] bg-porcelain p-5 text-center" style={{ backgroundImage: "radial-gradient(60% 60% at 20% 20%,rgba(223,25,149,.08),transparent 65%),radial-gradient(60% 60% at 85% 30%,rgba(7,98,200,.1),transparent 65%),radial-gradient(70% 60% at 50% 100%,rgba(0,195,137,.08),transparent 65%)" }}>
-                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#8A969E" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 5h18v14H3z M3 15l5-5 4 4 3-3 6 6 M15.5 9.5a1.5 1.5 0 1 0 0-.01" /></svg>
-                  <p className="text-[14px] font-medium text-body">{p.section.shotTitle(cap.name)}</p>
-                  <p className="text-[12px] text-muted">{p.section.shotNote}</p>
-                </div>
+                <>
+                  <div className="flex items-center gap-1.5 px-1.5 pb-2.5 pt-1" aria-hidden="true">
+                    <span className="size-[9px] rounded-full bg-hairline" />
+                    <span className="size-[9px] rounded-full bg-hairline" />
+                    <span className="size-[9px] rounded-full bg-hairline" />
+                    <span className="ml-2 text-[12px] text-muted">{p.section.frame(cap.name)}</span>
+                  </div>
+                {cap.shot ? (
+                  <ShotViewer src={cap.shot} size={cap.shotSize} alt={p.section.shotAlt(cap.name)} enlargeLabel={p.section.enlarge(cap.name)} closeLabel={p.section.closeShot} />
+                ) : (
+                  <div className="flex aspect-[16/10] flex-col items-center justify-center gap-2 rounded-[14px] border-[1.5px] border-dashed border-[#B6C1C8] bg-porcelain p-5 text-center" style={{ backgroundImage: "radial-gradient(60% 60% at 20% 20%,rgba(223,25,149,.08),transparent 65%),radial-gradient(60% 60% at 85% 30%,rgba(7,98,200,.1),transparent 65%),radial-gradient(70% 60% at 50% 100%,rgba(0,195,137,.08),transparent 65%)" }}>
+                    <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#8A969E" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 5h18v14H3z M3 15l5-5 4 4 3-3 6 6 M15.5 9.5a1.5 1.5 0 1 0 0-.01" /></svg>
+                    <p className="text-[14px] font-medium text-body">{p.section.shotTitle(cap.name)}</p>
+                    <p className="text-[12px] text-muted">{p.section.shotNote}</p>
+                  </div>
+                )}
+                </>
               )}
             </div>
           </div>

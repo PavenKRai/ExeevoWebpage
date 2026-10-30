@@ -17,6 +17,8 @@ export type Capability = {
   shot?: string;
   /** Pixel size of the screenshot when it is not 1600 x 1000. */
   shotSize?: [number, number];
+  /** Several screenshots: shown as a carousel, in this order, each with the label for the frame's title bar. Replaces `shot`. */
+  shots?: { src: string; label: string; size?: [number, number] }[];
 };
 
 export const platformPage = {
@@ -48,6 +50,11 @@ export const platformPage = {
     shotAlt: (n: string) => `Screenshot of ${n} in Exeevo CRM`,
     enlarge: (n: string) => `Enlarge the ${n} screenshot`,
     closeShot: "Close screenshot",
+    prevShot: "Previous screenshot",
+    nextShot: "Next screenshot",
+    goToShot: "Go to screenshot {n}",
+    shotGroup: (n: string, count: number) => `${n}: ${count} screenshots`,
+    shotLabelAlt: (n: string, label: string) => `${n} screenshot: ${label}`,
   },
   devicesList: ["Web", "Tablet", "Phone", "Offline"],
   cta: {
@@ -109,8 +116,12 @@ export const moduleToCapability: Record<string, string> = {
 export const capabilities: Capability[] = [
   {
     id: "field-sales",
-    shot: "/platform/field-sales.jpg",
-    shotSize: [1584, 953],
+    shots: [
+      { src: "/platform/field-sales-0.webp", label: "My customers · goal completion by customer", size: [1855, 1156] },
+      { src: "/platform/field-sales-1.webp", label: "Recommended customers · priority clusters on the map" },
+      { src: "/platform/field-sales-2.webp", label: "Why a customer is recommended · the top factors" },
+      { src: "/platform/field-sales-3.webp", label: "Visit list · planned by area on the map" },
+    ],
     name: "Field Sales",
     promise: "Every rep working the right HCPs, every quarter.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -156,6 +167,10 @@ export const capabilities: Capability[] = [
   },
   {
     id: "accounts",
+    shots: [
+      { src: "/platform/accounts-0.webp", label: "Order entry · quantities by delivery with live pricing" },
+      { src: "/platform/accounts-1.webp", label: "Order offers · add your own custom offers and more" },
+    ],
     name: "Account Management",
     promise: "Plan, price and win at the account level.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -263,6 +278,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "events",
+    shot: "/platform/events.png",
     name: "Events",
     promise: "Speaker programmes to congresses, in one workflow.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -299,6 +315,8 @@ export const capabilities: Capability[] = [
   },
   {
     id: "content",
+    shot: "/platform/content-mlr.jpg",
+    shotSize: [1591, 967],
     name: "Content and MLR",
     promise: "Approved content, faster, wherever it’s used.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -331,7 +349,8 @@ export const capabilities: Capability[] = [
   },
   {
     id: "compliance",
-    shot: "/platform/compliance.png",
+    shot: "/platform/consent-capture.jpg",
+    shotSize: [1589, 963],
     name: "Compliance and Transparency",
     promise: "Compliant by design, in every market you sell in.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -401,6 +420,12 @@ export const capabilities: Capability[] = [
   },
   {
     id: "ask-nova",
+    shots: [
+      { src: "/platform/ask-nova-0.webp", label: "Ask-Nova Insights · territory spotlight inside the CRM", size: [1780, 1108] },
+      { src: "/platform/ask-nova-1.webp", label: "Ask-Nova AI Support Tool · ask questions of your CRM data" },
+      { src: "/platform/ask-nova-2.webp", label: "Ask-Nova Studio · usage, cost and adoption" },
+      { src: "/platform/ask-nova-3.webp", label: "Ask-Nova in Teams · answers and charts in chat" },
+    ],
     name: "Ask-Nova",
     promise: "AI in every capability, and agents you configure yourself.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
@@ -466,6 +491,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "cases",
+    shot: "/platform/cases.png",
     name: "Cases, Assets and Kits",
     promise: "Every procedure covered, every device and kit accounted for.",
     industries: ["MedTech"],

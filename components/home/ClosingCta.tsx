@@ -2,7 +2,6 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { home } from "@/content/home";
-import { site } from "@/content/site";
 
 /** Closing call to action on a mist ground: Exeevo + Microsoft, a light and bold headline and two buttons. */
 export function ClosingCta() {
@@ -43,7 +42,7 @@ export function ClosingCta() {
             {c.h2.light} <b>{c.h2.bold}</b>
           </h2>
           <div className="flex flex-wrap justify-center gap-2.5">
-            <Button href={site.demoHref}>{c.primary}</Button>
+            <Button href="/platform">{c.primary}</Button>
             <Button href="/microsoft" variant="secondary">
               {c.secondary}
               <ArrowRight size={16} strokeWidth={1.6} aria-hidden="true" />

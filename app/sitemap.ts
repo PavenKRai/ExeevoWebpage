@@ -7,7 +7,7 @@ import { resourceHref } from "@/lib/resources";
 import { absoluteUrl } from "@/lib/seo";
 
 // Date of the last substantive content change; bump when copy changes so crawlers see freshness.
-const LAST_MODIFIED = new Date("2026-10-01");
+const LAST_MODIFIED = new Date("2026-10-30");
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const core: MetadataRoute.Sitemap = Object.values(seo).map((p) => ({

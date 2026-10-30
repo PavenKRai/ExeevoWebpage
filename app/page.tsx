@@ -28,8 +28,8 @@ export default function Home() {
       <MicrosoftUnderneath />
       <PrivacyTenant />
       <GoLive />
-      <ClosingCta />
       <DemoSection />
+      <ClosingCta />
     </div>
   );
 }

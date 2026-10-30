@@ -161,6 +161,7 @@ export const about = {
     body: "Supporting more than 15,000 users across EMEA, the Americas and APAC. Our people work across the United Kingdom, Portugal, the United States, Canada, India and China. Select an office to see its address.",
     mapLabel: "World map showing Exeevo offices in Clearwater, Montreal, Bangalore and Shanghai, and team members in the United Kingdom and Portugal",
     legend: { office: "Office", team: "Team members" },
+    contact: { label: "Contact us", email: "sales@exeevo.com" },
     team: [
       { id: "uk", name: "United Kingdom", x: 599.6, y: 78.3, side: "right" },
       { id: "pt", name: "Portugal", x: 569.6, y: 120.9, side: "left" },

@@ -17,7 +17,7 @@ const groups = [
   { title: "Main pages", links: [{ label: "Home", href: "/" }, ...site.nav.filter((l) => !l.href.includes("#"))] },
   { title: "Platform capabilities", links: [{ label: "Pharma", href: "/platform?industry=pharma" }, { label: "MedTech", href: "/platform?industry=medtech" }, { label: "Consumer Health", href: "/platform?industry=consumer-health" }, ...capabilities.map((c) => ({ label: c.name, href: `/platform#cap-${c.id}` }))] },
   { title: "Resources", links: [{ label: "All resources", href: "/resources" }, ...resourceTypes.map((t) => ({ label: t.label, href: t.path }))] },
-  { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Privacy policy", href: "/privacy" }, { label: "Cookie policy", href: "/cookies" }] },
+  { title: "Company", links: [{ label: "About", href: "/about" }, { label: "Contact us", href: "/#demo" }, { label: "Privacy policy", href: "/privacy" }, { label: "Cookie policy", href: "/cookies" }] },
 ];
 
 export default function SiteMapPage() {

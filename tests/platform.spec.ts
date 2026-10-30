@@ -60,7 +60,7 @@ test("platform: jump links and old ?module= deep links scroll to the right secti
 
 test("platform: every capability shows the screenshot placeholder, device availability and the Ask-Nova note", async ({ page }) => {
   await page.goto("/platform", { waitUntil: "networkidle" });
-  await expect(page.getByText("1600 × 1000 px recommended")).toHaveCount(capabilities.filter((c) => !c.shot).length); // the rest show their screenshot
+  await expect(page.getByText("1600 × 1000 px recommended")).toHaveCount(capabilities.filter((c) => !c.shot && !c.shots).length); // the rest show their screenshot
   await expect(page.getByText("Available on")).toHaveCount(11);
   await expect(page.getByText("Ask-Nova AI", { exact: true })).toHaveCount(11);
   await expect(page.getByRole("link", { name: "Get a demo" }).last()).toHaveAttribute("href", "/#demo");
@@ -136,12 +136,12 @@ test("platform: Medical Affairs is powered by Anju and links to the partner sect
 
 test("screenshots open in a dialog; the close button, Escape and a click outside close it", async ({ page }) => {
   await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
-  for (const id of ["field-sales", "medical", "marketing", "compliance", "insights"]) {
+  for (const id of ["field-sales", "medical", "marketing", "compliance", "insights", "events", "content", "cases"]) {
     await expect(page.locator(`#cap-${id} button[aria-haspopup="dialog"]`), id).toHaveCount(1);
   }
   const open = page.locator("#cap-field-sales button[aria-haspopup='dialog']");
   await open.click();
-  const dialog = page.getByRole("dialog", { name: /Field Sales/ });
+  const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
   await dialog.getByRole("button", { name: "Close screenshot" }).click();
   await expect(dialog).toHaveCount(0);
@@ -152,4 +152,86 @@ test("screenshots open in a dialog; the close button, Escape and a click outside
   await open.click();
   await page.mouse.click(5, 300);
   await expect(dialog).toHaveCount(0);
+});
+
+test.describe("Field Sales carousel", () => {
+  const sales = capabilities.find((c) => c.id === "field-sales")!;
+  const shots = sales.shots!;
+  const group = (page: import("@playwright/test").Page) => page.locator("#cap-field-sales [role=group][aria-roledescription=carousel]");
+
+  test("four slides in file order; title bar shows the label and counter; arrows and dots navigate", async ({ page }) => {
+    expect(shots.map((s) => s.src)).toEqual([0, 1, 2, 3].map((n) => `/platform/field-sales-${n}.webp`));
+    await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
+    const g = group(page);
+    await expect(g.getByText(shots[0].label)).toBeVisible();
+    await expect(g.getByText("1 / 4")).toBeVisible();
+    await g.hover();
+    await g.getByRole("button", { name: "Next screenshot" }).click();
+    await expect(g.getByText(shots[1].label)).toBeVisible();
+    await expect(g.getByText("2 / 4")).toBeVisible();
+    await g.getByRole("button", { name: "Previous screenshot" }).click();
+    await g.getByRole("button", { name: "Previous screenshot" }).click(); // wraps to the last
+    await expect(g.getByText("4 / 4")).toBeVisible();
+    await g.getByRole("button", { name: "Go to screenshot 3" }).click();
+    await expect(g.getByText(shots[2].label)).toBeVisible();
+    await expect(g.getByRole("button", { name: "Go to screenshot 3" })).toHaveAttribute("aria-current", "true");
+    await g.focus();
+    await page.keyboard.press("ArrowRight");
+    await expect(g.getByText("4 / 4")).toBeVisible();
+  });
+
+  test("arrows are hidden until the pointer is over the image", async ({ page }) => {
+    await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
+    const g = group(page);
+    const next = g.getByRole("button", { name: "Next screenshot" });
+    await page.mouse.move(2, 2);
+    await expect.poll(() => next.evaluate((e) => getComputedStyle(e).opacity)).toBe("0");
+    await g.locator(".group\\/shot").hover();
+    await expect.poll(() => next.evaluate((e) => getComputedStyle(e).opacity)).toBe("1");
+  });
+
+  test("plays by itself, and stops for good once an arrow is used", async ({ page }, info) => {
+    test.skip(info.project.name === "reduced-motion", "no autoplay under reduced motion");
+    await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
+    await page.mouse.move(2, 2);
+    const g = group(page);
+    await expect(g.getByText("2 / 4")).toBeVisible({ timeout: 9000 });
+    await g.getByRole("button", { name: "Next screenshot" }).click();
+    await expect(g.getByText("3 / 4")).toBeVisible();
+    await page.mouse.move(2, 2);
+    await page.waitForTimeout(6500);
+    await expect(g.getByText("3 / 4")).toBeVisible();
+  });
+
+  test("does not autoplay under reduced motion", async ({ page }, info) => {
+    test.skip(info.project.name !== "reduced-motion");
+    await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
+    await page.mouse.move(2, 2);
+    await page.waitForTimeout(6500);
+    await expect(group(page).getByText("1 / 4")).toBeVisible();
+  });
+
+  test("the expand button opens the current slide, which can be browsed in the dialog", async ({ page }) => {
+    await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
+    const g = group(page);
+    await g.getByRole("button", { name: "Go to screenshot 2" }).click();
+    await g.getByRole("button", { name: /^Enlarge/ }).click();
+    const dialog = page.getByRole("dialog", { name: shots[1].label });
+    await expect(dialog).toBeVisible();
+    await dialog.getByRole("button", { name: "Next screenshot" }).click();
+    await expect(page.getByRole("dialog", { name: shots[2].label })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog")).toHaveCount(0);
+    await expect(g.getByText("3 / 4")).toBeVisible();
+  });
+
+  test("only capabilities with several screenshots get a carousel; the rest keep a single image", async ({ page }) => {
+    await page.goto("/platform", { waitUntil: "networkidle" });
+    await expect(page.locator("[aria-roledescription=carousel]")).toHaveCount(capabilities.filter((c) => c.shots).length);
+    const accounts = page.locator("#cap-accounts [aria-roledescription=carousel]");
+    await expect(accounts.getByText("1 / 2")).toBeVisible();
+    await accounts.hover();
+    await accounts.getByRole("button", { name: "Next screenshot" }).click();
+    await expect(accounts.getByText("2 / 2")).toBeVisible();
+  });
 });

@@ -11,6 +11,14 @@ export const demo = {
   messageLabel: "Message",
   messageHint: "Optional. Tell us what you would like to cover.",
   jobTitleLabel: "Job title",
+  contactEmail: "sales@exeevo.com",
+  errors: {
+    invalid: "Some details were not accepted. Check each field and submit again.",
+    blocked: "We could not verify this request. Try again, or contact our team directly at",
+    busy: "Too many requests from your connection. Try again in a few minutes, or contact our team directly at",
+    down: "We could not send your request right now. Please try again shortly, or contact our team directly at",
+    offline: "We could not reach the server. Check your connection and try again, or contact our team directly at",
+  },
   notSure: "Not sure yet: help me choose",
 } as const;
 

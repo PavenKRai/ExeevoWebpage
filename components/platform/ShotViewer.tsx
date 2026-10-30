@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Maximize2, X } from "lucide-react";
+import { shotLoader } from "./shotLoader";
 import { useFocusTrap } from "../layout/useFocusTrap";
 
 type Size = [number, number];
@@ -22,21 +23,22 @@ export function ShotViewer({ src, alt, enlargeLabel, closeLabel, size = [1600, 1
         onClick={() => setOpen(true)}
         className="group relative block w-full cursor-zoom-in rounded-[14px]"
       >
-        <Image src={src} alt={alt} width={size[0]} height={size[1]} sizes="(min-width: 1024px) 700px, 100vw" className="block aspect-[16/10] w-full rounded-[14px] object-cover object-left-top" />
+        <Image loader={shotLoader} src={src} alt={alt} width={size[0]} height={size[1]} sizes="(min-width: 1024px) 700px, 100vw" className="block aspect-[16/10] w-full rounded-[14px] object-cover object-left-top" />
         <span aria-hidden="true" className="glass absolute bottom-3 right-3 flex size-10 items-center justify-center rounded-full text-heading transition-opacity group-hover:opacity-100 lg:opacity-70">
           <Maximize2 size={18} strokeWidth={1.8} />
         </span>
       </button>
       <AnimatePresence>
         {open && (
-          <Viewer key="viewer" size={size} src={src} alt={alt} closeLabel={closeLabel} onClose={close} reduce={!!reduce} />
+          <ShotDialog key="viewer" size={size} src={src} alt={alt} closeLabel={closeLabel} onClose={close} reduce={!!reduce} />
         )}
       </AnimatePresence>
     </>
   );
 }
 
-function Viewer({ src, alt, closeLabel, onClose, reduce, size }: { size: Size; src: string; alt: string; closeLabel: string; onClose: () => void; reduce: boolean }) {
+/** The enlarged view: glass overlay, close button and the image fitted to the window. `children` (optional controls) sit above the overlay and do not close it when clicked. */
+export function ShotDialog({ src, alt, closeLabel, onClose, reduce, size, unoptimized, children }: { unoptimized?: boolean; size: Size; src: string; alt: string; closeLabel: string; onClose: () => void; reduce: boolean; children?: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   useFocusTrap(ref, true, onClose);
   useEffect(() => {
@@ -73,6 +75,8 @@ function Viewer({ src, alt, closeLabel, onClose, reduce, size }: { size: Size; s
         tabIndex={0}
       >
         <Image
+          loader={unoptimized ? undefined : shotLoader}
+          unoptimized={unoptimized}
           src={src}
           alt={alt}
           width={size[0]}
@@ -83,6 +87,7 @@ function Viewer({ src, alt, closeLabel, onClose, reduce, size }: { size: Size; s
           className="block h-auto w-[1000px] max-w-none rounded-[14px] object-contain lg:w-[min(2000px,calc(100vw-4rem),calc((100vh-9rem)*var(--r)))]"
         />
       </motion.div>
+      {children && <div onClick={(e) => e.stopPropagation()} className="contents">{children}</div>}
     </motion.div>
   );
 }
