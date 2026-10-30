@@ -348,7 +348,8 @@ export const capabilities: Capability[] = [
   },
   {
     id: "compliance",
-    shot: "/platform/compliance.png",
+    shot: "/platform/consent-capture.jpg",
+    shotSize: [1589, 963],
     name: "Compliance and Transparency",
     promise: "Compliant by design, in every market you sell in.",
     industries: ["Pharma", "MedTech", "Consumer Health"],
