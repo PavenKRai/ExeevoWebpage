@@ -148,11 +148,10 @@ export function ConfigPlatform() {
             <ArrowRight aria-hidden="true" size={16} strokeWidth={1.6} />
           </Link>
         </div>
-        <div className="srg relative min-h-[420px] sm:min-h-[560px] lg:sticky lg:top-[120px] lg:col-span-5 lg:col-start-8">
-          <div className="glass absolute inset-0 rounded-[36px]" aria-hidden="true" />
-          <Image src={p.images.monitor.src} alt={p.images.monitor.alt} width={568} height={430} sizes="(min-width: 1024px) 330px, 55vw" className="absolute right-7 top-16 w-[62%] mix-blend-multiply" />
-          <Image src={p.images.tablet.src} alt={p.images.tablet.alt} width={541} height={325} sizes="(min-width: 1024px) 400px, 70vw" className="absolute left-6 top-[270px] w-[74%] mix-blend-multiply drop-shadow-[0_30px_30px_rgba(29,38,45,.18)] max-sm:top-[190px]" />
-          <Image src={p.images.phone.src} alt={p.images.phone.alt} width={162} height={325} sizes="140px" className="absolute bottom-6 right-[30px] w-[26%] drop-shadow-[0_24px_30px_rgba(29,38,45,.25)]" />
+        <div className="srg lg:sticky lg:top-[120px] lg:col-span-5 lg:col-start-8">
+          <div className="glass rounded-[36px] p-3 sm:p-4">
+            <Image src={p.image.src} alt={p.image.alt} width={p.image.width} height={p.image.height} sizes="(min-width: 1024px) 480px, 90vw" className="block h-auto w-full rounded-[26px]" />
+          </div>
         </div>
       </div>
     </section>
