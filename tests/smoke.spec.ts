@@ -73,3 +73,13 @@ test("the form lists 'not sure' plus every Platform capability; only Home has a 
   await page.goto("/services", { waitUntil: "networkidle" });
   await expect(page.locator("#demo")).toHaveCount(0);
 });
+
+test("footer has a Contact us link to the Home form; the site map page lists it; sitemap.xml has the current pages only", async ({ page, request }) => {
+  await page.goto("/about", { waitUntil: "networkidle" });
+  await expect(page.getByRole("contentinfo").getByRole("link", { name: "Contact us" })).toHaveAttribute("href", "/#demo");
+  const xml = await (await request.get("/sitemap.xml")).text();
+  for (const p of ["/platform", "/services", "/about", "/partners", "/microsoft", "/why-exeevo", "/ask-nova", "/resources", "/site-map"]) expect(xml, p).toContain(`${p}</loc>`);
+  for (const gone of ["/industries", "/solutions-by-role", "/glossary", "/getting-started"]) expect(xml, gone).not.toContain(`${gone}</loc>`);
+  await page.goto("/site-map", { waitUntil: "networkidle" });
+  await expect(page.getByRole("main").getByRole("link", { name: "Contact us" })).toHaveAttribute("href", "/#demo");
+});

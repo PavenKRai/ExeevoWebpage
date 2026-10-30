@@ -76,3 +76,9 @@ test("about: four offices (incl. Montreal) and team-member locations on the map 
   const html = await (await request.get("/about")).text();
   expect((html.match(/"@type":"Person"/g) ?? []).length).toBe(6);
 });
+
+test("about: the offices section shows the sales contact email as a mail link", async ({ page }) => {
+  await page.goto("/about", { waitUntil: "networkidle" });
+  const link = page.locator("#offices-title").locator("xpath=ancestor::section").getByRole("link", { name: "sales@exeevo.com" });
+  await expect(link).toHaveAttribute("href", "mailto:sales@exeevo.com");
+});

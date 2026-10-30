@@ -43,6 +43,7 @@ export const site = {
           { label: "Partnerships", href: "/partners" },
           { label: "Case Studies", href: "/resources/case-studies" },
           { label: "Trust & Compliance", href: "/why-exeevo#compliance" },
+          { label: "Contact us", href: "/#demo" },
         ],
       },
     ],

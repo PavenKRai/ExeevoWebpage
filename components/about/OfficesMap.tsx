@@ -15,34 +15,40 @@ export function OfficesMap() {
           <p className="lead sr max-w-[420px]">{o.body}</p>
         </div>
         <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-12">
-          <ul className="flex flex-col gap-2 lg:col-span-4">
-            {o.list.map((x) => {
-              const on = x.id === sel;
-              return (
-                <li key={x.id}>
-                  <button
-                    type="button"
-                    aria-pressed={on}
-                    onClick={() => setSel(x.id)}
-                    className={cn("flex min-h-14 w-full flex-col gap-2.5 rounded-[18px] border px-5 py-[18px] text-left text-heading transition-all duration-300", on ? "border-[#D9E0E5] bg-white shadow-[0_24px_40px_-28px_rgba(29,38,45,.4)]" : "border-heading/[.08] bg-transparent")}
-                  >
-                    <span className="flex w-full items-center justify-between gap-3">
-                      <span className="flex items-center gap-2.5 text-[17px] font-[450]">
-                        <span aria-hidden="true" className="size-2 shrink-0 rounded-[2px]" style={{ background: x.color }} />
-                        {x.city}
+          <div className="flex flex-col gap-4 lg:col-span-4">
+            <ul className="flex flex-col gap-2">
+              {o.list.map((x) => {
+                const on = x.id === sel;
+                return (
+                  <li key={x.id}>
+                    <button
+                      type="button"
+                      aria-pressed={on}
+                      onClick={() => setSel(x.id)}
+                      className={cn("flex min-h-14 w-full flex-col gap-2.5 rounded-[18px] border px-5 py-[18px] text-left text-heading transition-all duration-300", on ? "border-[#D9E0E5] bg-white shadow-[0_24px_40px_-28px_rgba(29,38,45,.4)]" : "border-heading/[.08] bg-transparent")}
+                    >
+                      <span className="flex w-full items-center justify-between gap-3">
+                        <span className="flex items-center gap-2.5 text-[17px] font-[450]">
+                          <span aria-hidden="true" className="size-2 shrink-0 rounded-[2px]" style={{ background: x.color }} />
+                          {x.city}
+                        </span>
+                        <span className="label">{x.region}</span>
                       </span>
-                      <span className="label">{x.region}</span>
-                    </span>
-                    <span className={cn("flex-col gap-0.5 text-[14px] leading-[1.5] text-muted", on ? "flex" : "sr-only")}>
-                      {x.addr.map((l) => (
-                        <span key={l}>{l}</span>
-                      ))}
-                    </span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+                      <span className={cn("flex-col gap-0.5 text-[14px] leading-[1.5] text-muted", on ? "flex" : "sr-only")}>
+                        {x.addr.map((l) => (
+                          <span key={l}>{l}</span>
+                        ))}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="flex flex-wrap items-center gap-x-3 px-1 text-[14px] text-muted">
+              {o.contact.label}
+              <a href={`mailto:${o.contact.email}`} className="tlink">{o.contact.email}</a>
+            </p>
+          </div>
           <div className="glass srg relative rounded-[28px] p-4 sm:p-6 lg:col-span-7 lg:col-start-6">
             <svg viewBox="0 0 1200 440" role="img" aria-label={o.mapLabel} className="block h-auto w-full overflow-visible">
               <image href="/about/world-dots.svg" x="0" y="0" width="1200" height="440" />
