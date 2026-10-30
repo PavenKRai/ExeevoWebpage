@@ -169,7 +169,7 @@ export const capabilities: Capability[] = [
     id: "accounts",
     shots: [
       { src: "/platform/accounts-0.webp", label: "Order entry · quantities by delivery with live pricing" },
-      { src: "/platform/accounts-1.webp", label: "Order offers · add basket discounts and free goods" },
+      { src: "/platform/accounts-1.webp", label: "Order offers · add your own custom offers and more" },
     ],
     name: "Account Management",
     promise: "Plan, price and win at the account level.",
