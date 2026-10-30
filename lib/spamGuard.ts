@@ -1,3 +1,4 @@
+import { checkBotId } from "botid/server";
 import { NextResponse } from "next/server";
 
 /** Light, dependency-free bot protection shared by the form routes. Flagged bots get a silent success so they learn nothing. */
@@ -61,4 +62,13 @@ export function clean<T extends Record<string, unknown>>(data: T, multiline: rea
         : v;
   }
   return out as T;
+}
+
+/** Vercel BotID verdict. In local development it always says "human"; if the check itself cannot run, the other guards still apply. */
+export async function botDetected() {
+  try {
+    return (await checkBotId()).isBot;
+  } catch {
+    return false;
+  }
 }

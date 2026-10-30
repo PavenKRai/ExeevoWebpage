@@ -31,7 +31,7 @@ Instructions for AI coding agents working on the Exeevo marketing website. Read 
 - Native CSS scroll-driven animations for scroll reveals. Never use a JavaScript scroll library.
 - `next/font/google`: Geist only (`--font-geist`) for display and text.
 - lucide-react icons at stroke width 1.8.
-- React Hook Form + Zod for the demo form, posting to `app/api/demo/route.ts`.
+- React Hook Form + Zod for the demo form, posting to `app/api/demo/route.ts`. Form routes are guarded by `lib/spamGuard.ts` and Vercel BotID (`botid`, started in `instrumentation-client.ts`).
 - pnpm, ESLint, Prettier, Playwright, and @axe-core/playwright.
 
 Do not add dependencies beyond these without saying why in the PR description. In particular, do not add:

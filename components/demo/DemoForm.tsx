@@ -42,6 +42,7 @@ export function DemoForm() {
       const res = await fetch("/api/demo", { method: "POST", headers: { "Content-Type": "application/json" }, body });
       if (res.ok) return setDone(true);
       if (res.status === 400) return setFailure("Some details were not accepted. Check each field and submit again.");
+      if (res.status === 403) return setFailure("We could not verify this request. Try again, or contact our team directly.");
       if (res.status === 429) return setFailure("Too many requests from your connection. Try again in a few minutes.");
       setFailure("The request service is unavailable right now. Try again shortly, or contact our team directly.");
     } catch {

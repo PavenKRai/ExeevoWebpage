@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import { demoSchema } from "@/lib/demoSchema";
-import { clean, looksLikeBot, rejectRequest } from "@/lib/spamGuard";
+import { botDetected, clean, looksLikeBot, rejectRequest } from "@/lib/spamGuard";
 
 export const maxDuration = 30;
 
 export async function POST(request: Request) {
   const rejected = rejectRequest(request);
   if (rejected) return rejected;
+  if (await botDetected()) return NextResponse.json({ error: "Request not allowed." }, { status: 403 });
 
   let json: unknown;
   try {
