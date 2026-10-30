@@ -419,7 +419,7 @@ export const capabilities: Capability[] = [
     id: "ask-nova",
     shots: [
       { src: "/platform/ask-nova-0.webp", label: "Ask-Nova Insights · territory spotlight inside the CRM", size: [1780, 1108] },
-      { src: "/platform/ask-nova-1.webp", label: "Ask-Nova Assistant · ask questions of your CRM data" },
+      { src: "/platform/ask-nova-1.webp", label: "Ask-Nova AI Support Tool · ask questions of your CRM data" },
       { src: "/platform/ask-nova-2.webp", label: "Ask-Nova Studio · usage, cost and adoption" },
       { src: "/platform/ask-nova-3.webp", label: "Ask-Nova in Teams · answers and charts in chat" },
     ],
