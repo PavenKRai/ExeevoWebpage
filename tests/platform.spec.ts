@@ -136,7 +136,7 @@ test("platform: Medical Affairs is powered by Anju and links to the partner sect
 
 test("screenshots open in a dialog; the close button, Escape and a click outside close it", async ({ page }) => {
   await page.goto("/platform#cap-field-sales", { waitUntil: "networkidle" });
-  for (const id of ["field-sales", "medical", "marketing", "compliance", "insights", "events", "content", "cases"]) {
+  for (const id of ["field-sales", "medical", "marketing", "compliance", "insights", "events", "content", "cases", "retail"]) {
     await expect(page.locator(`#cap-${id} button[aria-haspopup="dialog"]`), id).toHaveCount(1);
   }
   const open = page.locator("#cap-field-sales button[aria-haspopup='dialog']");

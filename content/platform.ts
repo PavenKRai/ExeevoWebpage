@@ -459,6 +459,7 @@ export const capabilities: Capability[] = [
   },
   {
     id: "retail",
+    shot: "/platform/retail.png",
     name: "Retail Execution",
     promise: "Win at the pharmacy shelf, store by store.",
     industries: ["Consumer Health"],
