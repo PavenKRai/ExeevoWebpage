@@ -150,6 +150,7 @@ export function ConfigPlatform() {
         </div>
         <div className="srg lg:sticky lg:top-[120px] lg:col-span-5 lg:col-start-8">
           <div className="glass rounded-[36px] p-3 sm:p-4">
+            <p className="px-3 pb-4 pt-3 text-[15px] text-muted sm:px-4 sm:pt-4">{p.image.label}</p>
             <div className="rounded-[26px] bg-white py-6 sm:py-10">
               <Image src={p.image.src} alt={p.image.alt} width={p.image.width} height={p.image.height} sizes="(min-width: 1024px) 480px, 90vw" className="block h-auto w-full" />
             </div>
