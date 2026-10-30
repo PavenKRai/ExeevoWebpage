@@ -225,8 +225,13 @@ test.describe("Field Sales carousel", () => {
     await expect(g.getByText("3 / 4")).toBeVisible();
   });
 
-  test("other capabilities keep a single image with no arrows", async ({ page }) => {
+  test("only capabilities with several screenshots get a carousel; the rest keep a single image", async ({ page }) => {
     await page.goto("/platform", { waitUntil: "networkidle" });
-    await expect(page.locator("[aria-roledescription=carousel]")).toHaveCount(1);
+    await expect(page.locator("[aria-roledescription=carousel]")).toHaveCount(capabilities.filter((c) => c.shots).length);
+    const accounts = page.locator("#cap-accounts [aria-roledescription=carousel]");
+    await expect(accounts.getByText("1 / 2")).toBeVisible();
+    await accounts.hover();
+    await accounts.getByRole("button", { name: "Next screenshot" }).click();
+    await expect(accounts.getByText("2 / 2")).toBeVisible();
   });
 });
