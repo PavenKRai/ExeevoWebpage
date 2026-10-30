@@ -83,3 +83,27 @@ test("footer has a Contact us link to the Home form; the site map page lists it;
   await page.goto("/site-map", { waitUntil: "networkidle" });
   await expect(page.getByRole("main").getByRole("link", { name: "Contact us" })).toHaveAttribute("href", "/#demo");
 });
+
+test("demo form: when the request is blocked, rate limited, or the CRM flow is down or unreachable, the error offers sales@exeevo.com", async ({ page }) => {
+  await page.goto("/", { waitUntil: "networkidle" });
+  const form = page.getByRole("form", { name: "Talk to our team" });
+  await form.locator("#demo-name").fill("Test Person");
+  await form.locator("#demo-email").fill("test@example.com");
+  await form.locator("#demo-company").fill("Example Co");
+  const cases: [string, number | "abort", RegExp][] = [
+    ["blocked", 403, /could not verify/],
+    ["rate limited", 429, /Too many requests/],
+    ["flow not configured", 503, /could not send your request/],
+    ["flow rejected or down", 502, /could not send your request/],
+    ["offline", "abort", /could not reach the server/],
+  ];
+  for (const [name, code, text] of cases) {
+    await page.route("**/api/demo", (route) => (code === "abort" ? route.abort() : route.fulfill({ status: code, json: { error: "x" } })));
+    await form.getByRole("button", { name: "Send request" }).click();
+    const alert = form.getByRole("alert");
+    await expect(alert, name).toContainText(text);
+    await expect(alert.getByRole("link", { name: "sales@exeevo.com" }), name).toHaveAttribute("href", "mailto:sales@exeevo.com");
+    await page.unroute("**/api/demo");
+  }
+  await expect(form.locator("#demo-name")).toHaveValue("Test Person"); // nothing the visitor typed is lost
+});

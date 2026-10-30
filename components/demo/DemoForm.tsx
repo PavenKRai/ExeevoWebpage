@@ -10,7 +10,7 @@ import { SelectField, TextAreaField, TextField } from "./DemoFields";
 
 export function DemoForm() {
   const [done, setDone] = useState(false);
-  const [failure, setFailure] = useState<string | null>(null);
+  const [failure, setFailure] = useState<{ text: string; email: boolean } | null>(null);
   const [startedAt, setStartedAt] = useState(() => Date.now());
   const [trap, setTrap] = useState("");
   const {
@@ -41,12 +41,13 @@ export function DemoForm() {
       const body = JSON.stringify({ ...values, startedAt, website: trap });
       const res = await fetch("/api/demo", { method: "POST", headers: { "Content-Type": "application/json" }, body });
       if (res.ok) return setDone(true);
-      if (res.status === 400) return setFailure("Some details were not accepted. Check each field and submit again.");
-      if (res.status === 403) return setFailure("We could not verify this request. Try again, or contact our team directly.");
-      if (res.status === 429) return setFailure("Too many requests from your connection. Try again in a few minutes.");
-      setFailure("The request service is unavailable right now. Try again shortly, or contact our team directly.");
+      const e = demo.errors;
+      if (res.status === 400) return setFailure({ text: e.invalid, email: false });
+      if (res.status === 403) return setFailure({ text: e.blocked, email: true });
+      if (res.status === 429) return setFailure({ text: e.busy, email: true });
+      setFailure({ text: e.down, email: true }); // the flow is down, not connected or rejected the request
     } catch {
-      setFailure("We could not reach the server. Check your connection and submit again.");
+      setFailure({ text: demo.errors.offline, email: true });
     }
   }
 
@@ -77,7 +78,13 @@ export function DemoForm() {
       <TextAreaField id="demo-message" label={demo.messageLabel} hint={demo.messageHint} error={errors.message?.message} {...register("message")} />
       {failure && (
         <p role="alert" className="rounded-input border border-error bg-white p-4 text-[15px] font-medium text-error">
-          {failure}
+          {failure.text}
+          {failure.email && (
+            <>
+              {" "}
+              <a href={`mailto:${demo.contactEmail}`} className="underline underline-offset-[3px]">{demo.contactEmail}</a>.
+            </>
+          )}
         </p>
       )}
       <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center sm:justify-between">
