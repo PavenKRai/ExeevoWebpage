@@ -29,15 +29,17 @@ export function ConsentGate() {
       role="region"
       aria-label={consent.label}
       data-consent-banner
-      className="glass fixed inset-x-3 bottom-3 z-[45] flex flex-col gap-4 rounded-[28px] bg-white/90 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:inset-x-auto sm:left-1/2 sm:w-[min(920px,calc(100vw-48px))] sm:-translate-x-1/2 sm:flex-row sm:items-center sm:gap-6 sm:p-5"
+      className="glass fixed inset-x-0 bottom-0 z-[45] rounded-t-[28px] bg-white/90 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:py-8"
     >
-      <p className="body-text !text-[14px] sm:flex-1">
-        {consent.body}{" "}
-        <Link href="/cookies" className="text-brand-blue underline underline-offset-[3px]">{consent.policy}</Link>
-      </p>
-      <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-        <button type="button" onClick={() => choose("denied")} className="btn btn-glass min-h-11">{consent.reject}</button>
-        <button type="button" onClick={() => choose("granted")} className="btn btn-ink min-h-11">{consent.accept}</button>
+      <div className="frame flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-10">
+        <p className="body-text !max-w-none !text-[15px] lg:flex-1">
+          {consent.body}{" "}
+          <Link href="/cookies" className="text-brand-blue underline underline-offset-[3px]">{consent.policy}</Link>
+        </p>
+        <div className="flex shrink-0 flex-col gap-2.5 sm:flex-row">
+          <button type="button" onClick={() => choose("denied")} className="btn btn-glass min-h-12">{consent.reject}</button>
+          <button type="button" onClick={() => choose("granted")} className="btn btn-ink min-h-12">{consent.accept}</button>
+        </div>
       </div>
     </div>
   );
