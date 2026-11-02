@@ -9,12 +9,12 @@ export function RecordDemo({ label }: { label: string }) {
   useLoops(ref, RECORD_LOOPS);
   return (
     <div
+      className="mx-auto lg:ml-auto lg:mr-0" // centred when the hero stacks (phones, tablets), right-aligned beside the text on desktop
       style={{
         position: "relative",
         width: "583px",
         maxWidth: "100%",
         height: "508px",
-        marginLeft: "auto",
       }}
     >
       <div
