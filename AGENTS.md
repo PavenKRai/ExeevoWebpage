@@ -31,6 +31,7 @@ Instructions for AI coding agents working on the Exeevo marketing website. Read 
 - Native CSS scroll-driven animations for scroll reveals. Never use a JavaScript scroll library.
 - `next/font/google`: Geist only (`--font-geist`) for display and text.
 - lucide-react icons at stroke width 1.8.
+- Google Analytics 4 via `lib/analytics.ts` and `components/analytics/` (no dependency): loads only when `NEXT_PUBLIC_GA_ID` is set, the site is not staging and the visitor accepted in the cookie banner (bottom of the page, never blocks the site). Never send personal data in events; use `track()`.
 - React Hook Form + Zod for the demo form, posting to `app/api/demo/route.ts`. Form routes are guarded by `lib/spamGuard.ts` and Vercel BotID (`botid`, started in `instrumentation-client.ts`).
 - pnpm, ESLint, Prettier, Playwright, and @axe-core/playwright.
 
@@ -161,7 +162,7 @@ Design widths are 390, 768, 1024 and 1440. Below 1024px the nav collapses into a
 
 - `app/api/demo/route.ts` validates with the same Zod schema as the client and forwards to `process.env.CRM_FORM_ENDPOINT`.
 - Never log personal data. Never put personal data in URLs or query strings.
-- Keep secrets in environment variables and document them in `.env.example`: `CRM_FORM_ENDPOINT`, `NEXT_PUBLIC_SITE_URL`.
+- Keep secrets in environment variables and document them in `.env.example`: `CRM_FORM_ENDPOINT`, `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_GA_ID`.
 - Consent copy is a professional placeholder until legal provides final wording and a privacy link.
 
 ## Testing

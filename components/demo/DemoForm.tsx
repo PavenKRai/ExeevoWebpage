@@ -4,6 +4,7 @@ import { Check } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { capabilityOptions, demo } from "@/content/demo";
+import { track } from "@/lib/analytics";
 import { demoSchema, type DemoInput } from "@/lib/demoSchema";
 import { Button } from "../ui/Button";
 import { SelectField, TextAreaField, TextField } from "./DemoFields";
@@ -40,7 +41,10 @@ export function DemoForm() {
     try {
       const body = JSON.stringify({ ...values, startedAt, website: trap });
       const res = await fetch("/api/demo", { method: "POST", headers: { "Content-Type": "application/json" }, body });
-      if (res.ok) return setDone(true);
+      if (res.ok) {
+        track("generate_lead", { form: "demo" });
+        return setDone(true);
+      }
       const e = demo.errors;
       if (res.status === 400) return setFailure({ text: e.invalid, email: false });
       if (res.status === 403) return setFailure({ text: e.blocked, email: true });

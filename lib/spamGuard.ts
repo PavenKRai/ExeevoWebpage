@@ -64,8 +64,9 @@ export function clean<T extends Record<string, unknown>>(data: T, multiline: rea
   return out as T;
 }
 
-/** Vercel BotID verdict. In local development it always says "human"; if the check itself cannot run, the other guards still apply. */
+/** Vercel BotID verdict. Only runs on Vercel (elsewhere there is no challenge, e.g. local `next start`); if the check itself cannot run, the other guards still apply. */
 export async function botDetected() {
+  if (!process.env.VERCEL) return false;
   try {
     return (await checkBotId()).isBot;
   } catch {

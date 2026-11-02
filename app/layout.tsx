@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { Analytics } from "@/components/analytics/Analytics";
+import { ConsentGate } from "@/components/analytics/ConsentGate";
 import { Footer } from "@/components/layout/Footer";
 import { Nav } from "@/components/layout/Nav";
 import { OffscreenPause } from "@/components/layout/OffscreenPause";
@@ -50,6 +52,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main">{children}</main>
         <Footer />
         <OffscreenPause />
+        <Analytics />
+        <ConsentGate />
         <RevealObserver />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </body>
