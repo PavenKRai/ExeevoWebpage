@@ -8,11 +8,6 @@ export type Consent = "granted" | "denied";
 export const CONSENT_KEY = "exeevo-consent";
 export const CONSENT_EVENT = "exeevo:consent";
 export const CONSENT_OPEN_EVENT = "exeevo:consent-open";
-/** Policy pages stay readable before a choice is made. */
-export const POLICY_PATHS = ["/cookies", "/privacy"];
-/** Search and AI crawlers cannot click, so they are never shown the gate (the page content is in the HTML for them). */
-export const BOT_PATTERN = "googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|applebot|facebookexternalhit|linkedinbot|twitterbot|gptbot|claudebot|perplexitybot|ccbot|ahrefsbot|semrushbot|bot\\b|crawler|spider";
-
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
