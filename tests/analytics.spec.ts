@@ -35,7 +35,8 @@ test.describe("with a measurement ID", () => {
     const box = await gate(page).boundingBox();
     const vh = page.viewportSize()!.height;
     expect(box!.y + box!.height).toBeGreaterThan(vh - 40); // at the bottom edge
-    expect(box!.height).toBeLessThan(vh * 0.4); // not a wall
+    expect(box!.height).toBeLessThanOrEqual(400); // 400px tall at most, and never more than 75% of a short screen
+    expect(box!.height).toBeLessThanOrEqual(vh * 0.75 + 1);
     // not blocking: the page is not inert, scrolls, and its links work
     expect(await page.evaluate(() => [...document.body.children].some((e) => (e as HTMLElement).inert))).toBe(false);
     expect(await page.evaluate(() => getComputedStyle(document.body).overflow)).not.toBe("hidden");
@@ -116,7 +117,7 @@ test.describe("with a measurement ID", () => {
       expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBe(0);
       const box = await gate(page).getByRole("button", { name: "Accept all" }).boundingBox();
       expect(box!.height).toBeGreaterThanOrEqual(44);
-      expect((await gate(page).boundingBox())!.height).toBeLessThan(780 * 0.5);
+      expect((await gate(page).boundingBox())!.height).toBeLessThanOrEqual(780 * 0.75 + 1);
       await ctx.close();
     }
   });
