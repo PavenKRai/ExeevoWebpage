@@ -29,7 +29,7 @@ export function ConsentGate() {
       role="region"
       aria-label={consent.label}
       data-consent-banner
-      className="glass fixed inset-x-0 bottom-0 z-[45] rounded-t-[28px] bg-white/90 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] sm:py-8"
+      className="glass fixed inset-x-0 bottom-0 z-[45] flex min-h-[min(450px,75vh)] flex-col justify-center rounded-t-[28px] bg-white/90 py-8 pb-[max(2rem,env(safe-area-inset-bottom))]"
     >
       <div className="frame flex flex-col gap-5 lg:flex-row lg:items-center lg:gap-10">
         <p className="body-text !max-w-none !text-[15px] lg:flex-1">
