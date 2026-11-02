@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/content/site";
 import { Button } from "../ui/Button";
+import { CookieSettingsButton } from "../analytics/CookieSettingsButton";
 import { Logo } from "./Logo";
 
 const linkCls = "inline-flex min-h-11 items-center text-[14px] text-body hover:text-heading";
@@ -36,6 +37,7 @@ export function Footer() {
             {f.legalLinks.map((l) => (
               <li key={l.label}><FooterLink href={l.href} className="inline-flex min-h-11 items-center hover:text-heading">{l.label}</FooterLink></li>
             ))}
+            <li><CookieSettingsButton className="inline-flex min-h-11 items-center hover:text-heading" /></li>
           </ul>
         </div>
       </div>

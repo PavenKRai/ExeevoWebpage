@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { newsletter as copy } from "@/content/resources/config";
+import { track } from "@/lib/analytics";
 import { newsletterSchema, type NewsletterInput } from "@/lib/newsletterSchema";
 
 /** "Get new resources in your inbox": light glass block on a mist ground ending every Resources page. The description line shows only when copy is provided. */
@@ -17,7 +18,10 @@ export function NewsletterBlock() {
     setFailure(null);
     try {
       const res = await fetch("/api/newsletter", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...values, startedAt, website: trap }) });
-      if (res.ok) return setDone(true);
+      if (res.ok) {
+        track("newsletter_signup");
+        return setDone(true);
+      }
       setFailure(res.status === 400 ? "That email address was not accepted. Check it and try again." : "Subscriptions are unavailable right now. Try again shortly.");
     } catch {
       setFailure("We could not reach the server. Check your connection and try again.");
