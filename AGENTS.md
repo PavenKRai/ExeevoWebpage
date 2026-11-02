@@ -32,6 +32,7 @@ Instructions for AI coding agents working on the Exeevo marketing website. Read 
 - `next/font/google`: Geist only (`--font-geist`) for display and text.
 - lucide-react icons at stroke width 1.8.
 - Google Analytics 4 via `lib/analytics.ts` and `components/analytics/` (no dependency): loads only when `NEXT_PUBLIC_GA_ID` is set, the site is not staging and the visitor accepted in the cookie banner (bottom of the page, never blocks the site). Never send personal data in events; use `track()`.
+- Vercel Web Analytics (`@vercel/analytics`, cookieless, first-party) is mounted in `app/layout.tsx` next to Google Analytics; it needs Web Analytics enabled on the Vercel project.
 - React Hook Form + Zod for the demo form, posting to `app/api/demo/route.ts`. Form routes are guarded by `lib/spamGuard.ts` and Vercel BotID (`botid`, started in `instrumentation-client.ts`).
 - pnpm, ESLint, Prettier, Playwright, and @axe-core/playwright.
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { Analytics } from "@/components/analytics/Analytics";
 import { ConsentGate } from "@/components/analytics/ConsentGate";
 import { Footer } from "@/components/layout/Footer";
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <OffscreenPause />
         <Analytics />
+        <VercelAnalytics />
         <ConsentGate />
         <RevealObserver />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
