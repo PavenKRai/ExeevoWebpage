@@ -182,7 +182,7 @@ export const partners: Partner[] = [
       "Exeevo is a MedPro DirectID partner. DirectID gives Exeevo customers real-time access to MedProID, MedPro’s licensing database of HCP and HCO identifying data, directly inside Exeevo CRM.",
       "Customers can verify licences and keep HCP and HCO records current without leaving the CRM, supporting compliant sampling, transparency reporting and accurate targeting in the US market."
     ],
-    "image": "/partners/medpro.webp"
+    "image": "/partners/medpro-systems.webp"
   },
   {
     "id": "iqvia",
